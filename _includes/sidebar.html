@@ -27,4 +27,23 @@
 <li><a href="http://www.github.com/danielecook"><img src="http://danielecook.com/img/github.png" /> Github <span  title='external link'  class='glyphicon glyphicon-circle-arrow-right'></a></li>
 
 </ul>
+
+<h4><a href="categories.html">Categories</a></h4>
+    <ul>
+  	  {% assign categories_list = site.categories %}  
+  	  {% include JB/categories_list %}
+  	</ul>
+<h4><a href="archive.html">Archive</a></h4>
+<ul>
+{% assign counter = 0 %}
+{% for post in site.posts %}
+  {% assign thisyear = post.date | date: "%B %Y" %}
+  {% assign prevyear = post.previous.date | date: "%B %Y" %}
+  {% assign counter = counter | plus: 1 %}
+  {% if thisyear != prevyear %}
+    <li><a href="/archive/#{{ post.date | date:"%B %Y" }}">{{ thisyear }} ({{ counter }})</a></li>
+    {% assign counter = 0 %}
+  {% endif %}
+{% endfor %}
+</ul>
 </aside>
