@@ -20,6 +20,10 @@
 }
 
 
+img {
+  max-width:740px;
+}
+
 /* posts index */
 .post > h3.title {
   position: relative;
