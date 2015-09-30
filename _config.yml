@@ -1,7 +1,8 @@
 # This is the default format. 
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
-
+paginate_path: "/blog/page:num/"
+paginate: 5
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: pygments
 markdown: redcarpet
@@ -11,6 +12,8 @@ kramdown:
 
 redcarpet:
     extensions: ["fenced_code_blocks","no_intra_emphasis", "tables", "autolink", "strikethrough", "with_toc_data"]
+
+
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
