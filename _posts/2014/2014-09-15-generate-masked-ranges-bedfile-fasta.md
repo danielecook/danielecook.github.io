@@ -22,9 +22,9 @@ tags:
   - gist
   - vcf
 ---
-If you are calling variants as part of a <acronym name="Next Generation Sequencing">NGS</acronym> experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as [repeatmasker][1] are used to identify low complexity regions, replacing repetitive sequences with **N**&#8216;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you are calling variants as part of a <acronym name="Next Generation Sequencing">NGS</acronym> experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as [repeatmasker][^1] are used to identify low complexity regions, replacing repetitive sequences with **N**'s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
 
-If you&#8217;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.
+If you've been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.
 
 <div class="row">
   <div class="col-md-6">
@@ -84,15 +84,9 @@ chrI    39419   42234
 chrI    42307   56428
 chrI    56455   57860
 </pre>
-    
-    <p>
-      <em>Each range corresponds with a low complexity region within the fasta file</em> </div> </div> 
-      
-      <p>
-        The resulting bed file can be used to filter variants out of a VCF file using a tool such as bcftools
-      </p>
-      
-      <p>
-      </p>
+</div>
+</div>
+_Each range corresponds with a low complexity region within the fasta file._ The resulting bed file can be used to filter variants out of a VCF file using a tool such as bcftools
 
+---- 
  [1]: http://www.repeatmasker.org/

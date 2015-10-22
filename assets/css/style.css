@@ -19,6 +19,10 @@
   background-color: #fdcd60;
 }
 
+.posts  img {
+  max-width: 750px;
+}
+
 
 img {
   max-width:740px;
