@@ -22,7 +22,7 @@ tags:
 ---
 [FastQC][1] is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I&#8217;m talking about the set of plots that look like this:
 
-[<img src="http://45.55.80.146/media/Uchicago-L001-CB4857_CGC-4642f-1.png" alt="fastqc-gc content" width="800" height="600" class="alignnone size-full wp-image-782" />][2]
+[<img src="/media/Uchicago-L001-CB4857_CGC-4642f-1.png" alt="fastqc-gc content" width="800" height="600" class="alignnone size-full wp-image-782" />][2]
 
 <!--more-->
 
@@ -51,7 +51,7 @@ To easily compare data across reports I wrote this short shell script (below) wh
 
 Images will be reorganized as shown below:
 
-[<img src="http://45.55.80.146/media/aggregate_fastqc.png" alt="aggregate_fastqc" width="444" height="581" class="aligncenter size-full wp-image-784" />][3]
+[<img src="/media/aggregate_fastqc.png" alt="aggregate_fastqc" width="444" height="581" class="aligncenter size-full wp-image-784" />][3]
 
 #### summary.txt
 
@@ -464,18 +464,11 @@ Images will be reorganized as shown below:
         SeqB.fq
       </td>
     </tr></tbody> </table> 
-    
-    <p>
-      You can now plot the basic statistics across fastq runs.
-    </p>
-    
-    <h5>
-      The Code
-    </h5>
-    
-    <p>
-    </p>
+ 
+##### The Code
+
+{% include gist gist_id="8e9afb2d2df7752efd8a" %}
 
  [1]: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
- [2]: http://45.55.80.146/media/Uchicago-L001-CB4857_CGC-4642f-1.png
- [3]: http://45.55.80.146/media/aggregate_fastqc.png
+ [2]: /media/Uchicago-L001-CB4857_CGC-4642f-1.png
+ [3]: /media/aggregate_fastqc.png

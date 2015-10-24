@@ -1,16 +1,18 @@
 ---
 layout: default
 ---
-
 <div class="row post-full">
   <div class="col-xs-8">
+{% if page.homepage != true %}
   <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 </div>
 
     <div class="date">
-      <span>{{ page.date  }}</span>
+      <span>{{ page.date | date: "%B %e, %Y"}}</span>
     </div>
+
+{% endif %}
     <div class="content posts">
       {{ content }}
     </div>

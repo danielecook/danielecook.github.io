@@ -30,9 +30,9 @@ You can use the **&** operator to concatenate two keywords (gene & &#8221; &#822
 
 <pre>= C2 &#038; " " &#038; D2</pre>
 
-The result would look something like this.<figure id="attachment_476" class="thumbnail wp-caption alignnone" style="width: 940px">
+The result would look something like this.
 
-[<img src="http://45.55.80.146/media/Screen-Shot-2014-03-03-at-8.38.03-AM-1024x351.png" alt="Pubmed result counts are in Column A1." width="940" height="322" class="size-large wp-image-476" />][2]<figcaption class="caption wp-caption-text"><small>Pubmed result counts are in Column A1.</small></figcaption></figure>
+[<img src="/media/Screen-Shot-2014-03-03-at-8.38.03-AM-1024x351.png" alt="Pubmed result counts are in Column A1." />][2]<figcaption class="caption wp-caption-text"><small>Pubmed result counts are in Column A1.</small>
 
  [1]: http://www.ncbi.nlm.nih.gov/books/NBK25499/
  [2]: http://45.55.80.146/media/Screen-Shot-2014-03-03-at-8.38.03-AM.png

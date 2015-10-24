@@ -36,6 +36,8 @@ Once installed, the script below can be used to download all the sequence data a
 <pre>brew install parallel
 brew install fastqc</pre>
 
+{% include gist gist_id="1fe7c42ded1e05fabe35" %}
+
  [1]: http://www.ncbi.nlm.nih.gov/sra
  [2]: http://www.ncbi.nlm.nih.gov/Traces/sra/?cmd=show&f=sra_sub_expl&view=get_started
  [3]: http://www.ncbi.nlm.nih.gov/books/NBK179288/

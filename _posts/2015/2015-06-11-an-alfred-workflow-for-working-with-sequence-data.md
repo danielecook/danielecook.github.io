@@ -17,17 +17,17 @@ categories:
 ---
 I&#8217;ve put together a simple alfred workflow with a few utilities for working with sequence data.
 
-### [<img src="http://45.55.80.146/media/icon.png" style="width:40px; margin-right:20px;" />Download the latest release of Seq-Utilities][1]
+### [<img src="/media/icon.png" style="width:40px; margin-right:20px;" />Download the latest release of Seq-Utilities][1]
 
 ### Usage
 
 **Generate a random dna sequence 200 base pairs long.**
 
-[<img src="http://45.55.80.146/media/dna1-1024x337.png" alt="dna1" width="940" height="309" class="aligncenter size-large wp-image-849" />][2]
+[<img src="/media/dna1-1024x337.png" alt="dna1" class="aligncenter size-large wp-image-849" />][2]
 
 **Generate the complement, reverse complement, RNA, and protein of a DNA sequence**
 
-[<img src="http://45.55.80.146/media/dna2-1024x521.png" alt="dna2" width="940" height="478" class="aligncenter size-large wp-image-850" />][3]
+[<img src="/media/dna2-1024x521.png" alt="dna2"  class="aligncenter size-large wp-image-850" />][3]
 
 **Open up blast and pre-populate the search field**
 

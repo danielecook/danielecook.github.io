@@ -23,7 +23,7 @@ tags:
 This idea I got from my brother &#8211; the idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:
 
 <div class='thumbnail pull-right'>
-  <img src="http://45.55.80.146/media/Screen-Shot-2014-01-20-at-12.33.18-AM.png" class='pull-right' alt="Directory Structure" width="205" height="149" class="size-full wp-image-439" /> 
+  <img src="/media/Screen-Shot-2014-01-20-at-12.33.18-AM.png" class='pull-right' alt="Directory Structure" width="205" height="149" class="size-full wp-image-439" /> 
   
   <div class="caption">
     Directory Structure
@@ -45,7 +45,7 @@ This idea I got from my brother &#8211; the idea is to keep any data analysis/bi
         #### Download
         
         <div class='well download' style="clear:both;">
-          <a class='download_link' href="/wp-downloads/Create_Project.alfredworkflow"><img class='download_img' src='/img/icon-alfred-workflow.png' style='float:left;width:50px;' /><br /> <strong>Create_Project.alfredworkflow</strong></a></p>
+          <a class='download_link' href="/downloads/createproject.alfredworkflow"><img class='download_img' src='/media/createproject.png' style='float:left;width:50px;' /><br /> <strong>Create_Project.alfredworkflow</strong></a></p>
         </div>
 
  [1]: http://phys.org/news/2013-09-science-crisis.html

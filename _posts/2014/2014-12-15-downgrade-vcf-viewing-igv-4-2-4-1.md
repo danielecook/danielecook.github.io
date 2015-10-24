@@ -23,3 +23,5 @@ tags:
 If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.
 
 All you have to do is revert the version number in the first line and replace a few characters IGV does not like. Below is a bash function that will do this &#8211; saving any inputted VCF as `{vcf_filename}.dg.vcf.gz`. The script also indexes the file making it ready for use.
+
+{% include gist gist_id="f1d80babd7d601a74981" %}
