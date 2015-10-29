@@ -3,14 +3,8 @@ title: From SRA Project to FastQ
 author: Daniel Cook
 layout: post
 permalink: /sra-project-fastq/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1414268933;}'
 dsq_thread_id:
   - 3156052916
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Bash
   - Bioinformatics
@@ -36,7 +30,7 @@ Once installed, the script below can be used to download all the sequence data a
 <pre>brew install parallel
 brew install fastqc</pre>
 
-{% include gist gist_id="1fe7c42ded1e05fabe35" %}
+{% include gist id="1fe7c42ded1e05fabe35" %}
 
  [1]: http://www.ncbi.nlm.nih.gov/sra
  [2]: http://www.ncbi.nlm.nih.gov/Traces/sra/?cmd=show&f=sra_sub_expl&view=get_started

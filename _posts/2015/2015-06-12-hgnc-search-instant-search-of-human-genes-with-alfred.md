@@ -23,7 +23,7 @@ tags:
 ---
 I have put together an Alfred workflow &#8211; this one searches the HGNC database for genes! I have converted the text database from the [HGNC website][1] and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
 
-### [<img src="http://45.55.80.146/media/gene-150x150.png" width="25px" /> Download the latest release][2]
+### [<img src="/media/gene-150x150.png" width="25px" /> Download the latest release][2]
 
 ## Usage
 
@@ -45,5 +45,5 @@ Please provide feedback. Specifically:
 
  [1]: http://www.genenames.org/
  [2]: https://github.com/danielecook/HGNC-Search/releases/latest
- [3]: http://45.55.80.146/media/d1.png
- [4]: http://45.55.80.146/media/d2.png
+ [3]: /media/d1.png
+ [4]: /media/d2.png

@@ -22,7 +22,7 @@ tags:
 <div class='row' style="padding:20px;">
   <div class="col-md-6">
     <div class='thumbnail'>
-      <img src="http://45.55.80.146/media/Screen-Shot-2014-05-27-at-10.50.04-PM.png" alt="Screen Shot 2014-05-27 at 10.50.04 PM" width="232" height="300" class="alignnone wp-image-534" /></p> 
+      <img src="/media/Screen-Shot-2014-05-27-at-10.50.04-PM.png" alt="Screen Shot 2014-05-27 at 10.50.04 PM" width="232" height="300" class="alignnone wp-image-534" /></p> 
       
       <div class="caption">
         <small>Runs in Iowa City</small>
@@ -32,7 +32,7 @@ tags:
   
   <div class="col-md-6" >
     <div class='thumbnail'>
-      <img src="http://45.55.80.146/media/2-all-107x300.png" alt="2-all" width="107" height="300" class="alignnone wp-image-502" /></p> 
+      <img src="/media/2-all-107x300.png" alt="2-all" width="107" height="300" class="alignnone wp-image-502" /></p> 
       
       <div class="caption">
         <small>Running and Biking in Chicago</small>
@@ -56,7 +56,7 @@ The script does a few unique things.
 
   1. Export your runkeeper data. The option is available for subscribers only under the settings menu.
 
-[<img src="http://45.55.80.146/media/Screen-Shot-2014-05-27-at-8.09.00-PM-300x198.png" alt="Exporting Runkeeper Data" width="300" height="198" class="img-thumbnail size-medium wp-image-520" />][5]
+[<img src="/media/Screen-Shot-2014-05-27-at-8.09.00-PM-300x198.png" alt="Exporting Runkeeper Data" width="300" height="198" class="img-thumbnail size-medium wp-image-520" />][5]
 
 <p class='caption'>
   <small>Exporting can be done from within the settings menu</small>
@@ -76,4 +76,4 @@ install.packages("mapproj")</pre>
  [2]: http://www.r-project.org/
  [3]: http://www.flowingdata.com.com
  [4]: http://www.topografix.com/gpx.asp
- [5]: http://45.55.80.146/media/Screen-Shot-2014-05-27-at-8.09.00-PM.png
+ [5]: /media/Screen-Shot-2014-05-27-at-8.09.00-PM.png

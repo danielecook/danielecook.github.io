@@ -27,7 +27,7 @@ If you have a small<sup><strong><a href='#footnote'>✱</a></strong></sup> datas
 
 <sup><a name='footnote'>✱</a></sup>* Note: The UCSC browser mysql resource will throttle you if you make too many queries. If you need to annotate large datasets, all of the data is freely available for download [here][4].*</p>
 
- [1]: http://45.55.80.146/accessing-the-ucsc-genome-browser-mysql-database/
+ [1]: /accessing-the-ucsc-genome-browser-mysql-database/
  [2]: http://www.sequelpro.com/
  [3]: http://www8.silversand.net/techdoc/teachsql/ch01.htm
  [4]: http://hgdownload-test.cse.ucsc.edu/goldenPath/

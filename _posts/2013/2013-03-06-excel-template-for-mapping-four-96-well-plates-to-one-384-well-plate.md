@@ -47,7 +47,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
     </div>
     
     <p>
-      <img src="http://45.55.80.146/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.08-AM.png" alt="Screen Shot 2013-03-06 at 10.55.08 AM" class="wp-image-190 img-polaroid" /> </li> 
+      <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.08-AM.png" alt="Screen Shot 2013-03-06 at 10.55.08 AM" class="wp-image-190 img-polaroid" /> </li> 
       
       <li class="span5">
         <div class="caption">
@@ -57,7 +57,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
         </div>
         
         <p>
-          <img src="http://45.55.80.146/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.30-AM.png" alt="Screen Shot 2013-03-06 at 10.55.30 AM"  class="alignnone size-full wp-image-191 img-polaroid" /> </li> 
+          <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.30-AM.png" alt="Screen Shot 2013-03-06 at 10.55.30 AM"  class="alignnone size-full wp-image-191 img-polaroid" /> </li> 
           
           <li class="span5">
             <div class="caption">
@@ -67,7 +67,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
             </div>
             
             <p>
-              <img src="http://45.55.80.146/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.41-AM.png" alt="Screen Shot 2013-03-06 at 10.55.41 AM" class="wp-image-192 img-polaroid" />
+              <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.41-AM.png" alt="Screen Shot 2013-03-06 at 10.55.41 AM" class="wp-image-192 img-polaroid" />
             </p>
           </li></ul>
 

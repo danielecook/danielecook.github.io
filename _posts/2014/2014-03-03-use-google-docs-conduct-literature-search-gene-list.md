@@ -35,4 +35,4 @@ The result would look something like this.
 [<img src="/media/Screen-Shot-2014-03-03-at-8.38.03-AM-1024x351.png" alt="Pubmed result counts are in Column A1." />][2]<figcaption class="caption wp-caption-text"><small>Pubmed result counts are in Column A1.</small>
 
  [1]: http://www.ncbi.nlm.nih.gov/books/NBK25499/
- [2]: http://45.55.80.146/media/Screen-Shot-2014-03-03-at-8.38.03-AM.png
+ [2]: /media/Screen-Shot-2014-03-03-at-8.38.03-AM.png

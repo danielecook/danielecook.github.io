@@ -34,5 +34,5 @@ I&#8217;ve put together a simple alfred workflow with a few utilities for workin
     blast ATGTCCTCGTTCGACCGTCGTATTGAAGCTGCATGTAAA
 
  [1]: https://github.com/danielecook/seq-utilities/releases/latest
- [2]: http://45.55.80.146/media/dna1.png
- [3]: http://45.55.80.146/media/dna2.png
+ [2]: /media/dna1.png
+ [3]: /media/dna2.png

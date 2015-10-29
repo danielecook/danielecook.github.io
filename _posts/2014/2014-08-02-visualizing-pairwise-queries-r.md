@@ -16,7 +16,7 @@ categories:
 tags:
   - gist
 ---
-<img src="http://45.55.80.146/media/diseasexorg.png" alt="diseasexorg" width="585" height="301" class="thumbnail" />
+<img src="/media/diseasexorg.png" alt="diseasexorg" width="585" height="301" class="thumbnail" />
 
 If you are doing a lot biological research and are interested in identifying whether an association exists between all the pairwise combinations between two sets of terms (e.g. two gene lists), you can use pubmed search results as a proxy for relative association.
 

@@ -17,7 +17,7 @@ tags:
   - bike
   - chicago
 ---
-<img style="float:left; margin-right:20px;border: 1px solid black;" src="http://45.55.80.146/media/2-all.png" alt="2-all" width="366" height="1024" class="alignnone size-large wp-image-502" />
+<img style="float:left; margin-right:20px;border: 1px solid black;" src="/media/2-all.png" alt="2-all" width="366" height="1024" class="alignnone size-large wp-image-502" />
 
 Using [runkeeper][1] and with the help of a tutorial at [flowing data][2], I was able to plot all of the running and biking I&#8217;ve been doing in Chicago since moving here two years ago. The <span style="color:#0080ff"><strong>blue</strong></span> is running and the **black** is biking.
 
