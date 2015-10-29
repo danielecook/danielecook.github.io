@@ -3,14 +3,8 @@ title: Generate a bedfile of masked ranges a fasta file
 author: Daniel Cook
 layout: post
 permalink: /generate-masked-ranges-bedfile-fasta/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1410830447;}'
 dsq_thread_id:
   - 3044593371
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Bioinformatics
   - Programming
@@ -87,6 +81,16 @@ chrI    56455   57860
 </div>
 </div>
 _Each range corresponds with a low complexity region within the fasta file._ The resulting bed file can be used to filter variants out of a VCF file using a tool such as bcftools
+
+## Usage
+
+```bash
+python generate_masked_ranges.py <fasta_file> > output_ranges.txt
+```
+
+## Script
+
+{% include gist id ="cfaa5c359d99bcad3200" %}
 
 ---- 
  [1]: http://www.repeatmasker.org/

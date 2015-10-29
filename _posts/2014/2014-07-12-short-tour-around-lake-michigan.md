@@ -23,24 +23,24 @@ I&#8217;ve given bicycle touring a try. Originally I wanted to bike around Lake 
   * **Get a proper touring bike** &#8211; I didn&#8217;t use a touring bike because I don&#8217;t have one (yet). I used a [Trek 7.2][2]. My wrists hurt a lot for parts of the trip. Next time I&#8217;ll get a proper touring bike with the appropriate handle bars.
 
 <div class="text-center">
-  <img src="/media/Screen-Shot-2014-07-12-at-7.27.56-PM1.png" alt="Trip around Lake Michigan" width="653" height="756" class="thumbnail" style="margin:auto;" /><small style="color:#4792f3">Day 1</span> · <span style="color:Red">Day 2</span> · <span style="color:#fba43c">Ferry</span> · <span style="color:Green">Day 3</span></small>
+  <img src="/media/Screen-Shot-2014-07-12-at-7.27.56-PM1.png" alt="Trip around Lake Michigan"  class="thumbnail" style="margin:auto;" /><small style="color:#4792f3">Day 1</span> · <span style="color:Red">Day 2</span> · <span style="color:#fba43c">Ferry</span> · <span style="color:Green">Day 3</span></small>
 </div>
 
 ### Pictures
 
-<img src="/media/IMG_0826.jpg" alt="Michigan" width="2448" height="3264" class="caption" />
+<img src="/media/IMG_0826.jpg" alt="Michigan"  class="caption" />
 
-<img src="/media/IMG_0849.jpg" alt="Outside Muskeegan" width="1979" height="2639" class="caption" />
+<img src="/media/IMG_0849.jpg" alt="Outside Muskeegan"  class="caption" />
 
 <!--more-->
 
-<img src="/media/IMG_0854.jpg" alt="After biking 8 hours - I found I could eat whatever I wanted." width="3264" height="2448" class="caption" />
+<img src="/media/IMG_0854.jpg" alt="After biking 8 hours - I found I could eat whatever I wanted." class="caption" />
 
-<img src="/media/IMG_0860.jpg" alt="Boardwalk in Muskeegan, MI" width="2232" height="2975" class="caption" />
+<img src="/media/IMG_0860.jpg" alt="Boardwalk in Muskeegan, MI"  class="caption" />
 
-<img src="/media/IMG_0874.jpg" alt="Middle of Lake Michigan - into the fog" width="3264" height="2448" class="caption" />
+<img src="/media/IMG_0874.jpg" alt="Middle of Lake Michigan - into the fog"  class="caption" />
 
-<img src="/media/IMG_0882.jpg" alt="Lakefront trail in Milwaukee" width="2448" height="3264" class="caption" />
+<img src="/media/IMG_0882.jpg" alt="Lakefront trail in Milwaukee"  class="caption" />
 
 <img src="/media/IMG_0905.jpg" alt="The trail outside Racine, WI"  class="caption" />
 

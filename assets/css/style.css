@@ -31,6 +31,10 @@ img {
   max-width:740px;
 }
 
+.page-header {
+  margin: 0px 0px 10px;
+}
+
 /* posts index */
 .post > h3.title {
   position: relative;

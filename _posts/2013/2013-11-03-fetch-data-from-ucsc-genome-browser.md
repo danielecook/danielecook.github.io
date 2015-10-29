@@ -22,6 +22,7 @@ tags:
 
 If you have a small<sup><strong><a href='#footnote'>✱</a></strong></sup> dataset that you would like to annotate, you can write [SQL][3] statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.  
 
+{% include gist id="7088662" %}
 
 * * *
 

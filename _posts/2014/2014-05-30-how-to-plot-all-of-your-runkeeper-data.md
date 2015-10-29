@@ -50,7 +50,6 @@ The script does a few unique things.
   * Runkeeper exports data in [gpx format][4]. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file. The script will retain all paths and plot them separately.
   * This script will merge in the type of activities so you can plot different types of activities by color.
   * Finally, cluster analysis is used to segregate different locations when plotting. If you are like me and have moved around a bit &#8211; this is necessary as plotting distant locations on the same map (e.g. Chicago and Boston) is not feasible and results in distant locations being plotted as single points.  
-    <!--more-->
 
 #### Directions
 
@@ -70,7 +69,9 @@ install.packages("plyr")
 install.packages("dplyr")
 install.packages("mapproj")</pre>
 
-  3. Run the script from within R Studio or on unix based machines using `RScript plot_runkeeper.R`. If you are using Rstudio, be sure to set the working directory using `setwd()`
+  3. Run the script below from within R Studio or on unix based machines using `RScript plot_runkeeper.R`. If you are using Rstudio, be sure to set the working directory using `setwd()`
+
+{% include gist id="6c555937144d4955073b" %}
 
  [1]: http://www.runkeeper.com
  [2]: http://www.r-project.org/

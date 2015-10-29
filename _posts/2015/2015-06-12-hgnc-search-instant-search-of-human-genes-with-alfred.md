@@ -3,14 +3,6 @@ title: 'HGNC Search &#8211; Instant search of human genes with Alfred'
 author: Daniel Cook
 layout: post
 permalink: /hgnc-search-instant-search-of-human-genes-with-alfred/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1434160819;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
-dsq_thread_id:
-  - 
 categories:
   - Alfred
   - Bioinformatics
@@ -29,11 +21,11 @@ I have put together an Alfred workflow &#8211; this one searches the HGNC databa
 
 **Full text search of the HGNC database**
 
-![][3]
+![](/media/d1-1024x759.png)
 
 **Information and links are provided for individual genes**
 
-![][4]
+![](/media/d2.png)
 
 ## Feedback
 

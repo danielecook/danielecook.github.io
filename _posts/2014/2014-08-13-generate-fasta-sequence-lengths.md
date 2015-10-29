@@ -22,11 +22,7 @@ tags:
 ---
 **This one liner:**
 
-<div class="oembed-gist">
-  <noscript>
-    View the code on <a href="https://gist.github.com/danielecook/394958db37c4d01f0ef3">Gist</a>.
-  </noscript>
-</div>
+{% include gist id="394958db37c4d01f0ef3" %}
 
 **Takes a fasta file as input:**
 

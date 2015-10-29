@@ -25,13 +25,10 @@ If you use **python** &#8211; its easy to download and store data in an SQlite d
 Below &#8211; you will see that that is what I have done here for HapMap allele frequency data ([2010-08_phaseII+III][1]), and it allows me to retrieve allele frequency data from 26,278,275 rows across 11 populations instantly. The database itself is 3.22 Gb. A zipped version (~1Gb) is available [Here][2].
 
 [<img src="/media/Screen-Shot-2014-01-20-at-12.07.25-AM-1024x466.png" alt="Screen Shot 2014-01-20 at 12.07.25 AM" width="940" height="427" class="alignnone size-large wp-image-431" />][3]
-
-<!--more-->
-
   
-If there is interest &#8211; I am considering developing a python based annotation package which would generate these sqlite files for a number of databases and then allow the user to annotate datasets using different identifiers (e.g. rs number, Gene Symbol, etc.).
-
 You will need sqlalchemy for this script to work. Install using `pip install sqlalchemy`.
+
+{% include gist id="8515642" %}
 
  [1]: http://hapmap.ncbi.nlm.nih.gov/downloads/genotypes/2010-08_phaseII+III/forward/
  [2]: https://drive.google.com/file/d/0B_6qjHtu65BDdmFBeXdGeEc2STQ/edit?usp=sharing
