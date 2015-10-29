@@ -3,8 +3,6 @@ title: Calculate Depth and Breadth of Coverage From a bam File
 author: Daniel Cook
 layout: post
 permalink: /calculate-depth-coverage-bam-file/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1411230944;}'
 dsq_thread_id:
   - 3041189857
 rp4wp_cached:
@@ -27,7 +25,10 @@ If you need to calculate *depth of coverage* and *breadth of coverage* you can d
 
 Additionally, if you specify the optional second parameter specifying the mitochondrial chromosome, the script will calculate the parameters listed above for the nuclear genome and calculate the ratio of mitochondrial depth of coverage to nuclear depth of coverage. This can act as a proxy for mitochondrial count/content within a cell.
 
-[Requires BCFTools][3]{.label.label-primary}
+{% include gist id = "8d9198f746c9d2a44d19" %}
+
+
+[Requires BCFTools][3]
 
  [1]: https://www.biostars.org/p/6571/#6574
  [2]: http://doi.org/10.1093/bib/bbu029

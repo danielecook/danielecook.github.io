@@ -31,12 +31,7 @@ tags:
 Featured on [Getting Genetics Done][1], this excel template helps you map 96 well templates to a single 384 well plate using Microsoft Excel.
 
 #### Download
-
-<div class='well download' style="clear:both;">
-  <a class='download_link' href="/wp-downloads/96_to_384_platemapper.xlsx"><img class='download_img' src='/img/icon-excel.png' style='float:left;width:50px;' /><br /> <strong>96_to_384_platemapper.xlsx</strong></a></p>
-</div>
-
-<!--more-->
+  <a class='download_link' href="/media/96_to_384_platemapper.xlsx"><strong>96_to_384_platemapper.xlsx</strong></a></p>
 
 <ul class="thumbnails">
   <li class="span5">
@@ -47,7 +42,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
     </div>
     
     <p>
-      <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.08-AM.png" alt="Screen Shot 2013-03-06 at 10.55.08 AM" class="wp-image-190 img-polaroid" /> </li> 
+      <img src="/media/Screen-Shot-2013-03-06-at-10.55.08-AM.png" alt="Screen Shot 2013-03-06 at 10.55.08 AM" class="wp-image-190 img-polaroid" /> </li> 
       
       <li class="span5">
         <div class="caption">
@@ -57,7 +52,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
         </div>
         
         <p>
-          <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.30-AM.png" alt="Screen Shot 2013-03-06 at 10.55.30 AM"  class="alignnone size-full wp-image-191 img-polaroid" /> </li> 
+          <img src="/media/Screen-Shot-2013-03-06-at-10.55.30-AM.png" alt="Screen Shot 2013-03-06 at 10.55.30 AM"  class="alignnone size-full wp-image-191 img-polaroid" /> </li> 
           
           <li class="span5">
             <div class="caption">
@@ -67,7 +62,7 @@ Featured on [Getting Genetics Done][1], this excel template helps you map 96 wel
             </div>
             
             <p>
-              <img src="/wp-content/uploads/2013/03/Screen-Shot-2013-03-06-at-10.55.41-AM.png" alt="Screen Shot 2013-03-06 at 10.55.41 AM" class="wp-image-192 img-polaroid" />
+              <img src="/media/Screen-Shot-2013-03-06-at-10.55.41-AM.png" alt="Screen Shot 2013-03-06 at 10.55.41 AM" class="wp-image-192 img-polaroid" />
             </p>
           </li></ul>
 

@@ -37,6 +37,7 @@ Usage:
     {% if forloop.last %}
       </ul>
     {% else %}
+    <a name="{{next_month}} {{ next_year }}"></a>
       {% if this_year != next_year %}
         </ul>
         <h3>{{next_year}}</h3>

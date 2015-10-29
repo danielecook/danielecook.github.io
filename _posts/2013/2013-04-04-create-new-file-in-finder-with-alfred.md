@@ -37,15 +37,9 @@ I have created a simple workflow for Alfred 2 which makes it easy to create a ne
 
 Open Alfred 2, and type **new** followed by the name of the file. If you just type new, a file called &#8216;untitled.txt&#8217; will be created.
 
-<img src="/wp-content/uploads/2013/04/Screen-Shot-2013-04-04-at-11.32.29-AM.png" alt="Screen Shot 2013-04-04 at 11.32.29 AM" class="alignnone size-full wp-image-217" />
-
-<img src="/wp-content/uploads/2013/04/Screen-Shot-2013-04-04-at-11.07.18-AM.png" alt="Screen Shot 2013-04-04 at 11.07.18 AM" width="961" height="766" class="alignnone size-full wp-image-216" />
-
 #### Download
 
-<div class='well download' style="clear:both;">
-  <a class='download_link' href="/wp-downloads/New_File.alfredworkflow"><img class='download_img' src='/img/icon-alfred-workflow.png' style='float:left;width:50px;' /><br /> <strong>New_File.alfredworkflow</strong></a></p>
-</div>
+<p><a class='download_link' href="/downloads/newfile.alfredworkflow"><strong>New_File.alfredworkflow</strong></a></p>
 
  [1]: http://www.jameskachan.com/
  [2]: http://ianisted.co.uk/new-finder-file-alfred-2
