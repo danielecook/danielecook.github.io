@@ -27,7 +27,7 @@ carat   cut color   clarity depth   table   price   x   y   z
 
 Then type `tbl` in alfred and you will see the following:
 
-![tbl screen](tbl.png)
+![tbl screen](https://github.com/danielecook/markdown-table-alfred/raw/master/tbl.png)
 
 You can create a table with or without a header. It will be copied to your clipboard as this: 
 
