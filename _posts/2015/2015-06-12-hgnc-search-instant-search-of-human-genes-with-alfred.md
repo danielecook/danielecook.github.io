@@ -10,7 +10,6 @@ categories:
   - Python
   - Utilities
 tags:
-  - Alfred
   - Database
 ---
 I have put together an Alfred workflow &#8211; this one searches the HGNC database for genes! I have converted the text database from the [HGNC website][1] and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.

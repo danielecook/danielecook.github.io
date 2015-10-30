@@ -12,10 +12,6 @@ excerpt: |
   </div>
 layout: post
 permalink: /create-new-file-in-finder-with-alfred/
-dsq_thread_id:
-  - 
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1399063656;}'
 rp4wp_cached:
   - 1
 rp4wp_auto_linked:
@@ -25,7 +21,6 @@ categories:
   - Downloads
   - Utilities
 tags:
-  - Alfred 2
   - Mac
   - OSX
 ---

@@ -1,1 +1,19 @@
-Sorry this page does not exist =(
+---
+layout: page
+title: 404
+---
+
+<div class="alert alert-danger" role="alert"><strong>404</strong> Not Found!</div>
+
+Perhaps what you are looking for is below:
+
+{% assign categories = {{site.categories | sort }} %}
+{% for category in categories  %} 
+
+  <h3 id="{{ category[0] }}">{{ category[0] | capitalize |  join: "/" }}</h3>
+  <ul>
+    {% assign pages_list = category[1] %}  
+    {% include pages_list %}
+  </ul>
+
+{% endfor %}

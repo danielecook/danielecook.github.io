@@ -13,7 +13,6 @@ rp4wp_auto_linked:
   - 1
 categories:
   - Bioinformatics
-  - Django
   - Programming
 tags:
   - Database

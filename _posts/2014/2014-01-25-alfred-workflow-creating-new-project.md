@@ -14,11 +14,8 @@ rp4wp_auto_linked:
 categories:
   - Alfred
   - Bioinformatics
-  - Misc
   - Tips
   - Utilities
-tags:
-  - Alfred
 ---
 This idea I got from my brother &#8211; the idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:
 

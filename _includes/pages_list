@@ -8,7 +8,7 @@
       	<li class="active"><a href="{{ BASE_PATH }}{{node.url}}" class="active">{{node.title}}</a></li>
       	{% else %}
         <li><strong>{{ node.date | date: "%Y-%m-%d"  }}</strong> - 
-        <a href="{{ post.url }}">{{ node.title }}</a></li>
+        <a href="{{ node.url }}">{{ node.title }}</a></li>
       	{% endif %}
       {% endif %}
     {% endif %}

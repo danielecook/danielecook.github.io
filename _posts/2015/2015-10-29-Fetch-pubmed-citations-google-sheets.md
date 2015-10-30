@@ -7,7 +7,6 @@ categories:
   - Alfred
   - Utilities
 tags:
-  - Alfred
   - Wormbase
 ---
 

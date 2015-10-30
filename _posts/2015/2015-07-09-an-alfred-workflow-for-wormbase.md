@@ -15,7 +15,6 @@ categories:
   - Alfred
   - Utilities
 tags:
-  - Alfred
   - Wormbase
 ---
 I have created an Alfred workflow for looking up gene information in wormbase. You can search by wormbase ID (e.g. WBGene00006759) You can use it to search for genes. Returned results will include:
