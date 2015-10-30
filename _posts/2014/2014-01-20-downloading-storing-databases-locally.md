@@ -28,7 +28,7 @@ Below &#8211; you will see that that is what I have done here for HapMap allele 
   
 You will need sqlalchemy for this script to work. Install using `pip install sqlalchemy`.
 
-{% include gist id="8515642" %}
+{% gist 8515642 %}
 
  [1]: http://hapmap.ncbi.nlm.nih.gov/downloads/genotypes/2010-08_phaseII+III/forward/
  [2]: https://drive.google.com/file/d/0B_6qjHtu65BDdmFBeXdGeEc2STQ/edit?usp=sharing

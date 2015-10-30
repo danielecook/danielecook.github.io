@@ -90,7 +90,7 @@ python generate_masked_ranges.py <fasta_file> > output_ranges.txt
 
 ## Script
 
-{% include gist id ="cfaa5c359d99bcad3200" %}
+{% gist cfaa5c359d99bcad3200 %}
 
 ---- 
  [1]: http://www.repeatmasker.org/

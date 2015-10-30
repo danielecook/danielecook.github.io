@@ -1,6 +1,0 @@
-<div id="gist">
-<script src="https://gist.github.com/{{ include.id }}.js{% if include.gist_file %}?file={{ include.gist_file }}{% endif %}"></script>
-<noscript>
-<pre>https://gist.github.com/{{include.id}}.js{% if include.gist_file %}?file={{include.gist_file}}{% endif %}</pre>
-</noscript>
-</div>

@@ -1,5 +1,5 @@
 
-  <aside class="sidebar" role="complementary">
+  <aside  role="complementary">
     <section class="widget text-2 widget_text"><div class="widget-inner">     <div class="textwidget"><aside>
 
 <img src="/assets/img/me.jpeg"  style="width:95px; border: 0px solid black; border-radius:5px; margin-right: 20px;" class='pull-left' />
@@ -19,25 +19,19 @@
   _st('install','Y8y68vXnqNhKB1AhG6ik','2.0.0');
 </script>
 
-<input type="text" style="width:80%" class="st-default-search-input">
+<input type="text" style="width:70%" class="st-default-search-input">
 <ul class="nav nav-pills nav-stacked">
-<li><a href="http://danielecook.com/feed/"><img src="http://danielecook.com/media/1434650378_rss_circle_color.png" /> RSS </a></li>
-<li><a href="https://www.sharelatex.com/github/repos/danielecook/cv/builds/latest/output.pdf"><img src="http://danielecook.com/img/paper.png" /> CV</a></li>
-<li><a href="http://scholar.google.com/citations?user=xPDZ2w4AAAAJ&hl=en"><img src="http://danielecook.com/img/ghat.png" /> Google Scholar <span  title='external link'  class='glyphicon glyphicon-circle-arrow-right'></span></a></li>
-<li><a href="http://www.github.com/danielecook"><img src="http://danielecook.com/img/github.png" /> Github <span  title='external link'  class='glyphicon glyphicon-circle-arrow-right'></a></li>
+<li><a href="/feed/"><img src="/media/1434650378_rss_circle_color.png" /> RSS </a></li>
+<li><a href="https://www.sharelatex.com/github/repos/danielecook/cv/builds/latest/output.pdf"><img src="/media/paper.png" /> CV</a></li>
+<li><a href="http://scholar.google.com/citations?user=xPDZ2w4AAAAJ&hl=en"><img src="/media/scholar.png" /> Google Scholar <span  title='external link'  class='glyphicon glyphicon-circle-arrow-right'></span></a></li>
+<li><a href="http://www.github.com/danielecook"><img src="/media/github.png" /> Github <span  title='external link'  class='glyphicon glyphicon-circle-arrow-right'></a></li>
 
 </ul>
 
-<h4><a href="/categories.html">Categories</a></h4>
-    <ul>
-  	  {% assign categories_list = site.categories %}  
+<h4><a href="/categories.html">Categories</a></h4>  
   	  {% include categories_list %}
-  	</ul>
-<h4><a href="/tags.html">Tags</a></h4>
-    <ul>
-      {% assign tags_list = site.tags %}  
+<h4><a href="/tags.html">Tags</a></h4> 
       {% include tags_list %}
-    </ul>
 <h4><a href="/archive.html">Archive</a></h4>
 <ul>
 {% assign counter = 0 %}

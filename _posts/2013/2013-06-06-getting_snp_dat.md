@@ -26,7 +26,7 @@ Unfortunately &#8211; one notable database biopython has trouble working with is
 
 To solve this problem &#8211; I wrote a function for retrieving SNP data, and parsing it into an array. Feel free to build on this, and use it as you wish. Suggestions welcome!
 
-{% include gist id="5637393" %}
+{% gist 5637393 %}
 
  [1]: http://biopython.org/
  [2]: http://www.ncbi.nlm.nih.gov/About/tools/restable_mol.html

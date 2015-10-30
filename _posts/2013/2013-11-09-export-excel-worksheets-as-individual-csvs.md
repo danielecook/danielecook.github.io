@@ -24,4 +24,4 @@ tags:
 ---
 If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don&#8217;t want to do so in Microsoft Excel &#8211; here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.
 
-{% include gist id="7380695" %}
+{% gist 7380695 %}

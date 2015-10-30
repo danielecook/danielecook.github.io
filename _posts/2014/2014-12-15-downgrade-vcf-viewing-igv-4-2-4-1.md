@@ -24,4 +24,4 @@ If you are using the new version of bcftools, and you frequently use IGV to view
 
 All you have to do is revert the version number in the first line and replace a few characters IGV does not like. Below is a bash function that will do this &#8211; saving any inputted VCF as `{vcf_filename}.dg.vcf.gz`. The script also indexes the file making it ready for use.
 
-{% include gist id="f1d80babd7d601a74981" %}
+{% gist f1d80babd7d601a74981 %}

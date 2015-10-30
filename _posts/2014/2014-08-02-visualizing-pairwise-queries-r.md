@@ -22,4 +22,4 @@ If you are doing a lot biological research and are interested in identifying whe
 
 In the example below, I show the results from organisms x diseases to give a rough estimate of how much each disease is studied in a given organism. Of course, this should all be taken with a (big) grain of salt because these organisms and diseases have many synonyms or related terms (e.g. *M. Musculus* is often referred to as Mouse in the literature). Additionally, the result count is based off of whether or not the terms were found together within the title and abstract of the literature only &#8211; and not the body of the text in many cases.
 
-{% include gist id="5ea8d34679fb197941c0" %}
+{% gist 5ea8d34679fb197941c0 %}

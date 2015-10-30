@@ -71,7 +71,7 @@ install.packages("mapproj")</pre>
 
   3. Run the script below from within R Studio or on unix based machines using `RScript plot_runkeeper.R`. If you are using Rstudio, be sure to set the working directory using `setwd()`
 
-{% include gist id="6c555937144d4955073b" %}
+{% gist 6c555937144d4955073b %}
 
  [1]: http://www.runkeeper.com
  [2]: http://www.r-project.org/

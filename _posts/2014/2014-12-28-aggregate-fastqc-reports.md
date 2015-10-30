@@ -467,7 +467,7 @@ Images will be reorganized as shown below:
  
 ##### The Code
 
-{% include gist id="8e9afb2d2df7752efd8a" %}
+{% gist 8e9afb2d2df7752efd8a %}
 
  [1]: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
  [2]: /media/Uchicago-L001-CB4857_CGC-4642f-1.png

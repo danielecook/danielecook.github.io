@@ -22,7 +22,7 @@ tags:
 ---
 **This one liner:**
 
-{% include gist id="394958db37c4d01f0ef3" %}
+{% gist 394958db37c4d01f0ef3 %}
 
 **Takes a fasta file as input:**
 

@@ -1,0 +1,11 @@
+{% assign categories = {{site.categories | sort }} %}
+   <div class="list-group">
+    {% for category in categories %} 
+    {{ post }}
+    	<a class="list-group-item {{ active }}" href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}">
+    		{{ category[0] | capitalize }} <span class="badge">{{ category[1].size }}</span>
+        
+    	</a>
+    {% endfor %}
+    </ul>
+  

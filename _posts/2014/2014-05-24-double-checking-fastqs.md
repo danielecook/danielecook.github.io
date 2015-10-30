@@ -38,7 +38,7 @@ This script will extracting basic information from a set of [FASTQs][2] and outp
 
 The script below will extract the machine name, lane, index, and pair.
 
-{% include gist id="68deab00bc57a1f76ba6" %}
+{% gist 68deab00bc57a1f76ba6 %}
 
  [1]: http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0041815
  [2]: http://en.wikipedia.org/wiki/FASTQ_format

@@ -35,4 +35,4 @@ This citations formats nicely as:
 
 To implement the function, you'll need to copy and paste the function below into the script editor and save it as a new project. Then it will become available within your google sheet. The script editor is available through the `Tools > Script Editor`
 
-{% include gist id="13a27f57ab5f1ff38dcd" %}
+{% gist 13a27f57ab5f1ff38dcd %}

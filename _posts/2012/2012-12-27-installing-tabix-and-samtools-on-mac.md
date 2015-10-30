@@ -5,8 +5,6 @@ layout: post
 permalink: /installing-tabix-and-samtools-on-mac/
 dsq_thread_id:
   - 1951413943
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1399046001;}'
 rp4wp_cached:
   - 1
 rp4wp_auto_linked:

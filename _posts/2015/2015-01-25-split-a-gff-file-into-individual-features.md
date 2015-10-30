@@ -17,7 +17,7 @@ I was working with [wormbase][2] annotation files, which combine all the differe
 
 As a result, I wrote this very short script for splitting the individual feature types apart, sorting them, and indexing them with tabix. This way they can be selectively viewed in IGV or elsewhere.
 
-{% include gist id="7a81acda1e87c1739665" %}
+{% gist 7a81acda1e87c1739665 %}
 
  [1]: http://www.ensembl.org/info/website/upload/gff.html
  [2]: ftp://ftp.wormbase.org/pub/wormbase/releases/WS245/species/c_elegans/PRJNA13758/

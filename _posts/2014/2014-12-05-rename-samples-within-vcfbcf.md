@@ -16,4 +16,4 @@ tags:
 ---
 These two simple bash functions make it easy to rename samples within a bcf file by using the filename given (if it is a single sample file) or adding a prefix to all samples. This is useful if you want to merge bcf files where the sample names are identical in both (for comparison purposes).
 
-{% include gist id="2e0cca284e907bbed602" %}
+{% gist 2e0cca284e907bbed602 %}

@@ -25,7 +25,7 @@ If you need to calculate *depth of coverage* and *breadth of coverage* you can d
 
 Additionally, if you specify the optional second parameter specifying the mitochondrial chromosome, the script will calculate the parameters listed above for the nuclear genome and calculate the ratio of mitochondrial depth of coverage to nuclear depth of coverage. This can act as a proxy for mitochondrial count/content within a cell.
 
-{% include gist id = "8d9198f746c9d2a44d19" %}
+{% gist 8d9198f746c9d2a44d19 %}
 
 
 [Requires BCFTools][3]
