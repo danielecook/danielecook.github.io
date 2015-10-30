@@ -1,3 +1,3 @@
 # Danielecook.com
 
-[danielecook.com](danielecook.com)
+[danielecook.com](http://danielecook.com)
