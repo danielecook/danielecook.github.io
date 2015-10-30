@@ -8,10 +8,7 @@ highlighter: pygments
 
 kramdown:
   input: GFM
-
-require 'redcarpet'
-
-
+  
 markdown: redcarpet
 redcarpet:
     extensions: ["fenced_code_blocks","no_intra_emphasis", "tables", "autolink", "strikethrough", "with_toc_data"]
