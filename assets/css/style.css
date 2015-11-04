@@ -19,16 +19,12 @@
   background-color: #fdcd60;
 }
 
-.posts  img {
-  max-width: 750px;
-}
-
 h1 {
   margin: 0px 0px 10px;
 }
 
 img {
-  max-width:740px;
+  max-width:100%;
 }
 
 .page-header {
