@@ -8,31 +8,23 @@
     {% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
   
     {% if forloop.first %}
-      <h3>{{this_year}}</h3>
-      <h4>{{this_month}}</h4>
-      <ul>
+      <ul style="list-style-type: none; padding-left: 0px;">
     {% endif %}
   
-        <li><strong>{{ post.date | date: "%d"  }}</strong> - 
+        <li><strong>{{ post.date | date: "%Y-%m-%d"  }}</strong> - 
         <a href="{{ post.url }}">{{ post.title }}</a></li>
-  
-    {% if forloop.last %}
-      </ul>
-    {% else %}
-    <a name="{{next_month}} {{ next_year }}"></a>
+
+
       {% if this_year != next_year %}
         </ul>
-        <h3>{{next_year}}</h3>
-        <h4>{{next_month}}</h4>
-        <ul>
-      {% else %}    
-        {% if this_month != next_month %}
-          </ul>
-          <h4>{{next_month}}</h4>
-          <ul>
-        {% endif %}
+        <br />
+        <ul style="list-style-type: none; padding-left: 0px;">
       {% endif %}
-    {% endif %}
+  
+      {% if forloop.last %}
+        </ul>
+      {% endif %}
+
   {% endfor %}
 {% endif %}
 {% assign posts_collate = nil %}

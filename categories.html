@@ -5,6 +5,9 @@ header: Posts By Category
 group: navigation
 ---
 
+<h1>Categories</h1>
+<hr />
+
 {% assign categories = {{site.categories | sort }} %}
 {% for category in categories  %} 
   <h3 id="{{ category[0] }}">{{ category[0] | capitalize |  join: "/" }}</h3>
