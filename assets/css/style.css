@@ -84,4 +84,34 @@ img {
 .tag_box a.active {
   background: #57A957;
   border: 1px solid #4c964d;
-  color: #FFF; }
+  color: #FFF;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+p, .date {
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+li, .list-group-item {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bitter', serif;
+  margin-bottom:20px;
+}
+
+/* Better styles for embedding GitHub Gists */
+.gist{font-size:13px;line-height:18px;margin-bottom:20px;width:100%}
+.gist pre{font-family:'Inconsolata',Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important}
+.gist-meta{font-family: Helvetica,Arial,sans-serif;font-size:13px !important}
+.gist-meta a{color:#26a !important;text-decoration:none}
+.gist-meta a:hover{color:#0e4071 !important}
+.gist .blob-code-inner, pre {font-family:Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important;}
