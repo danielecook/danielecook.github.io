@@ -26,8 +26,12 @@ This citations formats nicely as:
 
 <div class="panel panel-default">
   <div class="panel-body">
-<p><strong>The heritability of metabolic profiles in newborn twins.</strong><br />Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, <br />(2013 Mar) <em>Heredity</em> 110 (3) 253-8</p>
-</div>
+	<p style="margin-bottom: 0px;">
+		<strong>The heritability of metabolic profiles in newborn twins.</strong>
+		<br />Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, 
+		<br />(2013 Mar) <em>Heredity</em> 110 (3) 253-8
+	</p>
+	</div>
 </div>
 
 ### Setup
