@@ -111,7 +111,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Better styles for embedding GitHub Gists */
 .gist{font-size:13px;line-height:18px;margin-bottom:20px;width:100%}
 .gist pre{font-family:'Inconsolata',Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important}
-.gist-meta{font-family: Helvetica,Arial,sans-serif;font-size:13px !important}
+.gist-meta { visibility:collapse; padding: 5px; height: 30px; line-height: 10px !important; }
+.gist-meta a:nth-child(1), .gist-meta a:nth-child(2) { visibility:visible; }
+.gist-meta{font-family: Helvetica,Arial,sans-serif; font-size:13px !important}
 .gist-meta a{color:#26a !important;text-decoration:none}
 .gist-meta a:hover{color:#0e4071 !important}
 .gist .blob-code-inner, pre {font-family:Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important;}
