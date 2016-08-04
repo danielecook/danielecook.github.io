@@ -18,7 +18,7 @@ Type <kbd>qset</kbd> to set your quiver library location. `Quiver-Alfred` constr
 
 ![](https://github.com/danielecook/Quiver-alfred/blob/images/images/qset.png?raw=true)
 
-Type <kbd>q</kbd> to use!__
+__Type <kbd>q</kbd> to use!__
 
 ![](https://github.com/danielecook/Quiver-alfred/blob/images/images/initial.png?raw=true)
 
