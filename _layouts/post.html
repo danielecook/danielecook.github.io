@@ -10,24 +10,20 @@ layout: default
 
     <div class="date">
       <span>{{ page.date | date: "%B %e, %Y"}}</span>
+&nbsp;&nbsp;
+      {% for category in page.categories %}
+        <a class="btn btn-primary btn-xs" href="/categories.html#{{category}}" role="button"><i class="glyphicon glyphicon-th"></i> {{category}}</a>
+      {% endfor %}
+
+      {% for tag in page.tags %}
+        <a class="btn btn-xs btn-success" href="/tags.html#{{tag}}" role="button"><i class="glyphicon glyphicon-tags"></i> {{tag}}</a>
+      {% endfor %}
+
     </div>
 
 {% endif %}
     <div class="content posts">
       {{ content }}
-<br />
-<div class="panel panel-default">
- <div class="panel-body">
-      {% for category in page.categories %}
-        <a class="btn btn-primary btn-sm" href="/categories.html#{{category}}" role="button"><i class="glyphicon glyphicon-th"></i> {{category}}</a>
-      {% endfor %}
-
-      {% for tag in page.tags %}
-        <a class="btn btn-sm btn-success" href="/tags.html#{{tag}}" role="button"><i class="glyphicon glyphicon-tags"></i> {{tag}}</a>
-      {% endfor %}
-      </div>
-</div>
-
     </div>
   
 <div id="disqus_thread"></div>
