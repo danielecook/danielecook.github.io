@@ -3,14 +3,6 @@ title: An Alfred Workflow for wormbase
 author: Daniel Cook
 layout: post
 permalink: /an-alfred-workflow-for-wormbase/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1434207982;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
-dsq_thread_id:
-  - 3940558749
 categories:
   - Alfred
   - Utilities

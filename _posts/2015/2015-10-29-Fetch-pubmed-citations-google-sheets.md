@@ -4,10 +4,9 @@ author: Daniel Cook
 layout: post
 permalink: /fetch-citations-google-sheets/
 categories:
-  - Alfred
-  - Utilities
+  - Programming
 tags:
-  - Wormbase
+  - Google Sheets
 ---
 
 If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I've created a `pubmed()` function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
