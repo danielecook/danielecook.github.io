@@ -3,19 +3,8 @@ title: Sync STATA programs and settings with Dropbox
 author: Daniel Cook
 layout: post
 permalink: /sync-your-ado-directory-in-stata-across-computers/
-dsq_thread_id:
-  - 1649613916
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1399072869;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Programming
-tags:
-  - dropbox
-  - STATA
 ---
 With the release of STATA 12, users are allowed to install STATA across platform (linux, mac, windows) on up to three computers/user. If you frequently install/edit programs you can sync files from the ado directory, where programs are stored, across your computers using [Dropbox][1].  
 <!--more-->

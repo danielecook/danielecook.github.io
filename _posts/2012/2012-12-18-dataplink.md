@@ -3,19 +3,8 @@ title: dataplink
 author: Daniel Cook
 layout: post
 permalink: /dataplink/
-dsq_thread_id:
-  - 1650146932
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1399072869;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - STATA Programs
-tags:
-  - plink
-  - STATA
 ---
 
 
