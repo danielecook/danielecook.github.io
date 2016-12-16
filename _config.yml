@@ -4,13 +4,20 @@
 paginate_path: "/page:num/"
 paginate: 5
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: rouge
-gems: [jekyll-gist, jekyll-paginate]
+gems: [jekyll-gist, jekyll-paginate, rouge]
 
-kramdown:
-  input: GFM
-  
 markdown: kramdown
+# !github-pages! mandatory › https://help.github.com/articles/using-jekyll-with-pages/#configuration-settings-you-cannot-change
+# Since Jekyll 3 the default highlighter is Rouge (replaced Pygments.rb in v44)
+highlighter: rouge
+
+# More › http://kramdown.gettalong.org/quickref.html
+# Options › http://kramdown.gettalong.org/options.html
+kramdown:
+  input:          GFM
+  syntax_highlighter: rouge
+
+
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.

@@ -85,7 +85,7 @@ homepage: True
         <li class="disabled"><a href="#">&raquo;</a></li>
       {% endif %}
 
-      {% if paginator+page < paginator.total_pages %}
+      {% if paginator.page < paginator.total_pages %}
         <li><a href="/page{{ paginator.total_pages }}">Last</a></li>
       {% else %}
         <li class="disabled"><a href="#">Last</a></li>
