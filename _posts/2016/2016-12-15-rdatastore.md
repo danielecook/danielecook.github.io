@@ -23,6 +23,8 @@ The last two reasons are the primary motivation for developing `rdatastore`. Par
 <br /><br />
 <small>__The datastore interface can be used to view and edit data.__</small>
 - - - -
+
+
 ### Setup
 
 1. Setup a [Google Cloud Platform](https://cloud.google.com/) and create a new project.
