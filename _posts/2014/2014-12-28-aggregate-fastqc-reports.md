@@ -11,6 +11,7 @@ tags:
   - bam
   - fastq
   - gist
+  - fastqc
 ---
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I&#8217;m talking about the set of plots that look like this:
 
