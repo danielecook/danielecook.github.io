@@ -1,4 +1,10 @@
-# A big list of favorites
+---
+title: A big list of favorites
+author: Daniel Cook
+layout: post
+permalink: /favorites/
+published: true
+---
 
 Here it is! My favorite things in life across all domains. This is a work in progress, but hopefully you'll find one (or a few) things you like and add it to your life. It's a bit sparse currently, but it will fill in over time. 
 
@@ -70,7 +76,7 @@ __Tech News__
 
 __Financial__
 
-* __[Vanguard](http://www.vanguard.com)__ - The Best place for retirement accounts.
+* __[Vanguard](http://www.vanguard.com)__ - Retirement accounts and investing.
 
 __Blogs__
 
