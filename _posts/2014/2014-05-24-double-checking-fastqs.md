@@ -3,12 +3,6 @@ title: Double Checking FASTQs
 author: Daniel Cook
 layout: post
 permalink: /double-checking-fastqs/
-dsq_thread_id:
-  - 2753148029
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Bash
   - Bioinformatics

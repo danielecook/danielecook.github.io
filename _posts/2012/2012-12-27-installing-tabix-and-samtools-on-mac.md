@@ -3,12 +3,6 @@ title: Install Tabix and Samtools on Mac
 author: Daniel Cook
 layout: post
 permalink: /installing-tabix-and-samtools-on-mac/
-dsq_thread_id:
-  - 1951413943
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Bioinformatics
 tags:
@@ -22,14 +16,17 @@ I was having a tough time getting Tabix and Samtools installed on my mac &#8211;
 
 Homebrew can be installed by copying and pasting the following into the terminal:
 
-<pre class='prettyprint lang-bsh'>ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"</pre>
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
 Next you type this:
 
-<pre class='prettyprint lang-bsh'>brew tap homebrew/science
+```
+brew tap homebrew/science
 brew install tabix
 brew install samtools
-</pre>
+```
 
 And you are done. Homebrew has easy commands for symlinking these too. These details are mentioned when you install items.
 
