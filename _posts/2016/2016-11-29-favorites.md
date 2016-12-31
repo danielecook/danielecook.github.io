@@ -55,8 +55,14 @@ __Databases__
 
 ...
 
+## Future
+
+* [Text-based descriptions improve image synthesis](https://www.youtube.com/watch?v=rAbhypxs1qQ)
+* [Recurrent Neural Network Writes Sentences About Images](https://www.youtube.com/watch?v=e-WB4lfg30M)
+
 ## Personal
 ----
+
 
 ### iOS Apps
 
