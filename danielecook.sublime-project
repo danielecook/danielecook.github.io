@@ -1,0 +1,16 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Jekyll Build",
+			"shell_cmd": "jekyll serve -w"
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
+}
