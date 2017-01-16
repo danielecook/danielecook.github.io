@@ -3,14 +3,6 @@ title: Use Google Docs to identify gene-disease associations in Pubmed
 author: Daniel Cook
 layout: post
 permalink: /use-google-docs-conduct-literature-search-gene-list/
-dsq_thread_id:
-  - 2383230420
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1399045013;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
 categories:
   - Bioinformatics
   - Tips
@@ -20,7 +12,9 @@ tags:
 ---
 Google Docs allows you to import XML. By using NCBIs [esearch service][1], you can query pubmed for a list of genes. Stick the following code in **A2**, and a keyword in **B2**:
 
-<pre class='prettyprint lang-php'>=importXML("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&#038;term=" &#038; B2 ,"(//Count)[1]")</pre>
+```
+=importXML("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&#038;term=" &#038; B2 ,"(//Count)[1]")
+```
 
 What is more valuable, however, is if given a gene list &#8211; you can query pubmed for each gene combined with a second keyword like a disease.
 
@@ -28,7 +22,9 @@ For example, suppose you are studying Cleft lip and Palate and are left with a s
 
 You can use the **&** operator to concatenate two keywords (gene & &#8221; &#8221; & disease). In **B2** below you would put the following:
 
-<pre>= C2 &#038; " " &#038; D2</pre>
+```
+= C2 &#038; " " &#038; D2
+```
 
 The result would look something like this.
 

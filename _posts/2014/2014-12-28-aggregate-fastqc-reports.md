@@ -3,14 +3,6 @@ title: Aggregate FastQC Reports
 author: Daniel Cook
 layout: post
 permalink: /aggregate-fastqc-reports/
-keyword_cache:
-  - 'a:1:{s:13:"keywords_time";i:1419756967;}'
-rp4wp_cached:
-  - 1
-rp4wp_auto_linked:
-  - 1
-dsq_thread_id:
-  - 
 categories:
   - Bash
   - Bioinformatics
@@ -19,12 +11,11 @@ tags:
   - bam
   - fastq
   - gist
+  - fastqc
 ---
-[FastQC][1] is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I&#8217;m talking about the set of plots that look like this:
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I&#8217;m talking about the set of plots that look like this:
 
-[<img src="/media/Uchicago-L001-CB4857_CGC-4642f-1.png" alt="fastqc-gc content" width="800" height="600" class="alignnone size-full wp-image-782" />][2]
-
-<!--more-->
+![fastqc](/media/Uchicago-L001-CB4857_CGC-4642f-1.png)
 
 FastQC can be invoked from the command line by typing `fastqc <fastq/bam>`, and it will produce an html report and associated zip file containing data, plots, and some ancillary files. The zip file contains an **Images** folder where the plots that become incorporated into the html report are stored. They are:
 
@@ -51,424 +42,49 @@ To easily compare data across reports I wrote this short shell script (below) wh
 
 Images will be reorganized as shown below:
 
-[<img src="/media/aggregate_fastqc.png" alt="aggregate_fastqc" width="444" height="581" class="aligncenter size-full wp-image-784" />][3]
+![aggregate fastqc](/media/aggregate_fastqc.png)
 
 #### summary.txt
 
 **fq_aggregated**/**summary.txt** will produce a tab delimited file that looks like this:
 
-<table class='table table-striped table-bordered table-hover table-condensed'>
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Basic Statistics
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per base sequence quality
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per tile sequence quality
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per sequence quality scores
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      FAIL
-    </td>
-    
-    <td>
-      Per base sequence content
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per sequence GC content
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per base N content
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td colspan="3">
-      &#8230;
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Basic Statistics
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per base sequence quality
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per tile sequence quality
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per sequence quality scores
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      PASS
-    </td>
-    
-    <td>
-      Per base sequence content
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      FAIL
-    </td>
-    
-    <td>
-      Per sequence GC content
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      FAIL
-    </td>
-    
-    <td>
-      Per base N content
-    </td>
-    
-    <td>
-      SeqB.fq
-    </td>
-  </tr>
-</table>
+| PASS  | Basic Statistics  | SeqA.fq            |
+| PASS  | Per base  sequence  quality | SeqA.fq   |
+| PASS  | Per tile  sequence  quality | SeqA.fq   |
+| PASS  | Per sequence  quality scores  | SeqA.fq |
+| FAIL  | Per base  sequence  content | SeqA.fq   |
+| PASS  | Per sequence  GC  content | SeqA.fq     |
+| PASS  | Per base  N content | SeqA.fq          |
+| | …     |                                    |
+| PASS  | Basic Statistics  | SeqB.fq            |
+| PASS  | Per base  sequence  quality | SeqB.fq   |
+| PASS  | Per tile  sequence  quality | SeqB.fq   |
+| PASS  | Per sequence  quality scores  | SeqB.fq |
+| PASS  | Per base  sequence  content | SeqB.fq   |
+| FAIL  | Per sequence  GC  content | SeqB.fq     |
+| FAIL  | Per base  N content | SeqB.fq          |
 
 #### statistics.txt
 
 **fq_aggregated**/**statistics.txt** will look like this:
 
-<table class='table table-striped table-bordered table-hover table-condensed'>
-  <tr>
-    <td>
-      Filename
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      File type
-    </td>
-    
-    <td>
-      Conventional base calls
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      Encoding
-    </td>
-    
-    <td>
-      Sanger / Illumina 1.9
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      Total Sequences
-    </td>
-    
-    <td>
-      7303722
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      Sequences flagged as poor quality
-    </td>
-    
-    <td>
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      Sequence length
-    </td>
-    
-    <td>
-      23-100
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      %GC
-    </td>
-    
-    <td>
-      36
-    </td>
-    
-    <td>
-      SeqA.fq
-    </td>
-  </tr>
-  
-  <tr>
-    <td colspan="3">
-      &#8230;
-    </td>
-    
-    <tr>
-      <td>
-        Filename
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        File type
-      </td>
-      
-      <td>
-        Conventional base calls
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Encoding
-      </td>
-      
-      <td>
-        Sanger / Illumina 1.9
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Total Sequences
-      </td>
-      
-      <td>
-        324391
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Sequences flagged as poor quality
-      </td>
-      
-      <td>
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Sequence length
-      </td>
-      
-      <td>
-        40-100
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        %GC
-      </td>
-      
-      <td>
-        37
-      </td>
-      
-      <td>
-        SeqB.fq
-      </td>
-    </tr></tbody> </table> 
+| PASS  | Basic Statistics  | SeqA.fq            |
+| PASS  | Per base  sequence  quality | SeqA.fq   |
+| PASS  | Per tile  sequence  quality | SeqA.fq   |
+| PASS  | Per sequence  quality scores  | SeqA.fq |
+| FAIL  | Per base  sequence  content | SeqA.fq   |
+| PASS  | Per sequence  GC  content | SeqA.fq     |
+| PASS  | Per base  N content | SeqA.fq          |
+| | …     |                                    |
+| PASS  | Basic Statistics  | SeqB.fq            |
+| PASS  | Per base  sequence  quality | SeqB.fq   |
+| PASS  | Per tile  sequence  quality | SeqB.fq   |
+| PASS  | Per sequence  quality scores  | SeqB.fq |
+| PASS  | Per base  sequence  content | SeqB.fq   |
+| FAIL  | Per sequence  GC  content | SeqB.fq     |
+| FAIL  | Per base  N content | SeqB.fq          |
  
 ##### The Code
 
 {% gist 8e9afb2d2df7752efd8a %}
 
- [1]: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
- [2]: /media/Uchicago-L001-CB4857_CGC-4642f-1.png
- [3]: /media/aggregate_fastqc.png
