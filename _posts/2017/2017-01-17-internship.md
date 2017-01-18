@@ -17,7 +17,7 @@ This summer I am fortunate to have some time that I can commit to an internship.
 - My [Github profile](http://www.github.com/danielecook) reflects near-daily commitment to software development.
 - I have given talks at several conferences
 - Mentorship of several computer science students.
-- I love riding 
+- I love cycling and love to explore cities on my bike!
 
 If you or someone you know are looking for help on a project this summer, please contact me at <a href="mailto:danielecook@gmail.com">danielecook@gmail.com</a>.
 
