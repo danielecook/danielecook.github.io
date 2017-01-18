@@ -12,7 +12,7 @@ This summer I am fortunate to have some time that I can commit to an internship.
 
 - I have developed, maintained, and deployed scientific web applications using Google Cloud Platform - [CeNDR: The _C. elegans_ Natural Diversity Resource](http://www.elegansvariation.org). I also have experience with AWS.
 - I have organized, processed, and analyzed whole-genome sequence datasets for an entire species [Cook _et al._ 2016](http://andersenlab.org/publications/Cooketal.pdf).
-- Extensive experience with the Unix and developing pipelines.
+- Extensive experience with Unix, computing clusters, and pipeline development.
 - I have developed and published packages for R, Python, and Stata and contributed to a number of open-source projects. 
 - My [Github profile](http://www.github.com/danielecook) reflects near-daily commitment to software development.
 - I have given talks at several conferences
