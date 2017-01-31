@@ -17,6 +17,7 @@ Currently anyone with an email at the following domains can signup:
 * @uic.edu
 * @depaul.edu
 * @luc.edu
+* @iit.edu
 
 Members can invite anyone. I am happy to add any Chicago-area domains. Please let me know which ones I am missing!
 
