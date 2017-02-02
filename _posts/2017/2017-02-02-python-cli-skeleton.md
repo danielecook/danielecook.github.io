@@ -19,6 +19,6 @@ The repo has the following features added:
 * A setup file that will install the command
 * a simple argparse interface
 
-To get started, you should signup for an account on [travis-ci](http://www.travis-ci.org) and [coveralls](http://www.coveralls.io).
+To get started, you should signup for an account on [travis-ci](http://www.travis-ci.org) and [coveralls](http://www.coveralls.io), and fork the repo!
 
 <a href='https://github.com/danielecook/python-cli-skeleton' class="btn btn-large" type="submit"><img src='/assets/img/repo.svg' style='width: 16px; margin-right: 5px;' alt='repo' /> python-cli-skeleton on Github</a>
