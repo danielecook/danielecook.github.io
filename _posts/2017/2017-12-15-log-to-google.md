@@ -1,5 +1,5 @@
 ---
-title: Log commands to Stackdriver Logging
+title: Log commands to Google Cloud Stackdriver Logs
 author: Daniel Cook
 layout: post
 permalink: /log-back-to-google-cloud-logging/
