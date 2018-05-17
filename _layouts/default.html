@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ page.title }}</title>
+    <title>Daniel E. Cook | {{ page.title }}</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
 
@@ -45,10 +45,22 @@
      
 <header class="banner navbar navbar-default navbar-static-top" role="banner">
   <div class="container">
-   <p class="navbar-text navbar-right">Bioinformatics, Science, and some other stuff</p>
-  <div class="navbar-header">
-    <a class="navbar-brand" href="/">Daniel E. Cook</a>
+
+
+<div class='navbar-header pull-right'>
+    <ul class='nav navbar-nav navbar-head-group'>
+      <li><a href="/" {% if page.layout == 'post' %} class='selected' {% endif %}>Blog</a></li>
+      <!--<li><a href="#">Projects</a></li>-->
+      <li><a href="/photos" {% if page.type == 'photos' %} class='selected' {% endif %}>Photos</a></li>
+      <!--<li><a href="#">About</a></li>-->
+    </ul>
   </div>
+
+
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/"> Daniel E. Cook
+    </a>
+  <div>
   </div>
 </header>
 

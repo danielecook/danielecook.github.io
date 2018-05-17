@@ -200,3 +200,124 @@ pre, code {
   background-color: #404040;
   border: none;
 }
+
+.navbar-static-top {
+  min-height: 30px;
+}
+
+.navbar-brand {
+  padding: 0px 20px;
+  font-weight: 800;
+  margin-left: -20px;
+}
+
+.nav-head-group li a {
+  padding: 10px 0px;
+  line-height: 20px;
+}
+
+.navbar-head-group li a {
+  padding: 0px;
+  font-size: 15px;
+  margin-left: 25px;
+}
+
+/* header */
+
+.navbar-brand, .navbar-head-group>li>a, .navbar-text {
+    padding: 2px 10px !important;
+    margin: 0px !important;
+}
+
+.navbar {
+    min-height: 25px;
+}
+
+.navbar-collapse {
+    padding-left: 0px;
+}
+
+
+.brand-nav-color {
+    color: #777;
+}
+
+.navbar-head-group ul li:hover {
+  background-color: #b3b3b3;
+}
+
+.selected {
+  background-color: #b3b3b3;
+  font-weight: 800;
+  color: white !important;
+}
+
+.selected:hover {
+  background-color: #cccccc !important;
+  color: black !important;
+  font-weight: 800;
+  color: white !important;
+}
+
+
+
+/* Photos */
+
+
+.photo {
+  position: relative;
+}
+
+.photos_page .col-md-4 {
+    padding: 1px;
+    height: 323px;
+}
+
+.photo_thumbnail {
+  border: 1px solid black;
+}
+
+.photo_thumbnail:hover {
+  border: 1px solid black;
+}
+
+
+
+.photo_title {
+  visibility: hidden;
+  background: black;
+  position: absolute;
+  display: block;
+  width: 100%;
+  line-height: 20px;
+  padding: 9px 10px 10px 10px;
+  color: white;
+  font-weight: 600;
+  z-index: 100;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+@keyframes photo_title_animation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.8;
+    }
+}
+
+.photo:hover > .photo_title {
+    visibility: visible;
+    animation-name: photo_title_animation;
+    animation-duration: 0.1s;
+    opacity: 0.8;
+}
+
+.photo_title a {
+    text-decoration: none !important;
+}
+
+.photo small {
+  line-height: 20px;
+}

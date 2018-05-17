@@ -7,7 +7,7 @@ title: 404
 
 Perhaps what you are looking for is below:
 
-{% assign categories = {{site.categories | sort }} %}
+{% assign categories = site.categories | sort %}
 {% for category in categories  %} 
 
   <h3 id="{{ category[0] }}">{{ category[0] | capitalize |  join: "/" }}</h3>
