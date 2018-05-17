@@ -5,11 +5,11 @@ type: photos
 ---
 
 <h1>Photos</h1>
-<div class='row photos_page'>
+<div class='photos_page'>
   {% for image in site.static_files %}
       {% if image.path contains 'photos/' %}
         {% if image.path contains 'thumb' %}
-          <div class='col-md-4'>
+          <div class='col-md-4 col-sm-6 col-lg-4 col-xs-6'>
               <a target="_blank" class='photo' href='{{ site.baseurl }}{{ image.path| replace: ".thumb",""  }}'>
                 <div class='photo_title'>
                 {% assign title = image.path | split: '_' %}
