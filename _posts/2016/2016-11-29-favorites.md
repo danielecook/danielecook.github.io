@@ -25,22 +25,9 @@ __Note:__ There are no referral links here and I am not being paid to advertise 
 
 * __[Dropbox](http://www.dropbox.com)__ - The best backup/syncing solution. I pay for a subscription. I've used Box and Google Drive as well. Both are inferior.
 * __[Transmit](https://panic.com/transmit/)__ - FTP Client.
-
-#### Utilities
-
 * __[Sublime Text](https://www.sublimetext.com/)__ - The best text editor. Extend its functionality with [package control](https://packagecontrol.io/).
 * __[Alfred](https://www.alfredapp.com/)__ - Like spotlight but with a lot more functionality. Workflows extend its functionality considerably. See the ones I've written!
-
-__Databases__ 
-
 * __[Sequal Pro](https://www.sequelpro.com/)__ - A MYSQL GUI. The best GUI for a database I've seen. 
-
-
-### Web Development
-
-* __Jekyll__ - Static sites
-* __Flask__ - Python framework
-* __[peewee](http://docs.peewee-orm.com/)__ - A very easy to use ORM for simple projects.
 
 ### Programming
 
@@ -49,11 +36,15 @@ __Databases__
 
 #### R
 
-...
+Below I list some of my favorite R packages.
+
+* __[Cowplot](https://github.com/wilkelab/cowplot)__ - Arrange plots in a grid [Vignette](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html).
 
 #### Python
 
-...
+* __Jekyll__ - Static sites
+* __Flask__ - Python framework
+* __[peewee](http://docs.peewee-orm.com/)__ - A very easy to use ORM for simple projects.
 
 ## Future
 
