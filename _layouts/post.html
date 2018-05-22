@@ -5,53 +5,27 @@ type: 'blog'
 <div class="row post-full">
   <div class="col-md-8 col-sm-6 col-xs-12">
 {% if page.homepage != true %}
-  <div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-</div>
-
+  <h1 class='title'>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
     <div class="date">
       <span>{{ page.date | date: "%B %e, %Y"}}</span>
 &nbsp;&nbsp;
-      {% for category in page.categories %}
-        <a class="btn btn-primary btn-xs" href="/categories.html#{{category}}" role="button"><i class="glyphicon glyphicon-th"></i> {{category}}</a>
-      {% endfor %}
-
-      {% for tag in page.tags %}
-        <a class="btn btn-xs btn-success" href="/tags.html#{{tag}}" role="button"><i class="glyphicon glyphicon-tags"></i> {{tag}}</a>
-      {% endfor %}
 
     </div>
 
 {% endif %}
     <div class="content posts">
       {{ content }}
+
+      <strong>Categories: </strong>{% for category in page.categories %}
+        <a class="btn btn-link btn-xs" href="/categories.html#{{category}}" role="button">{{category}}</a>
+      {% endfor %}
+
+      <strong>Tags:</strong> {% for tag in page.tags %}
+        <a class="btn btn-xs btn-link" href="/tags.html#{{tag}}" role="button"></i> {{tag}}</a>
+      {% endfor %}
+
     </div>
-  
-<div id="disqus_thread"></div>
-<script>
-
-/**
- *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
- *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
-
-(function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = '//danielecook-com.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-
-DISQUS.reset({
-  reload: true,
-  config: function () {  
-    this.page.identifier = "{{ page.url }}";  
-    this.page.url = "{{ page.title }}";
-  }
-});
-
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                    
+ 
   
   </div>
 

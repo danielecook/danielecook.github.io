@@ -8,29 +8,27 @@ title: "blog"
 
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
-  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-  <hr />
+  <h1 class='title'><a href="{{ post.url }}">{{ post.title }}</a></h1>
     <div class="date">
       <span>{{ post.date | date: "%B %e, %Y"}}</span>
 &nbsp;&nbsp;
-      {% for category in post.categories %}
-        <a class="btn btn-primary btn-xs" href="/categories.html#{{category}}" role="button"><i class="glyphicon glyphicon-th"></i> {{category}}</a>
-      {% endfor %}
-
-      {% for tag in post.tags %}
-        <a class="btn btn-xs btn-success" href="/tags.html#{{tag}}" role="button"><i class="glyphicon glyphicon-tags"></i> &nbsp;{{tag}}</a>
-      {% endfor %}
 
     </div>
   <div class="content">
     {{ post.content }}
-<br />
+      <strong>Categories: </strong>{% for category in post.categories %}
+        <a class="btn btn-link btn-xs" href="/categories.html#{{category}}" role="button">{{category}}</a>
+      {% endfor %}
+
+      <strong>Tags:</strong> {% for tag in post.tags %}
+        <a class="btn btn-xs btn-link" href="/tags.html#{{tag}}" role="button"></i> {{tag}}</a>
+      {% endfor %}
+
+<br /><br /><br />
 
     </div>
 {% endfor %}
-{% if single %}
-    {% include comments %}
-{% endif %}
+
 <!-- Pagination links -->
 {% if paginator.total_pages > 1 %}
   <nav class="paginator" style="text-align:center;">

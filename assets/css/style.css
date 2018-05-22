@@ -15,12 +15,10 @@
 
 /* Jekyll Bootstrap Colors */
 
+body { padding-top: 40px; }
+
 #footer {
   background-color: #fdcd60;
-}
-
-h1 {
-  margin: 0px 0px 10px;
 }
 
 img {
@@ -114,6 +112,11 @@ p, .date {
   margin-bottom: 20px;
   text-align: justify;
 }
+
+.date {
+  color: #999999;
+}
+
 li, .list-group-item {
   font-size: 15px;
   line-height: 20px;
@@ -122,6 +125,10 @@ li, .list-group-item {
 h1, h2, h3, h4, h5, h6 {
   font-family: ubuntu, serif;
   margin-bottom: 20px;
+}
+
+.title {
+  margin: 0px;
 }
 
 /* Better styles for embedding GitHub Gists */
@@ -218,9 +225,10 @@ pre code, pre, code {
 }
 
 .navbar-brand {
-  padding: 0px 20px;
+  padding: 0px 0px;
   font-weight: 800;
-  margin-left: -40px;
+  position: relative;
+  left: -10px;
 }
 
 .nav-head-group li a {
