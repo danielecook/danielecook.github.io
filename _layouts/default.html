@@ -18,8 +18,7 @@
 
     <!-- Custom styles -->
     <link href="/assets/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
-
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,7 +47,7 @@
 <div class='navbar-header pull-right'>
     <ul class='nav navbar-nav navbar-head-group'>
       <li><a href="/" {% if page.layout == 'post' %} class='selected' {% endif %}>Blog</a></li>
-      <!--<li><a href="#">Projects</a></li>-->
+      <li><a href="/projects" {% if page.type == 'projects' %} class='selected' {% endif %}>Projects</a></li>
       <li><a href="/photos" {% if page.type == 'photos' %} class='selected' {% endif %}>Photos</a></li>
       <!--<li><a href="#">About</a></li>-->
     </ul>
