@@ -11,13 +11,13 @@
 <li><a href='/favorites/'><img src='/assets/img/star.png'> Favorites</a>
 </ul>
 
-<h4><a href="/categories.html"><i class="glyphicon glyphicon-th"></i> Categories</a></h4>  
+<h4><a href="/categories.html">Categories</a></h4>
   	  {% include categories_list %}
       <br />
-<h4><a href="/tags.html"><i class="glyphicon glyphicon-tags"></i> Tags</a></h4> 
+<h4><a href="/tags.html">Tags</a></h4>
       {% include tags_list %}
       <br /><br />
-<h4><a href="/archive.html"><i class="glyphicon glyphicon-calendar"></i> Archive</a></h4>
+<h4><a href="/archive.html">Archive</a></h4>
 <ul>
 {% assign counter = 0 %}
 {% for post in site.posts %}

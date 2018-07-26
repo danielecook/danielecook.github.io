@@ -8,8 +8,6 @@ categories:
     - Alfred
 ---
 
-# alfred-image-utilities
-
 A workflow for making quick changes to image files. Alfred-image-utilities grabs any selected images in the frontmost finder window and can apply changes to them. Most of the time a copy of the image is made and its extension is changed to `<filename>.orig.<ext>`. You can replace the original file by holding <kbd>command</kbd> when executing most commands.
 
 # [Download](https://github.com/danielecook/alfred-image-utilities/releases/latest)

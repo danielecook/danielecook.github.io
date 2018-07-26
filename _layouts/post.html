@@ -15,21 +15,19 @@ type: 'blog'
 {% endif %}
     <div class="content posts">
       {{ content }}
-
-      <strong>Categories: </strong>{% for category in page.categories %}
-        <a class="btn btn-link btn-xs" href="/categories.html#{{category}}" role="button">{{category}}</a>
+      {% for category in page.categories %}
+        <a class="label label-primary" href="/categories.html#{{category}}" role="button">{{category}}</a>&nbsp;
       {% endfor %}
 
-      <strong>Tags:</strong> {% for tag in page.tags %}
-        <a class="btn btn-xs btn-link" href="/tags.html#{{tag}}" role="button"></i> {{tag}}</a>
+      {% for tag in page.tags %}
+        <a class="label label-default" href="/tags.html#{{tag}}" role="button"></i> {{tag}}</a>
       {% endfor %}
-
     </div>
- 
-  
+
+
   </div>
 
-  <div class="col-md-4 col-sm-6 col-xs-12">   
+  <div class="col-md-4 col-sm-6 col-xs-12">
   {% include sidebar.html %}
   </div>
 

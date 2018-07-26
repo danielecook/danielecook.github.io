@@ -15,7 +15,7 @@
 
 /* Jekyll Bootstrap Colors */
 
-body { padding-top: 40px; }
+body { padding-top: 70px; }
 
 #footer {
   background-color: #fdcd60;
@@ -220,71 +220,15 @@ pre code, pre, code {
   background-color: white;
 }
 
-.navbar-static-top {
-  min-height: 30px;
-}
-
-.navbar-brand {
-  padding: 0px 0px;
-  font-weight: 800;
-  position: relative;
-  left: -10px;
-}
-
-.nav-head-group li a {
-  padding: 10px 0px;
-  line-height: 20px;
-}
 
 .navbar-head-group li a:hover, .navbar-brand:hover {
   background-color: #0f80ff !important;
   color: white !important;
 }
 
-.navbar-head-group li a {
-  padding: 0px;
-  font-size: 15px;
-  margin-left: 25px;
-}
-
-/* header */
-
-.navbar-brand, .navbar-head-group>li>a, .navbar-text {
-    padding: 2px 10px !important;
-    margin: 0px !important;
-}
-
-.navbar {
-    min-height: 25px;
-}
-
-.navbar-collapse {
-    padding-left: 0px;
-}
-
-
 .brand-nav-color {
     color: #777;
 }
-
-.navbar-head-group ul li:hover {
-  background-color: #b3b3b3;
-}
-
-.selected {
-  background-color: #b3b3b3;
-  font-weight: 800;
-  color: white !important;
-}
-
-.selected:hover {
-  background-color: #cccccc !important;
-  color: black !important;
-  font-weight: 800;
-  color: white !important;
-}
-
-
 
 /* Photos */
 
@@ -336,6 +280,7 @@ pre code, pre, code {
     animation-name: photo_title_animation;
     animation-duration: 0.1s;
     opacity: 0.8;
+    vertical-align: top;
 }
 
 .photo_title a {
