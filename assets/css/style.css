@@ -15,6 +15,11 @@
 
 /* Jekyll Bootstrap Colors */
 
+.navbar .selected {
+    background-color: #e5e5e5;
+    text-decoration: underline;
+}
+
 body { padding-top: 70px; }
 
 #footer {
