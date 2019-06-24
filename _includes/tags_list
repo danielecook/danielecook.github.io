@@ -1,5 +1,0 @@
-{% for tag in site.tags %} 
-  {% if tag[1].size > 1 %}
-  	<a href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag[0] }}" >{{ tag[0] }} ({{ tag[1].size }})</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  {% endif %}
-{% endfor %}
