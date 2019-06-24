@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bigquery on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/bigquery/</link>
+    <description>Recent content in bigquery on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 30 Dec 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/bigquery/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automatically construct / infer / sense bigquery schema</title>
+      <link>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</link>
+      <pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</guid>
+      <description>Update: BigQuery adds schema auto-detection (2019-06-22) BigQuery now offers a schema auto-detection features making the work I had done below no longer necessary.
+Original Post [Bigquery]() is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [Bigrquery](), which can be used to interact with bigquery using some of the functions in dplyr.</description>
+    </item>
+    
+  </channel>
+</rss>

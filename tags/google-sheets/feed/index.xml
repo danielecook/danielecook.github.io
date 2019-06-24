@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>google-sheets on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/google-sheets/</link>
+    <description>Recent content in google-sheets on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 29 Oct 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/google-sheets/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fetch Citations in Google Sheets using pubmed() function</title>
+      <link>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</guid>
+      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&amp;rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+=pubmed(23149456) Will return an html-formatted citation:
+The heritability of metabolic profiles in newborn twins.
+Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8</description>
+    </item>
+    
+    <item>
+      <title>Use Google Sheets to identify gene-disease associations in Pubmed</title>
+      <link>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</link>
+      <pubDate>Mon, 03 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</guid>
+      <description>Google Docs allows you to import XML. By using NCBIs esearch service, you can query pubmed for a list of genes. Stick the following code in A2, and a keyword in B2:
+=importXML(&amp;#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;amp;term=&amp;#34; &amp;amp; B2 ,&amp;#34;(//Count)[1]&amp;#34;) What is more valuable, however, is if given a gene list &amp;#8211; you can query pubmed for each gene combined with a second keyword like a disease.
+For example, suppose you are studying Cleft lip and Palate and are left with a set of genes identified from a gene expression analysis.</description>
+    </item>
+    
+  </channel>
+</rss>

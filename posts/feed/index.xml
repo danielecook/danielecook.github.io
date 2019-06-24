@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/posts/</link>
+    <description>Recent content in Posts on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/posts/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Log commands to Google Cloud Stackdriver Logs</title>
+      <link>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</guid>
+      <description>Google Cloud Platform (GCP) has a service called Stackdriver logging which provides a nice interface for accessing logs.
+Stackdriver logging is integrated with all GCP services but it can also be extended. Users can create custom logs and access them centrally using the web-based interface or the Google Cloud SDK.
+This got me wondering whether there was a way to log terminal commands locally or on a server. It is possible by setting the PROMPT_COMMAND variable in BASH.</description>
+    </item>
+    
+    <item>
+      <title>Python Command-line skeleton</title>
+      <link>https://www.danielecook.com/python-command-line-skeleton/</link>
+      <pubDate>Thu, 02 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/python-command-line-skeleton/</guid>
+      <description>Writing a command-line interface (CLI) is an easy way to extend the functionality and ease of use of any code you write.
+Python comes with the built-in module, argparse, that can be used to easily develop command-line interfaces. To speed up the process, I have developed a &amp;lsquo;skeleton&amp;rsquo; application that can be forked on github and used to quickly develop CLI programs in python.
+The repo has the following features added:</description>
+    </item>
+    
+    <item>
+      <title>Introducing a Chicago Bioinformatics Slack Channel</title>
+      <link>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</link>
+      <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</guid>
+      <description>Today I am introducing a new slack team for bioinformatians in Chicago.
+Signup for the Chicago Bioinformatics Slack Channel!
+Currently anyone with an email at the following domains can signup:
+ @northwestern.edu @uchicago.edu @uic.edu @depaul.edu @luc.edu @iit.edu  Members can invite anyone. I am happy to add any Chicago-area domains. Please let me know which ones I am missing!
+The slack team features channels for bioinformatics-help, general, introductions, meetups, and random currently.</description>
+    </item>
+    
+    <item>
+      <title>Alfred Image Utilities</title>
+      <link>https://www.danielecook.com/alfred-image-utilities/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/alfred-image-utilities/</guid>
+      <description>A workflow for making quick changes to image files. Alfred-image-utilities grabs any selected images in the frontmost finder window and can apply changes to them. Most of the time a copy of the image is made and its extension is changed to &amp;lt;filename&amp;gt;.orig.&amp;lt;ext&amp;gt;. You can replace the original file by holding command when executing most commands.
+Download Main Menu
+Convert to png or jpg
+You can convert from a large number of formats to these jpg or png.</description>
+    </item>
+    
+    <item>
+      <title>rdatastore</title>
+      <link>https://www.danielecook.com/rdatastore/</link>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/rdatastore/</guid>
+      <description>I&amp;rsquo;ve developed a new package for R known as rdatastore that is avaliable at cloudyr/rdatastore. rdatastore provides an interface for Google Cloud&amp;rsquo;s datastore service. Google Cloud Datastore is a NoSQL database, which makes provides a mechanism for storing and retrieving heterogeneous data. Although Google Datastore is not useful for storing large datasets, it has a number of useful applications within R. For example:
+ Saving and loading credentials for use with other services.</description>
+    </item>
+    
+    <item>
+      <title>A big list of favorites</title>
+      <link>https://www.danielecook.com/a-big-list-of-favorites/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/a-big-list-of-favorites/</guid>
+      <description>Here it is! My favorite things in life across all domains. This is a work in progress, but hopefully you&amp;rsquo;ll find one (or a few) things you like and add it to your life. It&amp;rsquo;s a bit sparse currently, but it will fill in over time.
+Note: There are no referral links here and I am not being paid to advertise anything here. Any companies/products listed have earned it.</description>
+    </item>
+    
+    <item>
+      <title>Guitar  Printouts</title>
+      <link>https://www.danielecook.com/guitar-printouts/</link>
+      <pubDate>Wed, 17 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/guitar-printouts/</guid>
+      <description>I put these guitar-related printouts (A chord diagram sheet and a fretboard diagram sheet) together years ago:
+   </description>
+    </item>
+    
+    <item>
+      <title>Quiver-alfred</title>
+      <link>https://www.danielecook.com/quiver-alfred/</link>
+      <pubDate>Thu, 04 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/quiver-alfred/</guid>
+      <description>Search Quiver from Alfred! Quiver-alfred quickly constructs a database of your notes for fast and easy querying.
+Download Usage Type qset to set your quiver library location. Quiver-Alfred constructs a database of your notes to make querying as fast as possible. The database should refresh once every hour and should only take a few seconds to create.
+Type q to use!
+You can search tags by hitting q #.</description>
+    </item>
+    
+    <item>
+      <title>memoise: Caching in the cloud</title>
+      <link>https://www.danielecook.com/memoise-caching-in-the-cloud/</link>
+      <pubDate>Wed, 27 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/memoise-caching-in-the-cloud/</guid>
+      <description>Update: 2019-06-22 Based on my suggestions, out-of-memory caching was implemented in the &amp;ldquo;official&amp;rdquo; memoise package here. The memoise package now caches based on files and AWS.
+Original Post Memoisation is a technique for caching the results of functions based on inputs. For example, the following function calculates the fibonnaci sequence in R.
+fib &amp;lt;- function(n) { if (n &amp;lt; 2) return(1) fib(n - 2) + fib(n - 1) } This is an innefficient way of calculating values of the fibonnacci sequence.</description>
+    </item>
+    
+    <item>
+      <title>Automatically construct / infer / sense bigquery schema</title>
+      <link>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</link>
+      <pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</guid>
+      <description>Update: BigQuery adds schema auto-detection (2019-06-22) BigQuery now offers a schema auto-detection features making the work I had done below no longer necessary.
+Original Post [Bigquery]() is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [Bigrquery](), which can be used to interact with bigquery using some of the functions in dplyr.</description>
+    </item>
+    
+    <item>
+      <title>Parallelize bcftools functions</title>
+      <link>https://www.danielecook.com/parallelize-bcftools-functions/</link>
+      <pubDate>Sat, 21 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/parallelize-bcftools-functions/</guid>
+      <description>bcftools is a great for working with variant call files. In general, it is fast. However, I have found that the process of merging VCF files (using bcftools merge) and performing concordance checking (using bcftools gtcheck) can be a little bit slow. That is why I wrote two functions that take advantage of GNU Parallel to parallelize them.
+# ~/.bashrc: executed by bash(1) for non-login shells. # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) # for examples function bam_chromosomes() { # Fetch chromosomes from a bam file samtools view -H $1 | \  grep -Po &amp;#39;SN:(.</description>
+    </item>
+    
+    <item>
+      <title>An Alfred workflow for generating markdown tables from your clipboard</title>
+      <link>https://www.danielecook.com/an-alfred-workflow-for-generating-markdown-tables-from-your-clipboard/</link>
+      <pubDate>Fri, 30 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-alfred-workflow-for-generating-markdown-tables-from-your-clipboard/</guid>
+      <description>Generate markdown tables from clipboard content.
+Download Usage Copy a csv or tsv. The script will attempt to intelligently guess the format. For example, if you copy the table below:
+carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.95 3.98 2.43 0.21 Premium E SI1 59.8 61 326 3.89 3.84 2.31 0.23 Good E VS1 56.9 65 327 4.05 4.07 2.</description>
+    </item>
+    
+    <item>
+      <title>Fetch Citations in Google Sheets using pubmed() function</title>
+      <link>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</guid>
+      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&amp;rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+=pubmed(23149456) Will return an html-formatted citation:
+The heritability of metabolic profiles in newborn twins.
+Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8</description>
+    </item>
+    
+    <item>
+      <title>An Alfred Workflow for Wormbase</title>
+      <link>https://www.danielecook.com/an-alfred-workflow-for-wormbase/</link>
+      <pubDate>Thu, 09 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-alfred-workflow-for-wormbase/</guid>
+      <description>I have created an Alfred workflow for looking up gene information in wormbase. You can search by wormbase ID (e.g., WBGene00006759) You can use it to search for genes. Returned results will include:
+ Gene identifiers Location Caenorhabditis orthologs Publications  Download the latest version Usage Search for Genes
+Get Gene Information</description>
+    </item>
+    
+    <item>
+      <title>An Alfred Workflow for Codebox</title>
+      <link>https://www.danielecook.com/an-alfred-workflow-for-codebox/</link>
+      <pubDate>Thu, 25 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-alfred-workflow-for-codebox/</guid>
+      <description>[Codebox]() is a great program for storing and accessing snippets. It offers a quickbar menu item, but I thought Alfred might offer more functionality. So I wrote a workflow for it.
+Download Codebox-Alfred workflow Important! The workflow works fairly well, but there are a few caveats. You should not do the following with your codebox libraries:
+ Don&amp;#8217;t put spaces into tag, list, or folder names. Use an underscore instead.</description>
+    </item>
+    
+    <item>
+      <title>HGNC Search: Instant search of human genes with Alfred</title>
+      <link>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</link>
+      <pubDate>Fri, 12 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</guid>
+      <description>I have put together an Alfred workflow &amp;#8211; this one searches the HGNC database for genes! I have converted the text database from the HGNC website and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
+Download the latest release Usage Full text search of the HGNC database
+Information and links are provided for individual genes</description>
+    </item>
+    
+    <item>
+      <title>An alfred workflow for working with sequence data</title>
+      <link>https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/</link>
+      <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/</guid>
+      <description> I&amp;rsquo;ve put together a simple alfred workflow with a few utilities for working with sequence data.
+Download the latest release of Seq-Utilities
+Usage Generate a random dna sequence 200 base pairs long.
+Generate the complement, reverse complement, RNA, and protein of a DNA sequence
+Open up blast and pre-populate the search field
+blast ATGTCCTCGTTCGACCGTCGTATTGAAGCTGCATGTAAA</description>
+    </item>
+    
+    <item>
+      <title>Split a GFF File into Individual Features</title>
+      <link>https://www.danielecook.com/split-a-gff-file-into-individual-features/</link>
+      <pubDate>Sun, 25 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/split-a-gff-file-into-individual-features/</guid>
+      <description>The General Feature Format is a widely used format for annotating genome sequences. If indexed with tabix, gff files can be viewed in IGV or elsewhere. While features are organized in a nested manner (e.g. genes &amp;gt; exons &amp;gt; variant), you can pull out the individual types and index them, or combine only a few for viewing in your genome browser.
+I was working with wormbase annotation files, which combine all the different types of features together (genes, ncRNA, mRNA, binding site, operon, G Quartets, piRNAs, etc).</description>
+    </item>
+    
+    <item>
+      <title>Aggregate FastQC Reports</title>
+      <link>https://www.danielecook.com/aggregate-fastqc-reports/</link>
+      <pubDate>Sun, 28 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/aggregate-fastqc-reports/</guid>
+      <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
+# Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
+Publication
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
+    </item>
+    
+    <item>
+      <title>Downgrade a VCF for viewing in IGV (4.2 &gt; 4.1)</title>
+      <link>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</link>
+      <pubDate>Mon, 15 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</guid>
+      <description>Update: You probably no longer need this (2019-06-24) If you are using up to date software then you probably do not need to worry about downgrading a VCF file.
+Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&amp;#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</description>
+    </item>
+    
+    <item>
+      <title>Rename Samples within a VCF/BCF</title>
+      <link>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</link>
+      <pubDate>Fri, 05 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</guid>
+      <description>Update: Use bcftools (2019-06-21) Since this post was originally written, bcftools has added a command for renaming samples called reheader which allows sample names to be easily modified.
+Original Post (2014-12-05) These two simple bash functions make it easy to rename samples within a bcf file by using the filename given (if it is a single sample file) or adding a prefix to all samples. This is useful if you want to merge bcf files where the sample names are identical in both (for comparison purposes).</description>
+    </item>
+    
+    <item>
+      <title>From SRA Project to FASTQ</title>
+      <link>https://www.danielecook.com/from-sra-project-to-fastq/</link>
+      <pubDate>Sat, 25 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/from-sra-project-to-fastq/</guid>
+      <description>Original Post (2014-10-25) The Sequence Read Archive (SRA) contains sequence data from scientific studies stored in a special &amp;#8216;sra&amp;#8217; format. Data is stored in a hierarchical format:
+Project ▸ Study ▸ Sample ▸ Experiment ▸ Run
+Recently, I had to use the SRA to download all of the sequence data for a given project. This required querying the SRA database for all the runs in a sequencing project and converting them to FASTQs.</description>
+    </item>
+    
+    <item>
+      <title>Calculate Depth and Breadth of Coverage From a bam File</title>
+      <link>https://www.danielecook.com/calculate-depth-and-breadth-of-coverage-from-a-bam-file/</link>
+      <pubDate>Sat, 20 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/calculate-depth-and-breadth-of-coverage-from-a-bam-file/</guid>
+      <description>Original Post What is the difference between depth and coverage in sequencing experiments? Actually &amp;#8211; they refer to the same thing, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is breadth of coverage. This paper more precisely defines what breadth of coverage and depth of coverage mean.</description>
+    </item>
+    
+    <item>
+      <title>Generate a bedfile of masked ranges a fasta file</title>
+      <link>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</link>
+      <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</guid>
+      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;rsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&amp;rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
+    </item>
+    
+    <item>
+      <title>Generate fasta sequence lengths</title>
+      <link>https://www.danielecook.com/generate-fasta-sequence-lengths/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/generate-fasta-sequence-lengths/</guid>
+      <description>This one liner:
+cat file.fa | awk &amp;#39;$0 ~ &amp;#34;&amp;gt;&amp;#34; {print c; c=0;printf substr($0,2,100) &amp;#34;\t&amp;#34;; } $0 !~ &amp;#34;&amp;gt;&amp;#34; {c+=length($0);} END { print c; } Takes a fasta file as input:
+&amp;gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &amp;gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &amp;gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &amp;gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &amp;gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &amp;gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &amp;gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa Outputs sequence name and length:
+EF491733 135 EF491734 155 EF491735 140 EF491736 146 EF491737 150 EF491738 152 EF491739 170 I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</description>
+    </item>
+    
+    <item>
+      <title>Visualizing Pairwise Queries in R</title>
+      <link>https://www.danielecook.com/visualizing-pairwise-queries-in-r/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/visualizing-pairwise-queries-in-r/</guid>
+      <description>You can look for interesting associations between sets of search terms on PubMed by comparing how often two terms co-occur. The code below returns the number of publications where both terms are mentioned, acting as a rough estimate for how associated they are (at least, in the scholarly world).
+In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism.</description>
+    </item>
+    
+    <item>
+      <title>A Short tour around Lake Michigan</title>
+      <link>https://www.danielecook.com/a-short-tour-around-lake-michigan/</link>
+      <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/a-short-tour-around-lake-michigan/</guid>
+      <description>&lt;p&gt;I&amp;#8217;ve given bicycle touring a try. Originally I wanted to bike around Lake Michigan, but it turns out to be over &lt;a href=&#34;http://en.wikipedia.org/wiki/Lake_Michigan&#34;&gt;1,400 miles&lt;/a&gt;. So I compromised on a three day trip around a good chunk and making use of the ferry from Muskeegon, MI to Milwaukee, WI. This was my first time &amp;#8211; so I also decided to stay in hotels. Next time I intend to camp. I learned a few valuable lessons along the way!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pack less stuff!&lt;/strong&gt; &amp;#8211; I had way too much. In fact, I wound up breaking two spokes on the second day.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shorten the days&lt;/strong&gt; &amp;#8211; Having never gone more than 40 miles in a single day, I decided to go 108 on the first day. Yeah. I probably should have gone more like 60-70 each day. By the time I got to my destination each day I was too tired to do anything. Part of the experience is seeing new places.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Get a proper touring bike&lt;/strong&gt; &amp;#8211; I didn&amp;#8217;t use a touring bike because I don&amp;#8217;t have one (yet). I used a &lt;a href=&#34;http://www.trekbikes.com/us/en/bikes/town/fitness/fx/7_2_fx_wsd_2014/#&#34;&gt;Trek 7.2&lt;/a&gt;. My wrists hurt a lot for parts of the trip. Next time I&amp;#8217;ll get a proper touring bike with the appropriate handle bars.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;text-center&#34;&gt;
+  &lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-07-12-at-7.27.56-PM1.png&#34; alt=&#34;Trip around Lake Michigan&#34;  class=&#34;thumbnail&#34; style=&#34;margin:auto;&#34; /&gt;&lt;small style=&#34;color:#4792f3&#34;&gt;Day 1&lt;/span&gt; · &lt;span style=&#34;color:Red&#34;&gt;Day 2&lt;/span&gt; · &lt;span style=&#34;color:#fba43c&#34;&gt;Ferry&lt;/span&gt; · &lt;span style=&#34;color:Green&#34;&gt;Day 3&lt;/span&gt;&lt;/small&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;pictures&#34;&gt;Pictures&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0826.jpg&#34; alt=&#34;Michigan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0849.jpg&#34; alt=&#34;Outside Muskeegan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to plot all of your Runkeeper Data</title>
+      <link>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</guid>
+      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I&amp;#8217;ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+The script does a few unique things.</description>
+    </item>
+    
+    <item>
+      <title>Where I Run and Bike in Chicago</title>
+      <link>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</link>
+      <pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</guid>
+      <description>Original Post (2014-05-25) Using runkeeper and with the help of a tutorial at flowing data, I was able to plot all of the running and biking I&amp;#8217;ve been doing in Chicago since moving here two years ago. The blue is running and the black is biking.
+ Update: Strava (2019-06-21) I have since migrated my data to Strava - which I like a lot better than runkeeper. You can migrate your data using the Tapariik service.</description>
+    </item>
+    
+    <item>
+      <title>Double Checking FASTQs</title>
+      <link>https://www.danielecook.com/double-checking-fastqs/</link>
+      <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/double-checking-fastqs/</guid>
+      <description>When you have performed a sequencing project, quality control is one of the first things you will need to do. Unfortunately, sample mix-ups and other issues can and do happen. Systematic biases can also occur by machine and lane.
+This script will extracting basic information from a set of FASTQs and output it to summary file (fastq_summary.txt). This will work with demultiplexed FASTQs generated by Illumina machines that appear in the following format:</description>
+    </item>
+    
+    <item>
+      <title>Use Google Sheets to identify gene-disease associations in Pubmed</title>
+      <link>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</link>
+      <pubDate>Mon, 03 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</guid>
+      <description>Google Docs allows you to import XML. By using NCBIs esearch service, you can query pubmed for a list of genes. Stick the following code in A2, and a keyword in B2:
+=importXML(&amp;#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;amp;term=&amp;#34; &amp;amp; B2 ,&amp;#34;(//Count)[1]&amp;#34;) What is more valuable, however, is if given a gene list &amp;#8211; you can query pubmed for each gene combined with a second keyword like a disease.
+For example, suppose you are studying Cleft lip and Palate and are left with a set of genes identified from a gene expression analysis.</description>
+    </item>
+    
+    <item>
+      <title>An R Function for Opening a dataframe in Excel (Mac Only)</title>
+      <link>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</link>
+      <pubDate>Tue, 18 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</guid>
+      <description>The dataframe viewer in Rstudio can be slow or unresponsive, and at times truncates the content within or the number of columns on large datasets. I want to be able to see the full columns and to be able to arrange and filter simultaneously. Although you can do this in R programmatically sometimes its easier and quicker to use Excel. The function below can be used to open a dataframe in Microsoft Excel.</description>
+    </item>
+    
+    <item>
+      <title>Alfred Workflow for Creating a Data Analysis Project</title>
+      <link>https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/</link>
+      <pubDate>Sat, 25 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/</guid>
+      <description>This idea I got from my brother. The idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:
+Directory Structure
+ Markdown (md) extension &amp;#8211; is used for the readme because its simple and so that the directory is ready for github if desired. Data Folder &amp;#8211; This directory is used for storing raw data and scripts that are used to clean and prepare data for analysis.</description>
+    </item>
+    
+    <item>
+      <title>Downloading and storing bioinformatic databases locally</title>
+      <link>https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/</link>
+      <pubDate>Mon, 20 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/</guid>
+      <description>If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) &amp;#8211; you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.
+If you use python, it is easy to download and store data in an SQlite database.</description>
+    </item>
+    
+    <item>
+      <title>Use Google to Find Lecture Notes</title>
+      <link>https://www.danielecook.com/use-google-to-find-lecture-notes/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/use-google-to-find-lecture-notes/</guid>
+      <description>This may seem obvious - but I&amp;rsquo;ve discovered a wonderful trick if you ever need to review a science topic quickly or are trying to learn something new, try searching google like this:
+(topic) + Lecture filetype:pdf You&amp;#8217;ll find that tons of professors post their lecture notes online. Also try using filetype:ppt or leave filetype off (as some professors host websites with lecture notes).</description>
+    </item>
+    
+    <item>
+      <title>Export excel worksheets as individual CSVs</title>
+      <link>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</link>
+      <pubDate>Sat, 09 Nov 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</guid>
+      <description>Original Post (2013-11-09) If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don&amp;#8217;t want to do so in Microsoft Excel &amp;#8211; here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.
+import xlrd # pip install xlrd import csv import os def export_workbook(filename): # Open workbook for initial extraction workbook = xlrd.</description>
+    </item>
+    
+    <item>
+      <title>Fetch Data from UCSC Genome Browser</title>
+      <link>https://www.danielecook.com/fetch-data-from-ucsc-genome-browser/</link>
+      <pubDate>Sun, 03 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/fetch-data-from-ucsc-genome-browser/</guid>
+      <description>Original Post (2013-11-03) Previously, I&amp;#8217;ve shown that you can use a mysql database browser (e.g. Sequel Pro) to access and browse the UCSC Genome Browser MySQL database.
+If you have a small dataset that you would like to annotate, you can write SQL statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.
+# Note: Requires mysqldb; install using: # pip install MySQL-python from MySQLdb.</description>
+    </item>
+    
+    <item>
+      <title>Accessing the UCSC Genome Browser MySQL Database</title>
+      <link>https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/</link>
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/</guid>
+      <description>&lt;p&gt;The UCSC Genome browser has a &lt;a href=&#34;http://genome.ucsc.edu/goldenPath/help/mysql.html&#34;&gt;publicly available MySQL database&lt;/a&gt;. There are a lot of different ways you can use it, including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Annotating a small dataset&lt;/li&gt;
+&lt;li&gt;Understanding how data is formatted, and can be used.&lt;/li&gt;
+&lt;li&gt;Browsing Data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are on a mac &amp;#8211; &lt;a href=&#34;http://www.sequelpro.com/&#34;&gt;Sequel Pro&lt;/a&gt; is a fantastic tool for browsing.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A function for retrieving SNP data from Entrez using BioPython</title>
+      <link>https://www.danielecook.com/a-function-for-retrieving-snp-data-from-entrez-using-biopython/</link>
+      <pubDate>Thu, 06 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/a-function-for-retrieving-snp-data-from-entrez-using-biopython/</guid>
+      <description>Biopython is a great tool for interacting with biological databases. I use it to retrieve records from NCBI&amp;#8217;s Entrez databases including Pubmed.
+Unfortunately &amp;#8211; one notable database biopython has trouble working with is the SNP database. This is due to the Bio.Entrez parser being unable to handle the XML returned from this database. One solution is to use a built in Python XML parser, but I thought I&amp;#8217;d try to come up with an easier solution.</description>
+    </item>
+    
+    <item>
+      <title>Create New File in Finder with Alfred 2</title>
+      <link>https://www.danielecook.com/create-new-file-in-finder-with-alfred-2/</link>
+      <pubDate>Thu, 04 Apr 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/create-new-file-in-finder-with-alfred-2/</guid>
+      <description>I have created a simple workflow for Alfred 2 which makes it easy to create a new text file in the frontmost finder window. Update &amp;#8211; at the suggestion of a visitor &amp;#8211; James Kachan &amp;#8211; I have updated the workflow to automatically open the new file in a text editor. An alternative, more advanced workflow for Alfred 2 has also been created by Ian Isted.
+Usage Open Alfred 2, and type new followed by the name of the file.</description>
+    </item>
+    
+    <item>
+      <title>Excel Template for Mapping Four 96-Well Plates to One 384-Well Plate</title>
+      <link>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</link>
+      <pubDate>Wed, 06 Mar 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</guid>
+      <description> This excel template helps you map 96 well templates to a single 384 well plate using Microsoft Excel.
+Download 96_to_384_platemapper.xlsx
+Copy in Identifiers A 384 well template is produced And a summary table too. </description>
+    </item>
+    
+    <item>
+      <title>Django models for Chado</title>
+      <link>https://www.danielecook.com/django-models-for-chado/</link>
+      <pubDate>Wed, 09 Jan 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/django-models-for-chado/</guid>
+      <description>Original Post (2013-01-09) Here is my first stab at models for django of the Chado database schema
+Gist → Chado models
+Update: machado (2019-06-20) I originally put together a set of models for Chado in January of 2013. I later moved on from this work when I started graduate school - but a group incorporated a little bit of this work in the development of their framework for storing, searching and visualizing biological data called machado.</description>
+    </item>
+    
+  </channel>
+</rss>

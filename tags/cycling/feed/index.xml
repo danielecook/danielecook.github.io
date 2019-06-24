@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CYCLING on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/cycling/</link>
+    <description>Recent content in CYCLING on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 12 Jul 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/cycling/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Short tour around Lake Michigan</title>
+      <link>https://www.danielecook.com/a-short-tour-around-lake-michigan/</link>
+      <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/a-short-tour-around-lake-michigan/</guid>
+      <description>&lt;p&gt;I&amp;#8217;ve given bicycle touring a try. Originally I wanted to bike around Lake Michigan, but it turns out to be over &lt;a href=&#34;http://en.wikipedia.org/wiki/Lake_Michigan&#34;&gt;1,400 miles&lt;/a&gt;. So I compromised on a three day trip around a good chunk and making use of the ferry from Muskeegon, MI to Milwaukee, WI. This was my first time &amp;#8211; so I also decided to stay in hotels. Next time I intend to camp. I learned a few valuable lessons along the way!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pack less stuff!&lt;/strong&gt; &amp;#8211; I had way too much. In fact, I wound up breaking two spokes on the second day.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shorten the days&lt;/strong&gt; &amp;#8211; Having never gone more than 40 miles in a single day, I decided to go 108 on the first day. Yeah. I probably should have gone more like 60-70 each day. By the time I got to my destination each day I was too tired to do anything. Part of the experience is seeing new places.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Get a proper touring bike&lt;/strong&gt; &amp;#8211; I didn&amp;#8217;t use a touring bike because I don&amp;#8217;t have one (yet). I used a &lt;a href=&#34;http://www.trekbikes.com/us/en/bikes/town/fitness/fx/7_2_fx_wsd_2014/#&#34;&gt;Trek 7.2&lt;/a&gt;. My wrists hurt a lot for parts of the trip. Next time I&amp;#8217;ll get a proper touring bike with the appropriate handle bars.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;text-center&#34;&gt;
+  &lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-07-12-at-7.27.56-PM1.png&#34; alt=&#34;Trip around Lake Michigan&#34;  class=&#34;thumbnail&#34; style=&#34;margin:auto;&#34; /&gt;&lt;small style=&#34;color:#4792f3&#34;&gt;Day 1&lt;/span&gt; · &lt;span style=&#34;color:Red&#34;&gt;Day 2&lt;/span&gt; · &lt;span style=&#34;color:#fba43c&#34;&gt;Ferry&lt;/span&gt; · &lt;span style=&#34;color:Green&#34;&gt;Day 3&lt;/span&gt;&lt;/small&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;pictures&#34;&gt;Pictures&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0826.jpg&#34; alt=&#34;Michigan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0849.jpg&#34; alt=&#34;Outside Muskeegan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to plot all of your Runkeeper Data</title>
+      <link>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</guid>
+      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I&amp;#8217;ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+The script does a few unique things.</description>
+    </item>
+    
+    <item>
+      <title>Where I Run and Bike in Chicago</title>
+      <link>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</link>
+      <pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</guid>
+      <description>Original Post (2014-05-25) Using runkeeper and with the help of a tutorial at flowing data, I was able to plot all of the running and biking I&amp;#8217;ve been doing in Chicago since moving here two years ago. The blue is running and the black is biking.
+ Update: Strava (2019-06-21) I have since migrated my data to Strava - which I like a lot better than runkeeper. You can migrate your data using the Tapariik service.</description>
+    </item>
+    
+  </channel>
+</rss>

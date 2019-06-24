@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Parallelize bcftools functions - Daniel E. Cook</title>
+  <meta content='Parallelize bcftools functions - Daniel E. Cook' property='title' />
+  <meta content='Parallelize bcftools functions - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="bcftools is a great for working with variant call files. In general, it is fast. However, I have found that the process of merging VCF files (using bcftools merge) and performing concordance checking (using bcftools gtcheck) can be a little bit slow. That is why I wrote two functions that take advantage of GNU Parallel to parallelize them.
+# ~/.bashrc: executed by bash(1) for non-login shells. # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) # for examples function bam_chromosomes() { # Fetch chromosomes from a bam file samtools view -H $1 | \  grep -Po &#39;SN:(." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/parallelize-bcftools-functions/" />
+
+
+<meta property="article:published_time" content="2015-11-21T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-11-21T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/parallelize-bcftools-functions/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Parallelize bcftools functions</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2015-11-21</time> 
+    
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p><a href="http://samtools.github.io/bcftools/">bcftools</a> is a great for working with <a href="http://www.1000genomes.org/wiki/analysis/variant%20call%20format/vcf-variant-call-format-version-41">variant call files</a>. In general, it is fast. However, I have found that the process of merging VCF files (using <code>bcftools merge</code>) and performing concordance checking (using <code>bcftools gtcheck</code>) can be a little bit slow. That is why I wrote two functions that take advantage of <a href="http://www.gnu.org/software/parallel/">GNU Parallel</a> to parallelize them.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc: executed by bash(1) for non-login shells.</span>
+<span style="color:#75715e"># see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)</span>
+<span style="color:#75715e"># for examples</span>
+
+<span style="color:#66d9ef">function</span> bam_chromosomes<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Fetch chromosomes from a bam file</span>
+    samtools view -H $1 | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    grep -Po <span style="color:#e6db74">&#39;SN:(.*)\t&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    cut -c <span style="color:#ae81ff">4</span>-1000
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> vcf_chromosomes<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Fetch contigs from a vcf file.</span>
+    bcftools view -h $1 | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    grep <span style="color:#e6db74">&#39;contig&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    egrep -o <span style="color:#e6db74">&#34;ID=([^,]+)&#34;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    sed <span style="color:#e6db74">&#39;s/ID=//g&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
+<span style="color:#f92672">}</span>
+
+
+PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
+<span style="color:#66d9ef">function</span> parallel_bcftools_merge<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    file_set<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | egrep -o <span style="color:#e6db74">&#39;(\-l|\-\-file-list)(=|[ ]+)[^ ]+&#39;</span> | tr <span style="color:#e6db74">&#39;=&#39;</span> <span style="color:#e6db74">&#39; &#39;</span> | cut -f <span style="color:#ae81ff">2</span> -d <span style="color:#e6db74">&#39; &#39;</span><span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file_set<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
+        <span style="color:#66d9ef">then</span>
+            find_vcf<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>cat <span style="color:#e6db74">${</span>file_set<span style="color:#e6db74">}</span> | head -n <span style="color:#ae81ff">1</span><span style="color:#e6db74">`</span>
+        <span style="color:#66d9ef">else</span>
+            find_vcf<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | tr <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | egrep -o <span style="color:#e6db74">&#39;[^ ]+.vcf.gz&#39;</span> | awk <span style="color:#e6db74">&#39;NR == 1 { print }&#39;</span> - <span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">fi</span>
+    contigs<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>vcf_chromosomes <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+    current_dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+    hash_merge<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span> | md5sum | cut -c <span style="color:#ae81ff">1</span>-5<span style="color:#e6db74">`</span>
+    output_prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>current_dir<span style="color:#e6db74">}</span><span style="color:#e6db74">/parallel_merge.</span><span style="color:#e6db74">${</span>hash_merge<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    
+    parallel --gnu --workdir <span style="color:#e6db74">${</span>current_dir<span style="color:#e6db74">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --env args -j <span style="color:#e6db74">${</span>PARALLEL_CORES<span style="color:#e6db74">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#e6db74">&#39;bcftools merge -r {1} -O u &#39;</span> $@ <span style="color:#e6db74">&#39; &gt; &#39;</span> <span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;.{1}.bcf&#39;</span> ::: <span style="color:#e6db74">${</span>contigs<span style="color:#e6db74">}</span> 
+    
+    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.bcf&#34; }&#39;</span><span style="color:#e6db74">`</span>
+    bcftools concat -O v <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span> | grep -v <span style="color:#e6db74">&#39;parallel_merge&#39;</span> | sed <span style="color:#e6db74">&#39;s/##bcftools_mergeCommand=merge -r I -O u /##bcftools_mergeCommand=merge /g&#39;</span> | bcftools view -O u
+    rm <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span>
+<span style="color:#f92672">}</span>
+
+
+PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
+<span style="color:#66d9ef">function</span> parallel_bcftools_gtcheck<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    find_vcf<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | tr <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | egrep -o <span style="color:#e6db74">&#39;[^ ]+.vcf.gz&#39;</span> | awk <span style="color:#e6db74">&#39;NR == 1 { print }&#39;</span> - <span style="color:#e6db74">`</span>
+    contigs<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>vcf_chromosomes <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+    current_dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
+    hash_merge<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span> | md5sum | cut -c <span style="color:#ae81ff">1</span>-5<span style="color:#e6db74">`</span>
+    output_prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>current_dir<span style="color:#e6db74">}</span><span style="color:#e6db74">/parallel_concordance.</span><span style="color:#e6db74">${</span>hash_merge<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    gtcheck_options<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | awk -v vcf<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;{ gsub(vcf,&#34;&#34;,$0); print $0; }&#39;</span><span style="color:#e6db74">`</span>
+    parallel --gnu  -j <span style="color:#e6db74">${</span>PARALLEL_CORES<span style="color:#e6db74">}</span> --workdir <span style="color:#e6db74">${</span>current_dir<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;bcftools view &#39;</span> <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39; {} | \
+</span><span style="color:#e6db74">    bcftools gtcheck &#39;</span> <span style="color:#e6db74">${</span>gtcheck_options<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39; - | \
+</span><span style="color:#e6db74">    awk -v chrom={} &#34;/^CN/ { print \$0 \&#34;\t\&#34; chrom } \$0 !~ /.*CN.*/ { print } \$0 ~ /^# \[1\]CN/ { print \$0 \&#34;\tchrom\&#34;}&#34; - &gt; &#39;</span> <span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;.{}.tsv&#39;</span> ::: <span style="color:#e6db74">${</span>contigs<span style="color:#e6db74">}</span>
+
+    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.tsv&#34; }&#39;</span><span style="color:#e6db74">`</span>
+    cat <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    grep <span style="color:#e6db74">&#39;CN&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;NR == 1 &amp;&amp; /Discordance/ { print } NR &gt; 1 &amp;&amp; $0 !~ /Discordance/ { print }&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;{ gsub(&#34;(# |\\[[0-9]+\\])&#34;,&#34;&#34;, $0); gsub(&#34; &#34;,&#34;_&#34;, $0); print }&#39;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    cut -f <span style="color:#ae81ff">2</span>-7 | datamash --header-in --sort --group<span style="color:#f92672">=</span>Sample_i,Sample_j sum Discordance  sum Number_of_sites | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    cat &lt;<span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;sample_i\tsample_j\tdiscordance\tnumber_of_sites&#34;</span><span style="color:#f92672">)</span> - | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;NR == 1 { print $0 &#34;\tconcordance&#34; } NR &gt; 1 &amp;&amp; $4 == 0 { print $0 &#34;\t&#34; } NR &gt; 1 &amp;&amp; $4 &gt; 0 { print $0 &#34;\t&#34; ($4-$3)/$4 }&#39;</span>
+    rm <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h3 id="usage">Usage</h3>
+
+<p>The function <code>vcf_chromosomes</code> extracts chromosomes names from a VCF file using bcftools. Parallelization occurs across chromosomes.</p>
+
+<h3 id="parallel-bcftools-merge"><code>parallel_bcftools_merge</code></h3>
+
+<p><code>parallel_bcftools_merge</code> is run very similar to <code>bcftools merge</code>. The only difference is that you have to pipe it into bcftools to change it to the appropriate output. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">parallel_bcftools_merge -m all <span style="color:#e6db74">`</span>ls *list_of_bcffiles<span style="color:#e6db74">`</span> | bcftools view -O z &gt; merged_vcf.vcf.gz</code></pre></div>
+<p>The <code>parallel_bcftools_merge</code> function will generate a temporary vcf for every chromosome. You can use all flags except for <code>-O</code> with this function.</p>
+
+<h3 id="parallel-bcftools-gtcheck"><code>parallel_bcftools_gtcheck</code></h3>
+
+<p><code>parallel_bcftools_gtcheck</code> should not be used with <code>--all-sites</code>, or <code>--plot</code>. I recommend using this function with <code>-H</code> and <code>-G 1</code> to calculate the absolute number of differences in terms of homozygous calls between samples. Also, this function requires datamash (on OSX, install with <code>brew install datamash</code>)</p>
+
+<p>The output file is slightly different than what bcftools normally outputs. In general, I use this function specifically to calculate conocordance between individual fastq runs - like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">parallel_bcftools_gtchek -H -G <span style="color:#ae81ff">1</span> union_samples.vcf.gz &gt; concordance.tsv</code></pre></div>
+<p>This parallelized version generates concordances for each chromosome and then merges the results together using datamash. Output looks like this:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">sample_i</th>
+<th align="left">sample_j</th>
+<th align="right">discordance</th>
+<th align="right">number_of_sites</th>
+<th align="right">concordance</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BGI2-RET1-ED3049</td>
+<td align="left">BGI1-RET1-ED3049</td>
+<td align="right">927</td>
+<td align="right">2344043</td>
+<td align="right">0.999605</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-CB4856</td>
+<td align="left">BGI1-RET1-CB4852</td>
+<td align="right">144484</td>
+<td align="right">2171694</td>
+<td align="right">0.933469</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-CX11315</td>
+<td align="left">BGI1-RET1-CB4852</td>
+<td align="right">106964</td>
+<td align="right">2721950</td>
+<td align="right">0.960703</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-CX11315</td>
+<td align="left">BGI1-RET1-CB4856</td>
+<td align="right">137200</td>
+<td align="right">2059983</td>
+<td align="right">0.933398</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-DL238</td>
+<td align="left">BGI1-RET1-CB4852</td>
+<td align="right">148217</td>
+<td align="right">2097343</td>
+<td align="right">0.929331</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-DL238</td>
+<td align="left">BGI1-RET1-CB4856</td>
+<td align="right">124132</td>
+<td align="right">1803664</td>
+<td align="right">0.931178</td>
+</tr>
+
+<tr>
+<td align="left">BGI1-RET1-DL238</td>
+<td align="left">BGI1-RET1-CX11315</td>
+<td align="right">146580</td>
+<td align="right">1996802</td>
+<td align="right">0.926593</td>
+</tr>
+</tbody>
+</table>
+</div>
+  
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/an-alfred-workflow-for-generating-markdown-tables-from-your-clipboard/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/">next post</a> →
+  </p>
+</div>
+
+
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

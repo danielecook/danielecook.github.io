@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/sql/</link>
+    <description>Recent content in SQL on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 02 Nov 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/sql/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Accessing the UCSC Genome Browser MySQL Database</title>
+      <link>https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/</link>
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/</guid>
+      <description>&lt;p&gt;The UCSC Genome browser has a &lt;a href=&#34;http://genome.ucsc.edu/goldenPath/help/mysql.html&#34;&gt;publicly available MySQL database&lt;/a&gt;. There are a lot of different ways you can use it, including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Annotating a small dataset&lt;/li&gt;
+&lt;li&gt;Understanding how data is formatted, and can be used.&lt;/li&gt;
+&lt;li&gt;Browsing Data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are on a mac &amp;#8211; &lt;a href=&#34;http://www.sequelpro.com/&#34;&gt;Sequel Pro&lt;/a&gt; is a fantastic tool for browsing.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

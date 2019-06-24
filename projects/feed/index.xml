@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/projects/</link>
+    <description>Recent content in Projects on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/projects/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacker News Trending</title>
+      <link>https://www.danielecook.com/projects/hntrending/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/hntrending/</guid>
+      <description>Hacker News is a great source of tech-news. However, the site has a very high turnover rate in terms of stories. If you do not check it daily it is easy to miss something.
+That is why I created Hacker News Trending (HN Trending). HN Trending is a simple website that aggregates Hacker news stories by popularity over the past week, month, year, and over all time. HN Trending is updated weekly,</description>
+    </item>
+    
+    <item>
+      <title>IEX API Python</title>
+      <link>https://www.danielecook.com/projects/iex-api-python/</link>
+      <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/iex-api-python/</guid>
+      <description>IEX-API-Python is a python wrapper for the IEX API. IEX-API-Python can be used to retrieve financial data such as stock prices, news, or company information from IEX. Data can be obtained as JSON or converted into Pandas DataFrames.
+IEX is an exchange founded by Brad Katsuyama and written about in the book Flash Boys by Michael Lewis.
+ GitHub Documentation  </description>
+    </item>
+    
+    <item>
+      <title>elegansvariation.org</title>
+      <link>https://www.danielecook.com/projects/elegansvariation/</link>
+      <pubDate>Fri, 26 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/elegansvariation/</guid>
+      <description>The C. elegans Natural Diversity Resource (CeNDR) is scientific web application that enables users to perform genetic studies. The web application is deployed using Google Cloud Platform and is written using Flask, a python-based web framework.
+The site features a genome-browser, a catalog for ordering scientific specimens, a download portal, and can also launch analytical pipelines for performing analyses. CeNDR is actively used by the scientific community and has become a valuable tool for performing studies.</description>
+    </item>
+    
+  </channel>
+</rss>

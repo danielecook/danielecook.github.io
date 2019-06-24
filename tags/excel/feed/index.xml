@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>excel on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/excel/</link>
+    <description>Recent content in excel on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 18 Feb 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/excel/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>An R Function for Opening a dataframe in Excel (Mac Only)</title>
+      <link>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</link>
+      <pubDate>Tue, 18 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</guid>
+      <description>The dataframe viewer in Rstudio can be slow or unresponsive, and at times truncates the content within or the number of columns on large datasets. I want to be able to see the full columns and to be able to arrange and filter simultaneously. Although you can do this in R programmatically sometimes its easier and quicker to use Excel. The function below can be used to open a dataframe in Microsoft Excel.</description>
+    </item>
+    
+    <item>
+      <title>Export excel worksheets as individual CSVs</title>
+      <link>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</link>
+      <pubDate>Sat, 09 Nov 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</guid>
+      <description>Original Post (2013-11-09) If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don&amp;#8217;t want to do so in Microsoft Excel &amp;#8211; here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.
+import xlrd # pip install xlrd import csv import os def export_workbook(filename): # Open workbook for initial extraction workbook = xlrd.</description>
+    </item>
+    
+    <item>
+      <title>Excel Template for Mapping Four 96-Well Plates to One 384-Well Plate</title>
+      <link>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</link>
+      <pubDate>Wed, 06 Mar 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</guid>
+      <description> This excel template helps you map 96 well templates to a single 384 well plate using Microsoft Excel.
+Download 96_to_384_platemapper.xlsx
+Copy in Identifiers A 384 well template is produced And a summary table too. </description>
+    </item>
+    
+  </channel>
+</rss>
