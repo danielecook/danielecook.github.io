@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/database/</link>
+    <description>Recent content in Database on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 12 Jun 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/database/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HGNC Search: Instant search of human genes with Alfred</title>
+      <link>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</link>
+      <pubDate>Fri, 12 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</guid>
+      <description>I have put together an Alfred workflow &amp;#8211; this one searches the HGNC database for genes! I have converted the text database from the HGNC website and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
+Download the latest release Usage Full text search of the HGNC database
+Information and links are provided for individual genes</description>
+    </item>
+    
+    <item>
+      <title>Django models for Chado</title>
+      <link>https://www.danielecook.com/django-models-for-chado/</link>
+      <pubDate>Wed, 09 Jan 2013 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/django-models-for-chado/</guid>
+      <description>Original Post (2013-01-09) Here is my first stab at models for django of the Chado database schema
+Gist → Chado models
+Update: machado (2019-06-20) I originally put together a set of models for Chado in January of 2013. I later moved on from this work when I started graduate school - but a group incorporated a little bit of this work in the development of their framework for storing, searching and visualizing biological data called machado.</description>
+    </item>
+    
+  </channel>
+</rss>

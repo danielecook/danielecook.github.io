@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/</link>
+    <description>Recent content in Tags on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bash</title>
+      <link>https://www.danielecook.com/tags/bash/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://www.danielecook.com/tags/python/</link>
+      <pubDate>Thu, 02 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chicago</title>
+      <link>https://www.danielecook.com/tags/chicago/</link>
+      <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/chicago/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Alfred</title>
+      <link>https://www.danielecook.com/tags/alfred/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/alfred/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://www.danielecook.com/tags/r/</link>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Guitar</title>
+      <link>https://www.danielecook.com/tags/guitar/</link>
+      <pubDate>Wed, 17 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/guitar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gist</title>
+      <link>https://www.danielecook.com/tags/gist/</link>
+      <pubDate>Wed, 27 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/gist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bigquery</title>
+      <link>https://www.danielecook.com/tags/bigquery/</link>
+      <pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/bigquery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>google-sheets</title>
+      <link>https://www.danielecook.com/tags/google-sheets/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/google-sheets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>https://www.danielecook.com/tags/database/</link>
+      <pubDate>Fri, 12 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Genetics</title>
+      <link>https://www.danielecook.com/tags/genetics/</link>
+      <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/genetics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gff</title>
+      <link>https://www.danielecook.com/tags/gff/</link>
+      <pubDate>Sun, 25 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/gff/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bam</title>
+      <link>https://www.danielecook.com/tags/bam/</link>
+      <pubDate>Sun, 28 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/bam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fastq</title>
+      <link>https://www.danielecook.com/tags/fastq/</link>
+      <pubDate>Sun, 28 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/fastq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vcf</title>
+      <link>https://www.danielecook.com/tags/vcf/</link>
+      <pubDate>Mon, 15 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/vcf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bcftools</title>
+      <link>https://www.danielecook.com/tags/bcftools/</link>
+      <pubDate>Fri, 05 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/bcftools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FASTA</title>
+      <link>https://www.danielecook.com/tags/fasta/</link>
+      <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/fasta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pubmed</title>
+      <link>https://www.danielecook.com/tags/pubmed/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/pubmed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cycling</title>
+      <link>https://www.danielecook.com/tags/cycling/</link>
+      <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/cycling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>excel</title>
+      <link>https://www.danielecook.com/tags/excel/</link>
+      <pubDate>Tue, 18 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/excel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tips</title>
+      <link>https://www.danielecook.com/tags/tips/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/tips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>https://www.danielecook.com/tags/sql/</link>
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/sql/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

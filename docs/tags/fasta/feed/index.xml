@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FASTA on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/fasta/</link>
+    <description>Recent content in FASTA on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 15 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/fasta/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Generate a bedfile of masked ranges a fasta file</title>
+      <link>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</link>
+      <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</guid>
+      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;rsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&amp;rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
+    </item>
+    
+    <item>
+      <title>Generate fasta sequence lengths</title>
+      <link>https://www.danielecook.com/generate-fasta-sequence-lengths/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/generate-fasta-sequence-lengths/</guid>
+      <description>This one liner:
+cat file.fa | awk &amp;#39;$0 ~ &amp;#34;&amp;gt;&amp;#34; {print c; c=0;printf substr($0,2,100) &amp;#34;\t&amp;#34;; } $0 !~ &amp;#34;&amp;gt;&amp;#34; {c+=length($0);} END { print c; } Takes a fasta file as input:
+&amp;gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &amp;gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &amp;gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &amp;gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &amp;gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &amp;gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &amp;gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa Outputs sequence name and length:
+EF491733 135 EF491734 155 EF491735 140 EF491736 146 EF491737 150 EF491738 152 EF491739 170 I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</description>
+    </item>
+    
+  </channel>
+</rss>

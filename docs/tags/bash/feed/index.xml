@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/bash/</link>
+    <description>Recent content in bash on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/bash/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Log commands to Google Cloud Stackdriver Logs</title>
+      <link>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</guid>
+      <description>Google Cloud Platform (GCP) has a service called Stackdriver logging which provides a nice interface for accessing logs.
+Stackdriver logging is integrated with all GCP services but it can also be extended. Users can create custom logs and access them centrally using the web-based interface or the Google Cloud SDK.
+This got me wondering whether there was a way to log terminal commands locally or on a server. It is possible by setting the PROMPT_COMMAND variable in BASH.</description>
+    </item>
+    
+    <item>
+      <title>Rename Samples within a VCF/BCF</title>
+      <link>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</link>
+      <pubDate>Fri, 05 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</guid>
+      <description>Update: Use bcftools (2019-06-21) Since this post was originally written, bcftools has added a command for renaming samples called reheader which allows sample names to be easily modified.
+Original Post (2014-12-05) These two simple bash functions make it easy to rename samples within a bcf file by using the filename given (if it is a single sample file) or adding a prefix to all samples. This is useful if you want to merge bcf files where the sample names are identical in both (for comparison purposes).</description>
+    </item>
+    
+  </channel>
+</rss>

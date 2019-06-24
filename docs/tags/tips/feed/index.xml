@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tips on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/tips/</link>
+    <description>Recent content in tips on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 10 Nov 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/tips/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Use Google to Find Lecture Notes</title>
+      <link>https://www.danielecook.com/use-google-to-find-lecture-notes/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/use-google-to-find-lecture-notes/</guid>
+      <description>This may seem obvious - but I&amp;rsquo;ve discovered a wonderful trick if you ever need to review a science topic quickly or are trying to learn something new, try searching google like this:
+(topic) + Lecture filetype:pdf You&amp;#8217;ll find that tons of professors post their lecture notes online. Also try using filetype:ppt or leave filetype off (as some professors host websites with lecture notes).</description>
+    </item>
+    
+  </channel>
+</rss>

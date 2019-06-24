@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vcf on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/vcf/</link>
+    <description>Recent content in vcf on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 15 Dec 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/vcf/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Downgrade a VCF for viewing in IGV (4.2 &gt; 4.1)</title>
+      <link>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</link>
+      <pubDate>Mon, 15 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</guid>
+      <description>Update: You probably no longer need this (2019-06-24) If you are using up to date software then you probably do not need to worry about downgrading a VCF file.
+Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&amp;#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</description>
+    </item>
+    
+  </channel>
+</rss>

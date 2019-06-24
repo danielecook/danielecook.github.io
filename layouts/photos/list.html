@@ -13,10 +13,9 @@
 <article class="fl w-100 w-50-m  w-33-ns photo">
     <div class="aspect-ratio aspect-ratio--1x1">
     	<a href="{{ .RelPermalink }}">
-      <img src="{{ .RelPermalink }}" 
+      <img src="{{ $image.RelPermalink }}" 
       class="db cover aspect-ratio--object" />
           </a>
-
     </div>
 </article>
 
@@ -25,4 +24,5 @@
 <div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 {{ partial "back-to-top.html" . }}
 </div>
+
 {{ end }}

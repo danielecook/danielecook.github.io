@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Alfred Workflow for Creating a Data Analysis Project - Daniel E. Cook</title>
+  <meta content='Alfred Workflow for Creating a Data Analysis Project - Daniel E. Cook' property='title' />
+  <meta content='Alfred Workflow for Creating a Data Analysis Project - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="This idea I got from my brother. The idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:
+Directory Structure
+ Markdown (md) extension &#8211; is used for the readme because its simple and so that the directory is ready for github if desired. Data Folder &#8211; This directory is used for storing raw data and scripts that are used to clean and prepare data for analysis." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/" />
+
+
+<meta property="article:published_time" content="2014-01-25T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2014-01-25T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Alfred Workflow for Creating a Data Analysis Project</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2014-01-25</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/alfred' class="link silver tag">Alfred</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p>This idea I got from my brother. The idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:</p>
+
+<p><img src="/Screen-Shot-2014-01-20-at-12.33.18-AM.png" alt="Directory Structure" /></p>
+
+<p><small>Directory Structure</small></p>
+
+<ul>
+<li><strong>Markdown (md) extension</strong> &#8211; is used for the readme because its simple and so that the directory is ready for github if desired.</li>
+<li><strong>Data Folder</strong> &#8211; This directory is used for storing raw data and scripts that are used to clean and prepare data for analysis.</li>
+<li><strong>analysis</strong> &#8211; This directory contains the scripts for producing statistics and visualizing data.
+
+<ul>
+<li><strong>report</strong> &#8211; any publications or presentations that come of the project can be stored in the report folder.
+
+<ul>
+<li><strong>run.sh</strong> is a two line script that will run prepare_data.sh and analysis.sh. This allows you to <a href="http://phys.org/news/2013-09-science-crisis.html">reproduce</a> the entirety of your work all at once and verify your results. </ul>
+What are your thoughts? How could this be improved?
+<br /></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<p>Navigate to the directory where you would like to create the project template; open alfred and type</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">project <span style="color:#f92672">[</span>a name <span style="color:#66d9ef">for</span> your project<span style="color:#f92672">]</span></code></pre></div>
+<p><br /></p>
+
+<h4 id="download-createproject-alfredworkflow"><a href="/createproject.alfredworkflow">Download</a></h4>
+</div>
+  
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/">next post</a> →
+  </p>
+</div>
+
+
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

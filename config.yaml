@@ -16,6 +16,7 @@ copyright: "This work is licensed under a Creative Commons Attribution-ShareAlik
 author:
   name: "Daniel Cook"
 
+publishDir: docs
 Paginate: 1000
 
 outputs:

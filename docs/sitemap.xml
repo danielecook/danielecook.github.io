@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.danielecook.com/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/projects/hntrending/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/projects/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/projects/iex-api-python/</loc>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bash/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/python-command-line-skeleton/</loc>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/python/</loc>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/chicago/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/alfred/</loc>
+    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/alfred-image-utilities/</loc>
+    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/r/</loc>
+    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/rdatastore/</loc>
+    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/a-big-list-of-favorites/</loc>
+    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/guitar/</loc>
+    <lastmod>2016-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/guitar-printouts/</loc>
+    <lastmod>2016-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/quiver-alfred/</loc>
+    <lastmod>2016-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/gist/</loc>
+    <lastmod>2016-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/memoise-caching-in-the-cloud/</loc>
+    <lastmod>2016-07-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/projects/elegansvariation/</loc>
+    <lastmod>2016-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</loc>
+    <lastmod>2015-12-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bigquery/</loc>
+    <lastmod>2015-12-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/parallelize-bcftools-functions/</loc>
+    <lastmod>2015-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/an-alfred-workflow-for-generating-markdown-tables-from-your-clipboard/</loc>
+    <lastmod>2015-10-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/google-sheets/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/an-alfred-workflow-for-wormbase/</loc>
+    <lastmod>2015-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/an-alfred-workflow-for-codebox/</loc>
+    <lastmod>2015-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/database/</loc>
+    <lastmod>2015-06-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</loc>
+    <lastmod>2015-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/</loc>
+    <lastmod>2015-06-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/genetics/</loc>
+    <lastmod>2015-06-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/split-a-gff-file-into-individual-features/</loc>
+    <lastmod>2015-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/gff/</loc>
+    <lastmod>2015-01-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/aggregate-fastqc-reports/</loc>
+    <lastmod>2014-12-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bam/</loc>
+    <lastmod>2014-12-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/fastq/</loc>
+    <lastmod>2014-12-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</loc>
+    <lastmod>2014-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/vcf/</loc>
+    <lastmod>2014-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</loc>
+    <lastmod>2014-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bcftools/</loc>
+    <lastmod>2014-12-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/from-sra-project-to-fastq/</loc>
+    <lastmod>2014-10-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/calculate-depth-and-breadth-of-coverage-from-a-bam-file/</loc>
+    <lastmod>2014-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/fasta/</loc>
+    <lastmod>2014-09-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</loc>
+    <lastmod>2014-09-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/generate-fasta-sequence-lengths/</loc>
+    <lastmod>2014-08-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/visualizing-pairwise-queries-in-r/</loc>
+    <lastmod>2014-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/pubmed/</loc>
+    <lastmod>2014-08-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/a-short-tour-around-lake-michigan/</loc>
+    <lastmod>2014-07-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/cycling/</loc>
+    <lastmod>2014-07-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</loc>
+    <lastmod>2014-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</loc>
+    <lastmod>2014-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/double-checking-fastqs/</loc>
+    <lastmod>2014-05-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</loc>
+    <lastmod>2014-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</loc>
+    <lastmod>2014-02-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/excel/</loc>
+    <lastmod>2014-02-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/</loc>
+    <lastmod>2014-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/</loc>
+    <lastmod>2014-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/use-google-to-find-lecture-notes/</loc>
+    <lastmod>2013-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/tips/</loc>
+    <lastmod>2013-11-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</loc>
+    <lastmod>2013-11-09T22:45:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/fetch-data-from-ucsc-genome-browser/</loc>
+    <lastmod>2013-11-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/</loc>
+    <lastmod>2013-11-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/sql/</loc>
+    <lastmod>2013-11-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/a-function-for-retrieving-snp-data-from-entrez-using-biopython/</loc>
+    <lastmod>2013-06-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/create-new-file-in-finder-with-alfred-2/</loc>
+    <lastmod>2013-04-04T22:45:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</loc>
+    <lastmod>2013-03-06T22:45:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/django-models-for-chado/</loc>
+    <lastmod>2013-01-09T22:45:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/photos/</loc>
+  </url>
+  
+</urlset>
