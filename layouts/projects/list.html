@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+<main class="center mv4 content-width ph3">
+  <h1>{{ .Title | upper }}</h1>
+  {{ .Content }}
+  <ul class="list pa0">
+    {{ range .Data.Pages }}
+    <li class="flex flex-wrap">
+        <div class='w-100 w-60-ns pa3'>
+            <h2 class="f4 heading-color heading-font fw6 no-underline" >{{ .Title }}</h2>
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            {{ .Content }}
+        </div>
+        <div class='w-100 w-40-ns pa4' style='line-height: 25px;'>
+            <a href="{{ .Params.project_url }}"><img src="/{{ .Params.image }}" class="float-right">
+            </a>
+        </div>
+    </li>
+    {{ end }}
+  </ul>
+</main>
+
+<div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+{{ partial "back-to-top.html" . }}
+</div>
+{{ end }}
