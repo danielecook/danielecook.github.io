@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Generate fasta sequence lengths - Daniel E. Cook</title>
+  <meta content='Generate fasta sequence lengths - Daniel E. Cook' property='title' />
+  <meta content='Generate fasta sequence lengths - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="This one liner:
+cat file.fa | awk &#39;$0 ~ &#34;&gt;&#34; {print c; c=0;printf substr($0,2,100) &#34;\t&#34;; } $0 !~ &#34;&gt;&#34; {c&#43;=length($0);} END { print c; } Takes a fasta file as input:
+&gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa Outputs sequence name and length:
+EF491733 135 EF491734 155 EF491735 140 EF491736 146 EF491737 150 EF491738 152 EF491739 170 I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/generate-fasta-sequence-lengths/" />
+
+
+<meta property="article:published_time" content="2014-08-13T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2014-08-13T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/generate-fasta-sequence-lengths/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Generate fasta sequence lengths</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2014-08-13</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/fasta' class="link silver tag">FASTA</a> &nbsp;&nbsp;<a href='/tags/gist' class="link silver tag">gist</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content"><p><strong>This one liner:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat file.fa | awk <span style="color:#960050;background-color:#1e0010">&#39;</span>$0 ~ <span style="color:#e6db74">&#34;&gt;&#34;</span> <span style="color:#f92672">{</span>print c; c<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;printf substr<span style="color:#f92672">(</span>$0,2,100<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;\t&#34;</span>; <span style="color:#f92672">}</span> $0 !~ <span style="color:#e6db74">&#34;&gt;&#34;</span> <span style="color:#f92672">{</span>c<span style="color:#f92672">+=</span>length<span style="color:#f92672">(</span>$0<span style="color:#f92672">)</span>;<span style="color:#f92672">}</span> END <span style="color:#f92672">{</span> print c; <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>Takes a fasta file as input:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-FASTA" data-lang="FASTA">&gt;EF491733
+tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg
+caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag
+gaccaccaggtctacggggatcgccaggatggcct
+&gt;EF491734
+tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc
+cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga
+tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat
+gccaa
+&gt;EF491735
+gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac
+atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa
+aacttcttgaatttgccttcatttgtcgcaattgtgcagc
+&gt;EF491736
+taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt
+aatcagactggaactccaatggttaatccaatgatggctttacaacaaca
+agcggccgcagtaaacctgattcccaacacaccaatttacccaccc
+&gt;EF491737
+actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac
+aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac
+agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc
+&gt;EF491738
+tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg
+ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc
+aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga
+gg
+&gt;EF491739
+tccttccaactgttgccaactttccaactacaagacacactgaaccagaa
+actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc
+tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg
+gcgatgaatcagaagatgaa</code></pre></div>
+<p><strong>Outputs sequence name and length:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsv" data-lang="tsv">EF491733    135
+EF491734    155
+EF491735    140
+EF491736    146
+EF491737    150
+EF491738    152
+EF491739    170</code></pre></div>
+<p>I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</p>
+</div>
+  
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+</main>
+
+   
+
+
+
+
+
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/visualizing-pairwise-queries-in-r/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/">next post</a> →
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>HGNC Search: Instant search of human genes with Alfred - Daniel E. Cook</title>
+  <meta content='HGNC Search: Instant search of human genes with Alfred - Daniel E. Cook' property='title' />
+  <meta content='HGNC Search: Instant search of human genes with Alfred - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="I have put together an Alfred workflow &#8211; this one searches the HGNC database for genes! I have converted the text database from the HGNC website and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
+Download the latest release Usage Full text search of the HGNC database
+Information and links are provided for individual genes" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/" />
+
+
+<meta property="article:published_time" content="2015-06-12T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-06-12T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">HGNC Search: Instant search of human genes with Alfred</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2015-06-12</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/alfred' class="link silver tag">Alfred</a> &nbsp;&nbsp;<a href='/tags/database' class="link silver tag">Database</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p>I have put together an Alfred workflow &#8211; this one searches the HGNC database for genes! I have converted the text database from the <a href="http://www.genenames.org/">HGNC website</a> and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.</p>
+
+<h3 id="img-src-gene-150x150-png-width-25px-download-the-latest-release-2"><a href="https://github.com/danielecook/HGNC-Search/releases/latest"><img src="/gene-150x150.png" width="25px" /> Download the latest release</a></h3>
+
+<h2 id="usage">Usage</h2>
+
+<p><strong>Full text search of the HGNC database</strong></p>
+
+<p><img src="/d1-1024x759.png" alt="" /></p>
+
+<p><strong>Information and links are provided for individual genes</strong></p>
+
+<p><img src="/d2.png" alt="" /></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Please provide feedback. Specifically:</p>
+
+<ul>
+<li>What other gene IDs should be displayed by default? (You can currently search for any)</li>
+<li>What other sites would you like to be able to navigate to.</li>
+<li>Is there additional information that should be folded in that would be useful?</li>
+</ul>
+</div>
+  
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.danielecook.com/an-alfred-workflow-for-codebox/">next post</a> →
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

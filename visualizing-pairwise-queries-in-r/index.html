@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Visualizing Pairwise Queries in R - Daniel E. Cook</title>
+  <meta content='Visualizing Pairwise Queries in R - Daniel E. Cook' property='title' />
+  <meta content='Visualizing Pairwise Queries in R - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="You can look for interesting associations between sets of search terms on PubMed by comparing how often two terms co-occur. The code below returns the number of publications where both terms are mentioned, acting as a rough estimate for how associated they are (at least, in the scholarly world).
+In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/visualizing-pairwise-queries-in-r/" />
+
+
+<meta property="article:published_time" content="2014-08-02T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2014-08-02T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/visualizing-pairwise-queries-in-r/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Visualizing Pairwise Queries in R</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2014-08-02</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/gist' class="link silver tag">gist</a> &nbsp;&nbsp;<a href='/tags/pubmed' class="link silver tag">pubmed</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content"><p><img src="/pairwise_search.png" alt="diseasexorg" class='center-img' /></p>
+
+<p>You can look for interesting associations between sets of search terms on PubMed by comparing how often two terms co-occur. The code below returns the number of publications where both terms are mentioned, acting as a rough estimate for how associated they are (at least, in the scholarly world).</p>
+
+<p>In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism. Of course, this should all be taken with a (big) grain of salt because these organisms and diseases have many synonyms or related terms (e.g. <em>M. Musculus</em> is often referred to as Mouse in the literature). Additionally, the result count is based off of whether or not the terms were found together within the title and abstract of the literature only &#8211; and not the body of the text in many cases.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># install.packages(&#34;RISmed&#34;, &#34;ggplot2&#34;)</span>
+<span style="color:#f92672">library</span>(RISmed)
+<span style="color:#f92672">library</span>(ggplot2)
+
+<span style="color:#75715e"># Given two lists of terms, lets see how &#39;hot&#39; they are together</span>
+set1 <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;ebola&#34;</span>,<span style="color:#e6db74">&#34;autoimmune&#34;</span>,<span style="color:#e6db74">&#34;Diabetes&#34;</span>,<span style="color:#e6db74">&#34;Glioblastoma&#34;</span>,<span style="color:#e6db74">&#34;Asthma&#34;</span>,<span style="color:#e6db74">&#34;Schizophrenia&#34;</span>)
+set2 <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;C. elegans&#34;</span>,<span style="color:#e6db74">&#34;D. Melanogaster&#34;</span>, <span style="color:#e6db74">&#34;M. Musculus&#34;</span>,<span style="color:#e6db74">&#34;S. Cerevisiae&#34;</span>)
+
+<span style="color:#75715e"># Generate all possible pairs</span>
+pairs <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">expand.grid</span>(set1, set2, stringsAsFactors<span style="color:#f92672">=</span>F)
+
+<span style="color:#75715e"># Search pubmed for each pair, and return the number of search results.</span>
+results <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">lapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#66d9ef">nrow</span>(pairs),  <span style="color:#66d9ef">function</span>(x) {
+  query <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">sprintf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, pairs[x,]<span style="color:#f92672">$</span>Var1, pairs[x,]<span style="color:#f92672">$</span>Var2)
+  <span style="color:#66d9ef">print</span>(query)
+  result <span style="color:#f92672">&lt;-</span> EUtilsSummary(query, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;esearch&#39;</span>, db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pubmed&#39;</span>)
+  <span style="color:#66d9ef">c</span>(q1<span style="color:#f92672">=</span>pairs[x,]<span style="color:#f92672">$</span>Var1, q2<span style="color:#f92672">=</span>pairs[x,]<span style="color:#f92672">$</span>Var2, count<span style="color:#f92672">=</span>QueryCount(result))
+})
+
+<span style="color:#75715e"># Do some data formatting on the results.</span>
+results <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">as.data.frame</span>(<span style="color:#66d9ef">do.call</span>(<span style="color:#e6db74">&#34;rbind&#34;</span>, results), stringsAsFactors<span style="color:#f92672">=</span>F)
+<span style="color:#75715e"># Turn the number of search results into numeric form.</span>
+results<span style="color:#f92672">$</span>count <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">as.numeric</span>(results<span style="color:#f92672">$</span>count)
+
+<span style="color:#75715e"># Plot the results using geom_tile</span>
+ggplot(results) <span style="color:#f92672">+</span>
+  geom_tile(aes(x<span style="color:#f92672">=</span>q1, y<span style="color:#f92672">=</span>q2, fill<span style="color:#f92672">=</span>count)) <span style="color:#f92672">+</span>
+  geom_text(aes(x<span style="color:#f92672">=</span>q1, y<span style="color:#f92672">=</span>q2, label<span style="color:#f92672">=</span>count), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>) <span style="color:#f92672">+</span> 
+  labs(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Disease Publications by Organism&#34;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;y&#34;</span>)
+
+ggsave(<span style="color:#e6db74">&#34;~/Desktop/pairwise_search.png&#34;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>)</code></pre></div></div>
+  
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+</main>
+
+   
+
+
+
+
+
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/a-short-tour-around-lake-michigan/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.danielecook.com/generate-fasta-sequence-lengths/">next post</a> →
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
