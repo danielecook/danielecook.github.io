@@ -3,6 +3,7 @@ addons:
   apt:
     packages:
       - python-pygments
+      - linkchecker
 
 # Clean and don't fail
 install:
@@ -11,7 +12,6 @@ install:
 # Build the website
 script:
   - bin/hugo --theme=theme_dan
-  - bin/linkchecker --recursion-level=10 public/index.html
 
 # Deploy to GitHub pages
 deploy:
