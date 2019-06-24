@@ -1,0 +1,16 @@
+{{ $maxtags := .Site.Params.maxTags | default 50 }}
+{{ if .Site.Params.showTagCloud | default true }}
+<div class="dn tr fixed right-2 " id="tag-cloud">
+    <strong>tags</strong> <br>
+    {{ range first $maxtags .Site.Taxonomies.tags.ByCount }}
+    <a class="silver no-underline tag" href="{{ "/tags/" | relLangURL }}{{ .Name | urlize }}">{{ .Name }}</a> ({{ .Count }}) <br/></li>
+  {{ end }}
+  <br />
+  {{ if .IsHome }}
+    {{ with .OutputFormats.Get "RSS" -}}
+        <a href="{{ .Permalink }}" class="rss">RSS</a>
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+{{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+<li class="mb2">
+      <div class='fl w-10 pa2 tl nowrap' style='line-height: 25px;'>
+        <time>{{ .Date.Format "2006-01-02" }}</time> 
+      </div>
+      <div class='fl w-90 pa2 pl5 pl4'>
+          <a class="f4 heading-color heading-font fw6 no-underline" href="{{ .Permalink }}">{{ .Title }}</a>
+          <p class="f5 mt1 silver">
+            {{ if isset .Params "tags" }}
+            {{ range .Params.tags }}<a href='{{ "/tags/" | relLangURL }}{{ . | urlize }}' class="link silver tag">{{ . }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ end }}
+            {{ end }}
+          </p>
+      </div>
+  </li>

@@ -1,0 +1,42 @@
+{{ define "main" }}
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">{{ .Title }}</div>
+  {{ if (not .Date.IsZero) and (isset .Params "tags") }}
+  <p class="silver f6 mt1 mb4 post-meta">
+    {{ if not .Date.IsZero }}<time>{{ .Date.Format "2006-01-02" }}</time> {{ end }}
+    {{ if or .Params.tags .Params.categories .Params.series }} {{ end }}
+    {{ if isset .Params "tags" }}
+    &nbsp;&nbsp;{{ range .Params.tags }}<a href='{{ "/tags/" | relLangURL }}{{ . | urlize }}' class="link silver tag">{{ . }}</a> &nbsp;&nbsp;{{ end }} 
+    {{ end }}
+  </p>
+  {{ end }}
+  <div class="lh-copy post-content">{{ .Content }}</div>
+  {{ if ne .Params.show_comments false }}
+  <div class='comments'>
+
+    <br />
+    <script src="https://utteranc.es/client.js"
+        repo="danielecook/danielecook.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+{{ end }}
+</main>
+{{ if not (eq .Params.toc false) }}
+  {{ partial "table-of-contents" . }}
+{{ end }}
+
+{{ if not (eq .Params.prev_next false) }}
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  {{ partial "back-to-top.html" . }}<br>
+  <p class="mb0 mt2 next_prev">
+  {{ with .PrevInSection }}{{ if . }}← <a href="{{ .Permalink }}">prev post</a>{{ end }}{{ end }}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {{ with .NextInSection }}{{ if . }}<a href="{{ .Permalink }}">next post</a> →{{ end }}{{ end }}
+  </p>
+</div>
+{{ end }}
+
+{{ end }}
