@@ -29,7 +29,6 @@ This got me wondering whether there was a way to log terminal commands locally o
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -38,9 +37,11 @@ This got me wondering whether there was a way to log terminal commands locally o
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -96,15 +97,15 @@ type="image/x-icon"/>
 <p>This got me wondering whether there was a way to log terminal commands locally or on a server. It is possible by setting the <code>PROMPT_COMMAND</code> variable in BASH. After a command is submitted the value of <code>PROMPT_COMMAND</code> is interpretted (technically it is interpretted before the next prompt is printed to the screen).</p>
 
 <p>I wrote up a quick function that looks to see whether the last command exited successfully (0) or resulted in an error (&gt;0), and log using INFO or ERROR respectively. Then I set the function to the <code>PROMPT_COMMAND</code> variable. Note that you may need to activate the gcloud beta logging for this to work.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> prompt <span style="color:#f92672">{</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $? -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>;<span style="color:#66d9ef">then</span>
-    <span style="color:#f92672">(</span>gcloud beta logging write bash_log <span style="color:#e6db74">&#34;`fc -nl -1`&#34;</span> --severity<span style="color:#f92672">=</span>INFO &gt; /dev/null <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> &amp;<span style="color:#f92672">)</span>
-<span style="color:#66d9ef">else</span>
-    <span style="color:#f92672">(</span>gcloud beta logging write bash_log <span style="color:#e6db74">&#34;`fc -nl -1`&#34;</span> --severity<span style="color:#f92672">=</span>ERROR &gt; /dev/null <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> &amp;<span style="color:#f92672">)</span>
-<span style="color:#66d9ef">fi</span>
-<span style="color:#f92672">}</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> prompt <span class="o">{</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>INFO &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
+<span class="k">else</span>
+    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>ERROR &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
+<span class="k">fi</span>
+<span class="o">}</span>
 
-PROMPT_COMMAND<span style="color:#f92672">=</span>prompt</code></pre></div>
+<span class="nv">PROMPT_COMMAND</span><span class="o">=</span>prompt</code></pre></div>
 <p>Now check the logging interface and you will see your commands are logged!</p>
 </div>
   
@@ -138,7 +139,7 @@ PROMPT_COMMAND<span style="color:#f92672">=</span>prompt</code></pre></div>
   <p class="mb0 mt2 next_prev">
   ← <a href="https://www.danielecook.com/python-command-line-skeleton/">prev post</a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  
+  <a href="https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/">next post</a> →
   </p>
 </div>
 

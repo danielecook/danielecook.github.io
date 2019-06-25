@@ -28,7 +28,6 @@
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -37,9 +36,11 @@
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -114,18 +115,18 @@ type="image/x-icon"/>
 <li><a href="https://cloud.google.com/sdk/">Download</a> the Google Cloud SDK. This provides a command line based <code>gcloud</code> command.</li>
 <li>Install rdatastore</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">devtools<span style="color:#f92672">::</span>install_github(<span style="color:#e6db74">&#34;cloudyr/rdatastore&#34;</span>)</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">devtools<span class="o">::</span>install_github<span class="p">(</span><span class="s">&#34;cloudyr/rdatastore&#34;</span><span class="p">)</span></code></pre></div>
 <h3 id="usage">Usage</h3>
 
 <h4 id="authentication">Authentication</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#f92672">library</span>(rdatastore)
-authenticate_datastore(<span style="color:#e6db74">&#34;andersen-lab&#34;</span>) <span style="color:#75715e"># Enter your project ID here. rdatastore will authenticate using Oauth.</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="kn">library</span><span class="p">(</span>rdatastore<span class="p">)</span>
+authenticate_datastore<span class="p">(</span><span class="s">&#34;andersen-lab&#34;</span><span class="p">)</span> <span class="c1"># Enter your project ID here. rdatastore will authenticate using Oauth.</span></code></pre></div>
 <h4 id="storing-data">Storing Data</h4>
 
 <p><strong>commit()</strong></p>
 
 <p>Individual entitites can be stored using <code>commit()</code>. You have to supply a kind (which is analogous to a table in relational database systems). You may optionally submit a name. Any additional arguments supplied are added as properties. Datatypes are inferred from R datatypes. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">commit(kind <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Car&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tesla&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>) <span style="color:#75715e"># Stores a new entity named &#39;Tesla&#39;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">commit<span class="p">(</span>kind <span class="o">=</span> <span class="s">&#34;Car&#34;</span><span class="p">,</span> name <span class="o">=</span> <span class="s">&#34;Tesla&#34;</span><span class="p">,</span> wheels <span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="c1"># Stores a new entity named &#39;Tesla&#39;</span></code></pre></div>
 <p><strong>Result</strong></p>
 
 <table>
@@ -149,7 +150,7 @@ authenticate_datastore(<span style="color:#e6db74">&#34;andersen-lab&#34;</span>
 <p><strong>Important! Stick with basic datatypes like character vectors, integers, doubles, binary, and datetime objects. Not all datatypes are supported.</strong></p>
 
 <p>I designed <code>rdatastore</code> to make it easier to append data rather than overwrite it. This is abit against the grain as far as other datastore libraries go. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">commit(kind <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Car&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tesla&#34;</span>, electric <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># Stores a new entity named &#39;Tesla&#39;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">commit<span class="p">(</span>kind <span class="o">=</span> <span class="s">&#34;Car&#34;</span><span class="p">,</span> name <span class="o">=</span> <span class="s">&#34;Tesla&#34;</span><span class="p">,</span> electric <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># Stores a new entity named &#39;Tesla&#39;</span></code></pre></div>
 <p>The entity will now be:</p>
 
 <table>
@@ -179,7 +180,7 @@ authenticate_datastore(<span style="color:#e6db74">&#34;andersen-lab&#34;</span>
 <p><strong>lookup()</strong></p>
 
 <p>Retrieve data by specifying its <code>kind</code> and <code>name</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">lookup(<span style="color:#e6db74">&#34;Car&#34;</span>, <span style="color:#e6db74">&#34;Tesla&#34;</span>)</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">lookup<span class="p">(</span><span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="s">&#34;Tesla&#34;</span><span class="p">)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -203,12 +204,12 @@ authenticate_datastore(<span style="color:#e6db74">&#34;andersen-lab&#34;</span>
 <p><strong>gql()</strong></p>
 
 <p>You can query items using the <a href="https://cloud.google.com/datastore/docs/reference/gql_reference">Google Query Language</a> (GQL). GQL is a lot like SQL.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># Lets commit a few more items</span>
-commit(<span style="color:#e6db74">&#34;Car&#34;</span>, <span style="color:#e6db74">&#34;VW&#34;</span>, electric <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-commit(<span style="color:#e6db74">&#34;Car&#34;</span>, <span style="color:#e6db74">&#34;Honda&#34;</span>, make <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Odyssey&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-commit(<span style="color:#e6db74">&#34;Car&#34;</span>, <span style="color:#e6db74">&#34;Reliant&#34;</span>, make <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Robin&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="c1"># Lets commit a few more items</span>
+commit<span class="p">(</span><span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="s">&#34;VW&#34;</span><span class="p">,</span> electric <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+commit<span class="p">(</span><span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="s">&#34;Honda&#34;</span><span class="p">,</span> make <span class="o">=</span> <span class="s">&#34;Odyssey&#34;</span><span class="p">,</span> wheels <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+commit<span class="p">(</span><span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="s">&#34;Reliant&#34;</span><span class="p">,</span> make <span class="o">=</span> <span class="s">&#34;Robin&#34;</span><span class="p">,</span> wheels <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
 
-gql(<span style="color:#e6db74">&#34;SELECT * FROM Car&#34;</span>)</code></pre></div>
+gql<span class="p">(</span><span class="s">&#34;SELECT * FROM Car&#34;</span><span class="p">)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -258,7 +259,7 @@ gql(<span style="color:#e6db74">&#34;SELECT * FROM Car&#34;</span>)</code></pre>
 <p>Notice that some some properties are <code>NA</code> because they were never specified.</p>
 
 <p>We can also query specific properties - but this will only return entitites with those properties defined.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">gql(<span style="color:#e6db74">&#34;SELECT make FROM Car&#34;</span>)</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">gql<span class="p">(</span><span class="s">&#34;SELECT make FROM Car&#34;</span><span class="p">)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -284,7 +285,7 @@ gql(<span style="color:#e6db74">&#34;SELECT * FROM Car&#34;</span>)</code></pre>
 </table>
 
 <p>You can also filter on properties with GQL:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">gql(<span style="color:#e6db74">&#34;SELECT * FROM Car WHERE wheels = 3&#34;</span>)</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">gql<span class="p">(</span><span class="s">&#34;SELECT * FROM Car WHERE wheels = 3&#34;</span><span class="p">)</span></code></pre></div>
 <table>
 <thead>
 <tr>

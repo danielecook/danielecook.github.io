@@ -28,7 +28,6 @@ import xlrd # pip install xlrd import csv import os def export_workbook(filename
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -37,9 +36,11 @@ import xlrd # pip install xlrd import csv import os def export_workbook(filename
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -91,49 +92,49 @@ type="image/x-icon"/>
 <h2 id="original-post-2013-11-09">Original Post (2013-11-09)</h2>
 
 <p>If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don&#8217;t want to do so in Microsoft Excel &#8211; here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xlrd <span style="color:#75715e"># pip install xlrd</span>
-<span style="color:#f92672">import</span> csv
-<span style="color:#f92672">import</span> os
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xlrd</span> <span class="c1"># pip install xlrd</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">export_workbook</span>(filename):
-  <span style="color:#75715e"># Open workbook for initial extraction</span>
-  workbook <span style="color:#f92672">=</span> xlrd<span style="color:#f92672">.</span>open_workbook(filename)
-  filename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitext(filename)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># Remove extension</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(filename):
-      os<span style="color:#f92672">.</span>makedirs(filename)
-  <span style="color:#75715e"># Iterate through each workbook.</span>
-  <span style="color:#66d9ef">for</span> sheet <span style="color:#f92672">in</span> workbook<span style="color:#f92672">.</span>sheet_names():
-    worksheet <span style="color:#f92672">=</span> workbook<span style="color:#f92672">.</span>sheet_by_name(sheet)
-    <span style="color:#75715e"># Create a file for each sheet</span>
-    <span style="color:#66d9ef">with</span> open(filename <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> str(sheet)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>,<span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
-      c <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f)
-      <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> range(worksheet<span style="color:#f92672">.</span>nrows):
-        c<span style="color:#f92672">.</span>writerow(worksheet<span style="color:#f92672">.</span>row_values(r))
-      <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Exported workbook &#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; </span><span style="color:#e6db74">%12.2d</span><span style="color:#e6db74"> row</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (sheet,worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">+</span><span style="color:#ae81ff">85</span>,<span style="color:#e6db74">&#34;s&#34;</span>[worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>:])
+<span class="k">def</span> <span class="nf">export_workbook</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+  <span class="c1"># Open workbook for initial extraction</span>
+  <span class="n">workbook</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+  <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Remove extension</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+  <span class="c1"># Iterate through each workbook.</span>
+  <span class="k">for</span> <span class="n">sheet</span> <span class="ow">in</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">():</span>
+    <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">sheet</span><span class="p">)</span>
+    <span class="c1"># Create a file for each sheet</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sheet</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row_values</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+      <span class="k">print</span> <span class="s2">&#34;Exported workbook &#39;</span><span class="si">%s</span><span class="s2">&#39; </span><span class="si">%12.2d</span><span class="s2"> row</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sheet</span><span class="p">,</span><span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span><span class="o">+</span><span class="mi">85</span><span class="p">,</span><span class="s2">&#34;s&#34;</span><span class="p">[</span><span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span><span class="o">==</span><span class="mi">1</span><span class="p">:])</span>
 
-export_workbook(<span style="color:#e6db74">&#39;test.xlsx&#39;</span>)</code></pre></div>
+<span class="n">export_workbook</span><span class="p">(</span><span class="s1">&#39;test.xlsx&#39;</span><span class="p">)</span></code></pre></div>
 <h2 id="update-xlsx2csv-2019-06-18">Update: xlsx2csv (2019-06-18)</h2>
 
 <p>The original post here detailed a python script for extracting worksheets from excel files as plain text files. However, I later stumbled upon an easy to use command-line based option called <a href="https://github.com/dilshod/xlsx2csv">xlsx2csv</a>. <code>xlsx2csv</code> is a python module with a command line interface that can export worksheets in an Excel file as plain text csv or tsv files.</p>
 
 <h3 id="install-xlsx2csv">Install xlsx2csv</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install xlsx2csv</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install xlsx2csv</code></pre></div>
 <h3 id="example-usage">Example usage:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xlsx2csv -n <span style="color:#e6db74">&#34;sheet_name&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>         -d <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>         --sci-float file.xlsx &gt; out.tsv</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">xlsx2csv -n <span class="s2">&#34;sheet_name&#34;</span> <span class="se">\
+</span><span class="se"></span>         -d <span class="s1">&#39;\t&#39;</span> <span class="se">\
+</span><span class="se"></span>         --sci-float file.xlsx &gt; out.tsv</code></pre></div>
 <h3 id="options">Options</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">usage: xlsx2csv <span style="color:#f92672">[</span>-h<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-v<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-a<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-c OUTPUTENCODING<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-d DELIMITER<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>--hyperlinks<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-e<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>-E EXCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>EXCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]]</span>
-                <span style="color:#f92672">[</span>-f DATEFORMAT<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t TIMEFORMAT<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--floatformat FLOATFORMAT<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>--sci-float<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>-I INCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>INCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]]</span>
-                <span style="color:#f92672">[</span>--ignore-formats IGNORE_FORMATS <span style="color:#f92672">[</span>IGNORE_FORMATS ...<span style="color:#f92672">]]</span>
-                <span style="color:#f92672">[</span>-l LINETERMINATOR<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-m<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-n SHEETNAME<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-i<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>--skipemptycolumns<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p SHEETDELIMITER<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-q QUOTING<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>-s SHEETID<span style="color:#f92672">]</span>
-                xlsxfile <span style="color:#f92672">[</span>outfile<span style="color:#f92672">]</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">usage: xlsx2csv <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> <span class="o">[</span>-a<span class="o">]</span> <span class="o">[</span>-c OUTPUTENCODING<span class="o">]</span> <span class="o">[</span>-d DELIMITER<span class="o">]</span>
+                <span class="o">[</span>--hyperlinks<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span>
+                <span class="o">[</span>-E EXCLUDE_SHEET_PATTERN <span class="o">[</span>EXCLUDE_SHEET_PATTERN ...<span class="o">]]</span>
+                <span class="o">[</span>-f DATEFORMAT<span class="o">]</span> <span class="o">[</span>-t TIMEFORMAT<span class="o">]</span> <span class="o">[</span>--floatformat FLOATFORMAT<span class="o">]</span>
+                <span class="o">[</span>--sci-float<span class="o">]</span>
+                <span class="o">[</span>-I INCLUDE_SHEET_PATTERN <span class="o">[</span>INCLUDE_SHEET_PATTERN ...<span class="o">]]</span>
+                <span class="o">[</span>--ignore-formats IGNORE_FORMATS <span class="o">[</span>IGNORE_FORMATS ...<span class="o">]]</span>
+                <span class="o">[</span>-l LINETERMINATOR<span class="o">]</span> <span class="o">[</span>-m<span class="o">]</span> <span class="o">[</span>-n SHEETNAME<span class="o">]</span> <span class="o">[</span>-i<span class="o">]</span>
+                <span class="o">[</span>--skipemptycolumns<span class="o">]</span> <span class="o">[</span>-p SHEETDELIMITER<span class="o">]</span> <span class="o">[</span>-q QUOTING<span class="o">]</span>
+                <span class="o">[</span>-s SHEETID<span class="o">]</span>
+                xlsxfile <span class="o">[</span>outfile<span class="o">]</span>
 xlsx2csv: error: the following arguments are required: xlsxfile</code></pre></div></div>
   
   <div class='comments'>

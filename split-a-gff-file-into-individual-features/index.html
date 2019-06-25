@@ -28,7 +28,6 @@ I was working with wormbase annotation files, which combine all the different ty
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -37,9 +36,11 @@ I was working with wormbase annotation files, which combine all the different ty
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -91,21 +92,21 @@ type="image/x-icon"/>
 <p>I was working with <a href="ftp://ftp.wormbase.org/pub/wormbase/releases/WS245/species/c_elegans/PRJNA13758/">wormbase</a> annotation files, which combine all the different types of features together (genes, ncRNA, mRNA, binding site, operon, G Quartets, piRNAs, etc). This results in a very dense track in IGV which makes it difficult to disentangle what role individual features (or features of interest) might have.</p>
 
 <p>As a result, I wrote this very short script for splitting the individual feature types apart, sorting them, and indexing them with tabix. This way they can be selectively viewed in IGV or elsewhere.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
-current_feature <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+<span class="n">current_feature</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
 
-<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>stdin:
-    feature <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">2</span>]
-    <span style="color:#66d9ef">if</span> feature <span style="color:#f92672">!=</span> current_feature:
-        f <span style="color:#f92672">=</span> file(feature <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.gff&#34;</span>, <span style="color:#e6db74">&#34;a+&#34;</span>)
-    f<span style="color:#f92672">.</span>write(line)</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gunzip -kfc &lt;GFF&gt; | grep -v ^<span style="color:#e6db74">&#34;#&#34;</span> | sort -k3,3 | python process_gff.py
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+    <span class="n">feature</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">feature</span> <span class="o">!=</span> <span class="n">current_feature</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="n">feature</span> <span class="o">+</span> <span class="s2">&#34;.gff&#34;</span><span class="p">,</span> <span class="s2">&#34;a+&#34;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gunzip -kfc &lt;GFF&gt; <span class="p">|</span> grep -v ^<span class="s2">&#34;#&#34;</span> <span class="p">|</span> sort -k3,3 <span class="p">|</span> python process_gff.py
 
-<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls *.gff<span style="color:#e6db74">`</span>; <span style="color:#66d9ef">do</span>
-    <span style="color:#f92672">(</span>grep ^<span style="color:#e6db74">&#34;#&#34;</span> $i.gff; grep -v ^<span style="color:#e6db74">&#34;#&#34;</span> $i.gff | sort -k1,1 -k4,4n<span style="color:#f92672">)</span> | bgzip &gt; $i.sorted.gff.gz;
-    tabix $i.sorted.gff.gz
-    rm $i.gff
-<span style="color:#66d9ef">done</span></code></pre></div></div>
+<span class="k">for</span> i in <span class="sb">`</span>ls *.gff<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+    <span class="o">(</span>grep ^<span class="s2">&#34;#&#34;</span> <span class="nv">$i</span>.gff<span class="p">;</span> grep -v ^<span class="s2">&#34;#&#34;</span> <span class="nv">$i</span>.gff <span class="p">|</span> sort -k1,1 -k4,4n<span class="o">)</span> <span class="p">|</span> bgzip &gt; <span class="nv">$i</span>.sorted.gff.gz<span class="p">;</span>
+    tabix <span class="nv">$i</span>.sorted.gff.gz
+    rm <span class="nv">$i</span>.gff
+<span class="k">done</span></code></pre></div></div>
   
   <div class='comments'>
 

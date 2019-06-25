@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nextflow on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/nextflow/</link>
+    <description>Recent content in nextflow on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 21 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/nextflow/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Useful Nextflow bash functions for SLURM</title>
+      <link>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</link>
+      <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</guid>
+      <description>If you use Nextflow on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your .bashrc.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14  # Shortcut for going to work directories # Usage: gw &amp;lt;workdir pattern&amp;gt; # Replace the work directory below as needed # Where workdir pattern is something like &amp;#34;ab/afedeu&amp;#34; function gw { path=`ls --color=none -d /path/to/work/directory/$1*`  cd $path } # sq squeue alternative # Outputs more complete information about jobs including the work directory function sq() { squeue --user `whoami` --format=&amp;#39;%.</description>
+    </item>
+    
+  </channel>
+</rss>

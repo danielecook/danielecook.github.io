@@ -28,7 +28,6 @@ This script will extracting basic information from a set of FASTQs and output it
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -37,9 +36,11 @@ This script will extracting basic information from a set of FASTQs and output it
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -105,86 +106,86 @@ type="image/x-icon"/>
 </ul>
 
 <p>The script below will extract the machine name, lane, index, and pair.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python</span>
-<span style="color:#f92672">import</span> re
-<span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> groupby <span style="color:#66d9ef">as</span> g
-<span style="color:#f92672">import</span> subprocess
-<span style="color:#f92672">import</span> sys
-<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> OrderedDict
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">groupby</span> <span class="k">as</span> <span class="n">g</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">most_common</span>(L):
-  <span style="color:#66d9ef">return</span> max(g(sorted(L)), key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span>(x, v):(len(list(v)),<span style="color:#f92672">-</span>L<span style="color:#f92672">.</span>index(x)))[<span style="color:#ae81ff">0</span>]
+<span class="k">def</span> <span class="nf">most_common</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+  <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">L</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">):(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span><span class="o">-</span><span class="n">L</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
 
-<span style="color:#75715e"># Set this variable to ensure no quality score lines get examined.</span>
-fq_at_start <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HWI&#34;</span>
+<span class="c1"># Set this variable to ensure no quality score lines get examined.</span>
+<span class="n">fq_at_start</span> <span class="o">=</span> <span class="s2">&#34;HWI&#34;</span>
 
-r <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>check_output(<span style="color:#e6db74">&#34;&#34;&#34;
-</span><span style="color:#e6db74">for r in `ls *fastq.gz`; 
-</span><span style="color:#e6db74">do
-</span><span style="color:#e6db74">echo &#34;$r&#34; 
-</span><span style="color:#e6db74">gunzip -cq $r | head -n 1000 | grep &#39;^@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; - | grep -v &#39;^@@&#39; |  egrep &#39;(:.+){4}&#39; -
-</span><span style="color:#e6db74">echo &#34;|&#34; 
-</span><span style="color:#e6db74">done;
-</span><span style="color:#e6db74">&#34;&#34;&#34;</span> <span style="color:#f92672">%</span> fq_at_start, shell<span style="color:#f92672">=</span>True)
+<span class="n">r</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">for r in `ls *fastq.gz`; 
+</span><span class="s2">do
+</span><span class="s2">echo &#34;$r&#34; 
+</span><span class="s2">gunzip -cq $r | head -n 1000 | grep &#39;^@</span><span class="si">%s</span><span class="s2">&#39; - | grep -v &#39;^@@&#39; |  egrep &#39;(:.+){4}&#39; -
+</span><span class="s2">echo &#34;|&#34; 
+</span><span class="s2">done;
+</span><span class="s2">&#34;&#34;&#34;</span> <span class="o">%</span> <span class="n">fq_at_start</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
-f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;fastq_summary.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>)
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;fastq_summary.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
  
 
-orig_line <span style="color:#f92672">=</span>  OrderedDict([(<span style="color:#e6db74">&#34;file&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;instrument&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;flowcell_id&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;x_coord&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;y_coord&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;index&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;pair&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;run_id&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;filtered&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>),
-      (<span style="color:#e6db74">&#34;control_bits&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)])
-l_keys <span style="color:#f92672">=</span> orig_line<span style="color:#f92672">.</span>keys()
+<span class="n">orig_line</span> <span class="o">=</span>  <span class="n">OrderedDict</span><span class="p">([(</span><span class="s2">&#34;file&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;instrument&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;flowcell_id&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;flowcell_lane&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;x_coord&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;y_coord&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;index&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;pair&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;run_id&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;filtered&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s2">&#34;control_bits&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)])</span>
+<span class="n">l_keys</span> <span class="o">=</span> <span class="n">orig_line</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(l_keys) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l_keys</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
  
-<span style="color:#66d9ef">for</span> fq_group <span style="color:#f92672">in</span> [filter(len,x<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;|&#34;</span>)][:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
-  index_set <span style="color:#f92672">=</span> []
-  <span style="color:#66d9ef">for</span> heading <span style="color:#f92672">in</span> fq_group[<span style="color:#ae81ff">1</span>:]:
-    l <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>split(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\:|#| )&#39;</span>,heading)
-    line <span style="color:#f92672">=</span> orig_line
-    line[<span style="color:#e6db74">&#34;file&#34;</span>] <span style="color:#f92672">=</span> fq_group[<span style="color:#ae81ff">0</span>]
-                <span style="color:#66d9ef">if</span> l[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#34;@SRR&#34;</span>):
-                    line[<span style="color:#e6db74">&#34;run_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-                    line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-                    line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-                    index_set<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;&#34;</span>)
-    <span style="color:#66d9ef">elif</span> len(l) <span style="color:#f92672">==</span> <span style="color:#ae81ff">11</span>:
-      line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-      line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-      line[<span style="color:#e6db74">&#34;flowcell_tile&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-      line[<span style="color:#e6db74">&#34;x_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
-      line[<span style="color:#e6db74">&#34;y_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
-      <span style="color:#66d9ef">try</span>:
-        line[<span style="color:#e6db74">&#34;pair&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">1</span>]
-        index_set<span style="color:#f92672">.</span>append(l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">0</span>])
-      <span style="color:#66d9ef">except</span>:
-        <span style="color:#66d9ef">break</span>
-    <span style="color:#66d9ef">elif</span> len(l) <span style="color:#f92672">==</span> <span style="color:#ae81ff">21</span>:
-      line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-      line[<span style="color:#e6db74">&#34;run_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-      line[<span style="color:#e6db74">&#34;flowcell_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-      line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
-      line[<span style="color:#e6db74">&#34;flowcell_tile&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
-      line[<span style="color:#e6db74">&#34;x_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]
-      line[<span style="color:#e6db74">&#34;y_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">12</span>]
-      line[<span style="color:#e6db74">&#34;pair&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">14</span>]
-      line[<span style="color:#e6db74">&#34;filtered&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
-      line[<span style="color:#e6db74">&#34;control_bits&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
-      line[<span style="color:#e6db74">&#34;index&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">20</span>]
-      index_set<span style="color:#f92672">.</span>append(l[<span style="color:#ae81ff">20</span>])
-    <span style="color:#66d9ef">else</span>:
-      <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;error&#34;</span>, l
-  line[<span style="color:#e6db74">&#34;index&#34;</span>] <span style="color:#f92672">=</span> most_common(index_set)
-  f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([line[x] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> l_keys]<span style="color:#f92672">+</span> [<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>]))</code></pre></div></div>
+<span class="k">for</span> <span class="n">fq_group</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">filter</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;|&#34;</span><span class="p">)][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+  <span class="n">index_set</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">heading</span> <span class="ow">in</span> <span class="n">fq_group</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\:|#| )&#39;</span><span class="p">,</span><span class="n">heading</span><span class="p">)</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">orig_line</span>
+    <span class="n">line</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fq_group</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;@SRR&#34;</span><span class="p">):</span>
+                    <span class="n">line</span><span class="p">[</span><span class="s2">&#34;run_id&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">line</span><span class="p">[</span><span class="s2">&#34;instrument&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_lane&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                    <span class="n">index_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;instrument&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_lane&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_tile&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;x_coord&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;y_coord&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">line</span><span class="p">[</span><span class="s2">&#34;pair&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">index_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="k">except</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">21</span><span class="p">:</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;instrument&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;run_id&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_id&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_lane&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;flowcell_tile&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;x_coord&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;y_coord&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;pair&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;filtered&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;control_bits&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+      <span class="n">line</span><span class="p">[</span><span class="s2">&#34;index&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span>
+      <span class="n">index_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">print</span> <span class="s2">&#34;error&#34;</span><span class="p">,</span> <span class="n">l</span>
+  <span class="n">line</span><span class="p">[</span><span class="s2">&#34;index&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">most_common</span><span class="p">(</span><span class="n">index_set</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l_keys</span><span class="p">]</span><span class="o">+</span> <span class="p">[</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">]))</span></code></pre></div></div>
   
   <div class='comments'>
 

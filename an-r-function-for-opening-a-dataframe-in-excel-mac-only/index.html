@@ -27,7 +27,6 @@
 
 <meta name="generator" content="Hugo 0.55.6" />
 
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
   --main-color: #309fff; 
@@ -36,9 +35,11 @@
   --body-text-color: #3d3d3d;
   --heading-text-color: #383838;
   --background-color: #fff;
+  --max-width: 850px;
 }</style>
-<link href='/css/tachyons.min.css' rel="stylesheet">
-<link href='/css/styles.css' rel="stylesheet">
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -88,22 +89,22 @@ type="image/x-icon"/>
   <div class="lh-copy post-content"><p>The dataframe viewer in <a href="http://www.rstudio.com/">Rstudio</a> can be slow or unresponsive, and at times truncates the content within or the number of columns on large datasets. I want to be able to see the full columns and to be able to arrange and filter simultaneously. Although you can do this in R programmatically sometimes its easier and quicker to use Excel. The function below can be used to open a dataframe in Microsoft Excel.</p>
 
 <p>This may be worth sticking in your <code>.RProfile</code> so it is always available.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">excel <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(df) {
-  f <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">paste0</span>(<span style="color:#66d9ef">tempdir</span>(),
-              <span style="color:#e6db74">&#39;/&#39;</span>,
-              <span style="color:#66d9ef">make.names</span>(<span style="color:#66d9ef">deparse</span>(<span style="color:#66d9ef">substitute</span>(df))),
-              <span style="color:#e6db74">&#39;.&#39;</span>,
-              <span style="color:#66d9ef">paste0</span>(<span style="color:#66d9ef">sample</span>(<span style="color:#66d9ef">letters</span>)[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>],collapse<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>),
-              <span style="color:#e6db74">&#39;.csv&#39;</span>)
-  write.csv(df,f)
-  <span style="color:#66d9ef">system</span>(<span style="color:#66d9ef">sprintf</span>(<span style="color:#e6db74">&#34;open -a &#39;Microsoft Excel&#39; %s&#34;</span>,f))
-}</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">excel <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>df<span class="p">)</span> <span class="p">{</span>
+  f <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kp">tempdir</span><span class="p">(),</span>
+              <span class="s">&#39;/&#39;</span><span class="p">,</span>
+              <span class="kp">make.names</span><span class="p">(</span><span class="kp">deparse</span><span class="p">(</span><span class="kp">substitute</span><span class="p">(</span>df<span class="p">))),</span>
+              <span class="s">&#39;.&#39;</span><span class="p">,</span>
+              <span class="kp">paste0</span><span class="p">(</span><span class="kp">sample</span><span class="p">(</span><span class="kc">letters</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span>collapse<span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">),</span>
+              <span class="s">&#39;.csv&#39;</span><span class="p">)</span>
+  write.csv<span class="p">(</span>df<span class="p">,</span>f<span class="p">)</span>
+  <span class="kp">system</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&#34;open -a &#39;Microsoft Excel&#39; %s&#34;</span><span class="p">,</span>f<span class="p">))</span>
+<span class="p">}</span></code></pre></div>
 <p>To use, just type:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">excel(dataframe)
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">excel<span class="p">(</span>dataframe<span class="p">)</span>
 
-<span style="color:#75715e"># Or pipe in using dplyr</span>
+<span class="c1"># Or pipe in using dplyr</span>
 
-df <span style="color:#f92672">%&gt;%</span> excel()</code></pre></div>
+df <span class="o">%&gt;%</span> excel<span class="p">()</span></code></pre></div>
 <p>Microsoft Excel will open with the dataframe that has been passed.</p>
 </div>
   
