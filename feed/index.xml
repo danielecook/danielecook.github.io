@@ -1830,7 +1830,7 @@ parallel fastqc &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt; ::: *.fastq.gz&lt;
 
 &lt;p&gt;What is the difference between depth and coverage in sequencing experiments? Actually &amp;#8211; &lt;a href=&#34;https://www.biostars.org/p/6571/#6574&#34;&gt;they refer to the same thing&lt;/a&gt;, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is &lt;strong&gt;breadth of coverage&lt;/strong&gt;. &lt;a href=&#34;http://doi.org/10.1093/bib/bbu029&#34;&gt;This paper&lt;/a&gt; more precisely defines what &lt;strong&gt;breadth of coverage&lt;/strong&gt; and &lt;strong&gt;depth of coverage&lt;/strong&gt; mean.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/doc-1024x216.png&#34; alt=&#34;Depth vs. Breadth of Coverage&#34; width=&#34;940&#34; height=&#34;198&#34; class=&#34;aligncenter size-large wp-image-805&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/doc.png&#34; alt=&#34;Depth vs. Breadth of Coverage&#34; width=&#34;940&#34; height=&#34;198&#34; class=&#34;aligncenter size-large wp-image-805&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you need to calculate &lt;em&gt;depth of coverage&lt;/em&gt; and &lt;em&gt;breadth of coverage&lt;/em&gt; you can do so using the python script below. To use the script, feed the function &lt;code&gt;coverage&lt;/code&gt; a bam file, and the function will return a dictionary of the depth of coverage, breadth of coverage, sum of depths (at every position), and number of bases mapped, for every contig/chromosome individually, and the entire genome as a whole.&lt;/p&gt;
 
@@ -3032,34 +3032,6 @@ xlsx2csv: error: the following arguments are required: xlsxfile&lt;/code&gt;&lt;
     </item>
     
     <item>
-      <title>Excel Template for Mapping Four 96-Well Plates to One 384-Well Plate</title>
-      <link>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</link>
-      <pubDate>Wed, 06 Mar 2013 22:45:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</guid>
-      <description>
-
-&lt;p&gt;This excel template helps you map 96 well templates to a single 384 well plate using Microsoft Excel.&lt;/p&gt;
-
-&lt;h3 id=&#34;download&#34;&gt;Download&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.danielecook.com/96_to_384_platemapper.xlsx&#34;&gt;96_to_384_platemapper.xlsx&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;copy-in-identifiers&#34;&gt;Copy in Identifiers&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/excel_1.png&#34; alt=&#34;Copy in Identifiers&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;a-384-well-template-is-produced&#34;&gt;A 384 well template is produced&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/excel_2.png&#34; alt=&#34;A 384 well template is produced&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;and-a-summary-table-too&#34;&gt;And a summary table too.&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/excel_3.png&#34; alt=&#34;Summary Table&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Django models for Chado</title>
       <link>https://www.danielecook.com/django-models-for-chado/</link>
       <pubDate>Wed, 09 Jan 2013 22:45:53 +0000</pubDate>
@@ -3099,7 +3071,7 @@ xlsx2csv: error: the following arguments are required: xlsxfile&lt;/code&gt;&lt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/danielecook/cv/raw/master/cv.pdf&#34;&gt;Curriculum vitae&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.github.com/danielecook&#34;&gt;Github Profile&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://scholar.google.com/citations?user=xPDZ2w4AAAAJ&amp;amp;hl=en&#34;&gt;Google Scholar Profile&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.danielecook.com/index.xml&#34;&gt;RSS Feed for this website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.danielecook.com/feed/index.xml&#34;&gt;RSS Feed for this website&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

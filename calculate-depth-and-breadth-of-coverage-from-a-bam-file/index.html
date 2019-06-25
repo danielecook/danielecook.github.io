@@ -92,7 +92,7 @@ type="image/x-icon"/>
 
 <p>What is the difference between depth and coverage in sequencing experiments? Actually &#8211; <a href="https://www.biostars.org/p/6571/#6574">they refer to the same thing</a>, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is <strong>breadth of coverage</strong>. <a href="http://doi.org/10.1093/bib/bbu029">This paper</a> more precisely defines what <strong>breadth of coverage</strong> and <strong>depth of coverage</strong> mean.</p>
 
-<p><img src="/doc-1024x216.png" alt="Depth vs. Breadth of Coverage" width="940" height="198" class="aligncenter size-large wp-image-805" /></p>
+<p><img src="/doc.png" alt="Depth vs. Breadth of Coverage" width="940" height="198" class="aligncenter size-large wp-image-805" /></p>
 
 <p>If you need to calculate <em>depth of coverage</em> and <em>breadth of coverage</em> you can do so using the python script below. To use the script, feed the function <code>coverage</code> a bam file, and the function will return a dictionary of the depth of coverage, breadth of coverage, sum of depths (at every position), and number of bases mapped, for every contig/chromosome individually, and the entire genome as a whole.</p>
 

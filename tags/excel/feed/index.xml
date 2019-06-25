@@ -31,16 +31,5 @@
 import xlrd # pip install xlrd import csv import os def export_workbook(filename): # Open workbook for initial extraction workbook = xlrd.</description>
     </item>
     
-    <item>
-      <title>Excel Template for Mapping Four 96-Well Plates to One 384-Well Plate</title>
-      <link>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</link>
-      <pubDate>Wed, 06 Mar 2013 22:45:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</guid>
-      <description> This excel template helps you map 96 well templates to a single 384 well plate using Microsoft Excel.
-Download 96_to_384_platemapper.xlsx
-Copy in Identifiers A 384 well template is produced And a summary table too. </description>
-    </item>
-    
   </channel>
 </rss>
