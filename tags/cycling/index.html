@@ -4,9 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>CYCLING - Daniel E. Cook</title>
-  <meta content='CYCLING - Daniel E. Cook' property='title' />
-  <meta content='CYCLING - Daniel E. Cook' property='og:title' />
+  <title>cycling - Daniel E. Cook</title>
+  <meta content='cycling - Daniel E. Cook' property='title' />
+  <meta content='cycling - Daniel E. Cook' property='og:title' />
 
 
 <meta property="og:description" content="" />
@@ -74,6 +74,7 @@ type="image/x-icon"/>
   
 
 <main class="center mv4 content-width ph3">
+  
   <h1 class="f2 fw6 silver" id="tag">CYCLING</h1>
   
   <ul class="list pa0">
@@ -122,6 +123,108 @@ type="image/x-icon"/>
     
   </ul>
 </main>
+
+
+
+
+<div class="dn tr fixed right-2 " id="tag-cloud">
+    <strong>tags</strong> <br>
+    
+    
+    <a class="silver tag" href="/tags/gist">gist</a> (18) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/alfred">alfred</a> (9) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/python">python</a> (4) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/r">r</a> (4) <br/></li>
+    
+  
+    
+    <a class="silver selected tag" href="/tags/cycling">cycling</a> (3) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/fastq">fastq</a> (3) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/bam">bam</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/bash">bash</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/chicago">chicago</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/database">database</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/excel">excel</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/fasta">fasta</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/google-sheets">google-sheets</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/pubmed">pubmed</a> (2) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/bcftools">bcftools</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/bigquery">bigquery</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/genetics">genetics</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/gff">gff</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/guitar">guitar</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/nextflow">nextflow</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/sql">sql</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/tips">tips</a> (1) <br/></li>
+    
+  
+    
+    <a class="silver tag" href="/tags/vcf">vcf</a> (1) <br/></li>
+    
+  
+  <br />
+  
+</div>
 
 <div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 
@@ -177,5 +280,28 @@ function topFunction() {
 
 
 
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
 </body>
 </html>

@@ -121,17 +121,8 @@ What are your thoughts? How could this be improved?
 <h4 id="download-createproject-alfredworkflow"><a href="/createproject.alfredworkflow">Download</a></h4>
 </div>
   
-  <div class='comments'>
-
-    <br />
-    <script src="https://utteranc.es/client.js"
-        repo="danielecook/danielecook.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-
+        <div id='comments'></div>
+  
 </main>
 
    
@@ -222,5 +213,28 @@ if (document.getElementById("contents-list") !== null && document.getElementsByC
 
 
 
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
 </body>
 </html>

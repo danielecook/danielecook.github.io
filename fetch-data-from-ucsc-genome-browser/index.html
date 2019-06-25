@@ -155,17 +155,8 @@ type="image/x-icon"/>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">muc5b</span><span class="o">.</span><span class="n">cdsStart</span>
 <span class="il">1200929L</span></code></pre></div></div>
   
-  <div class='comments'>
-
-    <br />
-    <script src="https://utteranc.es/client.js"
-        repo="danielecook/danielecook.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-
+        <div id='comments'></div>
+  
 </main>
 
    
@@ -256,5 +247,28 @@ if (document.getElementById("contents-list") !== null && document.getElementsByC
 
 
 
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
 </body>
 </html>

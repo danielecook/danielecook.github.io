@@ -171,17 +171,8 @@ mem_fib <span class="o">&lt;-</span> memoise<span class="p">(</span>fib<span cla
 
 mem_fib<span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span></code></pre></div></div>
   
-  <div class='comments'>
-
-    <br />
-    <script src="https://utteranc.es/client.js"
-        repo="danielecook/danielecook.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-
+        <div id='comments'></div>
+  
 </main>
 
    
@@ -272,5 +263,28 @@ if (document.getElementById("contents-list") !== null && document.getElementsByC
 
 
 
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
 </body>
 </html>
