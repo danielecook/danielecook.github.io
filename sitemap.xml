@@ -3,20 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.danielecook.com/a-strava-plugin-for-bitbar/</loc>
+    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/strava/</loc>
+    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -61,6 +72,11 @@
     <loc>https://www.danielecook.com/tags/bash/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/projects/vcf-kit/</loc>
+    <lastmod>2017-05-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>A Strava plugin for bitbar - Daniel E. Cook</title>
+  <meta content='A Strava plugin for bitbar - Daniel E. Cook' property='title' />
+  <meta content='A Strava plugin for bitbar - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="Bitbar is a cool little app for MacOS that allows you to run tiny programs that display useful information in the menu bar. These can be anything from current weather conditions, to information about digital ocean droplets, or a timer application. Being that I am also a big fan of strava, I decided to put together a strava plugin for bitbar.
+Wish I could put up some more impressive numbers here!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/a-strava-plugin-for-bitbar/" />
+
+
+<meta property="article:published_time" content="2019-06-25T20:26:29&#43;01:00"/>
+
+<meta property="article:modified_time" content="2019-06-25T20:26:29&#43;01:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+  --max-width: 850px;
+}</style>
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/a-strava-plugin-for-bitbar/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">A Strava plugin for bitbar</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-06-25</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/strava' class="link silver tag">strava</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content"><p><a href="https://getbitbar.com/">Bitbar</a> is a cool little app for MacOS that allows you to run tiny programs that display useful information in the menu bar. These can be anything from current weather conditions, to information about digital ocean droplets, or a timer application. Being that I am also a big fan of strava, I decided to put together a strava plugin for bitbar.</p>
+
+<p><img src="/bitbar.png" alt="bitbar strava" />
+<br /><small>Wish I could put up some more impressive numbers here!</small></p>
+
+<p>The plugin displays:</p>
+
+<ul>
+<li>Total miles run for all time</li>
+<li>Total miles biked for all time</li>
+<li>Breakdowns of miles run/biked this year, and in the past four weeks.</li>
+</ul>
+
+<p>To use the strava bitbar plugin:</p>
+
+<ol>
+<li>You can download the binary <a href="/strava.15m.cgo">here</a>.</li>
+<li>Go to the <a href="https://www.strava.com/settings/api">Strava API</a>, and create a new application.</li>
+</ol>
+
+<p>If you would like to review / compile the code yourself, the source is available below or from <a href="https://gist.github.com/danielecook/4213ec83b2af75bbe9d45f3ad03ca48d">this gist</a>.</p>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="hl"><span class="lnt">  5
+</span></span><span class="hl"><span class="lnt">  6
+</span></span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="cm">/*
+</span><span class="cm"># &lt;bitbar.title&gt;Strava&lt;/bitbar.title&gt;
+</span><span class="hl"><span class="cm"># &lt;bitbar.version&gt;v0.0.1&lt;/bitbar.version&gt;
+</span></span><span class="hl"><span class="cm"># &lt;bitbar.author&gt;Daniel Cook&lt;/bitbar.author&gt;
+</span></span><span class="cm"># &lt;bitbar.author.github&gt;danielecook&lt;/bitbar.author.github&gt;
+</span><span class="cm"># &lt;bitbar.desc&gt;Bitbar Strava tracker&lt;/bitbar.desc&gt;
+</span><span class="cm">*/</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;io/ioutil&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;os&#34;</span>
+	<span class="s">&#34;os/exec&#34;</span>
+	<span class="s">&#34;strings&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+
+	<span class="nx">keychain</span> <span class="s">&#34;github.com/keybase/go-keychain&#34;</span>
+	<span class="s">&#34;github.com/tidwall/gjson&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">service</span> <span class="p">=</span> <span class="s">&#34;Strava-API-BitBar&#34;</span>
+<span class="kd">const</span> <span class="nx">account</span> <span class="p">=</span> <span class="s">&#34;access_token&#34;</span>
+<span class="kd">const</span> <span class="nx">access_group</span> <span class="p">=</span> <span class="s">&#34;strava.api.bitbar&#34;</span>
+
+<span class="kd">var</span> <span class="nx">client</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span><span class="nx">Timeout</span><span class="p">:</span> <span class="mi">10</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">athlete</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Bar</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="nx">args</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span>
+
+	<span class="cm">/*
+</span><span class="cm">	   Set Access Token
+</span><span class="cm">	*/</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#34;set_api_key&#34;</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;---\n&#34;</span><span class="p">)</span>
+		<span class="nx">cmd</span> <span class="o">:=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">Command</span><span class="p">(</span><span class="s">&#34;osascript&#34;</span><span class="p">,</span> <span class="s">&#34;-e&#34;</span><span class="p">,</span> <span class="s">&#34;display dialog \&#34;Enter Strava-API access_token\&#34; default answer \&#34; \&#34; buttons {\&#34;ok\&#34;} with title \&#34;Enter Strava access_token\&#34; \n set a to the text returned of the result\n&#34;</span><span class="p">)</span>
+		<span class="nx">out</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cmd</span><span class="p">.</span><span class="nf">CombinedOutput</span><span class="p">()</span>
+		<span class="nx">out</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">Trim</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">out</span><span class="p">),</span> <span class="s">&#34; \n&#34;</span><span class="p">))</span>
+		<span class="nf">store_api_key</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s\n&#34;</span><span class="p">,</span> <span class="nx">out</span><span class="p">)</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="kd">var</span> <span class="nx">access_token</span> <span class="p">=</span> <span class="nf">fetch_api_key</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">access_token</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Set Strava Access Token&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;---&#34;</span><span class="p">)</span>
+		<span class="nf">access_token_line</span><span class="p">()</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Fetch urls
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">athlete_url</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;https://www.strava.com/api/v3/athlete?access_token=%s&#34;</span><span class="p">,</span> <span class="nx">access_token</span><span class="p">)</span>
+	<span class="nx">athlete</span> <span class="o">:=</span> <span class="nf">getUrl</span><span class="p">(</span><span class="nx">athlete_url</span><span class="p">)</span>
+	<span class="c1">// Error in response
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">is_err</span> <span class="p">=</span> <span class="kc">false</span>
+	<span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span> <span class="s">&#34;errors&#34;</span><span class="p">).</span><span class="nf">ForEach</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="nx">gjson</span><span class="p">.</span><span class="nx">Result</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+		<span class="nb">println</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span> <span class="s">&#34;message&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+		<span class="nx">is_err</span> <span class="p">=</span> <span class="kc">true</span>
+		<span class="k">return</span> <span class="kc">false</span>
+	<span class="p">})</span>
+
+	<span class="k">if</span> <span class="nx">is_err</span> <span class="o">==</span> <span class="kc">false</span> <span class="p">{</span>
+		<span class="nx">user_id</span> <span class="o">:=</span> <span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span> <span class="s">&#34;id&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">()</span>
+
+		<span class="nx">url</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;https://www.strava.com/api/v3/athletes/%s/stats?access_token=%s&#34;</span><span class="p">,</span> <span class="nx">user_id</span><span class="p">,</span> <span class="nx">access_token</span><span class="p">)</span>
+		<span class="nx">stats</span> <span class="o">:=</span> <span class="nf">getUrl</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🏃‍♂️ %.0f &#34;</span><span class="p">,</span> <span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;all_run_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()))</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🚲 %.0f\n&#34;</span><span class="p">,</span> <span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;all_ride_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()))</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;---&#34;</span><span class="p">)</span>
+
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s | href=https://www.strava.com/athletes/%s\n&#34;</span><span class="p">,</span> <span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span> <span class="s">&#34;username&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">(),</span> <span class="nx">user_id</span><span class="p">)</span>
+
+		<span class="cm">/* This Year */</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Year to date&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🏃‍♂️ %.0f miles (%v runs) | href=https://www.strava.com/athletes/%v/training/log?sport=Run \n&#34;</span><span class="p">,</span>
+			<span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;ytd_run_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()),</span>
+			<span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;ytd_run_totals.count&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">(),</span>
+			<span class="nx">user_id</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🚲 %.0f miles (%v rides) | href=https://www.strava.com/athletes/%v/training/log?sport=Ride \n&#34;</span><span class="p">,</span>
+			<span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;ytd_ride_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()),</span>
+			<span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;ytd_ride_totals.count&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">(),</span>
+			<span class="nx">user_id</span><span class="p">)</span>
+
+		<span class="cm">/* Last Four Weeks */</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;4 weeks&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🏃‍♂️ %.0f miles (%v runs) | href=https://www.strava.com/athletes/%v/training/log?sport=Run \n&#34;</span><span class="p">,</span>
+			<span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;recent_run_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()),</span>
+			<span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;recent_run_totals.count&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">(),</span>
+			<span class="nx">user_id</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;🚲 %.0f miles (%v rides) | href=https://www.strava.com/athletes/%v/training/log?sport=Ride \n&#34;</span><span class="p">,</span>
+			<span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;recent_ride_totals.distance&#34;</span><span class="p">).</span><span class="nf">Float</span><span class="p">()),</span>
+			<span class="nx">gjson</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">stats</span><span class="p">,</span> <span class="s">&#34;recent_ride_totals.count&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">(),</span>
+			<span class="nx">user_id</span><span class="p">)</span>
+
+		<span class="cm">/* Access Token */</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;---&#34;</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nf">access_token_line</span><span class="p">()</span>
+	<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getUrl</span><span class="p">(</span><span class="nx">url</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;API Error&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;---&#34;</span><span class="p">)</span>
+		<span class="nf">access_token_line</span><span class="p">()</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">b</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadAll</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;IO Error&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;---&#34;</span><span class="p">)</span>
+		<span class="nf">access_token_line</span><span class="p">()</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">store_api_key</span><span class="p">(</span><span class="nx">api_key</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
+	<span class="cm">/*
+</span><span class="cm">	   Stores the API key
+</span><span class="cm">	*/</span>
+	<span class="nx">item</span> <span class="o">:=</span> <span class="nx">keychain</span><span class="p">.</span><span class="nf">NewItem</span><span class="p">()</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetSecClass</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">SecClassGenericPassword</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetService</span><span class="p">(</span><span class="nx">service</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetLabel</span><span class="p">(</span><span class="s">&#34;Strava API Key for BitBar&#34;</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetAccessGroup</span><span class="p">(</span><span class="nx">access_group</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetData</span><span class="p">(</span><span class="nx">api_key</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetSynchronizable</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">SynchronizableNo</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetAccessible</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">AccessibleWhenUnlocked</span><span class="p">)</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">keychain</span><span class="p">.</span><span class="nf">AddItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">keychain</span><span class="p">.</span><span class="nx">ErrorDuplicateItem</span> <span class="p">{</span>
+		<span class="c1">// If duplicate -- overwrite
+</span><span class="c1"></span>		<span class="nf">delete_api_key</span><span class="p">()</span>
+		<span class="nx">keychain</span><span class="p">.</span><span class="nf">AddItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">delete_api_key</span><span class="p">()</span> <span class="p">{</span>
+	<span class="cm">/*
+</span><span class="cm">	   Deletes the record for the API key
+</span><span class="cm">	*/</span>
+	<span class="nx">item</span> <span class="o">:=</span> <span class="nx">keychain</span><span class="p">.</span><span class="nf">NewItem</span><span class="p">()</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetSecClass</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">SecClassGenericPassword</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetService</span><span class="p">(</span><span class="nx">service</span><span class="p">)</span>
+	<span class="nx">item</span><span class="p">.</span><span class="nf">SetAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
+	<span class="nx">keychain</span><span class="p">.</span><span class="nf">DeleteItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">fetch_api_key</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="cm">/*
+</span><span class="cm">	   Fetches the user API key from the keychain
+</span><span class="cm">	*/</span>
+	<span class="kd">var</span> <span class="nx">password</span> <span class="kt">string</span>
+	<span class="nx">query</span> <span class="o">:=</span> <span class="nx">keychain</span><span class="p">.</span><span class="nf">NewItem</span><span class="p">()</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetSecClass</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">SecClassGenericPassword</span><span class="p">)</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetService</span><span class="p">(</span><span class="nx">service</span><span class="p">)</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetAccessGroup</span><span class="p">(</span><span class="nx">access_group</span><span class="p">)</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetMatchLimit</span><span class="p">(</span><span class="nx">keychain</span><span class="p">.</span><span class="nx">MatchLimitOne</span><span class="p">)</span>
+	<span class="nx">query</span><span class="p">.</span><span class="nf">SetReturnData</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">results</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">keychain</span><span class="p">.</span><span class="nf">QueryItem</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="c1">// Error
+</span><span class="c1"></span>	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+		<span class="c1">// Not found
+</span><span class="c1"></span>	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">password</span> <span class="p">=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">Data</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">password</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">access_token_line</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">args</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Set Access Token | bash=&#34;</span> <span class="o">+</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#34; param1=set_api_key terminal=false refresh=true&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">meters_to_miles</span><span class="p">(</span><span class="nx">meters</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">meters</span> <span class="o">*</span> <span class="mf">0.0006213712</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+  
+        <div id='comments'></div>
+  
+</main>
+
+   
+
+
+
+
+
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
+</body>
+</html>

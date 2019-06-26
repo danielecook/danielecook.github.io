@@ -34,6 +34,16 @@ IEX is an exchange founded by Brad Katsuyama and written about in the book Flash
     </item>
     
     <item>
+      <title>VCF-Kit</title>
+      <link>https://www.danielecook.com/projects/vcf-kit/</link>
+      <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/vcf-kit/</guid>
+      <description>Abstract
+The variant call format (VCF) is a popular standard for storing genetic variation data. As a result, a large collection of tools has been developed that perform diverse analyses using VCF files. However, some tasks common to statistical and population geneticists have not been created yet. To streamline these types of analyses, we created novel tools that analyze or annotate VCF files and organized these tools into a command-line based utility named VCF-kit.</description>
+    </item>
+    
+    <item>
       <title>elegansvariation.org</title>
       <link>https://www.danielecook.com/projects/elegansvariation/</link>
       <pubDate>Fri, 26 Feb 2016 00:00:00 +0000</pubDate>
