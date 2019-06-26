@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/automatically-construct-/-infer-/-sense-bigquery-schema/</guid>
       <description>Update: BigQuery adds schema auto-detection (2019-06-22) BigQuery now offers a schema auto-detection features making the work I had done below no longer necessary.
-Original Post [Bigquery]() is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [Bigrquery](), which can be used to interact with bigquery using some of the functions in dplyr.</description>
+Original Post BigQuery is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using BigRQuery, which can be used to interact with bigquery using some of the functions in dplyr.</description>
     </item>
     
   </channel>

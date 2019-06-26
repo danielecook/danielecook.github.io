@@ -39,8 +39,10 @@
 &lt;p&gt;To use the strava bitbar plugin:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;You can download the binary &lt;a href=&#34;https://www.danielecook.com/strava.15m.cgo&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;You can download the binary &lt;a href=&#34;https://www.danielecook.com/strava.15m.cgo&#34;&gt;here&lt;/a&gt;. Add it to your bitbar folder.&lt;/li&gt;
 &lt;li&gt;Go to the &lt;a href=&#34;https://www.strava.com/settings/api&#34;&gt;Strava API&lt;/a&gt;, and create a new application.&lt;/li&gt;
+&lt;li&gt;Copy the &lt;code&gt;access_code&lt;/code&gt;. Select &lt;code&gt;Set Access Token&lt;/code&gt; from the menu.&lt;/li&gt;
+&lt;li&gt;Hit &lt;code&gt;⌘ + R&lt;/code&gt; and you should see your stats!&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;If you would like to review / compile the code yourself, the source is available below or from &lt;a href=&#34;https://gist.github.com/danielecook/4213ec83b2af75bbe9d45f3ad03ca48d&#34;&gt;this gist&lt;/a&gt;.&lt;/p&gt;
@@ -1275,7 +1277,7 @@ mem_fib&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt
 
 &lt;h2 id=&#34;original-post&#34;&gt;Original Post&lt;/h2&gt;
 
-&lt;p&gt;[Bigquery]() is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [Bigrquery](), which can be used to interact with bigquery using some of the functions in dplyr.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cloud.google.com/bigquery/&#34;&gt;BigQuery&lt;/a&gt; is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using &lt;a href=&#34;https://github.com/r-dbi/bigrquery&#34;&gt;BigRQuery&lt;/a&gt;, which can be used to interact with bigquery using some of the functions in dplyr.&lt;/p&gt;
 
 &lt;p&gt;It is easy to upload datasets to bigquery, although it requires you to specify a schema. If you have a lot of columns in a dataset this can be a pain to do manually - so I wrote a script to automate the process. The script automatically determines the variable types within the first 500 rows of a tab-delimited dataset. To get started, download the python script below and save it as schema.py.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;mimetypes&lt;/span&gt;
@@ -1802,11 +1804,11 @@ mem_fib&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt
 
 &lt;p&gt;&lt;strong&gt;Generate a random dna sequence 200 base pairs long.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/dna1-1024x337.png&#34; alt=&#34;dna1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/dna1.png&#34; alt=&#34;dna1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Generate the complement, reverse complement, RNA, and protein of a DNA sequence&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/dna2-1024x521.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/dna2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Open up blast and pre-populate the search field&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;blast ATGTCCTCGTTCGACCGTCGTATTGAAGCTGCATGTAAA&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
@@ -2658,8 +2660,6 @@ ggsave&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;hr /&gt;
-
 &lt;p&gt;If you use &lt;a href=&#34;http://www.runkeeper.com&#34;&gt;runkeeper&lt;/a&gt; and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using &lt;a href=&#34;http://www.r-project.org/&#34;&gt;&lt;strong&gt;R&lt;/strong&gt;&lt;/a&gt;. I&amp;#8217;ve written a script for doing so (Special thanks to &lt;a href=&#34;http://www.flowingdata.com.com&#34;&gt;flowing data&lt;/a&gt; which has a tutorial that helped with a few key parts of this).&lt;/p&gt;
 
 &lt;p&gt;The script does a few unique things.&lt;/p&gt;
@@ -2949,7 +2949,7 @@ clusters &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; pamk&lt;span class
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;= C2 &amp;amp; &amp;#34; &amp;#34; &amp;amp; D2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The result would look something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://www.danielecook.com/Screen-Shot-2014-03-03-at-8.38.03-AM.png&#34;&gt;&lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-03-03-at-8.38.03-AM-1024x351.png&#34; alt=&#34;Pubmed result counts are in Column A1.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.danielecook.com/Screen-Shot-2014-03-03-at-8.38.03-AM.png&#34;&gt;&lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-03-03-at-8.38.03-AM.png&#34; alt=&#34;Pubmed result counts are in Column A1.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;small&gt;Pubmed result counts are in Column A&lt;/small&gt;&lt;/p&gt;
 </description>
@@ -3036,7 +3036,7 @@ What are your thoughts? How could this be improved?
 
 &lt;p&gt;Below you will see that is what I have done here for HapMap allele frequency data (&lt;a href=&#34;http://hapmap.ncbi.nlm.nih.gov/downloads/genotypes/2010-08_phaseII+III/forward/&#34;&gt;2010-08_phaseII+III&lt;/a&gt;), and it allows me to retrieve allele frequency data from 26,278,275 rows across 11 populations instantly. The database itself is 3.22 Gb. A zipped version (~1Gb) is available &lt;a href=&#34;https://drive.google.com/file/d/0B_6qjHtu65BDdmFBeXdGeEc2STQ/edit?usp=sharing&#34;&gt;Here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://www.danielecook.com/Screen-Shot-2014-01-20-at-12.07.25-AM.png&#34;&gt;&lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-01-20-at-12.07.25-AM-1024x466.png&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.danielecook.com/Screen-Shot-2014-01-20-at-12.07.25-AM.png&#34;&gt;&lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-01-20-at-12.07.25-AM.png&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;You will need sqlalchemy for this script to work. Install using &lt;code&gt;pip install sqlalchemy&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#! /usr/local/bin/Python&lt;/span&gt;
