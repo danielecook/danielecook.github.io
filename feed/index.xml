@@ -569,10 +569,11 @@
       <guid>https://www.danielecook.com/projects/hntrending/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://news.ycombinator.com&#34;&gt;Hacker News&lt;/a&gt; is a great source of tech-news. However, the site has a very high turnover rate in terms of stories. If you do not check it daily it is easy to miss something.&lt;/p&gt;
 
-&lt;p&gt;That is why I created &lt;strong&gt;Hacker News Trending (HN Trending)&lt;/strong&gt;. HN Trending is a simple website that aggregates Hacker news stories by popularity over the past week, month, year, and over all time. HN Trending is updated weekly,&lt;/p&gt;
+&lt;p&gt;That is why I created &lt;strong&gt;Hacker News Trending (HN Trending)&lt;/strong&gt;. HN Trending is a simple website that aggregates Hacker news stories by popularity over the past week, month, year, and over all time. HN Trending is updated every Sunday.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://www.hntrending.com&#34;&gt;Hacker News Trending&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://hntrending.com/domains/year/index.html&#34;&gt;Front page Hacker News Story&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
