@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 15 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2015 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/vcf/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Parallelize bcftools functions</title>
+      <link>https://www.danielecook.com/parallelize-bcftools-functions/</link>
+      <pubDate>Sat, 21 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/parallelize-bcftools-functions/</guid>
+      <description>bcftools is a great for working with variant call files. In general, it is fast. However, I have found that the process of merging VCF files (using bcftools merge) and performing concordance checking (using bcftools gtcheck) can be a little bit slow. That is why I wrote two functions that take advantage of GNU Parallel to parallelize them.
+# ~/.bashrc: executed by bash(1) for non-login shells. # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) # for examples function bam_chromosomes() { # Fetch chromosomes from a bam file samtools view -H $1 | \  grep -Po &amp;#39;SN:(.</description>
+    </item>
     
     <item>
       <title>Downgrade a VCF for viewing in IGV (4.2 &gt; 4.1)</title>
