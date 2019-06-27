@@ -34,6 +34,16 @@ IEX is an exchange founded by Brad Katsuyama and written about in the book Flash
     </item>
     
     <item>
+      <title>Upvote.pub</title>
+      <link>https://www.danielecook.com/projects/upvote.pub/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/upvote.pub/</guid>
+      <description>Upvote.pub (https://www.upvote.pub) was a shortlived experiment to create a reddit-style clone specifically for scientific publications. Users could submit scientific publications from arXiv, bioRxiv, PubMed, or using a DOI. These submissions could then be upvoted or discussed using a commenting function (which also featured upvotes). I created the site because I like HackerNews and reddit, and I believe more dialogue regarding scientific publications would be a great thing.
+The site was featured on HackerNews and drew mixed criticims.</description>
+    </item>
+    
+    <item>
       <title>VCF-Kit</title>
       <link>https://www.danielecook.com/projects/vcf-kit/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>

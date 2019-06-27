@@ -595,6 +595,26 @@
     </item>
     
     <item>
+      <title>Upvote.pub</title>
+      <link>https://www.danielecook.com/projects/upvote.pub/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/projects/upvote.pub/</guid>
+      <description>&lt;p&gt;Upvote.pub (&lt;a href=&#34;https://www.upvote.pub&#34;&gt;https://www.upvote.pub&lt;/a&gt;) was a shortlived experiment to create a reddit-style clone specifically for scientific publications. Users could submit scientific publications from arXiv, bioRxiv, PubMed, or using a DOI. These submissions could then be upvoted or discussed using a commenting function (which also featured upvotes). I created the site because I like HackerNews and reddit, and I believe more dialogue regarding scientific publications would be a great thing.&lt;/p&gt;
+
+&lt;p&gt;The site was &lt;a href=&#34;https://news.ycombinator.com/item?id=16273171&#34;&gt;featured on HackerNews&lt;/a&gt; and drew mixed criticims. There are some subreddits which provide similar functionality. I have open-sourced this project.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;http://www.github.com/danielecook/upvote.pub&#34;&gt;Github Repo&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=16273171&#34;&gt;Hacker News Submission&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/danielecook/upvote.pub/raw/master/images/screen1.png&#34;&gt;Screenshot 1 - Submission screen&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/danielecook/upvote.pub/raw/master/images/screen2.png&#34;&gt;Screenshot 2 - Story&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/danielecook/upvote.pub/raw/master/images/screen3.png&#34;&gt;Screenshot 3 - Subs config&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Log commands to Google Cloud Stackdriver Logs</title>
       <link>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
@@ -3532,12 +3552,12 @@ xlsx2csv: error: the following arguments are required: xlsxfile&lt;/code&gt;&lt;
 
 &lt;h2 id=&#34;two-truths-and-a-lie&#34;&gt;Two truths and a lie&lt;/h2&gt;
 
-&lt;p&gt;Two of the items below are true and one is a lie.&lt;/p&gt;
+&lt;p&gt;Two of the statements below are true and one is a lie.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;I have three twin brothers&lt;/li&gt;
-&lt;li&gt;I have been to Antarctica&lt;/li&gt;
-&lt;li&gt;I have ridden a duck&lt;/li&gt;
+&lt;li&gt;I have three twin brothers.&lt;/li&gt;
+&lt;li&gt;I have been to Antarctica.&lt;/li&gt;
+&lt;li&gt;I have ridden a duck.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
