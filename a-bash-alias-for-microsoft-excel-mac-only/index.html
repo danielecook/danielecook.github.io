@@ -4,17 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>SQL - Daniel E. Cook</title>
-  <meta content='SQL - Daniel E. Cook' property='title' />
-  <meta content='SQL - Daniel E. Cook' property='og:title' />
+  <title>A bash alias for Microsoft Excel (Mac only) - Daniel E. Cook</title>
+  <meta content='A bash alias for Microsoft Excel (Mac only) - Daniel E. Cook' property='title' />
+  <meta content='A bash alias for Microsoft Excel (Mac only) - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.danielecook.com/tags/sql/" />
+<meta property="og:description" content="Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+function excel() { tmp=`mktemp` out=${1} cat ${out} &gt; $tmp open -a &#34;Microsoft Excel&#34; $tmp }" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/" />
 
 
-<meta property="og:updated_time" content="2013-11-02T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2019-06-28T00:26:29&#43;01:00"/>
+
+<meta property="article:modified_time" content="2019-06-28T00:26:29&#43;01:00"/>
+
 
 
 
@@ -45,7 +49,7 @@
 
 type="image/x-icon"/>
 
-<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/tags/sql/feed/index.xml" title="Daniel E. Cook" />
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/feed/index.xml" title="Daniel E. Cook" />
 </head>
 <body class="global-font">
   <div id="nav" class="content-width center">
@@ -72,137 +76,51 @@ type="image/x-icon"/>
 </div>
 
   
-
 <main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">A bash alias for Microsoft Excel (Mac only)</div>
   
-  <h1 class="f2 fw6 silver" id="tag">SQL</h1>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-06-28</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/bash' class="link silver tag">bash</a> &nbsp;&nbsp;<a href='/tags/gist' class="link silver tag">gist</a> &nbsp;&nbsp;<a href='/tags/excel' class="link silver tag">excel</a> &nbsp;&nbsp; 
+    
+  </p>
   
-  <ul class="list pa0">
-    
-        <li class="mb2">
-      <div class='fl w-10 pa2 tl nowrap' style='line-height: 25px;'>
-        <time>2013-11-02</time> 
-      </div>
-      <div class='fl w-90 pa2 pl5 pl4'>
-          <a class="f4 heading-color heading-font fw6 no-underline" href="https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/">Accessing the UCSC Genome Browser MySQL Database</a>
-          <p class="f5 mt1 silver">
-            
-            <a href='/tags/sql' class="link silver tag">SQL</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-          </p>
-      </div>
-  </li>
-    
-  </ul>
+  <div class="lh-copy post-content"><p>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> excel<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">tmp</span><span class="o">=</span><span class="sb">`</span>mktemp<span class="sb">`</span>
+    <span class="nv">out</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span>
+    cat <span class="si">${</span><span class="nv">out</span><span class="si">}</span> &gt; <span class="nv">$tmp</span>
+    open -a <span class="s2">&#34;Microsoft Excel&#34;</span> <span class="nv">$tmp</span>
+<span class="o">}</span></code></pre></div></div>
+  
+        <div id='comments'></div>
+  
 </main>
 
+   
 
 
 
-<div class="dn tr fixed right-2 " id="tag-cloud">
-    <strong>tags</strong> <br>
-    
-    
-    <a class="silver tag" href="/tags/gist">gist</a> (19) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/alfred">alfred</a> (9) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/python">python</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/r">r</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bash">bash</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/cycling">cycling</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/excel">excel</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fastq">fastq</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bam">bam</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/chicago">chicago</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/database">database</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fasta">fasta</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/google-sheets">google-sheets</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/pubmed">pubmed</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/vcf">vcf</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bcftools">bcftools</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bigquery">bigquery</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/genetics">genetics</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/gff">gff</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/guitar">guitar</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/nextflow">nextflow</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver selected tag" href="/tags/sql">sql</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/tips">tips</a> (1) <br/></li>
-    
-  
-  <br />
-  
-</div>
 
-<div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
 <a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
-
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
 </div>
+
+
 
   <div class='cb'></div>
 <footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">

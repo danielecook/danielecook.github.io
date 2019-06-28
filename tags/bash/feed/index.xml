@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Jun 2019 00:26:29 +0100</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/bash/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A bash alias for Microsoft Excel (Mac only)</title>
+      <link>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</link>
+      <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
+      
+      <guid>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</guid>
+      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&amp;rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;#34;Microsoft Excel&amp;#34; $tmp }</description>
+    </item>
     
     <item>
       <title>Log commands to Google Cloud Stackdriver Logs</title>

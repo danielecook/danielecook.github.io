@@ -7,33 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 25 Jun 2019 20:26:29 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 28 Jun 2019 00:26:29 +0100</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CYCLING</title>
-      <link>https://www.danielecook.com/tags/cycling/</link>
-      <pubDate>Tue, 25 Jun 2019 20:26:29 +0100</pubDate>
+      <title>bash</title>
+      <link>https://www.danielecook.com/tags/bash/</link>
+      <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
-      <guid>https://www.danielecook.com/tags/cycling/</guid>
+      <guid>https://www.danielecook.com/tags/bash/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>strava</title>
-      <link>https://www.danielecook.com/tags/strava/</link>
-      <pubDate>Tue, 25 Jun 2019 20:26:29 +0100</pubDate>
+      <title>excel</title>
+      <link>https://www.danielecook.com/tags/excel/</link>
+      <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
-      <guid>https://www.danielecook.com/tags/strava/</guid>
+      <guid>https://www.danielecook.com/tags/excel/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gist</title>
       <link>https://www.danielecook.com/tags/gist/</link>
-      <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/tags/gist/</guid>
       <description></description>
@@ -45,15 +45,6 @@
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/nextflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bash</title>
-      <link>https://www.danielecook.com/tags/bash/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/bash/</guid>
       <description></description>
     </item>
     
@@ -202,11 +193,11 @@
     </item>
     
     <item>
-      <title>excel</title>
-      <link>https://www.danielecook.com/tags/excel/</link>
-      <pubDate>Tue, 18 Feb 2014 00:00:00 +0000</pubDate>
+      <title>cycling</title>
+      <link>https://www.danielecook.com/tags/cycling/</link>
+      <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielecook.com/tags/excel/</guid>
+      <guid>https://www.danielecook.com/tags/cycling/</guid>
       <description></description>
     </item>
     

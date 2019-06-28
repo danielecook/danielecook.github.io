@@ -3,49 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.danielecook.com/a-strava-plugin-for-bitbar/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/cycling/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
-    <priority>0</priority>
+    <loc>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</loc>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/strava/</loc>
-    <lastmod>2019-06-25T20:26:29+01:00</lastmod>
+    <loc>https://www.danielecook.com/tags/bash/</loc>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/excel/</loc>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/gist/</loc>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</loc>
     <lastmod>2019-06-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/gist/</loc>
-    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -77,12 +77,6 @@
   <url>
     <loc>https://www.danielecook.com/log-commands-to-google-cloud-stackdriver-logs/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/bash/</loc>
-    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -322,6 +316,12 @@
   </url>
   
   <url>
+    <loc>https://www.danielecook.com/tags/cycling/</loc>
+    <lastmod>2014-07-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</loc>
     <lastmod>2014-05-30T00:00:00+00:00</lastmod>
   </url>
@@ -344,12 +344,6 @@
   <url>
     <loc>https://www.danielecook.com/an-r-function-for-opening-a-dataframe-in-excel-mac-only/</loc>
     <lastmod>2014-02-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/excel/</loc>
-    <lastmod>2014-02-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
