@@ -10,7 +10,8 @@
 
 
 <meta property="og:description" content="Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
-function excel() { tmp=`mktemp` out=${1} cat ${out} &gt; $tmp open -a &#34;Microsoft Excel&#34; $tmp }" />
+function excel() { tmp=`mktemp` out=${1} cat ${out} &gt; $tmp open -a &#34;Microsoft Excel&#34; $tmp } Usage:
+cat spreadsheet.tsv | excel" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/" />
 
@@ -93,7 +94,9 @@ type="image/x-icon"/>
     <span class="nv">out</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span>
     cat <span class="si">${</span><span class="nv">out</span><span class="si">}</span> &gt; <span class="nv">$tmp</span>
     open -a <span class="s2">&#34;Microsoft Excel&#34;</span> <span class="nv">$tmp</span>
-<span class="o">}</span></code></pre></div></div>
+<span class="o">}</span></code></pre></div>
+<p>Usage:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">cat spreadsheet.tsv <span class="p">|</span> excel</code></pre></div></div>
   
         <div id='comments'></div>
   

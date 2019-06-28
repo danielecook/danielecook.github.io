@@ -29,7 +29,9 @@
     &lt;span class=&#34;nv&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;
     cat &lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt; &amp;gt; &lt;span class=&#34;nv&#34;&gt;$tmp&lt;/span&gt;
     open -a &lt;span class=&#34;s2&#34;&gt;&amp;#34;Microsoft Excel&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$tmp&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Usage:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat spreadsheet.tsv &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; excel&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
