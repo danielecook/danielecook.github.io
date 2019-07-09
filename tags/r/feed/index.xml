@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 15 Dec 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jul 2019 00:26:29 +0100</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/r/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setting the working directory in R</title>
+      <link>https://www.danielecook.com/setting-the-working-directory-in-r/</link>
+      <pubDate>Tue, 09 Jul 2019 00:26:29 +0100</pubDate>
+      
+      <guid>https://www.danielecook.com/setting-the-working-directory-in-r/</guid>
+      <description>It is convenient to be able to set the working directory of a script to its parent directory. This allows you to point to the relative path of files associated with it. For example, if your working directory is set to the location of init.sh, then you will be able to read in data/file.dat without specifying its full path. If these files are in a git repo - you can also be assured they will travel together.</description>
+    </item>
     
     <item>
       <title>rdatastore</title>

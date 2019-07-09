@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Setting the working directory in R - Daniel E. Cook</title>
+  <meta content='Setting the working directory in R - Daniel E. Cook' property='title' />
+  <meta content='Setting the working directory in R - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="It is convenient to be able to set the working directory of a script to its parent directory. This allows you to point to the relative path of files associated with it. For example, if your working directory is set to the location of init.sh, then you will be able to read in data/file.dat without specifying its full path. If these files are in a git repo - you can also be assured they will travel together." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/setting-the-working-directory-in-r/" />
+
+
+<meta property="article:published_time" content="2019-07-09T00:26:29&#43;01:00"/>
+
+<meta property="article:modified_time" content="2019-07-09T00:26:29&#43;01:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+  --max-width: 850px;
+}</style>
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/setting-the-working-directory-in-r/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Setting the working directory in R</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-07-09</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/r' class="link silver tag">R</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p>It is convenient to be able to set the working directory of a script to its parent directory. This allows you to point to the relative path of files associated with it. For example, if your working directory is set to the location of <code>init.sh</code>, then you will be able to read in <code>data/file.dat</code> without specifying its full path. If these files are in a git repo - you can also be assured they will travel together.</p>
+<div class="highlight"><pre class="chroma">├── init.sh
+└── data
+    └── file.dat</pre></div>
+<p>In <strong>bash</strong> you can set the directory to the location of the script being executed using:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">0</span><span class="p">%/*</span><span class="si">}</span><span class="s2">&#34;</span>
+
+<span class="c1"># Or more obviously</span>
+<span class="nb">cd</span> <span class="s2">&#34;</span><span class="k">$(</span>dirname <span class="s2">&#34;</span><span class="si">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span></code></pre></div>
+<p>In <strong>python</strong> you can set the directory to the location of the script being executed using:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">abspath</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span></code></pre></div>
+<p>In <strong>R</strong>, unfortunately, no straightforward method exists. This <a href="https://stackoverflow.com/questions/3452086/getting-path-of-an-r-script">stackoverflow question</a> has some useful answers though. Two are listed below, and I&rsquo;ve added a third option for setting the work directory relative to a git repo.</p>
+
+<h3 id="setwd-to-script-location-when-calling-rscript">setwd to script location when calling <code>Rscript</code></h3>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">getScriptPath <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(){</span>
+    cmd.args <span class="o">&lt;-</span> <span class="kp">commandArgs</span><span class="p">()</span>
+    m <span class="o">&lt;-</span> <span class="kp">regexpr</span><span class="p">(</span><span class="s">&#34;(?&lt;=^--file=).+&#34;</span><span class="p">,</span> cmd.args<span class="p">,</span> perl<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+    script.dir <span class="o">&lt;-</span> <span class="kp">dirname</span><span class="p">(</span><span class="kp">regmatches</span><span class="p">(</span>cmd.args<span class="p">,</span> m<span class="p">))</span>
+    <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>script.dir<span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="kp">stop</span><span class="p">(</span><span class="s">&#34;can&#39;t determine script dir: please call the script with Rscript&#34;</span><span class="p">)</span>
+    <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>script.dir<span class="p">)</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="kp">stop</span><span class="p">(</span><span class="s">&#34;can&#39;t determine script dir: more than one &#39;--file&#39; argument detected&#34;</span><span class="p">)</span>
+    <span class="kr">return</span><span class="p">(</span>script.dir<span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Setting the script path would then be:</span>
+<span class="kp">setwd</span><span class="p">(</span>getScriptPath<span class="p">())</span></code></pre></div>
+<h3 id="setwd-to-script-location-in-rstudio">setwd to script location in Rstudio</h3>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># This will not throw an error if you are not using rstudio.</span>
+<span class="kp">try</span><span class="p">(</span><span class="kp">setwd</span><span class="p">(</span><span class="kp">dirname</span><span class="p">(</span>rstudioapi<span class="o">::</span>getActiveDocumentContext<span class="p">()</span><span class="o">$</span>path<span class="p">)))</span></code></pre></div>
+<h3 id="setting-the-script-path-relative-to-the-git-repo">Setting the script path relative to the git repo</h3>
+
+<p>Most of my code resides in git repositories - so an alternative to setting the working directory to the location of a script is to set it to the location of a git repository. Here is how I do that in R:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># First set the working directory to the location of a script (useful for working in Rstudio)</span>
+<span class="kp">try</span><span class="p">(</span><span class="kp">setwd</span><span class="p">(</span><span class="kp">dirname</span><span class="p">(</span>rstudioapi<span class="o">::</span>getActiveDocumentContext<span class="p">()</span><span class="o">$</span>path<span class="p">)))</span>
+<span class="c1"># Next, set the directory relative to the git repo</span>
+<span class="kp">setwd</span><span class="p">(</span><span class="kp">system</span><span class="p">(</span><span class="s">&#34;git rev-parse --show-toplevel&#34;</span><span class="p">,</span> intern<span class="o">=</span><span class="bp">T</span><span class="p">))</span></code></pre></div>
+<p>The big advantage of this approach is that you can call the script from anywhere while you are located in its git repo, and it will always execute from the base or top-level of that repo.</p>
+</div>
+  
+        <div id='comments'></div>
+  
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+    InstantClick.init();
+    </script>
+</body>
+</html>

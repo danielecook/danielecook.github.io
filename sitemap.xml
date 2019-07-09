@@ -3,26 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</loc>
-    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
+    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
+    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
+    <loc>https://www.danielecook.com/tags/r/</loc>
+    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/setting-the-working-directory-in-r/</loc>
+    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</loc>
+    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
   </url>
   
   <url>
@@ -115,12 +126,6 @@
   <url>
     <loc>https://www.danielecook.com/alfred-image-utilities/</loc>
     <lastmod>2017-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/r/</loc>
-    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
