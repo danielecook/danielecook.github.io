@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Converting VCF To JSON - Daniel E. Cook</title>
+  <meta content='Converting VCF To JSON - Daniel E. Cook' property='title' />
+  <meta content='Converting VCF To JSON - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="Recently I started developing a set of utilities called seq-collection (sc) written in nim and using the fantastic hts-nim package.
+The first utility I added was a tool to convert a VCF to JSON. This tool is useful for building out an API that reads genotype data directly from the VCF format. It is possible to read specific variants or intervals of VCF files when they are indexed, allowing for fast and efficient querying of genetic data without the need for a database." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/converting-vcf-to-json/" />
+
+
+<meta property="article:published_time" content="2019-09-22T01:15:53&#43;00:00"/>
+
+<meta property="article:modified_time" content="2019-09-22T01:15:53&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+  --max-width: 850px;
+}</style>
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/converting-vcf-to-json/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Converting VCF To JSON</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-09-22</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/vcf' class="link silver tag">VCF</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p>Recently I started developing a set of utilities called <a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
+
+<p>The first utility I added was a tool to convert a VCF to JSON. This tool is useful for building out an API that reads genotype data directly from the VCF format. It is possible to read specific variants or intervals of VCF files when they are indexed, allowing for fast and efficient querying of genetic data without the need for a database. Furthermore, these queries can be made over http connections making it possible to use a VCF file as a database.</p>
+
+<p>For example, as a graduate student I developed a <a href="https://elegansvariation.org/data/browser/">genome browser</a> for <em>C. elegans</em> wild isolates. Queries are made directly on specific genomic intervals of VCF files using <code>bcftools</code>. However, a large amount of python code is used to convert VCF output ot JSON format. The <code>sc</code> utility could replace this underlying python code on the server with a simple binary and a few command line arguments to accomplish the same task. Below I have a few examples illustrating how to use <code>sc json</code>.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>You can download the MAC OSX binary <a href="https://github.com/danielecook/seq-collection/releases/download/0.0.1/sc_macosx">here</a>.</p>
+
+<p>Or build from source at <a href="danielecook/seq-collection">danielecook/seq-collection</a></p>
+
+<h1 id="usage">Usage</h1>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">json
+
+Convert a VCF to JSON
+
+Usage:
+  json <span class="o">[</span>options<span class="o">]</span> vcf <span class="o">[</span>region ...<span class="o">]</span>
+
+Arguments:
+  vcf              VCF to convert to JSON
+  <span class="o">[</span>region ...<span class="o">]</span>     List of regions
+
+Options:
+  -i, --info<span class="o">=</span>INFO            comma-delimited INFO fields<span class="p">;</span> Use <span class="s1">&#39;ALL&#39;</span> <span class="k">for</span> everything
+  -f, --format<span class="o">=</span>FORMAT        comma-delimited FORMAT fields<span class="p">;</span> Use <span class="s1">&#39;ALL&#39;</span> <span class="k">for</span> everything
+  -s, --samples<span class="o">=</span>SAMPLES      Set Samples <span class="o">(</span>default: ALL<span class="o">)</span>
+  -p, --pretty               Prettify result
+  -a, --array                Output as a JSON array instead of individual JSON lines
+  -z, --zip                  Zip sample names with FORMAT fields <span class="o">(</span>e.g. <span class="o">{</span><span class="s1">&#39;sample1&#39;</span>: <span class="m">25</span>, <span class="s1">&#39;sample2&#39;</span>: <span class="m">34</span><span class="o">})</span>
+  -n, --annotation           Parse ANN Fields
+  --pass                     Only output variants where <span class="nv">FILTER</span><span class="o">=</span>PASS
+  --debug                    Debug
+  -h, --help                 Show this help</code></pre></div>
+<h1 id="examples">Examples</h1>
+
+<h2 id="list-all-sites">List all sites</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sc json tests/data/test.vcf.gz</code></pre></div>
+<p><strong>Output</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">41947</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="s2">&#34;.&#34;</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;T&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">]}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">105133</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="s2">&#34;.&#34;</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;G&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">]}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">176422</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="s2">&#34;.&#34;</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;G&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">]}</span></code></pre></div>
+<h2 id="pretty-output">pretty output</h2>
+
+<p>We can &ldquo;prettify&rdquo; this output using the <code>--pretty</code> flag:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sc json --pretty tests/data/test.vcf.gz</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;CHROM&#34;</span><span class="p">:</span> <span class="s2">&#34;I&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;POS&#34;</span><span class="p">:</span> <span class="mi">41947</span><span class="p">,</span>
+  <span class="nt">&#34;ID&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;REF&#34;</span><span class="p">:</span> <span class="s2">&#34;A&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;ALT&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;T&#34;</span>
+  <span class="p">],</span>
+  <span class="nt">&#34;QUAL&#34;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">,</span>
+  <span class="nt">&#34;FILTER&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;PASS&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="fetch-genotypes">Fetch Genotypes</h2>
+
+<p>Next we can output genotype calls by specifying the <code>--FORMAT</code> flag with a <code>GT</code> argument:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">&gt; sc json tests/data/test.vcf.gz</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">41947</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;T&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;GT&#34;</span><span class="p">:[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]}}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">105133</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;G&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;GT&#34;</span><span class="p">:[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]}}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">176422</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;G&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;GT&#34;</span><span class="p">:[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="kc">null</span><span class="p">,</span><span class="kc">null</span><span class="p">]]}}</span></code></pre></div>
+<p>The genotypes are ordered by sample, and the numbers correspond as follows as follows:</p>
+
+<ul>
+<li><code>-1</code> → Missing</li>
+<li><code>0</code> → Reference</li>
+<li><code>1</code> → First ALT allele</li>
+<li><code>2</code> → Second ALT allele</li>
+<li><code>3</code> → etc.</li>
+</ul>
+
+<p>You can also use <code>SGT</code> to outut a string representation of genotypes (e.g. &ldquo;0/1&rdquo;). It is also possible to use <code>TGT</code> to output the actual bases:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> sc json --format<span class="o">=</span>TGT tests/data/test.vcf.gz</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">41947</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;T&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;TGT&#34;</span><span class="p">:[</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">]}}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">105133</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;G&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;TGT&#34;</span><span class="p">:[</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">]}}</span>
+<span class="p">{</span><span class="nt">&#34;CHROM&#34;</span><span class="p">:</span><span class="s2">&#34;I&#34;</span><span class="p">,</span><span class="nt">&#34;POS&#34;</span><span class="p">:</span><span class="mi">176422</span><span class="p">,</span><span class="nt">&#34;ID&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&#34;REF&#34;</span><span class="p">:</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="nt">&#34;ALT&#34;</span><span class="p">:[</span><span class="s2">&#34;G&#34;</span><span class="p">],</span><span class="nt">&#34;QUAL&#34;</span><span class="p">:</span><span class="mf">999.0</span><span class="p">,</span><span class="nt">&#34;FILTER&#34;</span><span class="p">:[</span><span class="s2">&#34;PASS&#34;</span><span class="p">],</span><span class="nt">&#34;FORMAT&#34;</span><span class="p">:{</span><span class="nt">&#34;TGT&#34;</span><span class="p">:[</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;A/A&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;G/G&#34;</span><span class="p">,</span><span class="s2">&#34;./.&#34;</span><span class="p">]}}</span></code></pre></div></div>
+  
+        <div id='comments'></div>
+  
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/setting-the-working-directory-in-r/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-39176354-1', 'auto');
+
+        InstantClick.on('change', function() {
+            ga('send', 'pageview', location.pathname + location.search);
+      });
+       
+
+    InstantClick.init();
+    </script>
+</body>
+</html>

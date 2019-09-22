@@ -3,14 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.danielecook.com/converting-vcf-to-json/</loc>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/vcf/</loc>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -23,12 +40,6 @@
   <url>
     <loc>https://www.danielecook.com/setting-the-working-directory-in-r/</loc>
     <lastmod>2019-07-09T00:26:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -178,12 +189,6 @@
   <url>
     <loc>https://www.danielecook.com/parallelize-bcftools-functions/</loc>
     <lastmod>2015-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/vcf/</loc>
-    <lastmod>2015-11-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
