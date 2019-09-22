@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nim on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/nim/</link>
+    <description>Recent content in nim on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 22 Sep 2019 01:15:53 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/nim/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Converting VCF To JSON</title>
+      <link>https://www.danielecook.com/converting-vcf-to-json/</link>
+      <pubDate>Sun, 22 Sep 2019 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/converting-vcf-to-json/</guid>
+      <description>Recently I started developing a set of utilities called seq-collection (sc) written in nim and using the fantastic hts-nim package.
+The first utility I added was a tool to convert a VCF to JSON. This tool is useful for building out an API that reads genotype data directly from the VCF format. It is possible to read specific variants or intervals of VCF files when they are indexed, allowing for fast and efficient querying of genetic data without the need for a database.</description>
+    </item>
+    
+  </channel>
+</rss>
