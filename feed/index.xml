@@ -18,11 +18,11 @@
     
     
     <item>
-      <title>Using GNU-Parallel for bioinformatics.</title>
-      <link>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./</link>
+      <title>Using GNU-Parallel for bioinformatics</title>
+      <link>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics/</link>
       <pubDate>Fri, 27 Sep 2019 01:30:53 +0000</pubDate>
       
-      <guid>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./</guid>
+      <guid>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/parallel/&#34;&gt;GNU Parallel&lt;/a&gt; is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.&lt;/p&gt;
