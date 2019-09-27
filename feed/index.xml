@@ -106,7 +106,7 @@ parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; count_nts ::: TAAT TTT 
 
 &lt;p&gt;When working with BAMs or VCFs you can parallelize across chromosomes. Most variant callers or annotation tools allow you to operate on a single chromosome at a time by specifying a region. This allows us to apply a &lt;code&gt;split-apply-combine&lt;/code&gt; strategy by splitting by chromosome, operating on each chromosome, and combining the results at the end.&lt;/p&gt;
 
-&lt;h2 id=&#34;extract-chromosome-list-from-a-bam&#34;&gt;&lt;strong&gt;Extract&lt;/strong&gt; chromosome list from a BAM&lt;/h2&gt;
+&lt;h2 id=&#34;split-chromosomes-from-a-bam&#34;&gt;&lt;strong&gt;Split&lt;/strong&gt; chromosomes from a BAM&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;chrom_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;samtools idxstats in.bam &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -f &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep -v &lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
 
 &lt;span class=&#34;c1&#34;&gt;# For c. elegans you can would see the following 7&lt;/span&gt;

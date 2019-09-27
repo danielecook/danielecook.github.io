@@ -172,7 +172,7 @@ parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span c
 
 <p>When working with BAMs or VCFs you can parallelize across chromosomes. Most variant callers or annotation tools allow you to operate on a single chromosome at a time by specifying a region. This allows us to apply a <code>split-apply-combine</code> strategy by splitting by chromosome, operating on each chromosome, and combining the results at the end.</p>
 
-<h2 id="extract-chromosome-list-from-a-bam"><strong>Extract</strong> chromosome list from a BAM</h2>
+<h2 id="split-chromosomes-from-a-bam"><strong>Split</strong> chromosomes from a BAM</h2>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">chrom_list</span><span class="o">=</span><span class="sb">`</span>samtools idxstats in.bam <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span><span class="sb">`</span>
 
 <span class="c1"># For c. elegans you can would see the following 7</span>
