@@ -11,11 +11,173 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 22 Sep 2019 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Sep 2019 01:30:53 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using GNU-Parallel for bioinformatics.</title>
+      <link>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./</link>
+      <pubDate>Fri, 27 Sep 2019 01:30:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/parallel/&#34;&gt;GNU Parallel&lt;/a&gt; is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.&lt;/p&gt;
+
+&lt;p&gt;Many HPC clusters will have GNU-Parallel pre-installed or available as a module. You can also install it using &lt;a href=&#34;brew.sh&#34;&gt;homebrew&lt;/a&gt; or other package managers.&lt;/p&gt;
+
+&lt;h1 id=&#34;basic-usage&#34;&gt;Basic Usage&lt;/h1&gt;
+
+&lt;p&gt;Lets start with a basic example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into &lt;code&gt;parallel&lt;/code&gt;. We have provided the command &lt;code&gt;echo&lt;/code&gt; which will be parallelized across &lt;code&gt;j=4&lt;/code&gt; jobs. We can see what this looks like by using the &lt;code&gt;--dry-run&lt;/code&gt; flag which prints the commands to be run.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel --dry-run -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;echo 3
+echo 4
+echo 5
+echo 2
+echo 1&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The results are out of order! This is due to the nature of parallelization. Not all &amp;ldquo;jobs&amp;rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &amp;ldquo;first in first out&amp;rdquo; result set by using the &lt;code&gt;-k&lt;/code&gt; flag. Lets see what the &lt;strong&gt;output&lt;/strong&gt; looks like by removing the &lt;code&gt;--dry-run&lt;/code&gt; flag too:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Like any other command, you can send this output to a file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &amp;gt; out.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;j&#34;&gt;&lt;code&gt;-j&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;In order for GNU Parllel to work, you want to have a multi-core CPU. Parallelizing across more cores than you have available can actually make performance &lt;strong&gt;worse&lt;/strong&gt;, so it is important to tune the &lt;code&gt;-j&lt;/code&gt; parameter to the number of cores available.&lt;/p&gt;
+
+&lt;p&gt;Luckily, parallel allows you to specify &lt;code&gt;-j&lt;/code&gt; by the percent of cores or in relation to the number of cores:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;% &lt;span class=&#34;c1&#34;&gt;# Uses 100% of cores.&lt;/span&gt;
+parallel -j -1 &lt;span class=&#34;c1&#34;&gt;# Uses 1 less than the total number of cores.&lt;/span&gt;
+parallel -j +1 &lt;span class=&#34;c1&#34;&gt;# Parallelize across the number of cores + 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;use-for-args&#34;&gt;Use &lt;code&gt;:::&lt;/code&gt; for args&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;code&gt;:::&lt;/code&gt; to specify arguments from incoming commands or lists.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - There are limits to the number of arguments you can provide with a process substitution. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;use-for-args-within-files&#34;&gt;Use &lt;code&gt;::::&lt;/code&gt; for args within files&lt;/h2&gt;
+
+&lt;p&gt;For large argument lists you can specify a file with a list of arguments: one per line, using &lt;code&gt;::::&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; :::: my_args.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;use-to-define-argument-location&#34;&gt;Use &lt;code&gt;{}&lt;/code&gt; to define argument location&lt;/h2&gt;
+
+&lt;p&gt;By default, &lt;code&gt;parallel&lt;/code&gt; assumes the arguments are placed at the end of the input command, but you can explicitly place arguments in commands using &lt;code&gt;{}&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel --dry-run -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;-- a number&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;echo &amp;#34;1 &amp;lt;-- a number&amp;#34;
+echo &amp;#34;2 &amp;lt;-- a number&amp;#34;
+echo &amp;#34;3 &amp;lt;-- a number&amp;#34;
+echo &amp;#34;4 &amp;lt;-- a number&amp;#34;
+echo &amp;#34;5 &amp;lt;-- a number&amp;#34;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice that we are having to escape quotes - there are ways around this.&lt;/p&gt;
+
+&lt;h2 id=&#34;combinatorials&#34;&gt;Combinatorials&lt;/h2&gt;
+
+&lt;p&gt;You can keep adding &lt;code&gt;:::&lt;/code&gt; and &lt;code&gt;::::&lt;/code&gt; to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for comparing across datasets.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel --dry-run -k -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; Rscript run_analysis.R &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; ::: A B C&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csv&#34; data-lang=&#34;csv&#34;&gt;Rscript run_analysis.R 1 A
+Rscript run_analysis.R 1 B
+Rscript run_analysis.R 1 C
+Rscript run_analysis.R 2 A
+Rscript run_analysis.R 2 B
+Rscript run_analysis.R 2 C&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;parallelize-functions&#34;&gt;Parallelize Functions&lt;/h2&gt;
+
+&lt;p&gt;In some cases, you want to compute something more substantial. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;ATTA&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  tr ATCG TAGC &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    python -c &lt;span class=&#34;s2&#34;&gt;&amp;#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&amp;#39;T&amp;#39;), o.count(&amp;#39;G&amp;#39;), o.count(&amp;#39;C&amp;#39;), o.count(&amp;#39;A&amp;#39;))&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command has two operations. While is it possible to incorporate this into a &amp;lsquo;one-liner&amp;rsquo;, it is far easier to create a bash function, export it, and use that as input.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; count_nts &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;# $1 is the first argument passed to the function&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr ATCG TAGC &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    python -c &lt;span class=&#34;s2&#34;&gt;&amp;#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&amp;#39;T&amp;#39;), o.count(&amp;#39;G&amp;#39;), o.count(&amp;#39;C&amp;#39;), o.count(&amp;#39;A&amp;#39;))&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Use the `-f` flag to export functions&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; -f count_nts
+
+parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; count_nts ::: TAAT TTT AAAAT GCGCAT &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the basics down, lets see how we can use parallel to speed up bioinformatics.&lt;/p&gt;
+
+&lt;h1 id=&#34;gnu-parallel-for-variant-calling&#34;&gt;GNU Parallel for Variant Calling&lt;/h1&gt;
+
+&lt;p&gt;When working with BAMs or VCFs you can parallelize across chromosomes. Most variant callers or annotation tools allow you to operate on a single chromosome at a time by specifying a region. This allows us to apply a &lt;code&gt;split-apply-combine&lt;/code&gt; strategy by splitting by chromosome, operating on each chromosome, and combining the results at the end.&lt;/p&gt;
+
+&lt;h2 id=&#34;extract-chromosome-list-from-a-bam&#34;&gt;&lt;strong&gt;Extract&lt;/strong&gt; chromosome list from a BAM&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;chrom_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;samtools idxstats in.bam &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -f &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep -v &lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# For c. elegans you can would see the following 7&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# I&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# II&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# III&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# IV&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# V&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# X&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# MtDNA&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can create a function so this operation is easier going forward:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; bam_chromosomes &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    samtools idxstats &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -f &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep -v &lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;apply-an-operation-to-each-chromosome&#34;&gt;&lt;strong&gt;Apply&lt;/strong&gt; an operation to each chromosome&lt;/h2&gt;
+
+&lt;p&gt;Here is where GNU parallel comes into play: Parallelized variant calling by chromosome:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;genome&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;path/to/genome.fa
+&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; genome &lt;span class=&#34;c1&#34;&gt;# This is critical!&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; parallel_call &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    bcftools mpileup &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;        --fasta-ref &lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;genome&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;        --regions &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;        --output-type u &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    bcftools call --multiallelic-caller &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;                  --variants-only &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;                  --output-type u - &amp;gt; &lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/.bam/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;.bcf
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; -f parallel_call
+
+&lt;span class=&#34;nv&#34;&gt;chrom_set&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;bam_chromosomes test.bam&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+parallel --verbose -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; parallel_call sample_A.bam ::: &lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;chrom_set&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A few important notes regarding this step:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You must export any variables you use within a parallelized function. That is what I am doing here with the reference &lt;code&gt;genome&lt;/code&gt; variable.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bcftools mpileup&lt;/code&gt; outputs an uncompressed pileup (&lt;code&gt;--output-type=u&lt;/code&gt;). This is done for efficiency sake - there is no reason to pipe a compressed form of data for it to need to be uncompressed by the next tool.&lt;/li&gt;
+&lt;li&gt;Similarly, I also output an uncompressed set of variant calls &lt;code&gt;${1/.bam/}.$2.bcf&lt;/code&gt; because these are temporary files that we will remove later.&lt;/li&gt;
+&lt;li&gt;Finally, I use a variable substitution to remove the extension from the bam and to generate a &lt;code&gt;&amp;lt;sample&amp;gt;.&amp;lt;chromsome&amp;gt;.bcf&lt;/code&gt; filename: &lt;code&gt;${1/.bam/}.$2.bcf&lt;/code&gt; → &lt;code&gt;sample_A.I.bam&lt;/code&gt;, &lt;code&gt;sample_A.II.bam&lt;/code&gt;, etc. This prevents filename collisions if we are calling many samples simultaneously.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;combine-the-variant-calls&#34;&gt;&lt;strong&gt;Combine&lt;/strong&gt; the variant calls.&lt;/h2&gt;
+
+&lt;p&gt;Once we have completed variant calling we need to combine everything back in the right order. We can use a bash array to add a prefix and suffix to the list of chromosomes to reconstruct the output filenames and concatenate them into a single file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Generate an array of the resulting files&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# to be concatenated.&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;sample_name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;sample_A&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -- &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$chrom_set&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s2&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -- &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;@/#/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;sample_name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -- &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;@/%/.bcf&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# This will generate a list of the output files:&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# sample_A.I.bcf sample_B.II.bcf etc.&lt;/span&gt;
+
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -- &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;@/#/test.&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -- &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;@/%/.bcf&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Output compressed result&lt;/span&gt;
+bcftools concat &lt;span class=&#34;nv&#34;&gt;$@&lt;/span&gt; --output-type b &amp;gt; &lt;span class=&#34;nv&#34;&gt;$sample_name&lt;/span&gt;.bcf
+
+&lt;span class=&#34;c1&#34;&gt;# Remove intermediate files&lt;/span&gt;
+rm &lt;span class=&#34;nv&#34;&gt;$@&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To ensure the intermediate files are removed even when errors occur you should use a &lt;a href=&#34;http://redsymbol.net/articles/bash-exit-traps/&#34;&gt;bash trap&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;GNU Parallel can greatly speed up simple parallelization scenerios. Additional code is often required to handle the &amp;ldquo;splitting&amp;rdquo; and &amp;ldquo;combining&amp;rdquo; steps, but this can allow for tremendous efficiency gains.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Converting VCF To JSON</title>

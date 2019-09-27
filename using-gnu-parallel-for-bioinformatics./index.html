@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Using GNU-Parallel for bioinformatics. - Daniel E. Cook</title>
+  <meta content='Using GNU-Parallel for bioinformatics. - Daniel E. Cook' property='title' />
+  <meta content='Using GNU-Parallel for bioinformatics. - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="GNU Parallel is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.
+Many HPC clusters will have GNU-Parallel pre-installed or available as a module. You can also install it using homebrew or other package managers.
+Basic Usage Lets start with a basic example:
+seq 1 5 | parallel -j 4 echo Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into parallel." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./" />
+
+
+<meta property="article:published_time" content="2019-09-27T01:30:53&#43;00:00"/>
+
+<meta property="article:modified_time" content="2019-09-27T01:30:53&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+  --max-width: 850px;
+}</style>
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Daniel E. Cook</a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Using GNU-Parallel for bioinformatics.</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-09-27</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/bioinformatics' class="link silver tag">bioinformatics</a> &nbsp;&nbsp;<a href='/tags/tutorial' class="link silver tag">tutorial</a> &nbsp;&nbsp;<a href='/tags/bash' class="link silver tag">bash</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content">
+
+<p><a href="https://www.gnu.org/software/parallel/">GNU Parallel</a> is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.</p>
+
+<p>Many HPC clusters will have GNU-Parallel pre-installed or available as a module. You can also install it using <a href="brew.sh">homebrew</a> or other package managers.</p>
+
+<h1 id="basic-usage">Basic Usage</h1>
+
+<p>Lets start with a basic example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> echo</code></pre></div>
+<p>Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into <code>parallel</code>. We have provided the command <code>echo</code> which will be parallelized across <code>j=4</code> jobs. We can see what this looks like by using the <code>--dry-run</code> flag which prints the commands to be run.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel --dry-run -j <span class="m">4</span> echo</code></pre></div><div class="highlight"><pre class="chroma">echo 3
+echo 4
+echo 5
+echo 2
+echo 1</pre></div>
+<p>The results are out of order! This is due to the nature of parallelization. Not all &ldquo;jobs&rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &ldquo;first in first out&rdquo; result set by using the <code>-k</code> flag. Lets see what the <strong>output</strong> looks like by removing the <code>--dry-run</code> flag too:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div><div class="highlight"><pre class="chroma">1
+2
+3
+4
+5</pre></div>
+<p>Like any other command, you can send this output to a file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k <span class="nb">echo</span> &gt; out.txt</code></pre></div>
+<h2 id="j"><code>-j</code></h2>
+
+<p>In order for GNU Parllel to work, you want to have a multi-core CPU. Parallelizing across more cores than you have available can actually make performance <strong>worse</strong>, so it is important to tune the <code>-j</code> parameter to the number of cores available.</p>
+
+<p>Luckily, parallel allows you to specify <code>-j</code> by the percent of cores or in relation to the number of cores:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">100</span>% <span class="c1"># Uses 100% of cores.</span>
+parallel -j -1 <span class="c1"># Uses 1 less than the total number of cores.</span>
+parallel -j +1 <span class="c1"># Parallelize across the number of cores + 1</span></code></pre></div>
+<h2 id="use-for-args">Use <code>:::</code> for args</h2>
+
+<p>Use <code>:::</code> to specify arguments from incoming commands or lists.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div>
+<p><strong>Note</strong> - There are limits to the number of arguments you can provide with a process substitution. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div>
+<h2 id="use-for-args-within-files">Use <code>::::</code> for args within files</h2>
+
+<p>For large argument lists you can specify a file with a list of arguments: one per line, using <code>::::</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> :::: my_args.txt</code></pre></div>
+<h2 id="use-to-define-argument-location">Use <code>{}</code> to define argument location</h2>
+
+<p>By default, <code>parallel</code> assumes the arguments are placed at the end of the input command, but you can explicitly place arguments in commands using <code>{}</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span class="m">4</span> -k <span class="nb">echo</span> <span class="se">\&#34;</span><span class="o">{}</span> <span class="s2">&#34;&lt;-- a number&#34;</span><span class="se">\&#34;</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div><div class="highlight"><pre class="chroma">echo &#34;1 &lt;-- a number&#34;
+echo &#34;2 &lt;-- a number&#34;
+echo &#34;3 &lt;-- a number&#34;
+echo &#34;4 &lt;-- a number&#34;
+echo &#34;5 &lt;-- a number&#34;</pre></div>
+<p>Notice that we are having to escape quotes - there are ways around this.</p>
+
+<h2 id="combinatorials">Combinatorials</h2>
+
+<p>You can keep adding <code>:::</code> and <code>::::</code> to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for comparing across datasets.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -k -j <span class="m">4</span> Rscript run_analysis.R <span class="o">{</span><span class="m">1</span><span class="o">}</span> <span class="o">{</span><span class="m">2</span><span class="o">}</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">2</span><span class="sb">`</span> ::: A B C</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-csv" data-lang="csv">Rscript run_analysis.R 1 A
+Rscript run_analysis.R 1 B
+Rscript run_analysis.R 1 C
+Rscript run_analysis.R 2 A
+Rscript run_analysis.R 2 B
+Rscript run_analysis.R 2 C</code></pre></div>
+<h2 id="parallelize-functions">Parallelize Functions</h2>
+
+<p>In some cases, you want to compute something more substantial. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;ATTA&#34;</span> <span class="p">|</span>  tr ATCG TAGC <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    python -c <span class="s2">&#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&#39;T&#39;), o.count(&#39;G&#39;), o.count(&#39;C&#39;), o.count(&#39;A&#39;))&#34;</span></code></pre></div>
+<p>This command has two operations. While is it possible to incorporate this into a &lsquo;one-liner&rsquo;, it is far easier to create a bash function, export it, and use that as input.</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">function</span> count_nts <span class="o">{</span>
+    <span class="c1"># $1 is the first argument passed to the function</span>
+    <span class="nb">echo</span> <span class="nv">$1</span> <span class="p">|</span> tr ATCG TAGC <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    python -c <span class="s2">&#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&#39;T&#39;), o.count(&#39;G&#39;), o.count(&#39;C&#39;), o.count(&#39;A&#39;))&#34;</span>
+<span class="o">}</span>
+
+<span class="c1"># Use the `-f` flag to export functions</span>
+<span class="nb">export</span> -f count_nts
+
+parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\t&#39;</span></code></pre></div>
+<p>With the basics down, lets see how we can use parallel to speed up bioinformatics.</p>
+
+<h1 id="gnu-parallel-for-variant-calling">GNU Parallel for Variant Calling</h1>
+
+<p>When working with BAMs or VCFs you can parallelize across chromosomes. Most variant callers or annotation tools allow you to operate on a single chromosome at a time by specifying a region. This allows us to apply a <code>split-apply-combine</code> strategy by splitting by chromosome, operating on each chromosome, and combining the results at the end.</p>
+
+<h2 id="extract-chromosome-list-from-a-bam"><strong>Extract</strong> chromosome list from a BAM</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">chrom_list</span><span class="o">=</span><span class="sb">`</span>samtools idxstats in.bam <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span><span class="sb">`</span>
+
+<span class="c1"># For c. elegans you can would see the following 7</span>
+<span class="c1"># I</span>
+<span class="c1"># II</span>
+<span class="c1"># III</span>
+<span class="c1"># IV</span>
+<span class="c1"># V</span>
+<span class="c1"># X</span>
+<span class="c1"># MtDNA</span></code></pre></div>
+<p>We can create a function so this operation is easier going forward:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> bam_chromosomes <span class="o">{</span>
+    samtools idxstats <span class="nv">$1</span> <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span>
+<span class="o">}</span></code></pre></div>
+<h2 id="apply-an-operation-to-each-chromosome"><strong>Apply</strong> an operation to each chromosome</h2>
+
+<p>Here is where GNU parallel comes into play: Parallelized variant calling by chromosome:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">genome</span><span class="o">=</span>path/to/genome.fa
+<span class="nb">export</span> genome <span class="c1"># This is critical!</span>
+
+<span class="k">function</span> parallel_call <span class="o">{</span>
+    bcftools mpileup <span class="se">\
+</span><span class="se"></span>        --fasta-ref <span class="si">${</span><span class="nv">genome</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>        --regions <span class="nv">$2</span> <span class="se">\
+</span><span class="se"></span>        --output-type u <span class="se">\
+</span><span class="se"></span>        <span class="nv">$1</span> <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    bcftools call --multiallelic-caller <span class="se">\
+</span><span class="se"></span>                  --variants-only <span class="se">\
+</span><span class="se"></span>                  --output-type u - &gt; <span class="si">${</span><span class="nv">1</span><span class="p">/.bam/</span><span class="si">}</span>.<span class="nv">$2</span>.bcf
+<span class="o">}</span>
+
+<span class="nb">export</span> -f parallel_call
+
+<span class="nv">chrom_set</span><span class="o">=</span><span class="sb">`</span>bam_chromosomes test.bam<span class="sb">`</span>
+parallel --verbose -j <span class="m">4</span> parallel_call sample_A.bam ::: <span class="si">${</span><span class="nv">chrom_set</span><span class="si">}</span></code></pre></div>
+<p>A few important notes regarding this step:</p>
+
+<ul>
+<li>You must export any variables you use within a parallelized function. That is what I am doing here with the reference <code>genome</code> variable.</li>
+<li><code>bcftools mpileup</code> outputs an uncompressed pileup (<code>--output-type=u</code>). This is done for efficiency sake - there is no reason to pipe a compressed form of data for it to need to be uncompressed by the next tool.</li>
+<li>Similarly, I also output an uncompressed set of variant calls <code>${1/.bam/}.$2.bcf</code> because these are temporary files that we will remove later.</li>
+<li>Finally, I use a variable substitution to remove the extension from the bam and to generate a <code>&lt;sample&gt;.&lt;chromsome&gt;.bcf</code> filename: <code>${1/.bam/}.$2.bcf</code> → <code>sample_A.I.bam</code>, <code>sample_A.II.bam</code>, etc. This prevents filename collisions if we are calling many samples simultaneously.</li>
+</ul>
+
+<h2 id="combine-the-variant-calls"><strong>Combine</strong> the variant calls.</h2>
+
+<p>Once we have completed variant calling we need to combine everything back in the right order. We can use a bash array to add a prefix and suffix to the list of chromosomes to reconstruct the output filenames and concatenate them into a single file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Generate an array of the resulting files</span>
+<span class="c1"># to be concatenated.</span>
+<span class="nv">sample_name</span><span class="o">=</span><span class="s2">&#34;sample_A&#34;</span>
+<span class="nb">set</span> -- <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$chrom_set</span> <span class="p">|</span> tr <span class="s2">&#34;\n&#34;</span> <span class="s2">&#34; &#34;</span><span class="sb">`</span>
+<span class="nb">set</span> -- <span class="s2">&#34;</span><span class="si">${</span><span class="p">@/#/</span><span class="si">${</span><span class="nv">sample_name</span><span class="si">}</span><span class="p">.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> <span class="nb">set</span> -- <span class="s2">&#34;</span><span class="si">${</span><span class="p">@/%/.bcf</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="c1"># This will generate a list of the output files:</span>
+<span class="c1"># sample_A.I.bcf sample_B.II.bcf etc.</span>
+
+<span class="nb">set</span> -- <span class="s2">&#34;</span><span class="si">${</span><span class="p">@/#/test.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> <span class="nb">set</span> -- <span class="s2">&#34;</span><span class="si">${</span><span class="p">@/%/.bcf</span><span class="si">}</span><span class="s2">&#34;</span>
+
+<span class="c1"># Output compressed result</span>
+bcftools concat <span class="nv">$@</span> --output-type b &gt; <span class="nv">$sample_name</span>.bcf
+
+<span class="c1"># Remove intermediate files</span>
+rm <span class="nv">$@</span></code></pre></div>
+<p>To ensure the intermediate files are removed even when errors occur you should use a <a href="http://redsymbol.net/articles/bash-exit-traps/">bash trap</a>.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>GNU Parallel can greatly speed up simple parallelization scenerios. Additional code is often required to handle the &ldquo;splitting&rdquo; and &ldquo;combining&rdquo; steps, but this can allow for tremendous efficiency gains.</p>
+</div>
+  
+        <div id='comments'></div>
+  
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/converting-vcf-to-json/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-39176354-1', 'auto');
+
+        InstantClick.on('change', function() {
+            ga('send', 'pageview', location.pathname + location.search);
+      });
+       
+
+    InstantClick.init();
+    </script>
+</body>
+</html>

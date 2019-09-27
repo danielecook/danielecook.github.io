@@ -3,26 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.danielecook.com/converting-vcf-to-json/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics./</loc>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bash/</loc>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bioinformatics/</loc>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/tutorial/</loc>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/converting-vcf-to-json/</loc>
+    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
   </url>
   
   <url>
@@ -51,12 +74,6 @@
   <url>
     <loc>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</loc>
     <lastmod>2019-06-28T00:26:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/bash/</loc>
-    <lastmod>2019-06-28T00:26:29+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
