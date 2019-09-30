@@ -99,13 +99,13 @@ type="image/x-icon"/>
 
 <p>Lets start with a basic example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> echo</code></pre></div>
-<p>Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into <code>parallel</code>. We have provided the command <code>echo</code> which will be parallelized across <code>j=4</code> jobs. We can see what this looks like by using the <code>--dry-run</code> flag which prints the commands to be run.</p>
+<p>Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into <code>parallel</code>. We have provided the command <code>echo</code> which will be parallelized across <code>-j=4</code> jobs. We can see what this looks like by using the <code>--dry-run</code> flag which prints the commands to be run.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel --dry-run -j <span class="m">4</span> echo</code></pre></div><div class="highlight"><pre class="chroma">echo 3
 echo 4
 echo 5
 echo 2
 echo 1</pre></div>
-<p>The results are out of order! This is due to the nature of parallelization. Not all &ldquo;jobs&rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &ldquo;first in first out&rdquo; result set by using the <code>-k</code> flag. Lets see what the <strong>output</strong> looks like by removing the <code>--dry-run</code> flag too:</p>
+<p>The results are out of order! This is due to the nature of parallelization. Not all &ldquo;jobs&rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &ldquo;first in first out&rdquo; result set by using the <code>-k</code> flag. Lets see what the <strong>output</strong> looks like by removing the <code>--dry-run</code> flag:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div><div class="highlight"><pre class="chroma">1
 2
 3
@@ -117,23 +117,23 @@ echo 1</pre></div>
 
 <p>In order for GNU Parllel to work, you want to have a multi-core CPU. Parallelizing across more cores than you have available can actually make performance <strong>worse</strong>, so it is important to tune the <code>-j</code> parameter to the number of cores available.</p>
 
-<p>Luckily, parallel allows you to specify <code>-j</code> by the percent of cores or in relation to the number of cores:</p>
+<p>Luckily, parallel allows you to specify <code>-j</code> using a percentage of cores or as a number relative to the total number of cores. For example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">100</span>% <span class="c1"># Uses 100% of cores.</span>
 parallel -j -1 <span class="c1"># Uses 1 less than the total number of cores.</span>
 parallel -j +1 <span class="c1"># Parallelize across the number of cores + 1</span></code></pre></div>
 <h2 id="use-for-args">Use <code>:::</code> for args</h2>
 
-<p>Use <code>:::</code> to specify arguments from incoming commands or lists.</p>
+<p>Use <code>:::</code> to specify arguments derived from commands or lists.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div>
-<p><strong>Note</strong> - There are limits to the number of arguments you can provide with a process substitution. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:</p>
+<p><strong>Note</strong> - There are limits to the number of arguments you can provide with a process substitution as shown above. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div>
 <h2 id="use-for-args-within-files">Use <code>::::</code> for args within files</h2>
 
-<p>For large argument lists you can specify a file with a list of arguments: one per line, using <code>::::</code>.</p>
+<p>For large argument lists you can specify a file with a list of arguments. Specify a file of arguments (one per line) using <code>::::</code>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> :::: my_args.txt</code></pre></div>
-<h2 id="use-to-define-argument-location">Use <code>{}</code> to define argument location</h2>
+<h2 id="use-to-specify-argument-variables">Use <code>{}</code> to specify argument variables</h2>
 
-<p>By default, <code>parallel</code> assumes the arguments are placed at the end of the input command, but you can explicitly place arguments in commands using <code>{}</code>:</p>
+<p>By default, <code>parallel</code> assumes the arguments are placed at the end of the input command, but you can explicitly define where arguments are substituted using <code>{}</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span class="m">4</span> -k <span class="nb">echo</span> <span class="se">\&#34;</span><span class="o">{}</span> <span class="s2">&#34;&lt;-- a number&#34;</span><span class="se">\&#34;</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div><div class="highlight"><pre class="chroma">echo &#34;1 &lt;-- a number&#34;
 echo &#34;2 &lt;-- a number&#34;
 echo &#34;3 &lt;-- a number&#34;
@@ -143,7 +143,7 @@ echo &#34;5 &lt;-- a number&#34;</pre></div>
 
 <h2 id="combinatorials">Combinatorials</h2>
 
-<p>You can keep adding <code>:::</code> and <code>::::</code> to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for comparing across datasets.</p>
+<p>You can keep adding <code>:::</code> and <code>::::</code> to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for testing commands with different combinations of input parameters.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -k -j <span class="m">4</span> Rscript run_analysis.R <span class="o">{</span><span class="m">1</span><span class="o">}</span> <span class="o">{</span><span class="m">2</span><span class="o">}</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">2</span><span class="sb">`</span> ::: A B C</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-csv" data-lang="csv">Rscript run_analysis.R 1 A
 Rscript run_analysis.R 1 B
 Rscript run_analysis.R 1 C
@@ -152,7 +152,7 @@ Rscript run_analysis.R 2 B
 Rscript run_analysis.R 2 C</code></pre></div>
 <h2 id="parallelize-functions">Parallelize Functions</h2>
 
-<p>In some cases, you want to compute something more substantial. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.</p>
+<p>In some cases, you want to perform a series of commands. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;ATTA&#34;</span> <span class="p">|</span>  tr ATCG TAGC <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    python -c <span class="s2">&#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&#39;T&#39;), o.count(&#39;G&#39;), o.count(&#39;C&#39;), o.count(&#39;A&#39;))&#34;</span></code></pre></div>
 <p>This command has two operations. While is it possible to incorporate this into a &lsquo;one-liner&rsquo;, it is far easier to create a bash function, export it, and use that as input.</p>

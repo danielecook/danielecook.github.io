@@ -33,13 +33,13 @@
 
 &lt;p&gt;Lets start with a basic example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into &lt;code&gt;parallel&lt;/code&gt;. We have provided the command &lt;code&gt;echo&lt;/code&gt; which will be parallelized across &lt;code&gt;j=4&lt;/code&gt; jobs. We can see what this looks like by using the &lt;code&gt;--dry-run&lt;/code&gt; flag which prints the commands to be run.&lt;/p&gt;
+&lt;p&gt;Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into &lt;code&gt;parallel&lt;/code&gt;. We have provided the command &lt;code&gt;echo&lt;/code&gt; which will be parallelized across &lt;code&gt;-j=4&lt;/code&gt; jobs. We can see what this looks like by using the &lt;code&gt;--dry-run&lt;/code&gt; flag which prints the commands to be run.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel --dry-run -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;echo 3
 echo 4
 echo 5
 echo 2
 echo 1&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The results are out of order! This is due to the nature of parallelization. Not all &amp;ldquo;jobs&amp;rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &amp;ldquo;first in first out&amp;rdquo; result set by using the &lt;code&gt;-k&lt;/code&gt; flag. Lets see what the &lt;strong&gt;output&lt;/strong&gt; looks like by removing the &lt;code&gt;--dry-run&lt;/code&gt; flag too:&lt;/p&gt;
+&lt;p&gt;The results are out of order! This is due to the nature of parallelization. Not all &amp;ldquo;jobs&amp;rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &amp;ldquo;first in first out&amp;rdquo; result set by using the &lt;code&gt;-k&lt;/code&gt; flag. Lets see what the &lt;strong&gt;output&lt;/strong&gt; looks like by removing the &lt;code&gt;--dry-run&lt;/code&gt; flag:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;1
 2
 3
@@ -51,23 +51,23 @@ echo 1&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In order for GNU Parllel to work, you want to have a multi-core CPU. Parallelizing across more cores than you have available can actually make performance &lt;strong&gt;worse&lt;/strong&gt;, so it is important to tune the &lt;code&gt;-j&lt;/code&gt; parameter to the number of cores available.&lt;/p&gt;
 
-&lt;p&gt;Luckily, parallel allows you to specify &lt;code&gt;-j&lt;/code&gt; by the percent of cores or in relation to the number of cores:&lt;/p&gt;
+&lt;p&gt;Luckily, parallel allows you to specify &lt;code&gt;-j&lt;/code&gt; using a percentage of cores or as a number relative to the total number of cores. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;% &lt;span class=&#34;c1&#34;&gt;# Uses 100% of cores.&lt;/span&gt;
 parallel -j -1 &lt;span class=&#34;c1&#34;&gt;# Uses 1 less than the total number of cores.&lt;/span&gt;
 parallel -j +1 &lt;span class=&#34;c1&#34;&gt;# Parallelize across the number of cores + 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;use-for-args&#34;&gt;Use &lt;code&gt;:::&lt;/code&gt; for args&lt;/h2&gt;
 
-&lt;p&gt;Use &lt;code&gt;:::&lt;/code&gt; to specify arguments from incoming commands or lists.&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;:::&lt;/code&gt; to specify arguments derived from commands or lists.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - There are limits to the number of arguments you can provide with a process substitution. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - There are limits to the number of arguments you can provide with a process substitution as shown above. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k echo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;use-for-args-within-files&#34;&gt;Use &lt;code&gt;::::&lt;/code&gt; for args within files&lt;/h2&gt;
 
-&lt;p&gt;For large argument lists you can specify a file with a list of arguments: one per line, using &lt;code&gt;::::&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For large argument lists you can specify a file with a list of arguments. Specify a file of arguments (one per line) using &lt;code&gt;::::&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; :::: my_args.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;use-to-define-argument-location&#34;&gt;Use &lt;code&gt;{}&lt;/code&gt; to define argument location&lt;/h2&gt;
+&lt;h2 id=&#34;use-to-specify-argument-variables&#34;&gt;Use &lt;code&gt;{}&lt;/code&gt; to specify argument variables&lt;/h2&gt;
 
-&lt;p&gt;By default, &lt;code&gt;parallel&lt;/code&gt; assumes the arguments are placed at the end of the input command, but you can explicitly place arguments in commands using &lt;code&gt;{}&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;By default, &lt;code&gt;parallel&lt;/code&gt; assumes the arguments are placed at the end of the input command, but you can explicitly define where arguments are substituted using &lt;code&gt;{}&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel --dry-run -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; -k &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;-- a number&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;echo &amp;#34;1 &amp;lt;-- a number&amp;#34;
 echo &amp;#34;2 &amp;lt;-- a number&amp;#34;
 echo &amp;#34;3 &amp;lt;-- a number&amp;#34;
@@ -77,7 +77,7 @@ echo &amp;#34;5 &amp;lt;-- a number&amp;#34;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;combinatorials&#34;&gt;Combinatorials&lt;/h2&gt;
 
-&lt;p&gt;You can keep adding &lt;code&gt;:::&lt;/code&gt; and &lt;code&gt;::::&lt;/code&gt; to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for comparing across datasets.&lt;/p&gt;
+&lt;p&gt;You can keep adding &lt;code&gt;:::&lt;/code&gt; and &lt;code&gt;::::&lt;/code&gt; to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for testing commands with different combinations of input parameters.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;parallel --dry-run -k -j &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; Rscript run_analysis.R &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; ::: &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;seq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; ::: A B C&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csv&#34; data-lang=&#34;csv&#34;&gt;Rscript run_analysis.R 1 A
 Rscript run_analysis.R 1 B
 Rscript run_analysis.R 1 C
@@ -86,7 +86,7 @@ Rscript run_analysis.R 2 B
 Rscript run_analysis.R 2 C&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;parallelize-functions&#34;&gt;Parallelize Functions&lt;/h2&gt;
 
-&lt;p&gt;In some cases, you want to compute something more substantial. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.&lt;/p&gt;
+&lt;p&gt;In some cases, you want to perform a series of commands. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;ATTA&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  tr ATCG TAGC &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
 &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    python -c &lt;span class=&#34;s2&#34;&gt;&amp;#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&amp;#39;T&amp;#39;), o.count(&amp;#39;G&amp;#39;), o.count(&amp;#39;C&amp;#39;), o.count(&amp;#39;A&amp;#39;))&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This command has two operations. While is it possible to incorporate this into a &amp;lsquo;one-liner&amp;rsquo;, it is far easier to create a bash function, export it, and use that as input.&lt;/p&gt;
