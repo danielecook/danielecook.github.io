@@ -4,19 +4,36 @@
   
   <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://www.danielecook.com/tags/r/</loc>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</loc>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/notebook/</loc>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -57,12 +74,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/vcf/</loc>
     <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/r/</loc>
-    <lastmod>2019-07-09T00:26:29+01:00</lastmod>
     <priority>0</priority>
   </url>
   

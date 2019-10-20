@@ -11,11 +11,191 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 27 Sep 2019 01:30:53 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Oct 2019 01:30:53 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Speeding up Reading and Writing in R</title>
+      <link>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</link>
+      <pubDate>Sun, 20 Oct 2019 01:30:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</guid>
+      <description>
+
+&lt;p&gt;If you are relying on built-in functions to read and write large datasets you are losing out  on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.&lt;/p&gt;
+
+&lt;h1 id=&#34;sample-data&#34;&gt;Sample Data&lt;/h1&gt;
+
+&lt;p&gt;First, I&amp;rsquo;ll generate a sample dataset with ten million rows we can use for testing.&lt;/p&gt;
+
+&lt;h2 id=&#34;generating-a-test-dataset&#34;&gt;Generating a test dataset&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;tidyverse&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;microbenchmark&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+n &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1e6&lt;/span&gt;
+times &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# Number of times to run each benchmark&lt;/span&gt;
+data &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;a &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; runif&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;n&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   b &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;month.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   d &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;LETTERS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+
+write.table&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; quote &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; row.names &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here are the first few rows of that dataset:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;a&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;b&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;c&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;d&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1926477&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;789&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;August&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;R&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.8303095&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;156&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;March&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1144189&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;742&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;July&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;P&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2828960&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;337&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;April&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;S&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2861664&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;43&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;November&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;W&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;reading-tsvs&#34;&gt;Reading TSVs&lt;/h1&gt;
+
+&lt;p&gt;Base R has some pretty slow functions for reading files that also are poorly designed (row numbers and quotes by default, issues reading column names with special characters, etc.). Lets see how they compare with more up to date packages.&lt;/p&gt;
+
+&lt;h2 id=&#34;vroom-vs-readr-vs-base-r-vs-data-table&#34;&gt;vroom vs readr vs base R vs data.table&lt;/h2&gt;
+
+&lt;p&gt;Below I use microbenchmark to compare the following methods for reading this 1M row dataset:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;base::read.table&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;base::read.delim&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;readr::read_tsv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vroom::vroom&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;data.table::fread&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tbl_df(data.table::fread)&lt;/code&gt; - This converts the data.table to a &lt;code&gt;tibble::tbl_df&lt;/code&gt; object which is the type of data structure &lt;code&gt;readr&lt;/code&gt; and &lt;code&gt;vroom&lt;/code&gt; return and is what is used in the &lt;a href=&#34;https://www.tidyverse.org/&#34;&gt;tidyverse&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These functions will output data in either a data.frame, tibble, or data.table.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;bm &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; microbenchmark&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`base::read.table`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; read.table&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`base::read.delim`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; read.delim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`readr::read_tsv`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; readr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;read_tsv&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`vroom ~ 1 thread`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; num_threads &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`vroom ~ 8 threads`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`tbl_df(data.table::fread) ~ 1 thread`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; tbl_df&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fread&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; nThread &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`tbl_df(data.table::fread) ~ 8 threads`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; tbl_df&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fread&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`data.table::fread ~ 1 thread`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fread&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; nThread &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  &lt;span class=&#34;sb&#34;&gt;`data.table::fread ~ 8 threads`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fread&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+  times &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; times
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+autoplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;bm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; 
+  labs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;caption &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; glue&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;glue&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{scales::comma(n)} rows; {times} times&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/benchmarks-1.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+
+&lt;p&gt;Looks like the base R functions lose - by a lot. &lt;code&gt;data.table::fread&lt;/code&gt; and &lt;code&gt;vroom::vroom&lt;/code&gt; come out on top at ~ 100 milleseconds whereas the base functions take ~10 seconds or 100x longer!&lt;/p&gt;
+
+&lt;p&gt;Stop wasting your time with &lt;code&gt;read.table&lt;/code&gt;, &lt;code&gt;read.csv&lt;/code&gt;, and &lt;code&gt;read.delim&lt;/code&gt; and move to something quicker like &lt;code&gt;data.table::fread&lt;/code&gt;, or &lt;code&gt;vroom::vroom&lt;/code&gt; both of which perform much faster. Both can also take advantage of multiple cores but outperform base R even when they only use a single thread!&lt;/p&gt;
+
+&lt;h1 id=&#34;writing-tsvs&#34;&gt;Writing TSVs&lt;/h1&gt;
+
+&lt;h2 id=&#34;vroom-vs-readr-vs-data-table-vs-base-r&#34;&gt;vroom vs readr vs data.table vs base R&lt;/h2&gt;
+
+&lt;p&gt;Next I compared methods for writing TSV files. Base R has the functions &lt;code&gt;write.csv&lt;/code&gt; and &lt;code&gt;write.table&lt;/code&gt; for writing delimited text files. Unfortunately, these too have poor defaults (quoting strings, adding rownames).  I have turned these off for the comparison.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;bm &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; microbenchmark&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`base::write.table`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; write.table&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; file &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; quote&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; sep &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\t&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`readr::write_tsv`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; readr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;write_tsv&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`readr::write_tsv + gz`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; readr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;write_tsv&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv.gz&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`data.table::fwrite ~ 1 thread`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fwrite&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; nThread &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`data.table::fwrite ~ 8 threads`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; data.table&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;fwrite&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; nThread &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`vroom::vroom_write ~ 1 thread`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom_write&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; num_threads &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`vroom::vroom_write ~ 8 threads`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom_write&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`vroom::vroom_write ~ 1 thread + gz`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom_write&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv.gz&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; num_threads &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;sb&#34;&gt;`vroom::vroom_write ~ 8 threads + gz`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; vroom&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;vroom_write&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.tsv.gz&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    times &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; times
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+autoplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;bm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/writing_tsv-1.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;data.table::fwrite&lt;/code&gt; performs the fastest in multi-threaded mode with &lt;code&gt;vroom::vroom&lt;/code&gt; not far behind. These are ~100x faster than base R. Apparently, applying gzip compression slows things down considerably but can save a lot of space.&lt;/p&gt;
+
+&lt;h3 id=&#34;serializing-data&#34;&gt;Serializing Data&lt;/h3&gt;
+
+&lt;p&gt;Serialized data formats retain column types and avoid data loss that may occur when writing and reading TSVs. Here I compare:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;feather::write_feather&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fst::write_fst&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;base::save&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;base::saveRDS&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that these serialization formats each provide other benefits that should be considered. For example, feather files are a good interchange format between R and python using the python Pandas module.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;bm &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; microbenchmark&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`base::save`&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; file &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.Rda&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`saveRDS`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;saveRDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; file &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.rds&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`fst::write_fst`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; fst&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;write_fst&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; path &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.fst&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`feather::write_feather`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; feather&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;write_feather&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; path &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.feather&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   times &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; times
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+autoplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;bm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/serialize-1.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fst&lt;/code&gt; and &lt;code&gt;feather&lt;/code&gt; perform about the same and again, about ~100x better than base R.&lt;/p&gt;
+
+&lt;h3 id=&#34;reading-serialized-data&#34;&gt;Reading Serialized Data&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;bm &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; microbenchmark&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`base::load`&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;file &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.Rda&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`readRDS`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;readRDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;file &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.rds&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`fst::read_fst`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; fst&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;read_fst&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;path &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.fst&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   &lt;span class=&#34;sb&#34;&gt;`feather::read_feather`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; feather&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;read_feather&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;path &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;out.feather&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+   times &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; times
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+autoplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;bm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/serialize_bm-1.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fst&lt;/code&gt; reads the quickest but &lt;code&gt;feather&lt;/code&gt; is not too far behind. These functions are about ~10x better than base R in this comparison.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Using GNU-Parallel for bioinformatics</title>
