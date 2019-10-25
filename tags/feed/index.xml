@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 20 Oct 2019 01:30:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>google-sheets</title>
+      <link>https://www.danielecook.com/tags/google-sheets/</link>
+      <pubDate>Fri, 25 Oct 2019 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/google-sheets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://www.danielecook.com/tags/python/</link>
+      <pubDate>Fri, 25 Oct 2019 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>R</title>
@@ -103,15 +121,6 @@
     </item>
     
     <item>
-      <title>python</title>
-      <link>https://www.danielecook.com/tags/python/</link>
-      <pubDate>Thu, 02 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>chicago</title>
       <link>https://www.danielecook.com/tags/chicago/</link>
       <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
@@ -144,15 +153,6 @@
       <pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/bigquery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>google-sheets</title>
-      <link>https://www.danielecook.com/tags/google-sheets/</link>
-      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/google-sheets/</guid>
       <description></description>
     </item>
     
@@ -229,7 +229,7 @@
     </item>
     
     <item>
-      <title>CYCLING</title>
+      <title>cycling</title>
       <link>https://www.danielecook.com/tags/cycling/</link>
       <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
       

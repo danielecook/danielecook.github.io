@@ -4,13 +4,36 @@
   
   <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://www.danielecook.com/from-pandas-to-google-sheets/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/google-sheets/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/python/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -23,12 +46,6 @@
   <url>
     <loc>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</loc>
     <lastmod>2019-10-20T01:30:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -146,12 +163,6 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/python/</loc>
-    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</loc>
     <lastmod>2017-01-31T00:00:00+00:00</lastmod>
   </url>
@@ -233,12 +244,6 @@
   <url>
     <loc>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</loc>
     <lastmod>2015-10-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/google-sheets/</loc>
-    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
