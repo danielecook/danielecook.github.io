@@ -3,26 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.danielecook.com/calculate-insert-size-metrics-faster/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/nim/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/vcf/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/from-pandas-to-google-sheets/</loc>
     <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -80,18 +97,6 @@
   <url>
     <loc>https://www.danielecook.com/converting-vcf-to-json/</loc>
     <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/nim/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/vcf/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

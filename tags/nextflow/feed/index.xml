@@ -18,7 +18,7 @@
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</guid>
-      <description>If you use Nextflow on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your .bashrc.
+      <description>If you use Nextflow on a cluster with the SLURM scheduler, then these bash functions may be useful to you and worth sticking in your .bashrc.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14  # Shortcut for going to work directories # Usage: gw &amp;lt;workdir pattern&amp;gt; # Replace the work directory below as needed # Where workdir pattern is something like &amp;#34;ab/afedeu&amp;#34; function gw { path=`ls --color=none -d /path/to/work/directory/$1*`  cd $path } # sq squeue alternative # Outputs more complete information about jobs including the work directory function sq() { squeue --user `whoami` --format=&amp;#39;%.</description>
     </item>
     

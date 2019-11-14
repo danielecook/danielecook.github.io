@@ -9,7 +9,7 @@
   <meta content='Useful Nextflow bash functions for SLURM - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="If you use Nextflow on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your .bashrc.
+<meta property="og:description" content="If you use Nextflow on a cluster with the SLURM scheduler, then these bash functions may be useful to you and worth sticking in your .bashrc.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14  # Shortcut for going to work directories # Usage: gw &lt;workdir pattern&gt; # Replace the work directory below as needed # Where workdir pattern is something like &#34;ab/afedeu&#34; function gw { path=`ls --color=none -d /path/to/work/directory/$1*`  cd $path } # sq squeue alternative # Outputs more complete information about jobs including the work directory function sq() { squeue --user `whoami` --format=&#39;%." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/" />
@@ -87,7 +87,7 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p>If you use <a href="http://www.nextflow.io">Nextflow</a> on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your <code>.bashrc</code>.</p>
+  <div class="lh-copy post-content"><p>If you use <a href="http://www.nextflow.io">Nextflow</a> on a cluster with the SLURM scheduler, then these bash functions may be useful to you and worth sticking in your <code>.bashrc</code>.</p>
 
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

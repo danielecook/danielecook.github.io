@@ -4,17 +4,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>SQL - Daniel E. Cook</title>
-  <meta content='SQL - Daniel E. Cook' property='title' />
-  <meta content='SQL - Daniel E. Cook' property='og:title' />
+  <title>Calculate Insert Size Metrics Faster - Daniel E. Cook</title>
+  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='title' />
+  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.danielecook.com/tags/sql/" />
+<meta property="og:description" content="Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.
+To speed things up, I created a new command: insert-size. insert-size is approximately
+Insert-size does not operate in exactly the same way as picard CollectInsertSizeMetrics, but the results are stunningly close.
+insert-size has some nice advantages over picard as well. The output is a lot more interpretable and parsable than standard picard output." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/calculate-insert-size-metrics-faster/" />
 
 
-<meta property="og:updated_time" content="2013-11-02T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2019-11-07T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2019-11-07T00:00:00&#43;00:00"/>
+
 
 
 
@@ -45,7 +51,7 @@
 
 type="image/x-icon"/>
 
-<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/tags/sql/feed/index.xml" title="Daniel E. Cook" />
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/calculate-insert-size-metrics-faster/feed/index.xml" title="Daniel E. Cook" />
 </head>
 <body class="global-font">
   <div id="nav" class="content-width center">
@@ -72,153 +78,68 @@ type="image/x-icon"/>
 </div>
 
   
-
 <main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Calculate Insert Size Metrics Faster</div>
   
-  <h1 class="f2 fw6 silver" id="tag">SQL</h1>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2019-11-07</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/vcf' class="link silver tag">VCF</a> &nbsp;&nbsp;<a href='/tags/nim' class="link silver tag">nim</a> &nbsp;&nbsp; 
+    
+  </p>
   
-  <ul class="list pa0">
-    
-        <li class="mb2">
-      <div class='fl w-10 pa2 tl nowrap' style='line-height: 25px;'>
-        <time>2013-11-02</time> 
-      </div>
-      <div class='fl w-90 pa2 pl5 pl4'>
-          <a class="f4 heading-color heading-font fw6 no-underline" href="https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/">Accessing the UCSC Genome Browser MySQL Database</a>
-          <p class="f5 mt1 silver">
-            
-            <a href='/tags/sql' class="link silver tag">SQL</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-          </p>
-      </div>
-  </li>
-    
-  </ul>
+  <div class="lh-copy post-content"><p>Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.</p>
+
+<p>To speed things up, I created a new command: <code>insert-size</code>. <code>insert-size</code> is approximately</p>
+
+<p>Insert-size does not operate in exactly the same way as picard <code>CollectInsertSizeMetrics</code>, but the results are stunningly close.</p>
+
+<p><img src="/insert_size_compare.png" alt="" /><!-- --></p>
+
+<p><code>insert-size</code> has some nice advantages over picard as well. The output is a lot more interpretable and parsable than standard picard output.</p>
+
+<p>(Show example of diff)</p>
+
+<p>Additionally, you can run <code>insert-size</code> on a list of bams and collate the results in a file for comparison. The output contains the sample name identified within the bam as well as the filename.</p>
+
+<p>You can also output the distribution of insert-sizes by count by using the <code>--dist</code> flag.</p>
+
+<p>There is room for improvement with this command. It doesn&rsquo;t examine results by lane or sequencing library. Additionally, it could be made to be even faster by parallelizing across chromosome.</p>
+
+<p>For example, a relatively small BAM file with ~2M reads takes an average of XX seconds to</p>
+
+<hr />
+
+<p>Recently I started developing a set of utilities called <a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
+</div>
+  
+        <div id='comments'></div>
+  
 </main>
 
+   
 
 
 
-<div class="dn tr fixed right-2 " id="tag-cloud">
-    <strong>tags</strong> <br>
-    
-    
-    <a class="silver tag" href="/tags/gist">gist</a> (19) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/alfred">alfred</a> (9) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/r">r</a> (6) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/python">python</a> (5) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bash">bash</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/vcf">vcf</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/cycling">cycling</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/excel">excel</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fastq">fastq</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/google-sheets">google-sheets</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bam">bam</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/chicago">chicago</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/database">database</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fasta">fasta</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/nim">nim</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/pubmed">pubmed</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bcftools">bcftools</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bigquery">bigquery</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bioinformatics">bioinformatics</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/genetics">genetics</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/gff">gff</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/guitar">guitar</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/nextflow">nextflow</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/notebook">notebook</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver selected tag" href="/tags/sql">sql</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/tips">tips</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/tutorial">tutorial</a> (1) <br/></li>
-    
-  
-  <br />
-  
-</div>
 
-<div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
 <a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
-
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/from-pandas-to-google-sheets/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
 </div>
+
+
 
   <div class='cb'></div>
 <footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">

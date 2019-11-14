@@ -11,11 +11,43 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Oct 2019 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Calculate Insert Size Metrics Faster</title>
+      <link>https://www.danielecook.com/calculate-insert-size-metrics-faster/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/calculate-insert-size-metrics-faster/</guid>
+      <description>&lt;p&gt;Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.&lt;/p&gt;
+
+&lt;p&gt;To speed things up, I created a new command: &lt;code&gt;insert-size&lt;/code&gt;. &lt;code&gt;insert-size&lt;/code&gt; is approximately&lt;/p&gt;
+
+&lt;p&gt;Insert-size does not operate in exactly the same way as picard &lt;code&gt;CollectInsertSizeMetrics&lt;/code&gt;, but the results are stunningly close.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/insert_size_compare.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;insert-size&lt;/code&gt; has some nice advantages over picard as well. The output is a lot more interpretable and parsable than standard picard output.&lt;/p&gt;
+
+&lt;p&gt;(Show example of diff)&lt;/p&gt;
+
+&lt;p&gt;Additionally, you can run &lt;code&gt;insert-size&lt;/code&gt; on a list of bams and collate the results in a file for comparison. The output contains the sample name identified within the bam as well as the filename.&lt;/p&gt;
+
+&lt;p&gt;You can also output the distribution of insert-sizes by count by using the &lt;code&gt;--dist&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;There is room for improvement with this command. It doesn&amp;rsquo;t examine results by lane or sequencing library. Additionally, it could be made to be even faster by parallelizing across chromosome.&lt;/p&gt;
+
+&lt;p&gt;For example, a relatively small BAM file with ~2M reads takes an average of XX seconds to&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Recently I started developing a set of utilities called &lt;a href=&#34;https://github.com/danielecook/seq-collection&#34;&gt;seq-collection&lt;/a&gt; (&lt;strong&gt;sc&lt;/strong&gt;) written in &lt;a href=&#34;https://nim-lang.org/&#34;&gt;nim&lt;/a&gt; and using the fantastic &lt;a href=&#34;https://github.com/brentp/hts-nim&#34;&gt;hts-nim&lt;/a&gt; package.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>From Pandas to Google Sheets</title>
@@ -23,7 +55,7 @@
       <pubDate>Fri, 25 Oct 2019 01:15:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/from-pandas-to-google-sheets/</guid>
-      <description>&lt;p&gt;I wrote the following snippet to post data files to google sheets. In order to get this to work you will need to &lt;a href=&#34;https://gspread.readthedocs.io/en/latest/oauth2.html&#34;&gt;authorize google sheets access&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;I wrote the following snippet to post datasets (e.g. TSVs or CSVs) to google sheets. In order to get this to work you will need to &lt;a href=&#34;https://gspread.readthedocs.io/en/latest/oauth2.html&#34;&gt;authorize google sheets access&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Then you can set the content of any google sheets worksheet to the data from a pandas dataframe by using the &lt;code&gt;pandas_to_sheets&lt;/code&gt; function.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/usr/bin/env python&lt;/span&gt;
@@ -424,7 +456,7 @@ rm &lt;span class=&#34;nv&#34;&gt;$@&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/d
 
 &lt;p&gt;You can download the MAC OSX binary &lt;a href=&#34;https://github.com/danielecook/seq-collection/releases/download/0.0.1/sc_macosx&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Or build from source at &lt;a href=&#34;danielecook/seq-collection&#34;&gt;danielecook/seq-collection&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Or build from source at &lt;a href=&#34;http://www.github.com/danielecook/seq-collection&#34;&gt;danielecook/seq-collection&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;json
@@ -568,7 +600,7 @@ Options:
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</guid>
-      <description>&lt;p&gt;If you use &lt;a href=&#34;http://www.nextflow.io&#34;&gt;Nextflow&lt;/a&gt; on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your &lt;code&gt;.bashrc&lt;/code&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;If you use &lt;a href=&#34;http://www.nextflow.io&#34;&gt;Nextflow&lt;/a&gt; on a cluster with the SLURM scheduler, then these bash functions may be useful to you and worth sticking in your &lt;code&gt;.bashrc&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
