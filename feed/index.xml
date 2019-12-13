@@ -11,43 +11,11 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 01:15:53 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Calculate Insert Size Metrics Faster</title>
-      <link>https://www.danielecook.com/calculate-insert-size-metrics-faster/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/calculate-insert-size-metrics-faster/</guid>
-      <description>&lt;p&gt;Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.&lt;/p&gt;
-
-&lt;p&gt;To speed things up, I created a new command: &lt;code&gt;insert-size&lt;/code&gt;. &lt;code&gt;insert-size&lt;/code&gt; is approximately&lt;/p&gt;
-
-&lt;p&gt;Insert-size does not operate in exactly the same way as picard &lt;code&gt;CollectInsertSizeMetrics&lt;/code&gt;, but the results are stunningly close.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/insert_size_compare.png&#34; alt=&#34;&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;insert-size&lt;/code&gt; has some nice advantages over picard as well. The output is a lot more interpretable and parsable than standard picard output.&lt;/p&gt;
-
-&lt;p&gt;(Show example of diff)&lt;/p&gt;
-
-&lt;p&gt;Additionally, you can run &lt;code&gt;insert-size&lt;/code&gt; on a list of bams and collate the results in a file for comparison. The output contains the sample name identified within the bam as well as the filename.&lt;/p&gt;
-
-&lt;p&gt;You can also output the distribution of insert-sizes by count by using the &lt;code&gt;--dist&lt;/code&gt; flag.&lt;/p&gt;
-
-&lt;p&gt;There is room for improvement with this command. It doesn&amp;rsquo;t examine results by lane or sequencing library. Additionally, it could be made to be even faster by parallelizing across chromosome.&lt;/p&gt;
-
-&lt;p&gt;For example, a relatively small BAM file with ~2M reads takes an average of XX seconds to&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Recently I started developing a set of utilities called &lt;a href=&#34;https://github.com/danielecook/seq-collection&#34;&gt;seq-collection&lt;/a&gt; (&lt;strong&gt;sc&lt;/strong&gt;) written in &lt;a href=&#34;https://nim-lang.org/&#34;&gt;nim&lt;/a&gt; and using the fantastic &lt;a href=&#34;https://github.com/brentp/hts-nim&#34;&gt;hts-nim&lt;/a&gt; package.&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>From Pandas to Google Sheets</title>
