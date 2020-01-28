@@ -9,8 +9,8 @@
   <meta content='A function for retrieving SNP data from Entrez using BioPython - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Biopython is a great tool for interacting with biological databases. I use it to retrieve records from NCBI&#8217;s Entrez databases including Pubmed.
-Unfortunately &#8211; one notable database biopython has trouble working with is the SNP database. This is due to the Bio.Entrez parser being unable to handle the XML returned from this database. One solution is to use a built in Python XML parser, but I thought I&#8217;d try to come up with an easier solution." />
+<meta property="og:description" content="Biopython is a great tool for interacting with biological databases. I use it to retrieve records from NCBI’s Entrez databases including Pubmed.
+Unfortunately – one notable database biopython has trouble working with is the SNP database. This is due to the Bio.Entrez parser being unable to handle the XML returned from this database. One solution is to use a built in Python XML parser, but I thought I’d try to come up with an easier solution." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/a-function-for-retrieving-snp-data-from-entrez-using-biopython/" />
 
@@ -26,7 +26,7 @@ Unfortunately &#8211; one notable database biopython has trouble working with is
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,28 +87,26 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p><a href="http://biopython.org/">Biopython</a> is a great tool for interacting with biological databases. I use it to retrieve records from <a href="http://www.ncbi.nlm.nih.gov/About/tools/restable_mol.html">NCBI&#8217;s Entrez databases</a> including Pubmed.</p>
-
-<p>Unfortunately &#8211; one notable database biopython has trouble working with is the <a href="http://www.ncbi.nlm.nih.gov/snp">SNP</a> database. This is due to the <code>Bio.Entrez</code> parser being unable to handle the XML returned from this database. One solution is to use a built in Python XML parser, but I thought I&#8217;d try to come up with an easier solution.</p>
-
-<p>To solve this problem &#8211; I wrote a function for retrieving SNP data, and parsing it into an array.</p>
+  <div class="lh-copy post-content"><p><a href="http://biopython.org/">Biopython</a> is a great tool for interacting with biological databases. I use it to retrieve records from <a href="http://www.ncbi.nlm.nih.gov/About/tools/restable_mol.html">NCBI’s Entrez databases</a> including Pubmed.</p>
+<p>Unfortunately – one notable database biopython has trouble working with is the <a href="http://www.ncbi.nlm.nih.gov/snp">SNP</a> database. This is due to the <code>Bio.Entrez</code> parser being unable to handle the XML returned from this database. One solution is to use a built in Python XML parser, but I thought I’d try to come up with an easier solution.</p>
+<p>To solve this problem – I wrote a function for retrieving SNP data, and parsing it into an array.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
 <span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">Entrez</span>
 
-<span class="n">Entrez</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">&#34;YOUR@EMAIL.HERE&#34;</span>
+<span class="n">Entrez</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">YOUR@EMAIL.HERE</span><span class="s2">&#34;</span>
 
-<span class="k">def</span> <span class="nf">pull_line</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    This function parses data from lines in one of three ways:
-</span><span class="s2">    1.) Pulls variables out of a particular line when defined as &#34;variablename=[value]&#34; - uses a string to find the variable.
-</span><span class="s2">    2.) Pulls variables based on a set position within a line [splits the line by &#39;|&#39;]
-</span><span class="s2">    3.) Defines variables that can be identified based on a limited possible set of values - [categorical variable, specified using an array]
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">line_set</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">var_set</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">pull_line</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    This function parses data from lines in one of three ways:</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    1.) Pulls variables out of a particular line when defined as </span><span class="s2">&#34;</span><span class="s2">variablename=[value]</span><span class="s2">&#34;</span><span class="s2"> - uses a string to find the variable.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    2.) Pulls variables based on a set position within a line [splits the line by </span><span class="s2">&#39;</span><span class="s2">|</span><span class="s2">&#39;</span><span class="s2">]</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    3.) Defines variables that can be identified based on a limited possible set of values - [categorical variable, specified using an array]</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="n">line_set</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">var_set</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">line_set</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">v</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">line_set</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="p">]</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
@@ -118,142 +116,143 @@ type="image/x-icon"/>
                 <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">line_set</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">line_set</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
     <span class="k">return</span> <span class="n">line_set</span>
 
-<span class="k">def</span> <span class="nf">pull_vars</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span><span class="n">line_start</span><span class="p">,</span><span class="n">line</span><span class="p">,</span><span class="n">multi</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    Delegates and compiles data from entrez flat files dependent on whether
-</span><span class="s2">    the type of data trying to be pulled is contained in unique vs. non-unique lines.
-</span><span class="s2">    For example - the first line of the flat file is always something like this:
-</span><span class="s2">    rs12009 | Homo Sapiens | 9606 | etc.
-</span><span class="s2">    This line is unique (refers to RefSnp identifier)- and only occurs once in each flat file. On the other hand, lines
-</span><span class="s2">    beginning with &#34;ss[number]&#34; refer to &#39;submitted snp&#39; numbers and can appear multiple times.
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">lineset</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; | &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">line_start</span><span class="p">)]</span>
+<span class="k">def</span> <span class="nf">pull_vars</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span><span class="n">line_start</span><span class="p">,</span><span class="n">line</span><span class="p">,</span><span class="n">multi</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    Delegates and compiles data from entrez flat files dependent on whether</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    the type of data trying to be pulled is contained in unique vs. non-unique lines.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    For example - the first line of the flat file is always something like this:</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    rs12009 | Homo Sapiens | 9606 | etc.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    This line is unique (refers to RefSnp identifier)- and only occurs once in each flat file. On the other hand, lines</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    beginning with </span><span class="s2">&#34;</span><span class="s2">ss[number]</span><span class="s2">&#34;</span><span class="s2"> refer to </span><span class="s2">&#39;</span><span class="s2">submitted snp</span><span class="s2">&#39;</span><span class="s2"> numbers and can appear multiple times.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="n">lineset</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1"> | </span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">line_start</span><span class="p">)</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lineset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> 
     <span class="c1"># If the same line exists multiple times - place results into an array</span>
     <span class="k">if</span> <span class="n">multi</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">pulled_vars</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pulled_vars</span> <span class="o">=</span> <span class="p">[</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lineset</span><span class="p">:</span>
             <span class="c1"># Pull date in from line and append</span>
-            <span class="n">pulled_vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pull_line</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span><span class="n">line</span><span class="p">))</span>
+            <span class="n">pulled_vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pull_line</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span><span class="n">line</span><span class="p">)</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pulled_vars</span>  
     <span class="k">else</span><span class="p">:</span>
     <span class="c1"># Else if the line is always unique, output single dictionary</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">lineset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">pulled_vars</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">pulled_vars</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">pull_line</span><span class="p">(</span><span class="n">var_set</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">get_snp</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34; 
-</span><span class="s2">    Takes as input an array of snp identifiers and returns 
-</span><span class="s2">    a parsed dictionary of their data from Entrez.
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">Entrez</span><span class="o">.</span><span class="n">efetch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s1">&#39;SNP&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">q</span><span class="p">),</span> <span class="n">rettype</span><span class="o">=</span><span class="s1">&#39;flt&#39;</span><span class="p">,</span> <span class="n">retmode</span><span class="o">=</span><span class="s1">&#39;flt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># Return dictionary variable</span>
+<span class="k">def</span> <span class="nf">get_snp</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2"> </span><span class="s2">
+</span><span class="s2"></span><span class="s2">    Takes as input an array of snp identifiers and returns </span><span class="s2">
+</span><span class="s2"></span><span class="s2">    a parsed dictionary of their data from Entrez.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">Entrez</span><span class="o">.</span><span class="n">efetch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">SNP</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">,</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="p">,</span> <span class="n">rettype</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">flt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">retmode</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">flt</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span> <span class="c1"># Return dictionary variable</span>
     <span class="c1"># Parse flat file response</span>
-    <span class="k">for</span> <span class="n">snp_info</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">snp_info</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="se">\n</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">snp_info</span>
         <span class="c1"># Parse the First Line. Details of rs flat files available here:</span>
         <span class="c1"># ftp://ftp.ncbi.nlm.nih.gov/snp/specs/00readme.txt</span>
-        <span class="n">snp</span> <span class="o">=</span> <span class="n">snp_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">snp</span> <span class="o">=</span> <span class="n">snp_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># Parse the &#39;rs&#39; line:</span>
-        <span class="n">rsId</span> <span class="o">=</span> <span class="n">snp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; | &#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">rsId</span> <span class="o">=</span> <span class="n">snp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2"> | </span><span class="s2">&#34;</span><span class="p">)</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span>
 
         <span class="c1"># rs vars</span>
-        <span class="n">rs_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;organism&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                   <span class="s2">&#34;taxId&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
-                   <span class="s2">&#34;snpClass&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
-                   <span class="s2">&#34;genotype&#34;</span><span class="p">:</span><span class="s2">&#34;genotype=&#34;</span><span class="p">,</span>
-                   <span class="s2">&#34;rsLinkout&#34;</span><span class="p">:</span><span class="s2">&#34;submitterlink=&#34;</span><span class="p">,</span>
-                   <span class="s2">&#34;date&#34;</span><span class="p">:</span><span class="s2">&#34;updated &#34;</span><span class="p">}</span>
+        <span class="n">rs_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">organism</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">taxId</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">snpClass</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">genotype</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">genotype=</span><span class="s2">&#34;</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">rsLinkout</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">submitterlink=</span><span class="s2">&#34;</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">date</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">updated </span><span class="s2">&#34;</span><span class="p">}</span>
 
         <span class="c1"># rs vars</span>
-        <span class="n">ss_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;ssId&#34;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                   <span class="s2">&#34;handle&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                   <span class="s2">&#34;locSnpId&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
-                   <span class="s2">&#34;orient&#34;</span><span class="p">:</span><span class="s2">&#34;orient=&#34;</span><span class="p">,</span>
-                   <span class="s2">&#34;exemplar&#34;</span><span class="p">:</span><span class="s2">&#34;ss_pick=&#34;</span><span class="p">,</span>
+        <span class="n">ss_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ssId</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">handle</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">locSnpId</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient=</span><span class="s2">&#34;</span><span class="p">,</span>
+                   <span class="sa"></span><span class="s2">&#34;</span><span class="s2">exemplar</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ss_pick=</span><span class="s2">&#34;</span><span class="p">,</span>
                    <span class="p">}</span>
 
         <span class="c1"># SNP line variables:</span>
-        <span class="n">SNP_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;observed&#34;</span><span class="p">:</span><span class="s2">&#34;alleles=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;value&#34;</span><span class="p">:</span><span class="s2">&#34;het=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;stdError&#34;</span><span class="p">:</span><span class="s2">&#34;se(het)=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;validated&#34;</span><span class="p">:</span><span class="s2">&#34;validated=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;validProbMin&#34;</span><span class="p">:</span><span class="s2">&#34;min_prob=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;validProbMax&#34;</span><span class="p">:</span><span class="s2">&#34;max_prob=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;validation&#34;</span><span class="p">:</span><span class="s2">&#34;suspect=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;AlleleOrigin&#34;</span><span class="p">:[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;germline&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;somatic&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;inherited&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;paternal&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;maternal&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;de-novo&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;bipaternal&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;unipaternal&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;not-tested&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;tested-inconclusive&#39;</span><span class="p">],</span>
-                    <span class="s2">&#34;snpType&#34;</span><span class="p">:[</span><span class="s1">&#39;notwithdrawn&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;artifact&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;gene-duplication&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;duplicate-submission&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;notspecified&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;ambiguous-location;&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;low-map-quality&#39;</span><span class="p">]}</span>
+        <span class="n">SNP_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">observed</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">alleles=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">value</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">het=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">stdError</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">se(het)=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">validated</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">validated=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">validProbMin</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">min_prob=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">validProbMax</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">max_prob=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">validation</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">suspect=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">AlleleOrigin</span><span class="s2">&#34;</span><span class="p">:</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">unknown</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">germline</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">somatic</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">inherited</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">paternal</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">maternal</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">de-novo</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">bipaternal</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">unipaternal</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">not-tested</span><span class="s1">&#39;</span><span class="p">,</span>
+                                    <span class="sa"></span><span class="s1">&#39;</span><span class="s1">tested-inconclusive</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">snpType</span><span class="s2">&#34;</span><span class="p">:</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">notwithdrawn</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">artifact</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">gene-duplication</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">duplicate-submission</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">notspecified</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">ambiguous-location;</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">low-map-quality</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">}</span>
         
         <span class="c1"># CLINSIG line variables:</span>
-        <span class="n">CLINSIG_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;ClinicalSignificance&#34;</span><span class="p">:[</span><span class="s1">&#39;probable-pathogenic&#39;</span><span class="p">,</span><span class="s1">&#39;pathogenic&#39;</span><span class="p">,</span><span class="s1">&#39;other&#39;</span><span class="p">]}</span>
+        <span class="n">CLINSIG_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ClinicalSignificance</span><span class="s2">&#34;</span><span class="p">:</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">probable-pathogenic</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">pathogenic</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">other</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">}</span>
 
         <span class="c1"># GMAF line variables</span>
-        <span class="n">GMAF_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;allele&#34;</span><span class="p">:</span><span class="s2">&#34;allele=&#34;</span><span class="p">,</span>
-                     <span class="s2">&#34;sampleSize&#34;</span><span class="p">:</span><span class="s2">&#34;count=&#34;</span><span class="p">,</span>
-                     <span class="s2">&#34;freq&#34;</span><span class="p">:</span><span class="s2">&#34;MAF=&#34;</span><span class="p">}</span>
+        <span class="n">GMAF_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">allele</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">allele=</span><span class="s2">&#34;</span><span class="p">,</span>
+                     <span class="sa"></span><span class="s2">&#34;</span><span class="s2">sampleSize</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">count=</span><span class="s2">&#34;</span><span class="p">,</span>
+                     <span class="sa"></span><span class="s2">&#34;</span><span class="s2">freq</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">MAF=</span><span class="s2">&#34;</span><span class="p">}</span>
 
         <span class="c1"># CTG line variables</span>
-        <span class="n">CTG_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;groupLabel&#34;</span><span class="p">:</span><span class="s2">&#34;assembly=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;chromosome&#34;</span><span class="p">:</span><span class="s2">&#34;chr=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;physmapInt&#34;</span><span class="p">:</span><span class="s2">&#34;chr-pos=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;asnFrom&#34;</span><span class="p">:</span><span class="s2">&#34;ctg-start=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;asnTo&#34;</span><span class="p">:</span><span class="s2">&#34;ctg-end=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;loctype&#34;</span><span class="p">:</span><span class="s2">&#34;loctype=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;orient&#34;</span><span class="p">:</span><span class="s2">&#34;orient=&#34;</span><span class="p">}</span>
+        <span class="n">CTG_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">groupLabel</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">assembly=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">chromosome</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">chr=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">physmapInt</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">chr-pos=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">asnFrom</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ctg-start=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">asnTo</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ctg-end=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">loctype</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">loctype=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient=</span><span class="s2">&#34;</span><span class="p">}</span>
 
         <span class="c1"># LOC line variables</span>
-        <span class="n">LOC_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;symbol&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                    <span class="s2">&#34;geneId&#34;</span><span class="p">:</span><span class="s2">&#34;locus_id=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;fxnClass&#34;</span><span class="p">:</span><span class="s2">&#34;fxn-class=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;allele&#34;</span><span class="p">:</span><span class="s2">&#34;allele=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;readingFrame&#34;</span><span class="p">:</span><span class="s2">&#34;frame=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;residue&#34;</span><span class="p">:</span><span class="s2">&#34;residue=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;aaPosition&#34;</span><span class="p">:</span><span class="s2">&#34;aa_position=&#34;</span><span class="p">}</span>
+        <span class="n">LOC_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">symbol</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">geneId</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">locus_id=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">fxnClass</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">fxn-class=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">allele</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">allele=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">readingFrame</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">frame=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">residue</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">residue=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">aaPosition</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">aa_position=</span><span class="s2">&#34;</span><span class="p">}</span>
 
         <span class="c1"># LOC line variables</span>
-        <span class="n">SEQ_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;gi&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                    <span class="s2">&#34;source&#34;</span><span class="p">:</span><span class="s2">&#34;source-db=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;asnFrom&#34;</span><span class="p">:</span><span class="s2">&#34;seq-pos=&#34;</span><span class="p">,</span>
-                    <span class="s2">&#34;orient&#34;</span><span class="p">:</span><span class="s2">&#34;orient=&#34;</span><span class="p">}</span>
+        <span class="n">SEQ_vars</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">gi</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">source</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">source-db=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">asnFrom</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">seq-pos=</span><span class="s2">&#34;</span><span class="p">,</span>
+                    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">orient=</span><span class="s2">&#34;</span><span class="p">}</span>
 
         <span class="c1"># Pull out variable information:</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;rs&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">rs_vars</span><span class="p">,</span><span class="s2">&#34;rs&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;ss&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">ss_vars</span><span class="p">,</span><span class="s2">&#34;ss&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;SNP&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">SNP_vars</span><span class="p">,</span><span class="s2">&#34;SNP&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;CLINSIG&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">CLINSIG_vars</span><span class="p">,</span><span class="s2">&#34;CLINSIG&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;GMAF&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">GMAF_vars</span><span class="p">,</span><span class="s2">&#34;GMAF&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;CTG&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">CTG_vars</span><span class="p">,</span><span class="s2">&#34;CTG&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;LOC&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">LOC_vars</span><span class="p">,</span><span class="s2">&#34;LOC&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">][</span><span class="s1">&#39;SEQ&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">SEQ_vars</span><span class="p">,</span><span class="s2">&#34;SEQ&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rs</span><span class="s1">&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">rs_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">rs</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">ss</span><span class="s1">&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">ss_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">ss</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">SNP</span><span class="s1">&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">SNP_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">SNP</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">CLINSIG</span><span class="s1">&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">CLINSIG_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">CLINSIG</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">GMAF</span><span class="s1">&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">GMAF_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">GMAF</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">CTG</span><span class="s1">&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">CTG_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">CTG</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">LOC</span><span class="s1">&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">LOC_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">LOC</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">rsId</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">SEQ</span><span class="s1">&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">pull_vars</span><span class="p">(</span><span class="n">SEQ_vars</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">SEQ</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">snp</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">r</span>
         
 
-<span class="n">snp</span> <span class="o">=</span> <span class="n">get_snp</span><span class="p">([</span><span class="s2">&#34;12009&#34;</span><span class="p">])</span>
-<span class="k">print</span> <span class="n">pp</span><span class="p">(</span><span class="n">snp</span><span class="p">)</span></code></pre></div></div>
+<span class="n">snp</span> <span class="o">=</span> <span class="n">get_snp</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">12009</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">pp</span><span class="p">(</span><span class="n">snp</span><span class="p">)</span>
+</code></pre></div></div>
   
         <div id='comments'></div>
   

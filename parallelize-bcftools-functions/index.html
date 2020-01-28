@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,21 +87,19 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p><a href="http://samtools.github.io/bcftools/">bcftools</a> is a great for working with <a href="http://www.1000genomes.org/wiki/analysis/variant%20call%20format/vcf-variant-call-format-version-41">variant call files</a>. In general, it is fast. However, I have found that the process of merging VCF files (using <code>bcftools merge</code>) and performing concordance checking (using <code>bcftools gtcheck</code>) can be a little bit slow. That is why I wrote two functions that take advantage of <a href="http://www.gnu.org/software/parallel/">GNU Parallel</a> to parallelize them.</p>
+  <div class="lh-copy post-content"><p><a href="http://samtools.github.io/bcftools/">bcftools</a> is a great for working with <a href="http://www.1000genomes.org/wiki/analysis/variant%20call%20format/vcf-variant-call-format-version-41">variant call files</a>. In general, it is fast. However, I have found that the process of merging VCF files (using <code>bcftools merge</code>) and performing concordance checking (using <code>bcftools gtcheck</code>) can be a little bit slow. That is why I wrote two functions that take advantage of <a href="http://www.gnu.org/software/parallel/">GNU Parallel</a> to parallelize them.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ~/.bashrc: executed by bash(1) for non-login shells.</span>
 <span class="c1"># see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)</span>
 <span class="c1"># for examples</span>
 
-<span class="k">function</span> bam_chromosomes<span class="o">()</span> <span class="o">{</span>
+<span class="k">function</span> bam_chromosomes<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1"># Fetch chromosomes from a bam file</span>
     samtools view -H <span class="nv">$1</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    grep -Po <span class="s1">&#39;SN:(.*)\t&#39;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>    cut -c <span class="m">4</span>-1000
+</span><span class="se"></span>    cut -c 4-1000
 <span class="o">}</span>
 
-<span class="k">function</span> vcf_chromosomes<span class="o">()</span> <span class="o">{</span>
+<span class="k">function</span> vcf_chromosomes<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1"># Fetch contigs from a vcf file.</span>
     bcftools view -h <span class="nv">$1</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    grep <span class="s1">&#39;contig&#39;</span> <span class="p">|</span> <span class="se">\
@@ -112,69 +110,63 @@ type="image/x-icon"/>
 
 
 <span class="nv">PARALLEL_CORES</span><span class="o">=</span><span class="m">6</span>
-<span class="k">function</span> parallel_bcftools_merge<span class="o">()</span> <span class="o">{</span>
+<span class="k">function</span> parallel_bcftools_merge<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="nv">file_set</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$@</span> <span class="p">|</span> egrep -o <span class="s1">&#39;(\-l|\-\-file-list)(=|[ ]+)[^ ]+&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;=&#39;</span> <span class="s1">&#39; &#39;</span> <span class="p">|</span> cut -f <span class="m">2</span> -d <span class="s1">&#39; &#39;</span><span class="sb">`</span>
     <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">file_set</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span>
         <span class="k">then</span>
-            <span class="nv">find_vcf</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">file_set</span><span class="si">}</span> <span class="p">|</span> head -n <span class="m">1</span><span class="sb">`</span>
+            <span class="nv">find_vcf</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">file_set</span><span class="si">}</span> <span class="p">|</span> head -n 1<span class="sb">`</span>
         <span class="k">else</span>
             <span class="nv">find_vcf</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$@</span> <span class="p">|</span> tr <span class="s1">&#39;\t&#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> egrep -o <span class="s1">&#39;[^ ]+.vcf.gz&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;NR == 1 { print }&#39;</span> - <span class="sb">`</span>
     <span class="k">fi</span>
     <span class="nv">contigs</span><span class="o">=</span><span class="sb">`</span>vcf_chromosomes <span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span><span class="sb">`</span>
     <span class="nv">current_dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span><span class="k">)</span>
-    <span class="nv">hash_merge</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -c <span class="m">1</span>-5<span class="sb">`</span>
+    <span class="nv">hash_merge</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -c 1-5<span class="sb">`</span>
     <span class="nv">output_prefix</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">current_dir</span><span class="si">}</span><span class="s2">/parallel_merge.</span><span class="si">${</span><span class="nv">hash_merge</span><span class="si">}</span><span class="s2">&#34;</span>
     
     parallel --gnu --workdir <span class="si">${</span><span class="nv">current_dir</span><span class="si">}</span> <span class="se">\
 </span><span class="se"></span>    --env args -j <span class="si">${</span><span class="nv">PARALLEL_CORES</span><span class="si">}</span> <span class="se">\
 </span><span class="se"></span>    <span class="s1">&#39;bcftools merge -r {1} -O u &#39;</span> <span class="nv">$@</span> <span class="s1">&#39; &gt; &#39;</span> <span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s1">&#39;.{1}.bcf&#39;</span> ::: <span class="si">${</span><span class="nv">contigs</span><span class="si">}</span> 
     
-    <span class="nv">order</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$contigs</span> <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> awk -v <span class="s2">&#34;prefix=</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{ print prefix &#34;.&#34; $0 &#34;.bcf&#34; }&#39;</span><span class="sb">`</span>
+    <span class="nv">order</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$contigs</span> <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> awk -v <span class="s2">&#34;</span><span class="s2">prefix=</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{ print prefix &#34;.&#34; $0 &#34;.bcf&#34; }&#39;</span><span class="sb">`</span>
     bcftools concat -O v <span class="si">${</span><span class="nv">order</span><span class="si">}</span> <span class="p">|</span> grep -v <span class="s1">&#39;parallel_merge&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/##bcftools_mergeCommand=merge -r I -O u /##bcftools_mergeCommand=merge /g&#39;</span> <span class="p">|</span> bcftools view -O u
     rm <span class="si">${</span><span class="nv">order</span><span class="si">}</span>
 <span class="o">}</span>
 
 
 <span class="nv">PARALLEL_CORES</span><span class="o">=</span><span class="m">6</span>
-<span class="k">function</span> parallel_bcftools_gtcheck<span class="o">()</span> <span class="o">{</span>
+<span class="k">function</span> parallel_bcftools_gtcheck<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="nv">find_vcf</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$@</span> <span class="p">|</span> tr <span class="s1">&#39;\t&#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> egrep -o <span class="s1">&#39;[^ ]+.vcf.gz&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;NR == 1 { print }&#39;</span> - <span class="sb">`</span>
     <span class="nv">contigs</span><span class="o">=</span><span class="sb">`</span>vcf_chromosomes <span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span><span class="sb">`</span>
     <span class="nv">current_dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span><span class="k">)</span>
-    <span class="nv">hash_merge</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -c <span class="m">1</span>-5<span class="sb">`</span>
+    <span class="nv">hash_merge</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -c 1-5<span class="sb">`</span>
     <span class="nv">output_prefix</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">current_dir</span><span class="si">}</span><span class="s2">/parallel_concordance.</span><span class="si">${</span><span class="nv">hash_merge</span><span class="si">}</span><span class="s2">&#34;</span>
     <span class="nv">gtcheck_options</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$@</span> <span class="p">|</span> awk -v <span class="nv">vcf</span><span class="o">=</span><span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span> <span class="s1">&#39;{ gsub(vcf,&#34;&#34;,$0); print $0; }&#39;</span><span class="sb">`</span>
     parallel --gnu  -j <span class="si">${</span><span class="nv">PARALLEL_CORES</span><span class="si">}</span> --workdir <span class="si">${</span><span class="nv">current_dir</span><span class="si">}</span> <span class="s1">&#39;bcftools view &#39;</span> <span class="si">${</span><span class="nv">find_vcf</span><span class="si">}</span> <span class="s1">&#39; {} | \
 </span><span class="s1">    bcftools gtcheck &#39;</span> <span class="si">${</span><span class="nv">gtcheck_options</span><span class="si">}</span> <span class="s1">&#39; - | \
 </span><span class="s1">    awk -v chrom={} &#34;/^CN/ { print \$0 \&#34;\t\&#34; chrom } \$0 !~ /.*CN.*/ { print } \$0 ~ /^# \[1\]CN/ { print \$0 \&#34;\tchrom\&#34;}&#34; - &gt; &#39;</span> <span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s1">&#39;.{}.tsv&#39;</span> ::: <span class="si">${</span><span class="nv">contigs</span><span class="si">}</span>
 
-    <span class="nv">order</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$contigs</span> <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> awk -v <span class="s2">&#34;prefix=</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{ print prefix &#34;.&#34; $0 &#34;.tsv&#34; }&#39;</span><span class="sb">`</span>
+    <span class="nv">order</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$contigs</span> <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> awk -v <span class="s2">&#34;</span><span class="s2">prefix=</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{ print prefix &#34;.&#34; $0 &#34;.tsv&#34; }&#39;</span><span class="sb">`</span>
     cat <span class="si">${</span><span class="nv">order</span><span class="si">}</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    grep <span class="s1">&#39;CN&#39;</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    awk <span class="s1">&#39;NR == 1 &amp;&amp; /Discordance/ { print } NR &gt; 1 &amp;&amp; $0 !~ /Discordance/ { print }&#39;</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    awk <span class="s1">&#39;{ gsub(&#34;(# |\\[[0-9]+\\])&#34;,&#34;&#34;, $0); gsub(&#34; &#34;,&#34;_&#34;, $0); print }&#39;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>    cut -f <span class="m">2</span>-7 <span class="p">|</span> datamash --header-in --sort --group<span class="o">=</span>Sample_i,Sample_j sum Discordance  sum Number_of_sites <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    cut -f 2-7 <span class="p">|</span> datamash --header-in --sort --group<span class="o">=</span>Sample_i,Sample_j sum Discordance  sum Number_of_sites <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    cat &lt;<span class="o">(</span><span class="nb">echo</span> -e <span class="s2">&#34;sample_i\tsample_j\tdiscordance\tnumber_of_sites&#34;</span><span class="o">)</span> - <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    awk <span class="s1">&#39;NR == 1 { print $0 &#34;\tconcordance&#34; } NR &gt; 1 &amp;&amp; $4 == 0 { print $0 &#34;\t&#34; } NR &gt; 1 &amp;&amp; $4 &gt; 0 { print $0 &#34;\t&#34; ($4-$3)/$4 }&#39;</span>
     rm <span class="si">${</span><span class="nv">order</span><span class="si">}</span>
-<span class="o">}</span></code></pre></div>
-<h3 id="usage">Usage</h3>
+<span class="o">}</span>
 
+</code></pre></div><h3 id="usage">Usage</h3>
 <p>The function <code>vcf_chromosomes</code> extracts chromosomes names from a VCF file using bcftools. Parallelization occurs across chromosomes.</p>
-
-<h3 id="parallel-bcftools-merge"><code>parallel_bcftools_merge</code></h3>
-
+<h3 id="parallel_bcftools_merge"><code>parallel_bcftools_merge</code></h3>
 <p><code>parallel_bcftools_merge</code> is run very similar to <code>bcftools merge</code>. The only difference is that you have to pipe it into bcftools to change it to the appropriate output. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel_bcftools_merge -m all <span class="sb">`</span>ls *list_of_bcffiles<span class="sb">`</span> <span class="p">|</span> bcftools view -O z &gt; merged_vcf.vcf.gz</code></pre></div>
-<p>The <code>parallel_bcftools_merge</code> function will generate a temporary vcf for every chromosome. You can use all flags except for <code>-O</code> with this function.</p>
-
-<h3 id="parallel-bcftools-gtcheck"><code>parallel_bcftools_gtcheck</code></h3>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel_bcftools_merge -m all <span class="sb">`</span>ls *list_of_bcffiles<span class="sb">`</span> <span class="p">|</span> bcftools view -O z &gt; merged_vcf.vcf.gz
+</code></pre></div><p>The <code>parallel_bcftools_merge</code> function will generate a temporary vcf for every chromosome. You can use all flags except for <code>-O</code> with this function.</p>
+<h3 id="parallel_bcftools_gtcheck"><code>parallel_bcftools_gtcheck</code></h3>
 <p><code>parallel_bcftools_gtcheck</code> should not be used with <code>--all-sites</code>, or <code>--plot</code>. I recommend using this function with <code>-H</code> and <code>-G 1</code> to calculate the absolute number of differences in terms of homozygous calls between samples. Also, this function requires datamash (on OSX, install with <code>brew install datamash</code>)</p>
-
 <p>The output file is slightly different than what bcftools normally outputs. In general, I use this function specifically to calculate conocordance between individual fastq runs - like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel_bcftools_gtchek -H -G <span class="m">1</span> union_samples.vcf.gz &gt; concordance.tsv</code></pre></div>
-<p>This parallelized version generates concordances for each chromosome and then merges the results together using datamash. Output looks like this:</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel_bcftools_gtchek -H -G <span class="m">1</span> union_samples.vcf.gz &gt; concordance.tsv
+</code></pre></div><p>This parallelized version generates concordances for each chromosome and then merges the results together using datamash. Output looks like this:</p>
 <table>
 <thead>
 <tr>
@@ -185,7 +177,6 @@ type="image/x-icon"/>
 <th align="right">concordance</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">BGI2-RET1-ED3049</td>
@@ -194,7 +185,6 @@ type="image/x-icon"/>
 <td align="right">2344043</td>
 <td align="right">0.999605</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-CB4856</td>
 <td align="left">BGI1-RET1-CB4852</td>
@@ -202,7 +192,6 @@ type="image/x-icon"/>
 <td align="right">2171694</td>
 <td align="right">0.933469</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-CX11315</td>
 <td align="left">BGI1-RET1-CB4852</td>
@@ -210,7 +199,6 @@ type="image/x-icon"/>
 <td align="right">2721950</td>
 <td align="right">0.960703</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-CX11315</td>
 <td align="left">BGI1-RET1-CB4856</td>
@@ -218,7 +206,6 @@ type="image/x-icon"/>
 <td align="right">2059983</td>
 <td align="right">0.933398</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-DL238</td>
 <td align="left">BGI1-RET1-CB4852</td>
@@ -226,7 +213,6 @@ type="image/x-icon"/>
 <td align="right">2097343</td>
 <td align="right">0.929331</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-DL238</td>
 <td align="left">BGI1-RET1-CB4856</td>
@@ -234,7 +220,6 @@ type="image/x-icon"/>
 <td align="right">1803664</td>
 <td align="right">0.931178</td>
 </tr>
-
 <tr>
 <td align="left">BGI1-RET1-DL238</td>
 <td align="left">BGI1-RET1-CX11315</td>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Genetics on Daniel E. Cook</title>
@@ -18,12 +18,12 @@
       <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/</guid>
-      <description> I&amp;rsquo;ve put together a simple alfred workflow with a few utilities for working with sequence data.
+      <description>I&#39;ve put together a simple alfred workflow with a few utilities for working with sequence data.
 Download the latest release of Seq-Utilities
 Usage Generate a random dna sequence 200 base pairs long.
 Generate the complement, reverse complement, RNA, and protein of a DNA sequence
 Open up blast and pre-populate the search field
-blast ATGTCCTCGTTCGACCGTCGTATTGAAGCTGCATGTAAA</description>
+blast ATGTCCTCGTTCGACCGTCGTATTGAAGCTGCATGTAAA </description>
     </item>
     
   </channel>

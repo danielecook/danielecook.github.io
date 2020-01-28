@@ -27,7 +27,7 @@ This got me wondering whether there was a way to log terminal commands locally o
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -89,24 +89,20 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>Google Cloud Platform (GCP) has a service called Stackdriver logging which provides a nice interface for accessing logs.</p>
-
-<p><img src="/gcp-logs.png" alt="" /></p>
-
+<p><img src="/gcp-logs.png" alt=""></p>
 <p>Stackdriver logging is integrated with all GCP services but it can also be extended. Users can create custom logs and access them centrally using the web-based interface or the <a href="https://cloud.google.com/sdk/">Google Cloud SDK</a>.</p>
-
 <p>This got me wondering whether there was a way to log terminal commands locally or on a server. It is possible by setting the <code>PROMPT_COMMAND</code> variable in BASH. After a command is submitted the value of <code>PROMPT_COMMAND</code> is interpretted (technically it is interpretted before the next prompt is printed to the screen).</p>
-
 <p>I wrote up a quick function that looks to see whether the last command exited successfully (0) or resulted in an error (&gt;0), and log using INFO or ERROR respectively. Then I set the function to the <code>PROMPT_COMMAND</code> variable. Note that you may need to activate the gcloud beta logging for this to work.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> prompt <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
-    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>INFO &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">[</span><span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="o">]</span><span class="p">;</span><span class="k">then</span>
+    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>INFO &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
 <span class="k">else</span>
-    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>ERROR &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
+    <span class="o">(</span>gcloud beta logging write bash_log <span class="s2">&#34;`fc -nl -1`&#34;</span> --severity<span class="o">=</span>ERROR &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="o">)</span>
 <span class="k">fi</span>
 <span class="o">}</span>
 
-<span class="nv">PROMPT_COMMAND</span><span class="o">=</span>prompt</code></pre></div>
-<p>Now check the logging interface and you will see your commands are logged!</p>
+<span class="nv">PROMPT_COMMAND</span><span class="o">=</span>prompt
+</code></pre></div><p>Now check the logging interface and you will see your commands are logged!</p>
 </div>
   
         <div id='comments'></div>

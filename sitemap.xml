@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://www.danielecook.com/</loc>
     <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -14,33 +13,33 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/tags/google-sheets/</loc>
     <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/python/</loc>
     <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/notebook/</loc>
+    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/r/</loc>
     <lastmod>2019-10-20T01:30:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -49,32 +48,23 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/notebook/</loc>
-    <lastmod>2019-10-20T01:30:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics/</loc>
-    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/tags/bash/</loc>
     <lastmod>2019-09-27T01:30:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/bioinformatics/</loc>
     <lastmod>2019-09-27T01:30:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/tutorial/</loc>
     <lastmod>2019-09-27T01:30:53+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/using-gnu-parallel-for-bioinformatics/</loc>
+    <lastmod>2019-09-27T01:30:53+00:00</lastmod>
   </url>
   
   <url>
@@ -85,13 +75,11 @@
   <url>
     <loc>https://www.danielecook.com/tags/nim/</loc>
     <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/vcf/</loc>
     <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -107,24 +95,21 @@
   <url>
     <loc>https://www.danielecook.com/tags/excel/</loc>
     <lastmod>2019-06-28T00:26:29+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/gist/</loc>
     <lastmod>2019-06-28T00:26:29+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</loc>
-    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/nextflow/</loc>
     <lastmod>2019-06-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/useful-nextflow-bash-functions-for-slurm/</loc>
+    <lastmod>2019-06-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -163,20 +148,18 @@
   </url>
   
   <url>
+    <loc>https://www.danielecook.com/tags/chicago/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</loc>
     <lastmod>2017-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/chicago/</loc>
-    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/tags/alfred/</loc>
     <lastmod>2017-01-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -197,7 +180,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/guitar/</loc>
     <lastmod>2016-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -228,7 +210,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/bigquery/</loc>
     <lastmod>2015-12-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -259,7 +240,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/database/</loc>
     <lastmod>2015-06-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -275,18 +255,16 @@
   <url>
     <loc>https://www.danielecook.com/tags/genetics/</loc>
     <lastmod>2015-06-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/split-a-gff-file-into-individual-features/</loc>
-    <lastmod>2015-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/gff/</loc>
     <lastmod>2015-01-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/split-a-gff-file-into-individual-features/</loc>
+    <lastmod>2015-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -297,13 +275,11 @@
   <url>
     <loc>https://www.danielecook.com/tags/bam/</loc>
     <lastmod>2014-12-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.danielecook.com/tags/fastq/</loc>
     <lastmod>2014-12-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -312,14 +288,13 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</loc>
+    <loc>https://www.danielecook.com/tags/bcftools/</loc>
     <lastmod>2014-12-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/bcftools/</loc>
+    <loc>https://www.danielecook.com/rename-samples-within-a-vcf/bcf/</loc>
     <lastmod>2014-12-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -335,7 +310,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/fasta/</loc>
     <lastmod>2014-09-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -349,14 +323,13 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/visualizing-pairwise-queries-in-r/</loc>
+    <loc>https://www.danielecook.com/tags/pubmed/</loc>
     <lastmod>2014-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/pubmed/</loc>
+    <loc>https://www.danielecook.com/visualizing-pairwise-queries-in-r/</loc>
     <lastmod>2014-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -367,7 +340,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/cycling/</loc>
     <lastmod>2014-07-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -406,14 +378,13 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/use-google-to-find-lecture-notes/</loc>
+    <loc>https://www.danielecook.com/tags/tips/</loc>
     <lastmod>2013-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/tags/tips/</loc>
+    <loc>https://www.danielecook.com/use-google-to-find-lecture-notes/</loc>
     <lastmod>2013-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -434,7 +405,6 @@
   <url>
     <loc>https://www.danielecook.com/tags/sql/</loc>
     <lastmod>2013-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

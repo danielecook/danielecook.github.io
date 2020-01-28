@@ -11,7 +11,7 @@
 
 <meta property="og:description" content="Generate markdown tables from clipboard content.
 Download Usage Copy a csv or tsv. The script will attempt to intelligently guess the format. For example, if you copy the table below:
-carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.95 3.98 2.43 0.21 Premium E SI1 59.8 61 326 3.89 3.84 2.31 0.23 Good E VS1 56.9 65 327 4.05 4.07 2." />
+carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.95 3.98 2.43 0.21 Premium E SI1 59.8 61 326 3.89 3.84 2.31 0.23 Good E VS1 56.9 65 327 4.05 4.07 2.31 0." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/an-alfred-workflow-for-generating-markdown-tables-from-your-clipboard/" />
 
@@ -27,7 +27,7 @@ carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.9
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,35 +88,27 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p>Generate markdown tables from clipboard content.</p>
-
-<h4 id="download-https-github-com-danielecook-markdown-table-alfred-raw-workflow-markdown-tables-alfredworkflow"><a href="https://github.com/danielecook/markdown-table-alfred/raw/workflow/markdown-tables.alfredworkflow">Download</a></h4>
-
+  <div class="lh-copy post-content"><p>Generate markdown tables from clipboard content.</p>
+<h4 id="downloadhttpsgithubcomdanielecookmarkdown-table-alfredrawworkflowmarkdown-tablesalfredworkflow"><a href="https://github.com/danielecook/markdown-table-alfred/raw/workflow/markdown-tables.alfredworkflow">Download</a></h4>
 <h2 id="usage">Usage</h2>
-
 <p>Copy a csv or tsv. The script will attempt to intelligently guess the format. For example, if you copy the table below:</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">carat   cut color   clarity depth   table   price   x   y   z
-<span class="m">0</span>.23    Ideal   E   SI2 <span class="m">61</span>.5    <span class="m">55</span>  <span class="m">326</span> <span class="m">3</span>.95    <span class="m">3</span>.98    <span class="m">2</span>.43
-<span class="m">0</span>.21    Premium E   SI1 <span class="m">59</span>.8    <span class="m">61</span>  <span class="m">326</span> <span class="m">3</span>.89    <span class="m">3</span>.84    <span class="m">2</span>.31
-<span class="m">0</span>.23    Good    E   VS1 <span class="m">56</span>.9    <span class="m">65</span>  <span class="m">327</span> <span class="m">4</span>.05    <span class="m">4</span>.07    <span class="m">2</span>.31
-<span class="m">0</span>.29    Premium I   VS2 <span class="m">62</span>.4    <span class="m">58</span>  <span class="m">334</span> <span class="m">4</span>.2 <span class="m">4</span>.23    <span class="m">2</span>.63
-<span class="m">0</span>.31    Good    J   SI2 <span class="m">63</span>.3    <span class="m">58</span>  <span class="m">335</span> <span class="m">4</span>.34    <span class="m">4</span>.35    <span class="m">2</span>.75</code></pre></div>
-<p>Then type <code>tbl</code> in alfred and you will see the following:</p>
-
-<p><img src="https://github.com/danielecook/markdown-table-alfred/raw/master/tbl.png" alt="tbl screen" /></p>
-
+0.23    Ideal   E   SI2 61.5    <span class="m">55</span>  <span class="m">326</span> 3.95    3.98    2.43
+0.21    Premium E   SI1 59.8    <span class="m">61</span>  <span class="m">326</span> 3.89    3.84    2.31
+0.23    Good    E   VS1 56.9    <span class="m">65</span>  <span class="m">327</span> 4.05    4.07    2.31
+0.29    Premium I   VS2 62.4    <span class="m">58</span>  <span class="m">334</span> 4.2 4.23    2.63
+0.31    Good    J   SI2 63.3    <span class="m">58</span>  <span class="m">335</span> 4.34    4.35    2.75
+</code></pre></div><p>Then type <code>tbl</code> in alfred and you will see the following:</p>
+<p><img src="https://github.com/danielecook/markdown-table-alfred/raw/master/tbl.png" alt="tbl screen"></p>
 <p>You can create a table with or without a header. It will be copied to your clipboard as this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="p">|</span>   carat <span class="p">|</span> cut     <span class="p">|</span> color   <span class="p">|</span> clarity   <span class="p">|</span> depth   <span class="p">|</span>   table <span class="p">|</span>   price <span class="p">|</span>      x <span class="p">|</span>    y <span class="p">|</span>    z <span class="p">|</span>
 <span class="p">|</span>--------:<span class="p">|</span>:--------<span class="p">|</span>:--------<span class="p">|</span>:----------<span class="p">|</span>:--------<span class="p">|</span>--------:<span class="p">|</span>--------:<span class="p">|</span>-------:<span class="p">|</span>-----:<span class="p">|</span>-----:<span class="p">|</span>
-<span class="p">|</span>    <span class="m">0</span>.23 <span class="p">|</span> Ideal   <span class="p">|</span> E       <span class="p">|</span> SI2       <span class="p">|</span> <span class="m">61</span>.5    <span class="p">|</span>    <span class="m">55</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   <span class="m">3</span>.95 <span class="p">|</span> <span class="m">3</span>.98 <span class="p">|</span> <span class="m">2</span>.43 <span class="p">|</span>
-<span class="p">|</span>    <span class="m">0</span>.21 <span class="p">|</span> Premium <span class="p">|</span> E       <span class="p">|</span> SI1       <span class="p">|</span> <span class="m">59</span>.8    <span class="p">|</span>    <span class="m">61</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   <span class="m">3</span>.89 <span class="p">|</span> <span class="m">3</span>.84 <span class="p">|</span> <span class="m">2</span>.31 <span class="p">|</span>
-<span class="p">|</span>    <span class="m">0</span>.23 <span class="p">|</span> Good    <span class="p">|</span> E       <span class="p">|</span> VS1       <span class="p">|</span> <span class="m">56</span>.9    <span class="p">|</span>    <span class="m">65</span>   <span class="p">|</span>     <span class="m">327</span> <span class="p">|</span>   <span class="m">4</span>.05 <span class="p">|</span> <span class="m">4</span>.07 <span class="p">|</span> <span class="m">2</span>.31 <span class="p">|</span>
-<span class="p">|</span>    <span class="m">0</span>.29 <span class="p">|</span> Premium <span class="p">|</span> I       <span class="p">|</span> VS2       <span class="p">|</span> <span class="m">62</span>.4    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">334</span> <span class="p">|</span>   <span class="m">4</span>.2  <span class="p">|</span> <span class="m">4</span>.23 <span class="p">|</span> <span class="m">2</span>.63 <span class="p">|</span>
-<span class="p">|</span>    <span class="m">0</span>.31 <span class="p">|</span> Good    <span class="p">|</span> J       <span class="p">|</span> SI2       <span class="p">|</span> <span class="m">63</span>.3    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">335</span> <span class="p">|</span>   <span class="m">4</span>.34 <span class="p">|</span> <span class="m">4</span>.35 <span class="p">|</span> <span class="m">2</span>.75 <span class="p">|</span></code></pre></div>
-<p>And it will render like this:</p>
-
+<span class="p">|</span>    0.23 <span class="p">|</span> Ideal   <span class="p">|</span> E       <span class="p">|</span> SI2       <span class="p">|</span> 61.5    <span class="p">|</span>    <span class="m">55</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   3.95 <span class="p">|</span> 3.98 <span class="p">|</span> 2.43 <span class="p">|</span>
+<span class="p">|</span>    0.21 <span class="p">|</span> Premium <span class="p">|</span> E       <span class="p">|</span> SI1       <span class="p">|</span> 59.8    <span class="p">|</span>    <span class="m">61</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   3.89 <span class="p">|</span> 3.84 <span class="p">|</span> 2.31 <span class="p">|</span>
+<span class="p">|</span>    0.23 <span class="p">|</span> Good    <span class="p">|</span> E       <span class="p">|</span> VS1       <span class="p">|</span> 56.9    <span class="p">|</span>    <span class="m">65</span>   <span class="p">|</span>     <span class="m">327</span> <span class="p">|</span>   4.05 <span class="p">|</span> 4.07 <span class="p">|</span> 2.31 <span class="p">|</span>
+<span class="p">|</span>    0.29 <span class="p">|</span> Premium <span class="p">|</span> I       <span class="p">|</span> VS2       <span class="p">|</span> 62.4    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">334</span> <span class="p">|</span>   4.2  <span class="p">|</span> 4.23 <span class="p">|</span> 2.63 <span class="p">|</span>
+<span class="p">|</span>    0.31 <span class="p">|</span> Good    <span class="p">|</span> J       <span class="p">|</span> SI2       <span class="p">|</span> 63.3    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">335</span> <span class="p">|</span>   4.34 <span class="p">|</span> 4.35 <span class="p">|</span> 2.75 <span class="p">|</span>
+</code></pre></div><p>And it will render like this:</p>
 <table>
 <thead>
 <tr>
@@ -132,7 +124,6 @@ type="image/x-icon"/>
 <th align="right">z</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0.23</td>
@@ -146,7 +137,6 @@ type="image/x-icon"/>
 <td align="right">3.98</td>
 <td align="right">2.43</td>
 </tr>
-
 <tr>
 <td align="right">0.21</td>
 <td align="left">Premium</td>
@@ -159,7 +149,6 @@ type="image/x-icon"/>
 <td align="right">3.84</td>
 <td align="right">2.31</td>
 </tr>
-
 <tr>
 <td align="right">0.23</td>
 <td align="left">Good</td>
@@ -172,7 +161,6 @@ type="image/x-icon"/>
 <td align="right">4.07</td>
 <td align="right">2.31</td>
 </tr>
-
 <tr>
 <td align="right">0.29</td>
 <td align="left">Premium</td>
@@ -185,7 +173,6 @@ type="image/x-icon"/>
 <td align="right">4.23</td>
 <td align="right">2.63</td>
 </tr>
-
 <tr>
 <td align="right">0.31</td>
 <td align="left">Good</td>

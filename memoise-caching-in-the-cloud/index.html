@@ -27,7 +27,7 @@ fib &lt;- function(n) { if (n &lt; 2) return(1) fib(n - 2) &#43; fib(n - 1) } Th
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,88 +88,78 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h3 id="update-2019-06-22">Update: 2019-06-22</h3>
-
+  <div class="lh-copy post-content"><h3 id="update-2019-06-22">Update: 2019-06-22</h3>
 <p>Based on my suggestions, out-of-memory caching was implemented in the &ldquo;official&rdquo; memoise package <a href="https://github.com/r-lib/memoise/pull/25">here</a>. The memoise package now caches based on files and AWS.</p>
-
 <h3 id="original-post">Original Post</h3>
-
 <p><strong>Memoisation</strong> is a technique for caching the results of functions based on inputs. For example, the following function calculates the <a href="https://en.wikipedia.org/wiki/Fibonnacci_sequence">fibonnaci sequence</a> in R.</p>
-<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">fib <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
-  <span class="kr">if</span> <span class="p">(</span>n <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-  fib<span class="p">(</span>n <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> fib<span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>This is an innefficient way of calculating values of the fibonnacci sequence. However, it is a useful example for understanding memoisation. The following code uses Hadley Wickhams package <a href="https://github.com/hadley/memoise">memoise</a>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>memoise<span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="n">fib</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="nf">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+  <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>This is an innefficient way of calculating values of the fibonnacci sequence. However, it is a useful example for understanding memoisation. The following code uses Hadley Wickhams package <a href="https://github.com/hadley/memoise">memoise</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">library</span><span class="p">(</span><span class="n">memoise</span><span class="p">)</span>
 
 <span class="c1"># fib() generates the nth element of the fibonnaci seqeuence</span>
-fib <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
-  <span class="kr">if</span> <span class="p">(</span>n <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-  fib<span class="p">(</span>n <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> fib<span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">fib</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="nf">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+  <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Memoize fib</span>
-mem_fib <span class="o">&lt;-</span> memoise<span class="p">(</span>fib<span class="p">)</span>
+<span class="n">mem_fib</span> <span class="o">&lt;-</span> <span class="nf">memoise</span><span class="p">(</span><span class="n">fib</span><span class="p">)</span>
 
-mem_fib<span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span></code></pre></div>
-<p>In the above example, the <code>memoise()</code> function generates a memoised function, which will automatically cache results. If the function is run again with the same parameters, it will return the cached result rather than recompute the result. Implementing memoisation can significantly speed up analysis when functions that take time to run are repeatedly called.</p>
-
+<span class="nf">mem_fib</span><span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span>
+</code></pre></div><p>In the above example, the <code>memoise()</code> function generates a memoised function, which will automatically cache results. If the function is run again with the same parameters, it will return the cached result rather than recompute the result. Implementing memoisation can significantly speed up analysis when functions that take time to run are repeatedly called.</p>
 <p>What if you are running similar analyses within a cluster environment? The ability to cache results in a centralized datastore could increase the speed of analysis across all machines. Alternatively, perhaps you work on different computers at work and at home. Forgetting to save/load intermediate files may require long-running functions to be run again. Further, managing and retaining intermediate files can be cumbersome and annoying. Again, caching the results of the memoised function in a central location (e.g., cloud-based storage) can speed up analytical pipelines across machines.</p>
-
-<p>Recently I&rsquo;ve put some work into developing new types of out-of-memory caches for the <strong>memoise</strong> package  <a href="https://github.com/danielecook/memoise">available here</a>. This forked version can be used to cache items locally or remotely in a variety of environments. Supported environments include:</p>
-
+<p>Recently I've put some work into developing new types of out-of-memory caches for the <strong>memoise</strong> package  <a href="https://github.com/danielecook/memoise">available here</a>. This forked version can be used to cache items locally or remotely in a variety of environments. Supported environments include:</p>
 <ul>
 <li>R environment (cache_local)</li>
 <li>Google Datastore (cache_datastore)</li>
 <li>Amazon S3 (cache_aws_s3)</li>
 <li>File system (cache_filesystem; allows dropbox, google drive to be used for caching)</li>
 </ul>
-
 <p>There are a few caveats to consider when using this version of <strong>memoise</strong>. If you use the external cache options, it will take additional time to retrieve cached items. This is preferable in cluster environments where syncing files across instances/nodes can be difficult. However, when working at home/work, using locally synced files is preferred.</p>
-
 <h3 id="installation">Installation</h3>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">devtools<span class="o">::</span>install_github<span class="p">(</span><span class="s">&#34;danielecook/memoise&#34;</span><span class="p">)</span></code></pre></div>
-<h3 id="usage">Usage</h3>
-
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&#34;</span><span class="s">danielecook/memoise&#34;</span><span class="p">)</span>
+</code></pre></div><h3 id="usage">Usage</h3>
 <h4 id="google-datastore">Google Datastore</h4>
-<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>memoise<span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">library</span><span class="p">(</span><span class="n">memoise</span><span class="p">)</span>
 
 <span class="c1"># fib() generates the nth element of the fibonnaci seqeuence</span>
-fib <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
-  <span class="kr">if</span> <span class="p">(</span>n <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-  fib<span class="p">(</span>n <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> fib<span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">fib</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="nf">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+  <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Define a cache</span>
-ds <span class="o">&lt;-</span> cache_datastore<span class="p">(</span>project <span class="o">=</span> <span class="s">&#34;your-project-name&#34;</span><span class="p">,</span> cache_name <span class="o">=</span> <span class="s">&#34;rcache2&#34;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">&lt;-</span> <span class="nf">cache_datastore</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">your-project-name&#34;</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">rcache2&#34;</span><span class="p">)</span>
 
 <span class="c1"># Memoize fib</span>
-mem_fib <span class="o">&lt;-</span> memoise<span class="p">(</span>fib<span class="p">,</span> cache <span class="o">=</span> ds<span class="p">)</span>
+<span class="n">mem_fib</span> <span class="o">&lt;-</span> <span class="nf">memoise</span><span class="p">(</span><span class="n">fib</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="n">ds</span><span class="p">)</span>
 
-mem_fib<span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span></code></pre></div>
-<h4 id="amazon-s3">Amazon S3</h4>
-<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>memoise<span class="p">)</span>
+<span class="nf">mem_fib</span><span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span>
+</code></pre></div><h4 id="amazon-s3">Amazon S3</h4>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">library</span><span class="p">(</span><span class="n">memoise</span><span class="p">)</span>
 
 <span class="c1"># fib() generates the nth element of the fibonnaci seqeuence</span>
-fib <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
-  <span class="kr">if</span> <span class="p">(</span>n <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-  fib<span class="p">(</span>n <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> fib<span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">fib</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="nf">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+  <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Set up credentials</span>
-<span class="kp">Sys.setenv</span><span class="p">(</span><span class="s">&#34;AWS_ACCESS_KEY_ID&#34;</span> <span class="o">=</span> <span class="s">&#34;&lt;access key&gt;&#34;</span><span class="p">,</span>
-           <span class="s">&#34;AWS_SECRET_ACCESS_KEY&#34;</span> <span class="o">=</span> <span class="s">&#34;&lt;access secret&gt;&#34;</span><span class="p">)</span>
+<span class="nf">Sys.setenv</span><span class="p">(</span><span class="s">&#34;</span><span class="s">AWS_ACCESS_KEY_ID&#34;</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">&lt;access key&gt;&#34;</span><span class="p">,</span>
+           <span class="s">&#34;</span><span class="s">AWS_SECRET_ACCESS_KEY&#34;</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">&lt;access secret&gt;&#34;</span><span class="p">)</span>
 
 <span class="c1"># Define a cache</span>
 <span class="c1"># Your bucket name must be unique among all s3 users - so use something like &#39;rcache-&lt;initials&gt;&#39;</span>
-aws_s3 <span class="o">&lt;-</span> cache_s3<span class="p">(</span><span class="s">&#34;&lt;unique bucket name&gt;&#34;</span><span class="p">)</span>
+<span class="n">aws_s3</span> <span class="o">&lt;-</span> <span class="nf">cache_s3</span><span class="p">(</span><span class="s">&#34;</span><span class="s">&lt;unique bucket name&gt;&#34;</span><span class="p">)</span>
 
 <span class="c1"># Memoize fib</span>
-mem_fib <span class="o">&lt;-</span> memoise<span class="p">(</span>fib<span class="p">,</span> cache <span class="o">=</span> aws_s3<span class="p">)</span>
+<span class="n">mem_fib</span> <span class="o">&lt;-</span> <span class="nf">memoise</span><span class="p">(</span><span class="n">fib</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="n">aws_s3</span><span class="p">)</span>
 
-mem_fib<span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span></code></pre></div></div>
+<span class="nf">mem_fib</span><span class="p">(</span><span class="m">30</span><span class="p">)</span> <span class="c1"># Initial run caches the value</span>
+</code></pre></div></div>
   
         <div id='comments'></div>
   

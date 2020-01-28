@@ -9,8 +9,9 @@
   <meta content='How to plot all of your Runkeeper Data - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I&#8217;ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
-The script does a few unique things." />
+<meta property="og:description" content="If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+The script does a few unique things.
+ Runkeeper exports data in gpx format. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/" />
 
@@ -26,7 +27,7 @@ The script does a few unique things." />
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,156 +88,136 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<div class="fl w-100 pa2">
-<div class="fl w-50 ma2 thumbnail">
-    <img src="/Screen-Shot-2014-05-27-at-10.50.04-PM.png" />
-      <small>Runs in Iowa City</small>
-</div>
-
-<div class="fl w-20 ma2 thumbnail">
-    <img src="/2-all.png" />
-    <small>Running and Biking in Chicago</small>
-</div>
-</div>
-
-<p>If you use <a href="http://www.runkeeper.com">runkeeper</a> and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using <a href="http://www.r-project.org/"><strong>R</strong></a>. I&#8217;ve written a script for doing so (Special thanks to <a href="http://www.flowingdata.com.com">flowing data</a> which has a tutorial that helped with a few key parts of this).</p>
-
+  <div class="lh-copy post-content"><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>If you use <a href="http://www.runkeeper.com">runkeeper</a> and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using <a href="http://www.r-project.org/"><strong>R</strong></a>. I’ve written a script for doing so (Special thanks to <a href="http://www.flowingdata.com.com">flowing data</a> which has a tutorial that helped with a few key parts of this).</p>
 <p>The script does a few unique things.</p>
-
 <ul>
 <li>Runkeeper exports data in <a href="http://www.topografix.com/gpx.asp">gpx format</a>. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file. The script will retain all paths and plot them separately.</li>
 <li>This script will merge in the type of activities so you can plot different types of activities by color.</li>
-<li>Finally, cluster analysis is used to segregate different locations when plotting. If you are like me and have moved around a bit &#8211; this is necessary as plotting distant locations on the same map (e.g. Chicago and Boston) is not feasible and results in distant locations being plotted as single points.<br /></li>
+<li>Finally, cluster analysis is used to segregate different locations when plotting. If you are like me and have moved around a bit – this is necessary as plotting distant locations on the same map (e.g. Chicago and Boston) is not feasible and results in distant locations being plotted as single points.</li>
 </ul>
-
 <h4 id="directions">Directions</h4>
-
 <ol>
 <li>Export your runkeeper data. The option is available for subscribers only under the settings menu.</li>
 </ol>
-
-<p><a href="/Screen-Shot-2014-05-27-at-8.09.00-PM.png"><img src="/Screen-Shot-2014-05-27-at-8.09.00-PM-300x198.png" alt="Exporting Runkeeper Data" width="300" height="198" class="img-thumbnail size-medium wp-image-520" /></a></p>
-
-<p class='caption'>
-  <small>Exporting can be done from within the settings menu</small>
-</p>
-
+<p><a href="/Screen-Shot-2014-05-27-at-8.09.00-PM.png"><!-- raw HTML omitted --></a></p>
+<!-- raw HTML omitted -->
 <ol>
-<li>Place the script below within a folder containing your runkeeper data. Set the <code>num_locations</code> variable to the number of places you have lived/run. This will be used to pull out the number of distinct running locations automatically.</p></li>
-<li>Install the necessary R packages. You can run the following code within R to do so.
-<br /></li>
+<li>Place the script below within a folder containing your runkeeper data. Set the <code>num_locations</code> variable to the number of places you have lived/run. This will be used to pull out the number of distinct running locations automatically.<!-- raw HTML omitted --></li>
+<li>Install the necessary R packages. You can run the following code within R to do so.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R">install.packages<span class="p">(</span><span class="s">&#34;fpc&#34;</span><span class="p">)</span>
-install.packages<span class="p">(</span><span class="s">&#34;plyr&#34;</span><span class="p">)</span>
-install.packages<span class="p">(</span><span class="s">&#34;dplyr&#34;</span><span class="p">)</span>
-install.packages<span class="p">(</span><span class="s">&#34;mapproj&#34;</span><span class="p">)</span></code></pre></div>
-<ol>
+<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#34;</span><span class="s">fpc&#34;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#34;</span><span class="s">plyr&#34;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#34;</span><span class="s">dplyr&#34;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#34;</span><span class="s">mapproj&#34;</span><span class="p">)</span>
+</code></pre></div><ol start="3">
 <li>Run the script below from within R Studio or on unix based machines using <code>RScript plot_runkeeper.R</code>. If you are using Rstudio, be sure to set the working directory using <code>setwd()</code></li>
 </ol>
 <div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="c1"># Special thanks for insights from flowingdata.com regarding this.</span>
 
-<span class="kn">library</span><span class="p">(</span>plotKML<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>plyr<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>fpc<span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">plotKML</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">fpc</span><span class="p">)</span>
 
-num_locations <span class="o">&lt;-</span> <span class="m">5</span>
+<span class="n">num_locations</span> <span class="o">&lt;-</span> <span class="m">5</span>
 
 <span class="c1"># Usage: Place this script in the directory containing your runkeeper data. You can run from terminal using &#39;Rscript map_runkeeper.R&#39;, or</span>
 <span class="c1"># set your working directory to the location and run within RStudio (use setwd(&#34;~/location/of/runkeeper/data&#34;)).</span>
 <span class="c1"># See below on how to set the number of clusters.</span>
 
 <span class="c1"># GPX files downloaded from Runkeeper</span>
-files <span class="o">&lt;-</span> <span class="kp">dir</span><span class="p">(</span>pattern <span class="o">=</span> <span class="s">&#34;\\.gpx&#34;</span><span class="p">)</span>
+<span class="n">files</span> <span class="o">&lt;-</span> <span class="nf">dir</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">\\.gpx&#34;</span><span class="p">)</span>
 
 <span class="c1"># Generate vectors for data frame</span>
-index <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
-latitude <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
-longitude <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
-file <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
+<span class="n">index</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="p">)</span>
+<span class="n">latitude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="p">)</span>
+<span class="n">longitude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="p">)</span>
+<span class="n">file</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="p">)</span>
 
-<span class="kt">c</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="c1"># Set up Counter</span>
+<span class="n">c</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="c1"># Set up Counter</span>
 
 <span class="c1"># </span>
-<span class="kr">for</span> <span class="p">(</span>f <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>files<span class="p">))</span> <span class="p">{</span>
-  curr_route <span class="o">&lt;-</span> readGPX<span class="p">(</span>files<span class="p">[</span>f<span class="p">])</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">f</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">curr_route</span> <span class="o">&lt;-</span> <span class="nf">readGPX</span><span class="p">(</span><span class="n">files</span><span class="n">[f</span><span class="n">]</span><span class="p">)</span>
 <span class="c1"># Treat interrupted GPS paths as seperate routes (useful if you occasionally stop running..walk for a bit, and start again like I do.)</span>
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> curr_route<span class="o">$</span>tracks<span class="p">[[</span><span class="m">1</span><span class="p">]])</span> <span class="p">{</span>
-  <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span> <span class="o">+</span> <span class="m">1</span>
-  location <span class="o">&lt;-</span> i
-  file <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="kp">file</span><span class="p">,</span><span class="kp">rep</span><span class="p">(</span>files<span class="p">[</span>f<span class="p">],</span> <span class="kp">dim</span><span class="p">(</span>location<span class="p">)[</span><span class="m">1</span><span class="p">]))</span> 
-  index <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>index<span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">,</span> <span class="kp">dim</span><span class="p">(</span>location<span class="p">)[</span><span class="m">1</span><span class="p">]))</span>
-  latitude <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>latitude<span class="p">,</span> location<span class="o">$</span>lat<span class="p">)</span>
-  longitude <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>longitude<span class="p">,</span> location<span class="o">$</span>lon<span class="p">)</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="n">curr_route</span><span class="o">$</span><span class="n">tracks</span><span class="n">[</span><span class="n">[1</span><span class="n">]</span><span class="n">]</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">c</span> <span class="o">&lt;-</span> <span class="n">c</span> <span class="o">+</span> <span class="m">1</span>
+  <span class="n">location</span> <span class="o">&lt;-</span> <span class="n">i</span>
+  <span class="n">file</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="nf">rep</span><span class="p">(</span><span class="n">files</span><span class="n">[f</span><span class="n">]</span><span class="p">,</span> <span class="nf">dim</span><span class="p">(</span><span class="n">location</span><span class="p">)</span><span class="n">[1</span><span class="n">]</span><span class="p">)</span><span class="p">)</span> 
+  <span class="n">index</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nf">dim</span><span class="p">(</span><span class="n">location</span><span class="p">)</span><span class="n">[1</span><span class="n">]</span><span class="p">)</span><span class="p">)</span>
+  <span class="n">latitude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span>
+  <span class="n">longitude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">location</span><span class="o">$</span><span class="n">lon</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="p">}</span>
-routes <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>index<span class="p">,</span> latitude<span class="p">,</span> longitude<span class="p">,</span><span class="kp">file</span><span class="p">))</span>
+<span class="n">routes</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">cbind</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span><span class="n">file</span><span class="p">)</span><span class="p">)</span>
 
 <span class="c1"># Because the routes dataframe takes a while to generate for some folks - save it!</span>
-<span class="kp">save</span><span class="p">(</span>routes<span class="p">,</span> file<span class="o">=</span><span class="s">&#34;routes.Rdata&#34;</span><span class="p">)</span>
+<span class="nf">save</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s">&#34;</span><span class="s">routes.Rdata&#34;</span><span class="p">)</span>
 <span class="c1"># Use to load as needed.</span>
-<span class="kp">load</span><span class="p">(</span><span class="s">&#34;routes.Rdata&#34;</span><span class="p">)</span>
+<span class="nf">load</span><span class="p">(</span><span class="s">&#34;</span><span class="s">routes.Rdata&#34;</span><span class="p">)</span>
 
 <span class="c1"># Fix data types</span>
-routes<span class="o">$</span>file <span class="o">&lt;-</span> <span class="kp">as.character</span><span class="p">(</span>routes<span class="o">$</span><span class="kp">file</span><span class="p">)</span>
-routes<span class="o">$</span>latitude <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">levels</span><span class="p">(</span>routes<span class="o">$</span>latitude<span class="p">)[</span>routes<span class="o">$</span>latitude<span class="p">])</span>
-routes<span class="o">$</span>longitude <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">levels</span><span class="p">(</span>routes<span class="o">$</span>longitude<span class="p">)[</span>routes<span class="o">$</span>longitude<span class="p">])</span>
-routes <span class="o">&lt;-</span> <span class="kp">transform</span><span class="p">(</span>routes<span class="p">,</span> index <span class="o">=</span> <span class="kp">as.numeric</span><span class="p">(</span>index<span class="p">))</span>
+<span class="n">routes</span><span class="o">$</span><span class="n">file</span> <span class="o">&lt;-</span> <span class="nf">as.character</span><span class="p">(</span><span class="n">routes</span><span class="o">$</span><span class="n">file</span><span class="p">)</span>
+<span class="n">routes</span><span class="o">$</span><span class="n">latitude</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">routes</span><span class="o">$</span><span class="n">latitude</span><span class="p">)</span><span class="n">[routes</span><span class="o">$</span><span class="n">latitude</span><span class="n">]</span><span class="p">)</span>
+<span class="n">routes</span><span class="o">$</span><span class="n">longitude</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">routes</span><span class="o">$</span><span class="n">longitude</span><span class="p">)</span><span class="n">[routes</span><span class="o">$</span><span class="n">longitude</span><span class="n">]</span><span class="p">)</span>
+<span class="n">routes</span> <span class="o">&lt;-</span> <span class="nf">transform</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="p">)</span>
 
 <span class="c1"># Load Meta Data</span>
-meta_data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#34;cardioActivities.csv&#34;</span><span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-meta_data <span class="o">&lt;-</span> rename<span class="p">(</span>meta_data<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;GPX.File&#34;</span> <span class="o">=</span> <span class="s">&#34;file&#34;</span><span class="p">))</span>
+<span class="n">meta_data</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#34;</span><span class="s">cardioActivities.csv&#34;</span><span class="p">,</span> <span class="n">stringsAsFactors</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">meta_data</span> <span class="o">&lt;-</span> <span class="nf">rename</span><span class="p">(</span><span class="n">meta_data</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;</span><span class="s">GPX.File&#34;</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">file&#34;</span><span class="p">)</span><span class="p">)</span>
 
 <span class="c1"># Bind routes</span>
-routes <span class="o">&lt;-</span> left_join<span class="p">(</span>routes<span class="p">,</span> meta_data<span class="p">,</span> by<span class="o">=</span><span class="s">&#34;file&#34;</span><span class="p">)</span> <span class="o">%.%</span>
-  arrange<span class="p">(</span>index<span class="p">)</span>
+<span class="n">routes</span> <span class="o">&lt;-</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="n">meta_data</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&#34;</span><span class="s">file&#34;</span><span class="p">)</span> <span class="o">%.%</span>
+  <span class="nf">arrange</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
 
 <span class="c1"># Use this function specify activity color if you have multiple activities.</span>
-activity_color <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>activity<span class="p">)</span> <span class="p">{</span>
-  <span class="kr">if</span> <span class="p">(</span>activity<span class="o">==</span><span class="s">&#34;Cycling&#34;</span><span class="p">)</span> <span class="p">{</span>
-    color <span class="o">=</span> <span class="s">&#34;#00000060&#34;</span>
-  <span class="p">}</span> <span class="kr">else</span> <span class="kr">if</span> <span class="p">(</span>activity<span class="o">==</span><span class="s">&#34;Hiking&#34;</span><span class="p">)</span> <span class="p">{</span>
-    color <span class="o">=</span> <span class="s">&#34;#00000060&#34;</span>
-  <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-    color <span class="o">=</span> <span class="s">&#34;#0080ff60&#34;</span>
+<span class="n">activity_color</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">activity</span><span class="o">==</span><span class="s">&#34;</span><span class="s">Cycling&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">#00000060&#34;</span>
+  <span class="p">}</span> <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">activity</span><span class="o">==</span><span class="s">&#34;</span><span class="s">Hiking&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">#00000060&#34;</span>
+  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">#0080ff60&#34;</span>
   <span class="p">}</span>
-  color
+  <span class="n">color</span>
 <span class="p">}</span>
 
 <span class="c1"># Identify clusters of points, which will correspond to locations you have run. For example,</span>
 <span class="c1"># I have run in Boston, Iowa City, Chicago, and a few other cities. You will want to set the minimum krange</span>
 <span class="c1"># to the number of cities you have run in (5 in my case).</span>
-clusters <span class="o">&lt;-</span> pamk<span class="p">(</span>routes<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="s">&#34;latitude&#34;</span><span class="p">,</span> <span class="s">&#34;longitude&#34;</span><span class="p">)],</span> krange<span class="o">=</span>num_locations<span class="o">:</span><span class="m">20</span><span class="p">,</span> diss<span class="o">=</span><span class="bp">T</span><span class="p">,</span> usepam<span class="o">=</span><span class="bp">F</span><span class="p">)</span><span class="o">$</span>pamobject<span class="o">$</span>medoids
+<span class="n">clusters</span> <span class="o">&lt;-</span> <span class="nf">pamk</span><span class="p">(</span><span class="n">routes</span><span class="n">[</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;</span><span class="s">latitude&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">longitude&#34;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span> <span class="n">krange</span><span class="o">=</span><span class="n">num_locations</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">diss</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">usepam</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span><span class="o">$</span><span class="n">pamobject</span><span class="o">$</span><span class="n">medoids</span>
 
 <span class="c1"># Plot Everything</span>
-<span class="kr">for</span> <span class="p">(</span>r <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">max</span><span class="p">(</span><span class="kp">row</span><span class="p">(</span>clusters<span class="p">)))</span> <span class="p">{</span>
-  <span class="kp">print</span><span class="p">(</span>r<span class="p">)</span>
-  lat_range <span class="o">&lt;-</span> clusters<span class="p">[</span>r<span class="p">,][</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span><span class="m">20</span><span class="p">,</span> sd<span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
-  lon_range <span class="o">&lt;-</span>clusters<span class="p">[</span>r<span class="p">,][</span><span class="m">2</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span><span class="m">20</span><span class="p">,</span> sd<span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
-  setroutes <span class="o">&lt;-</span> filter<span class="p">(</span>routes<span class="p">,</span> <span class="p">(</span>latitude <span class="o">&gt;</span> <span class="kp">min</span><span class="p">(</span>lat_range<span class="p">)</span> <span class="o">&amp;</span> latitude <span class="o">&lt;</span> <span class="kp">max</span><span class="p">(</span>lat_range<span class="p">)),</span>
-                      longitude <span class="o">&gt;</span> <span class="kp">min</span><span class="p">(</span>lon_range<span class="p">)</span> <span class="o">&amp;</span>  longitude <span class="o">&lt;</span> <span class="kp">max</span><span class="p">(</span>lon_range<span class="p">))</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">r</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">max</span><span class="p">(</span><span class="nf">row</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+  <span class="n">lat_range</span> <span class="o">&lt;-</span> <span class="n">clusters</span><span class="n">[r</span><span class="p">,</span><span class="n">]</span><span class="n">[1</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+  <span class="n">lon_range</span> <span class="o">&lt;-</span><span class="n">clusters</span><span class="n">[r</span><span class="p">,</span><span class="n">]</span><span class="n">[2</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+  <span class="n">setroutes</span> <span class="o">&lt;-</span> <span class="nf">filter</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="p">(</span><span class="n">latitude</span> <span class="o">&gt;</span> <span class="nf">min</span><span class="p">(</span><span class="n">lat_range</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">latitude</span> <span class="o">&lt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">lat_range</span><span class="p">)</span><span class="p">)</span><span class="p">,</span>
+                      <span class="n">longitude</span> <span class="o">&gt;</span> <span class="nf">min</span><span class="p">(</span><span class="n">lon_range</span><span class="p">)</span> <span class="o">&amp;</span>  <span class="n">longitude</span> <span class="o">&lt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">lon_range</span><span class="p">)</span><span class="p">)</span>
   
-  routeIds <span class="o">&lt;-</span> <span class="kp">unique</span><span class="p">(</span>setroutes<span class="o">$</span>index<span class="p">)</span>
+  <span class="n">routeIds</span> <span class="o">&lt;-</span> <span class="nf">unique</span><span class="p">(</span><span class="n">setroutes</span><span class="o">$</span><span class="n">index</span><span class="p">)</span>
   
   <span class="c1"># Albers projection</span>
-  locProj <span class="o">&lt;-</span> mapproject<span class="p">(</span>setroutes<span class="o">$</span>longitude<span class="p">,</span> setroutes<span class="o">$</span>latitude<span class="p">,</span> <span class="s">&#34;rectangular&#34;</span><span class="p">,</span> par<span class="o">=</span><span class="m">38</span><span class="p">)</span>
-  setroutes<span class="o">$</span>latproj <span class="o">&lt;-</span> locProj<span class="o">$</span>x
-  setroutes<span class="o">$</span>lonproj <span class="o">&lt;-</span> locProj<span class="o">$</span>y
+  <span class="n">locProj</span> <span class="o">&lt;-</span> <span class="nf">mapproject</span><span class="p">(</span><span class="n">setroutes</span><span class="o">$</span><span class="n">longitude</span><span class="p">,</span> <span class="n">setroutes</span><span class="o">$</span><span class="n">latitude</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">rectangular&#34;</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="m">38</span><span class="p">)</span>
+  <span class="n">setroutes</span><span class="o">$</span><span class="n">latproj</span> <span class="o">&lt;-</span> <span class="n">locProj</span><span class="o">$</span><span class="n">x</span>
+  <span class="n">setroutes</span><span class="o">$</span><span class="n">lonproj</span> <span class="o">&lt;-</span> <span class="n">locProj</span><span class="o">$</span><span class="n">y</span>
   
   
   <span class="c1"># Map the projected points</span>
-  pdf<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&#34;%s-all.pdf&#34;</span><span class="p">,</span> r<span class="p">))</span>
+  <span class="nf">pdf</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#34;</span><span class="s">%s-all.pdf&#34;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span><span class="p">)</span>
   
-  plot<span class="p">(</span>setroutes<span class="o">$</span>latproj<span class="p">,</span> setroutes<span class="o">$</span>lonproj<span class="p">,</span> type<span class="o">=</span><span class="s">&#34;n&#34;</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">)</span>
-  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> routeIds<span class="p">)</span> <span class="p">{</span>
-    currRoute <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>setroutes<span class="p">,</span> index<span class="o">==</span>i<span class="p">)</span>
-    lines<span class="p">(</span>currRoute<span class="o">$</span>latproj<span class="p">,</span> currRoute<span class="o">$</span>lonproj<span class="p">,</span> col<span class="o">=</span>activity_color<span class="p">(</span>currRoute<span class="o">$</span>Type<span class="p">),</span> lwd<span class="o">=</span><span class="m">0.4</span><span class="p">)</span>
+  <span class="nf">plot</span><span class="p">(</span><span class="n">setroutes</span><span class="o">$</span><span class="n">latproj</span><span class="p">,</span> <span class="n">setroutes</span><span class="o">$</span><span class="n">lonproj</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&#34;</span><span class="s">n&#34;</span><span class="p">,</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&#34;</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#34;</span><span class="s">&#34;</span><span class="p">)</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="n">routeIds</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">currRoute</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">setroutes</span><span class="p">,</span> <span class="n">index</span><span class="o">==</span><span class="n">i</span><span class="p">)</span>
+    <span class="nf">lines</span><span class="p">(</span><span class="n">currRoute</span><span class="o">$</span><span class="n">latproj</span><span class="p">,</span> <span class="n">currRoute</span><span class="o">$</span><span class="n">lonproj</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="nf">activity_color</span><span class="p">(</span><span class="n">currRoute</span><span class="o">$</span><span class="n">Type</span><span class="p">)</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span>
   <span class="p">}</span>
-  dev.off<span class="p">()</span>
-<span class="p">}</span></code></pre></div></div>
+  <span class="nf">dev.off</span><span class="p">(</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
   
         <div id='comments'></div>
   

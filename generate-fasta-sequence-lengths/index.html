@@ -28,7 +28,7 @@ EF491733 135 EF491734 155 EF491735 140 EF491736 146 EF491737 150 EF491738 152 EF
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -90,9 +90,9 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p><strong>This one liner:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fa <span class="p">|</span> awk <span class="err">&#39;</span><span class="nv">$0</span> ~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span>print c<span class="p">;</span> <span class="nv">c</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nb">printf</span> substr<span class="o">(</span><span class="nv">$0</span>,2,100<span class="o">)</span> <span class="s2">&#34;\t&#34;</span><span class="p">;</span> <span class="o">}</span> <span class="nv">$0</span> !~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span><span class="nv">c</span><span class="o">+=</span>length<span class="o">(</span><span class="nv">$0</span><span class="o">)</span><span class="p">;</span><span class="o">}</span> END <span class="o">{</span> print c<span class="p">;</span> <span class="o">}</span></code></pre></div>
-<p><strong>Takes a fasta file as input:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-FASTA" data-lang="FASTA">&gt;EF491733
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fa <span class="p">|</span> awk <span class="err">&#39;</span><span class="nv">$0</span> ~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span>print c<span class="p">;</span> <span class="nv">c</span><span class="o">=</span>0<span class="p">;</span><span class="nb">printf</span> substr<span class="o">(</span><span class="nv">$0</span>,2,100<span class="o">)</span> <span class="s2">&#34;\t&#34;</span><span class="p">;</span> <span class="o">}</span> <span class="nv">$0</span> !~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span><span class="nv">c</span><span class="o">+=</span>length<span class="o">(</span><span class="nv">$0</span><span class="o">)</span><span class="p">;</span><span class="o">}</span> END <span class="o">{</span> print c<span class="p">;</span> <span class="o">}</span>
+</code></pre></div><p><strong>Takes a fasta file as input:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;EF491733
 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg
 caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag
 gaccaccaggtctacggggatcgccaggatggcct
@@ -122,16 +122,16 @@ gg
 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa
 actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc
 tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg
-gcgatgaatcagaagatgaa</code></pre></div>
-<p><strong>Outputs sequence name and length:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-tsv" data-lang="tsv">EF491733    135
+gcgatgaatcagaagatgaa
+</code></pre></div><p><strong>Outputs sequence name and length:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">EF491733    135
 EF491734    155
 EF491735    140
 EF491736    146
 EF491737    150
 EF491738    152
-EF491739    170</code></pre></div>
-<p>I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</p>
+EF491739    170
+</code></pre></div><p>I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</p>
 </div>
   
         <div id='comments'></div>

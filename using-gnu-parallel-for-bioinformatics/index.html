@@ -28,7 +28,7 @@ seq 1 5 | parallel -j 4 echo Here we are (1) Printing a sequence of numbers from
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -89,73 +89,64 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p><a href="https://www.gnu.org/software/parallel/">GNU Parallel</a> is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.</p>
-
+  <div class="lh-copy post-content"><p><a href="https://www.gnu.org/software/parallel/">GNU Parallel</a> is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.</p>
 <p>Many HPC clusters will have GNU-Parallel pre-installed or available as a module. You can also install it using <a href="brew.sh">homebrew</a> or other package managers.</p>
-
 <h1 id="basic-usage">Basic Usage</h1>
-
 <p>Lets start with a basic example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> echo</code></pre></div>
-<p>Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into <code>parallel</code>. We have provided the command <code>echo</code> which will be parallelized across <code>-j=4</code> jobs. We can see what this looks like by using the <code>--dry-run</code> flag which prints the commands to be run.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel --dry-run -j <span class="m">4</span> echo</code></pre></div><div class="highlight"><pre class="chroma">echo 3
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> <span class="nb">echo</span>
+</code></pre></div><p>Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into <code>parallel</code>. We have provided the command <code>echo</code> which will be parallelized across <code>-j=4</code> jobs. We can see what this looks like by using the <code>--dry-run</code> flag which prints the commands to be run.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel --dry-run -j <span class="m">4</span> <span class="nb">echo</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo 3
 echo 4
 echo 5
 echo 2
-echo 1</pre></div>
-<p>The results are out of order! This is due to the nature of parallelization. Not all &ldquo;jobs&rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &ldquo;first in first out&rdquo; result set by using the <code>-k</code> flag. Lets see what the <strong>output</strong> looks like by removing the <code>--dry-run</code> flag:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div><div class="highlight"><pre class="chroma">1
+echo 1
+</code></pre></div><p>The results are out of order! This is due to the nature of parallelization. Not all &ldquo;jobs&rdquo; initiate or take the same amount of time so it is common to observe outputs in a different order. We can enforce a &ldquo;first in first out&rdquo; result set by using the <code>-k</code> flag. Lets see what the <strong>output</strong> looks like by removing the <code>--dry-run</code> flag:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k <span class="nb">echo</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">1
 2
 3
 4
-5</pre></div>
-<p>Like any other command, you can send this output to a file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k <span class="nb">echo</span> &gt; out.txt</code></pre></div>
-<h2 id="j"><code>-j</code></h2>
-
+5
+</code></pre></div><p>Like any other command, you can send this output to a file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k <span class="nb">echo</span> &gt; out.txt
+</code></pre></div><h2 id="-j"><code>-j</code></h2>
 <p>In order for GNU Parllel to work, you want to have a multi-core CPU. Parallelizing across more cores than you have available can actually make performance <strong>worse</strong>, so it is important to tune the <code>-j</code> parameter to the number of cores available.</p>
-
 <p>Luckily, parallel allows you to specify <code>-j</code> using a percentage of cores or as a number relative to the total number of cores. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">100</span>% <span class="c1"># Uses 100% of cores.</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j 100% <span class="c1"># Uses 100% of cores.</span>
 parallel -j -1 <span class="c1"># Uses 1 less than the total number of cores.</span>
-parallel -j +1 <span class="c1"># Parallelize across the number of cores + 1</span></code></pre></div>
-<h2 id="use-for-args">Use <code>:::</code> for args</h2>
-
+parallel -j +1 <span class="c1"># Parallelize across the number of cores + 1</span>
+</code></pre></div><h2 id="use--for-args">Use <code>:::</code> for args</h2>
 <p>Use <code>:::</code> to specify arguments derived from commands or lists.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div>
-<p><strong>Note</strong> - There are limits to the number of arguments you can provide with a process substitution as shown above. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k echo</code></pre></div>
-<h2 id="use-for-args-within-files">Use <code>::::</code> for args within files</h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> ::: <span class="sb">`</span>seq <span class="m">1</span> 5<span class="sb">`</span>
+</code></pre></div><p><strong>Note</strong> - There are limits to the number of arguments you can provide with a process substitution as shown above. In these instances, it may be better to pipe arguments or use a file (below) rather than supply them with a process substitution:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">seq <span class="m">1</span> <span class="m">5</span> <span class="p">|</span> parallel -j <span class="m">4</span> -k <span class="nb">echo</span>
+</code></pre></div><h2 id="use--for-args-within-files">Use <code>::::</code> for args within files</h2>
 <p>For large argument lists you can specify a file with a list of arguments. Specify a file of arguments (one per line) using <code>::::</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> :::: my_args.txt</code></pre></div>
-<h2 id="use-to-specify-argument-variables">Use <code>{}</code> to specify argument variables</h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel -j <span class="m">4</span> -k <span class="nb">echo</span> :::: my_args.txt
+</code></pre></div><h2 id="use-">Use `</h2>
 <p>By default, <code>parallel</code> assumes the arguments are placed at the end of the input command, but you can explicitly define where arguments are substituted using <code>{}</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span class="m">4</span> -k <span class="nb">echo</span> <span class="se">\&#34;</span><span class="o">{}</span> <span class="s2">&#34;&lt;-- a number&#34;</span><span class="se">\&#34;</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">5</span><span class="sb">`</span></code></pre></div><div class="highlight"><pre class="chroma">echo &#34;1 &lt;-- a number&#34;
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span class="m">4</span> -k <span class="nb">echo</span> <span class="se">\&#34;</span><span class="o">{</span><span class="o">}</span> <span class="s2">&#34;&lt;-- a number&#34;</span><span class="se">\&#34;</span> ::: <span class="sb">`</span>seq <span class="m">1</span> 5<span class="sb">`</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo &#34;1 &lt;-- a number&#34;
 echo &#34;2 &lt;-- a number&#34;
 echo &#34;3 &lt;-- a number&#34;
 echo &#34;4 &lt;-- a number&#34;
-echo &#34;5 &lt;-- a number&#34;</pre></div>
-<p>Notice that we are having to escape quotes - there are ways around this.</p>
-
+echo &#34;5 &lt;-- a number&#34;
+</code></pre></div><p>Notice that we are having to escape quotes - there are ways around this.</p>
 <h2 id="combinatorials">Combinatorials</h2>
-
 <p>You can keep adding <code>:::</code> and <code>::::</code> to add additional arguments, and these will be combined to generate all possible combinations. This is extremely useful for testing commands with different combinations of input parameters.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -k -j <span class="m">4</span> Rscript run_analysis.R <span class="o">{</span><span class="m">1</span><span class="o">}</span> <span class="o">{</span><span class="m">2</span><span class="o">}</span> ::: <span class="sb">`</span>seq <span class="m">1</span> <span class="m">2</span><span class="sb">`</span> ::: A B C</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-csv" data-lang="csv">Rscript run_analysis.R 1 A
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">parallel --dry-run -k -j <span class="m">4</span> Rscript run_analysis.R <span class="o">{</span>1<span class="o">}</span> <span class="o">{</span>2<span class="o">}</span> ::: <span class="sb">`</span>seq <span class="m">1</span> 2<span class="sb">`</span> ::: A B C
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Rscript run_analysis.R 1 A
 Rscript run_analysis.R 1 B
 Rscript run_analysis.R 1 C
 Rscript run_analysis.R 2 A
 Rscript run_analysis.R 2 B
-Rscript run_analysis.R 2 C</code></pre></div>
-<h2 id="parallelize-functions">Parallelize Functions</h2>
-
+Rscript run_analysis.R 2 C
+</code></pre></div><h2 id="parallelize-functions">Parallelize Functions</h2>
 <p>In some cases, you want to perform a series of commands. For example, the code below compute the number of ATCGs of the complement of a DNA sequence.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;ATTA&#34;</span> <span class="p">|</span>  tr ATCG TAGC <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>    python -c <span class="s2">&#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&#39;T&#39;), o.count(&#39;G&#39;), o.count(&#39;C&#39;), o.count(&#39;A&#39;))&#34;</span></code></pre></div>
-<p>This command has two operations. While is it possible to incorporate this into a &lsquo;one-liner&rsquo;, it is far easier to create a bash function, export it, and use that as input.</p>
+</span><span class="se"></span>    python -c <span class="s2">&#34;import sys; o=sys.stdin.read().strip(); print(o, o.count(&#39;T&#39;), o.count(&#39;G&#39;), o.count(&#39;C&#39;), o.count(&#39;A&#39;))&#34;</span>
+</code></pre></div><p>This command has two operations. While is it possible to incorporate this into a &lsquo;one-liner&rsquo;, it is far easier to create a bash function, export it, and use that as input.</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">function</span> count_nts <span class="o">{</span>
     <span class="c1"># $1 is the first argument passed to the function</span>
     <span class="nb">echo</span> <span class="nv">$1</span> <span class="p">|</span> tr ATCG TAGC <span class="p">|</span> <span class="se">\
@@ -165,15 +156,14 @@ Rscript run_analysis.R 2 C</code></pre></div>
 <span class="c1"># Use the `-f` flag to export functions</span>
 <span class="nb">export</span> -f count_nts
 
-parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\t&#39;</span></code></pre></div>
-<p>With the basics down, lets see how we can use parallel to speed up bioinformatics.</p>
+parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span class="p">|</span> tr <span class="s1">&#39; &#39;</span> <span class="s1">&#39;\t&#39;</span>
 
+</code></pre></div><p>With the basics down, lets see how we can use parallel to speed up bioinformatics.</p>
 <h1 id="gnu-parallel-for-variant-calling">GNU Parallel for Variant Calling</h1>
-
 <p>When working with BAMs or VCFs you can parallelize across chromosomes. Most variant callers or annotation tools allow you to operate on a single chromosome at a time by specifying a region. This allows us to apply a <code>split-apply-combine</code> strategy by splitting by chromosome, operating on each chromosome, and combining the results at the end.</p>
-
-<h2 id="split-chromosomes-from-a-bam"><strong>Split</strong> chromosomes from a BAM</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">chrom_list</span><span class="o">=</span><span class="sb">`</span>samtools idxstats in.bam <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span><span class="sb">`</span>
+<h2 id="__split__-chromosomes-from-a-bam"><strong>Split</strong> chromosomes from a BAM</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+<span class="nv">chrom_list</span><span class="o">=</span><span class="sb">`</span>samtools idxstats in.bam <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span><span class="sb">`</span>
 
 <span class="c1"># For c. elegans you can would see the following 7</span>
 <span class="c1"># I</span>
@@ -182,13 +172,12 @@ parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span c
 <span class="c1"># IV</span>
 <span class="c1"># V</span>
 <span class="c1"># X</span>
-<span class="c1"># MtDNA</span></code></pre></div>
-<p>We can create a function so this operation is easier going forward:</p>
+<span class="c1"># MtDNA</span>
+</code></pre></div><p>We can create a function so this operation is easier going forward:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> bam_chromosomes <span class="o">{</span>
     samtools idxstats <span class="nv">$1</span> <span class="p">|</span> cut -f <span class="m">1</span> <span class="p">|</span> grep -v <span class="s1">&#39;*&#39;</span>
-<span class="o">}</span></code></pre></div>
-<h2 id="apply-an-operation-to-each-chromosome"><strong>Apply</strong> an operation to each chromosome</h2>
-
+<span class="o">}</span>
+</code></pre></div><h2 id="__apply__-an-operation-to-each-chromosome"><strong>Apply</strong> an operation to each chromosome</h2>
 <p>Here is where GNU parallel comes into play: Parallelized variant calling by chromosome:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
@@ -209,18 +198,16 @@ parallel -j <span class="m">4</span> count_nts ::: TAAT TTT AAAAT GCGCAT <span c
 <span class="nb">export</span> -f parallel_call
 
 <span class="nv">chrom_set</span><span class="o">=</span><span class="sb">`</span>bam_chromosomes test.bam<span class="sb">`</span>
-parallel --verbose -j <span class="m">4</span> parallel_call sample_A.bam ::: <span class="si">${</span><span class="nv">chrom_set</span><span class="si">}</span></code></pre></div>
-<p>A few important notes regarding this step:</p>
+parallel --verbose -j <span class="m">4</span> parallel_call sample_A.bam ::: <span class="si">${</span><span class="nv">chrom_set</span><span class="si">}</span>
 
+</code></pre></div><p>A few important notes regarding this step:</p>
 <ul>
 <li>You must export any variables you use within a parallelized function. That is what I am doing here with the reference <code>genome</code> variable.</li>
 <li><code>bcftools mpileup</code> outputs an uncompressed pileup (<code>--output-type=u</code>). This is done for efficiency sake - there is no reason to pipe a compressed form of data for it to need to be uncompressed by the next tool.</li>
 <li>Similarly, I also output an uncompressed set of variant calls <code>${1/.bam/}.$2.bcf</code> because these are temporary files that we will remove later.</li>
 <li>Finally, I use a variable substitution to remove the extension from the bam and to generate a <code>&lt;sample&gt;.&lt;chromsome&gt;.bcf</code> filename: <code>${1/.bam/}.$2.bcf</code> → <code>sample_A.I.bam</code>, <code>sample_A.II.bam</code>, etc. This prevents filename collisions if we are calling many samples simultaneously.</li>
 </ul>
-
-<h2 id="combine-the-variant-calls"><strong>Combine</strong> the variant calls.</h2>
-
+<h2 id="__combine__-the-variant-calls"><strong>Combine</strong> the variant calls.</h2>
 <p>Once we have completed variant calling we need to combine everything back in the right order. We can use a bash array to add a prefix and suffix to the list of chromosomes to reconstruct the output filenames and concatenate them into a single file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Generate an array of the resulting files</span>
 <span class="c1"># to be concatenated.</span>
@@ -236,11 +223,9 @@ parallel --verbose -j <span class="m">4</span> parallel_call sample_A.bam ::: <s
 bcftools concat <span class="nv">$@</span> --output-type b &gt; <span class="nv">$sample_name</span>.bcf
 
 <span class="c1"># Remove intermediate files</span>
-rm <span class="nv">$@</span></code></pre></div>
-<p>To ensure the intermediate files are removed even when errors occur you should use a <a href="http://redsymbol.net/articles/bash-exit-traps/">bash trap</a>.</p>
-
+rm <span class="nv">$@</span>
+</code></pre></div><p>To ensure the intermediate files are removed even when errors occur you should use a <a href="http://redsymbol.net/articles/bash-exit-traps/">bash trap</a>.</p>
 <h1 id="summary">Summary</h1>
-
 <p>GNU Parallel can greatly speed up simple parallelization scenerios. Additional code is often required to handle the &ldquo;splitting&rdquo; and &ldquo;combining&rdquo; steps, but this can allow for tremendous efficiency gains.</p>
 </div>
   

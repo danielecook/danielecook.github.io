@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Database on Daniel E. Cook</title>
@@ -18,7 +18,7 @@
       <pubDate>Fri, 12 Jun 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/hgnc-search-instant-search-of-human-genes-with-alfred/</guid>
-      <description>I have put together an Alfred workflow &amp;#8211; this one searches the HGNC database for genes! I have converted the text database from the HGNC website and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
+      <description>I have put together an Alfred workflow – this one searches the HGNC database for genes! I have converted the text database from the HGNC website and configured it for full text search using sqlite. This allows you to lookup genes by their UCSC, Entrez, Vega, Ensembl, and many other identifiers very quickly.
 Download the latest release Usage Full text search of the HGNC database
 Information and links are provided for individual genes</description>
     </item>

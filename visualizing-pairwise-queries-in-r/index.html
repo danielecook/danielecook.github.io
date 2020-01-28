@@ -26,7 +26,7 @@ In the example below, I show the results from organisms x diseases/disease-assoc
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,42 +87,42 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p><img src="/pairwise_search.png" alt="diseasexorg" class='center-img' /></p>
-
+  <div class="lh-copy post-content"><p><!-- raw HTML omitted --></p>
 <p>You can look for interesting associations between sets of search terms on PubMed by comparing how often two terms co-occur. The code below returns the number of publications where both terms are mentioned, acting as a rough estimate for how associated they are (at least, in the scholarly world).</p>
-
-<p>In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism. Of course, this should all be taken with a (big) grain of salt because these organisms and diseases have many synonyms or related terms (e.g. <em>M. Musculus</em> is often referred to as Mouse in the literature). Additionally, the result count is based off of whether or not the terms were found together within the title and abstract of the literature only &#8211; and not the body of the text in many cases.</p>
+<p>In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism. Of course, this should all be taken with a (big) grain of salt because these organisms and diseases have many synonyms or related terms (e.g. <em>M. Musculus</em> is often referred to as Mouse in the literature). Additionally, the result count is based off of whether or not the terms were found together within the title and abstract of the literature only – and not the body of the text in many cases.</p>
 <div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="c1"># install.packages(&#34;RISmed&#34;, &#34;ggplot2&#34;)</span>
-<span class="kn">library</span><span class="p">(</span>RISmed<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RISmed</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 
 <span class="c1"># Given two lists of terms, lets see how &#39;hot&#39; they are together</span>
-set1 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;ebola&#34;</span><span class="p">,</span><span class="s">&#34;autoimmune&#34;</span><span class="p">,</span><span class="s">&#34;Diabetes&#34;</span><span class="p">,</span><span class="s">&#34;Glioblastoma&#34;</span><span class="p">,</span><span class="s">&#34;Asthma&#34;</span><span class="p">,</span><span class="s">&#34;Schizophrenia&#34;</span><span class="p">)</span>
-set2 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;C. elegans&#34;</span><span class="p">,</span><span class="s">&#34;D. Melanogaster&#34;</span><span class="p">,</span> <span class="s">&#34;M. Musculus&#34;</span><span class="p">,</span><span class="s">&#34;S. Cerevisiae&#34;</span><span class="p">)</span>
+<span class="n">set1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;</span><span class="s">ebola&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">autoimmune&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">Diabetes&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">Glioblastoma&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">Asthma&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">Schizophrenia&#34;</span><span class="p">)</span>
+<span class="n">set2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;</span><span class="s">C. elegans&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">D. Melanogaster&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">M. Musculus&#34;</span><span class="p">,</span><span class="s">&#34;</span><span class="s">S. Cerevisiae&#34;</span><span class="p">)</span>
 
 <span class="c1"># Generate all possible pairs</span>
-pairs <span class="o">&lt;-</span> <span class="kp">expand.grid</span><span class="p">(</span>set1<span class="p">,</span> set2<span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="n">pairs</span> <span class="o">&lt;-</span> <span class="nf">expand.grid</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">,</span> <span class="n">stringsAsFactors</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="c1"># Search pubmed for each pair, and return the number of search results.</span>
-results <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>pairs<span class="p">),</span>  <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
-  query <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#34;%s %s&#34;</span><span class="p">,</span> pairs<span class="p">[</span>x<span class="p">,]</span><span class="o">$</span>Var1<span class="p">,</span> pairs<span class="p">[</span>x<span class="p">,]</span><span class="o">$</span>Var2<span class="p">)</span>
-  <span class="kp">print</span><span class="p">(</span>query<span class="p">)</span>
-  result <span class="o">&lt;-</span> EUtilsSummary<span class="p">(</span>query<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;esearch&#39;</span><span class="p">,</span> db<span class="o">=</span><span class="s">&#39;pubmed&#39;</span><span class="p">)</span>
-  <span class="kt">c</span><span class="p">(</span>q1<span class="o">=</span>pairs<span class="p">[</span>x<span class="p">,]</span><span class="o">$</span>Var1<span class="p">,</span> q2<span class="o">=</span>pairs<span class="p">[</span>x<span class="p">,]</span><span class="o">$</span>Var2<span class="p">,</span> count<span class="o">=</span>QueryCount<span class="p">(</span>result<span class="p">))</span>
-<span class="p">})</span>
+<span class="n">results</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span><span class="p">,</span>  <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">query</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span><span class="s">&#34;</span><span class="s">%s %s&#34;</span><span class="p">,</span> <span class="n">pairs</span><span class="n">[x</span><span class="p">,</span><span class="n">]</span><span class="o">$</span><span class="n">Var1</span><span class="p">,</span> <span class="n">pairs</span><span class="n">[x</span><span class="p">,</span><span class="n">]</span><span class="o">$</span><span class="n">Var2</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">&lt;-</span> <span class="nf">EUtilsSummary</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&#39;</span><span class="s">esearch&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="s">&#39;</span><span class="s">pubmed&#39;</span><span class="p">)</span>
+  <span class="nf">c</span><span class="p">(</span><span class="n">q1</span><span class="o">=</span><span class="n">pairs</span><span class="n">[x</span><span class="p">,</span><span class="n">]</span><span class="o">$</span><span class="n">Var1</span><span class="p">,</span> <span class="n">q2</span><span class="o">=</span><span class="n">pairs</span><span class="n">[x</span><span class="p">,</span><span class="n">]</span><span class="o">$</span><span class="n">Var2</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="nf">QueryCount</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="p">)</span>
+<span class="p">}</span><span class="p">)</span>
 
 <span class="c1"># Do some data formatting on the results.</span>
-results <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">do.call</span><span class="p">(</span><span class="s">&#34;rbind&#34;</span><span class="p">,</span> results<span class="p">),</span> stringsAsFactors<span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="s">&#34;</span><span class="s">rbind&#34;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span><span class="p">,</span> <span class="n">stringsAsFactors</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 <span class="c1"># Turn the number of search results into numeric form.</span>
-results<span class="o">$</span>count <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>results<span class="o">$</span>count<span class="p">)</span>
+<span class="n">results</span><span class="o">$</span><span class="n">count</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">count</span><span class="p">)</span>
 
 <span class="c1"># Plot the results using geom_tile</span>
-ggplot<span class="p">(</span>results<span class="p">)</span> <span class="o">+</span>
-  geom_tile<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>q1<span class="p">,</span> y<span class="o">=</span>q2<span class="p">,</span> fill<span class="o">=</span>count<span class="p">))</span> <span class="o">+</span>
-  geom_text<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>q1<span class="p">,</span> y<span class="o">=</span>q2<span class="p">,</span> label<span class="o">=</span>count<span class="p">),</span> color <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">)</span> <span class="o">+</span> 
-  labs<span class="p">(</span>title<span class="o">=</span><span class="s">&#34;Disease Publications by Organism&#34;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&#34;y&#34;</span><span class="p">)</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">geom_tile</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">q1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">q2</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">count</span><span class="p">)</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">geom_text</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">q1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">q2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">count</span><span class="p">)</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">white&#34;</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#34;</span><span class="s">Disease Publications by Organism&#34;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">&#34;</span><span class="s">x&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&#34;</span><span class="s">y&#34;</span><span class="p">)</span>
 
-ggsave<span class="p">(</span><span class="s">&#34;~/Desktop/pairwise_search.png&#34;</span><span class="p">,</span> width <span class="o">=</span> <span class="m">8</span><span class="p">,</span> height <span class="o">=</span> <span class="m">6</span><span class="p">)</span></code></pre></div></div>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&#34;</span><span class="s">~/Desktop/pairwise_search.png&#34;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="m">6</span><span class="p">)</span>
+
+</code></pre></div></div>
   
         <div id='comments'></div>
   

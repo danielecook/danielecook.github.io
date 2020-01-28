@@ -9,7 +9,7 @@
   <meta content='From SRA Project to FASTQ - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Original Post (2014-10-25) The Sequence Read Archive (SRA) contains sequence data from scientific studies stored in a special &#8216;sra&#8217; format. Data is stored in a hierarchical format:
+<meta property="og:description" content="Original Post (2014-10-25) The Sequence Read Archive (SRA) contains sequence data from scientific studies stored in a special ‘sra’ format. Data is stored in a hierarchical format:
 Project ▸ Study ▸ Sample ▸ Experiment ▸ Run
 Recently, I had to use the SRA to download all of the sequence data for a given project. This required querying the SRA database for all the runs in a sequencing project and converting them to FASTQs." />
 <meta property="og:type" content="article" />
@@ -27,7 +27,7 @@ Recently, I had to use the SRA to download all of the sequence data for a given 
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,25 +88,20 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h2 id="original-post-2014-10-25">Original Post (2014-10-25)</h2>
-
-<p>The <a href="http://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> contains sequence data from scientific studies stored in a special &#8216;sra&#8217; format. Data is stored in a <a href="http://www.ncbi.nlm.nih.gov/Traces/sra/?cmd=show&amp;f=sra_sub_expl&amp;view=get_started">hierarchical format</a>:</p>
-
+  <div class="lh-copy post-content"><h2 id="original-post-2014-10-25">Original Post (2014-10-25)</h2>
+<p>The <a href="http://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> contains sequence data from scientific studies stored in a special ‘sra’ format. Data is stored in a <a href="http://www.ncbi.nlm.nih.gov/Traces/sra/?cmd=show&amp;f=sra_sub_expl&amp;view=get_started">hierarchical format</a>:</p>
 <p>Project ▸ Study ▸ Sample ▸ Experiment ▸ Run</p>
-
-<p>Recently, I had to use the SRA to download all of the sequence data for a given project. This required querying the SRA database for all the runs in a sequencing project and converting them to FASTQs. Here&#8217;s how I did it:</p>
-
-<p>First, you&#8217;ll need <a href="http://www.ncbi.nlm.nih.gov/books/NBK179288/">entrez direct</a>, and the sra toolkit. If you are on a mac, you can install both using <a href="homebrew.sh">homebrew</a>.</p>
+<p>Recently, I had to use the SRA to download all of the sequence data for a given project. This required querying the SRA database for all the runs in a sequencing project and converting them to FASTQs. Here’s how I did it:</p>
+<p>First, you’ll need <a href="http://www.ncbi.nlm.nih.gov/books/NBK179288/">entrez direct</a>, and the sra toolkit. If you are on a mac, you can install both using <a href="homebrew.sh">homebrew</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install edirect <span class="c1"># Entrez Direct</span>
-brew install sratoolkit</code></pre></div>
-<p>Once installed, the script below can be used to download all the sequence data associated with a given project. The script queries the project for all the associated sequence data, and converts to zipped FASTQs. Note that it also uses gnu parallel (to speed things up) and fastqc for quality control. These can be installed on mac using:</p>
+brew install sratoolkit
+</code></pre></div><p>Once installed, the script below can be used to download all the sequence data associated with a given project. The script queries the project for all the associated sequence data, and converts to zipped FASTQs. Note that it also uses gnu parallel (to speed things up) and fastqc for quality control. These can be installed on mac using:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install parallel
-brew install fastqc</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Download_SRP_Runs<span class="o">()</span> <span class="o">{</span>
+brew install fastqc
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Download_SRP_Runs<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="nv">SRP_IDs</span><span class="o">=</span><span class="sb">`</span>esearch -db sra -query <span class="nv">$1</span> <span class="p">|</span> efetch -format docsum <span class="p">|</span> xtract -pattern DocumentSummary -element Run@acc <span class="p">|</span> tr <span class="s1">&#39;\t&#39;</span> <span class="s1">&#39;\n&#39;</span><span class="sb">`</span>
     <span class="k">for</span> r in <span class="si">${</span><span class="nv">SRP_IDs</span><span class="si">}</span><span class="p">;</span> <span class="k">do</span>
-        <span class="nv">url</span><span class="o">=</span><span class="s2">&#34;ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/</span><span class="si">${</span><span class="nv">r</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">6</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">r</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">r</span><span class="si">}</span><span class="s2">.sra&#34;</span>
+        <span class="nv">url</span><span class="o">=</span><span class="s2">&#34;</span><span class="s2">ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/</span><span class="si">${</span><span class="nv">r</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">6</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">r</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">r</span><span class="si">}</span><span class="s2">.sra</span><span class="s2">&#34;</span>
         wget <span class="nv">$url</span>
     <span class="k">done</span><span class="p">;</span>
 <span class="o">}</span>
@@ -114,12 +109,11 @@ brew install fastqc</code></pre></div><div class="highlight"><pre class="chroma"
 Download_SRP_Runs &lt;SRP ID GOES HERE&gt;
 
 <span class="c1"># Convert to fastq</span>
-parallel fastq-dump --split-files --gzip <span class="o">{}</span> ::: *.sra
+parallel fastq-dump --split-files --gzip <span class="o">{</span><span class="o">}</span> ::: *.sra
 
 <span class="c1"># Perform quality control</span>
-parallel fastqc <span class="o">{}</span> ::: *.fastq.gz</code></pre></div>
-<h2 id="update-sra-explorer-2019-06-20">Update: SRA Explorer (2019-06-20)</h2>
-
+parallel fastqc <span class="o">{</span><span class="o">}</span> ::: *.fastq.gz
+</code></pre></div><h2 id="update-sra-explorer-2019-06-20">Update: SRA Explorer (2019-06-20)</h2>
 <p>The <a href="https://ewels.github.io/sra-explorer/#">SRA Explorer</a> by <a href="http://phil.ewels.co.uk/">Phil Ewels</a> can be used to generate a collection of SRA datasets and direct download links for their FASTQs.</p>
 </div>
   

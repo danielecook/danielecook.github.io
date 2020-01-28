@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bam on Daniel E. Cook</title>
@@ -21,7 +21,7 @@
       <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
 # Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
- MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller Bioinformatics (2016) doi: 10.</description>
     </item>
     
     <item>
@@ -30,7 +30,7 @@ Publication
       <pubDate>Sat, 20 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/calculate-depth-and-breadth-of-coverage-from-a-bam-file/</guid>
-      <description>Original Post What is the difference between depth and coverage in sequencing experiments? Actually &amp;#8211; they refer to the same thing, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is breadth of coverage. This paper more precisely defines what breadth of coverage and depth of coverage mean.</description>
+      <description>Original Post What is the difference between depth and coverage in sequencing experiments? Actually – they refer to the same thing, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is breadth of coverage. This paper more precisely defines what breadth of coverage and depth of coverage mean.</description>
     </item>
     
   </channel>

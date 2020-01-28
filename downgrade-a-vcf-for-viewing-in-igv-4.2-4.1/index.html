@@ -10,7 +10,7 @@
 
 
 <meta property="og:description" content="Update: You probably no longer need this (2019-06-24) If you are using up to date software then you probably do not need to worry about downgrading a VCF file.
-Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again." />
+Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I’ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/" />
 
@@ -26,7 +26,7 @@ Original Post (2014-12-15) If you are using the new version of bcftools, and you
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,23 +87,17 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h2 id="update-you-probably-no-longer-need-this-2019-06-24">Update: You probably no longer need this (2019-06-24)</h2>
-
+  <div class="lh-copy post-content"><h2 id="update-you-probably-no-longer-need-this-2019-06-24">Update: You probably no longer need this (2019-06-24)</h2>
 <p>If you are using up to date software then you probably do not need to worry about downgrading a VCF file.</p>
-
 <h2 id="original-post-2014-12-15">Original Post (2014-12-15)</h2>
-
-<p>If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</p>
-
-<p>All you have to do is revert the version number in the first line and replace a few characters IGV does not like. Below is a bash function that will do this &#8211; saving any inputted VCF as <code>{vcf_filename}.dg.vcf.gz</code>. The script also indexes the file making it ready for use.</p>
+<p>If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I’ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</p>
+<p>All you have to do is revert the version number in the first line and replace a few characters IGV does not like. Below is a bash function that will do this – saving any inputted VCF as <code>{vcf_filename}.dg.vcf.gz</code>. The script also indexes the file making it ready for use.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># If you are trying to view VCF 4.2 files in IGV - you may run into issues. This function might help you.</span>
 <span class="c1"># This script will:</span>
 <span class="c1"># 1. Rename the file as version 4.1</span>
 <span class="c1"># 2. Replace parentheses in the INFO lines (IGV doesn&#39;t like these!)</span>
 
-<span class="k">function</span> vcf_downgrade<span class="o">()</span> <span class="o">{</span>
+<span class="k">function</span> vcf_downgrade<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
   <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="p">/.bcf/</span><span class="si">}</span>
   <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">outfile</span><span class="p">/.gz/</span><span class="si">}</span>
   <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">outfile</span><span class="p">/.vcf/</span><span class="si">}</span>
@@ -114,7 +108,9 @@ type="image/x-icon"/>
 </span><span class="se"></span>  sed <span class="s2">&#34;s/,Version=\&#34;3\&#34;&gt;/&gt;/&#34;</span> <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>  bcftools view -O z &gt; <span class="si">${</span><span class="nv">outfile</span><span class="si">}</span>.dg.vcf.gz
   tabix <span class="si">${</span><span class="nv">outfile</span><span class="si">}</span>.dg.vcf.gz
-<span class="o">}</span></code></pre></div></div>
+<span class="o">}</span>
+
+</code></pre></div></div>
   
         <div id='comments'></div>
   

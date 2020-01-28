@@ -9,10 +9,9 @@
   <meta content='Fetch Citations in Google Sheets using pubmed() function - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+<meta property="og:description" content="If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&#39;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
 =pubmed(23149456) Will return an html-formatted citation:
-The heritability of metabolic profiles in newborn twins.
-Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8" />
+Setup To implement the function, you&#39;ll need to copy and paste the function below into the script editor and save it as a new project." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/" />
 
@@ -28,7 +27,7 @@ Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman 
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -89,17 +88,12 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&rsquo;ve created a <code>pubmed()</code> function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">=</span>pubmed<span class="o">(</span><span class="m">23149456</span><span class="o">)</span></code></pre></div>
-<p>Will return an html-formatted citation:</p>
-
-<p><strong>The heritability of metabolic profiles in newborn twins.</strong><br />Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, <br />(2013 Mar) <em>Heredity</em> 110 (3) 253-8</p>
-
+  <div class="lh-copy post-content"><p>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I've created a <code>pubmed()</code> function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">=</span>pubmed<span class="o">(</span>23149456<span class="o">)</span>
+</code></pre></div><p>Will return an html-formatted citation:</p>
+<!-- raw HTML omitted -->
 <h3 id="setup">Setup</h3>
-
-<p>To implement the function, you&rsquo;ll need to copy and paste the function below into the script editor and save it as a new project. Then it will become available within your google sheet. The script editor is available through the <code>Tools &gt; Script Editor</code></p>
+<p>To implement the function, you'll need to copy and paste the function below into the script editor and save it as a new project. Then it will become available within your google sheet. The script editor is available through the <code>Tools &gt; Script Editor</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/**
 </span><span class="cm"> * Returns formatted pubmed citation.
 </span><span class="cm"> *
@@ -112,17 +106,17 @@ type="image/x-icon"/>
 </span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span>  <span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&amp;id=&#34;</span> <span class="o">+</span> <span class="nx">id</span> <span class="o">+</span> <span class="s2">&#34;&amp;retmode=json&#34;</span><span class="p">)</span>
   <span class="nx">summary</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
   
-  <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">title</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">journal</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">fulljournalname</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">volume</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">volume</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">issue</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">issue</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">journal</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">fulljournalname</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">volume</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">volume</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">issue</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">issue</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">citation</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">pub_date</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">pubdate</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">pages</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">pub_date</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">pubdate</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">pages</span><span class="p">;</span>
  
   <span class="kd">var</span> <span class="nx">authors</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
-  <span class="k">for</span><span class="p">(</span><span class="nx">author</span> <span class="k">in</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">authors</span><span class="p">){</span>
-    <span class="nx">authors</span><span class="o">+=</span><span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">authors</span><span class="p">[</span><span class="nx">author</span><span class="p">].</span><span class="nx">name</span><span class="o">+</span><span class="s1">&#39;, &#39;</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">author</span> <span class="k">in</span> <span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">authors</span><span class="p">)</span><span class="p">{</span>
+    <span class="nx">authors</span><span class="o">+=</span><span class="nx">summary</span><span class="p">.</span><span class="nx">result</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="p">.</span><span class="nx">authors</span><span class="p">[</span><span class="nx">author</span><span class="p">]</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s1">&#39;, &#39;</span><span class="p">;</span>
   <span class="p">}</span>
   
   <span class="kd">var</span> <span class="nx">citation</span> <span class="o">=</span> <span class="s2">&#34;&lt;p&gt;&lt;strong&gt;&#34;</span> <span class="o">+</span> <span class="nx">title</span> <span class="o">+</span> <span class="s2">&#34;&lt;/strong&gt;&lt;br /&gt;&#34;</span> <span class="o">+</span>
