@@ -3,8 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.danielecook.com/calculate-insert-size-metrics-faster/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/nim/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/seq-collection/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/vcf/</loc>
+    <lastmod>2020-01-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -18,17 +48,7 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/tags/python/</loc>
-    <lastmod>2019-10-25T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
     <lastmod>2019-10-25T01:15:53+00:00</lastmod>
   </url>
   
@@ -69,16 +89,6 @@
   
   <url>
     <loc>https://www.danielecook.com/converting-vcf-to-json/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/nim/</loc>
-    <lastmod>2019-09-22T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/vcf/</loc>
     <lastmod>2019-09-22T01:15:53+00:00</lastmod>
   </url>
   

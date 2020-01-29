@@ -41,7 +41,6 @@ Then you can set the content of any google sheets worksheet to the data from a p
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -90,42 +89,42 @@ type="image/x-icon"/>
   
   <div class="lh-copy post-content"><p>I wrote the following snippet to post datasets (e.g. TSVs or CSVs) to google sheets. In order to get this to work you will need to <a href="https://gspread.readthedocs.io/en/latest/oauth2.html">authorize google sheets access</a>.</p>
 <p>Then you can set the content of any google sheets worksheet to the data from a pandas dataframe by using the <code>pandas_to_sheets</code> function.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
-<span class="kn">import</span> <span class="nn">gspread</span>
-<span class="kn">from</span> <span class="nn">oauth2client.service_account</span> <span class="kn">import</span> <span class="n">ServiceAccountCredentials</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+<span style="color:#f92672">import</span> gspread
+<span style="color:#f92672">from</span> oauth2client.service_account <span style="color:#f92672">import</span> ServiceAccountCredentials
 
-<span class="k">def</span> <span class="nf">iter_pd</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="n">val</span>
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#34;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="n">val</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">iter_pd</span>(df):
+    <span style="color:#66d9ef">for</span> val <span style="color:#f92672">in</span> list(df<span style="color:#f92672">.</span>columns):
+        <span style="color:#66d9ef">yield</span> val
+    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>values:
+        <span style="color:#66d9ef">for</span> val <span style="color:#f92672">in</span> list(row):
+            <span style="color:#66d9ef">if</span> pd<span style="color:#f92672">.</span>isna(val):
+                <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">yield</span> val
 
-<span class="k">def</span> <span class="nf">pandas_to_sheets</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">,</span> <span class="n">sheet</span><span class="p">,</span> <span class="n">clear</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span><span class="p">:</span>
-    <span class="c1"># Updates all values in a workbook to match a pandas dataframe</span>
-    <span class="k">if</span> <span class="n">clear</span><span class="p">:</span>
-        <span class="n">sheet</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="p">)</span>
-    <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="o">=</span> <span class="n">pandas_df</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">cells</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">A1:{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gspread</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">rowcol_to_a1</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">iter_pd</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
-        <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">val</span>
-    <span class="n">sheet</span><span class="o">.</span><span class="n">update_cells</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pandas_to_sheets</span>(pandas_df, sheet, clear <span style="color:#f92672">=</span> True):
+    <span style="color:#75715e"># Updates all values in a workbook to match a pandas dataframe</span>
+    <span style="color:#66d9ef">if</span> clear:
+        sheet<span style="color:#f92672">.</span>clear()
+    (row, col) <span style="color:#f92672">=</span> pandas_df<span style="color:#f92672">.</span>shape
+    cells <span style="color:#f92672">=</span> sheet<span style="color:#f92672">.</span>range(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">A1:{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(gspread<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>rowcol_to_a1(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, col)))
+    <span style="color:#66d9ef">for</span> cell, val <span style="color:#f92672">in</span> zip(cells, iter_pd(df)):
+        cell<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> val
+    sheet<span style="color:#f92672">.</span>update_cells(cells)
 
-<span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">https://spreadsheets.google.com/feeds</span><span class="s1">&#39;</span><span class="p">,</span>
-         <span class="sa"></span><span class="s1">&#39;</span><span class="s1">https://www.googleapis.com/auth/drive</span><span class="s1">&#39;</span><span class="p">]</span>
+scope <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://spreadsheets.google.com/feeds</span><span style="color:#e6db74">&#39;</span>,
+         <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://www.googleapis.com/auth/drive</span><span style="color:#e6db74">&#39;</span>]
 
-<span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="o">.</span><span class="n">from_json_keyfile_name</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">service.json</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span>
+credentials <span style="color:#f92672">=</span> ServiceAccountCredentials<span style="color:#f92672">.</span>from_json_keyfile_name(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">service.json</span><span style="color:#e6db74">&#39;</span>, scope)
 
-<span class="n">gc</span> <span class="o">=</span> <span class="n">gspread</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+gc <span style="color:#f92672">=</span> gspread<span style="color:#f92672">.</span>authorize(credentials)
 
-<span class="n">workbook</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">open_by_key</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">&lt;workbook id&gt;</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">worksheet</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">worksheet_name</span><span class="s2">&#34;</span><span class="p">)</span>
+workbook <span style="color:#f92672">=</span> gc<span style="color:#f92672">.</span>open_by_key(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;workbook id&gt;</span><span style="color:#e6db74">&#34;</span>)
+sheet <span style="color:#f92672">=</span> workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">worksheet_name</span><span style="color:#e6db74">&#34;</span>)
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">input_data.tsv</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="n">pandas_to_sheets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">workbook</span><span class="o">.</span><span class="n">worksheet</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">worksheet</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">input_data.tsv</span><span style="color:#e6db74">&#34;</span>)
+pandas_to_sheets(df, workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">worksheet</span><span style="color:#e6db74">&#34;</span>))
 </code></pre></div></div>
   
         <div id='comments'></div>
@@ -149,7 +148,7 @@ type="image/x-icon"/>
   <p class="mb0 mt2 next_prev">
   ← <a href="https://www.danielecook.com/speeding-up-reading-and-writing-in-r/">prev post</a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  
+  <a href="https://www.danielecook.com/calculate-insert-size-metrics-faster/">next post</a> →
   </p>
 </div>
 

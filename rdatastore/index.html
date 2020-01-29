@@ -40,7 +40,6 @@
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -97,8 +96,8 @@ type="image/x-icon"/>
 <p>The last two reasons are the primary motivation for developing <code>rdatastore</code>. Parallelized pipelines can simultaneously submit results to datastore (across many nodes or machines), and the results are obtainable for analysis within R. Settings can be updated on one machine and retrieved on others as well, obviating the need to modify virtual machines or scripts in many cases.</p>
 <hr>
 <p><img src="/datastore.png" alt="datastore">
-<!-- raw HTML omitted --><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->__The datastore interface can be used to view and edit data.__<!-- raw HTML omitted --></p>
+<br /><br />
+<small>__The datastore interface can be used to view and edit data.__</small></p>
 <hr>
 <h3 id="setup">Setup</h3>
 <ol>
@@ -106,15 +105,15 @@ type="image/x-icon"/>
 <li><a href="https://cloud.google.com/sdk/">Download</a> the Google Cloud SDK. This provides a command line based <code>gcloud</code> command.</li>
 <li>Install rdatastore</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&#34;</span><span class="s">cloudyr/rdatastore&#34;</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">devtools<span style="color:#f92672">::</span><span style="color:#a6e22e">install_github</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">cloudyr/rdatastore&#34;</span>)
 </code></pre></div><h3 id="usage">Usage</h3>
 <h4 id="authentication">Authentication</h4>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">library</span><span class="p">(</span><span class="n">rdatastore</span><span class="p">)</span>
-<span class="nf">authenticate_datastore</span><span class="p">(</span><span class="s">&#34;</span><span class="s">andersen-lab&#34;</span><span class="p">)</span> <span class="c1"># Enter your project ID here. rdatastore will authenticate using Oauth.</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(rdatastore)
+<span style="color:#a6e22e">authenticate_datastore</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">andersen-lab&#34;</span>) <span style="color:#75715e"># Enter your project ID here. rdatastore will authenticate using Oauth.</span>
 </code></pre></div><h4 id="storing-data">Storing Data</h4>
 <p><strong>commit()</strong></p>
 <p>Individual entitites can be stored using <code>commit()</code>. You have to supply a kind (which is analogous to a table in relational database systems). You may optionally submit a name. Any additional arguments supplied are added as properties. Datatypes are inferred from R datatypes. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">commit</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Tesla&#34;</span><span class="p">,</span> <span class="n">wheels</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="c1"># Stores a new entity named &#39;Tesla&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">commit</span>(kind <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Tesla&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>) <span style="color:#75715e"># Stores a new entity named &#39;Tesla&#39;</span>
 </code></pre></div><p><strong>Result</strong></p>
 <table>
 <thead>
@@ -134,7 +133,7 @@ type="image/x-icon"/>
 </table>
 <p><strong>Important! Stick with basic datatypes like character vectors, integers, doubles, binary, and datetime objects. Not all datatypes are supported.</strong></p>
 <p>I designed <code>rdatastore</code> to make it easier to append data rather than overwrite it. This is abit against the grain as far as other datastore libraries go. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">commit</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Tesla&#34;</span><span class="p">,</span> <span class="n">electric</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># Stores a new entity named &#39;Tesla&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">commit</span>(kind <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Tesla&#34;</span>, electric <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># Stores a new entity named &#39;Tesla&#39;</span>
 </code></pre></div><p>The entity will now be:</p>
 <table>
 <thead>
@@ -158,7 +157,7 @@ type="image/x-icon"/>
 <p>When using <code>commit()</code> you can omit the <code>name</code> parameter in which case Google datastore will autogenerate an ID for the entity. I'm not sure where this is useful. You won't be able to look the item up without knowing its ID or by performing a query on the entities data.</p>
 <p><strong>lookup()</strong></p>
 <p>Retrieve data by specifying its <code>kind</code> and <code>name</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">lookup</span><span class="p">(</span><span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">Tesla&#34;</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">lookup</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Tesla&#34;</span>)
 </code></pre></div><table>
 <thead>
 <tr>
@@ -179,12 +178,12 @@ type="image/x-icon"/>
 </table>
 <p><strong>gql()</strong></p>
 <p>You can query items using the <a href="https://cloud.google.com/datastore/docs/reference/gql_reference">Google Query Language</a> (GQL). GQL is a lot like SQL.</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="c1"># Lets commit a few more items</span>
-<span class="nf">commit</span><span class="p">(</span><span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">VW&#34;</span><span class="p">,</span> <span class="n">electric</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
-<span class="nf">commit</span><span class="p">(</span><span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">Honda&#34;</span><span class="p">,</span> <span class="n">make</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Odyssey&#34;</span><span class="p">,</span> <span class="n">wheels</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
-<span class="nf">commit</span><span class="p">(</span><span class="s">&#34;</span><span class="s">Car&#34;</span><span class="p">,</span> <span class="s">&#34;</span><span class="s">Reliant&#34;</span><span class="p">,</span> <span class="n">make</span> <span class="o">=</span> <span class="s">&#34;</span><span class="s">Robin&#34;</span><span class="p">,</span> <span class="n">wheels</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># Lets commit a few more items</span>
+<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">VW&#34;</span>, electric <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Honda&#34;</span>, make <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Odyssey&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Car&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Reliant&#34;</span>, make <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Robin&#34;</span>, wheels <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
 
-<span class="nf">gql</span><span class="p">(</span><span class="s">&#34;</span><span class="s">SELECT * FROM Car&#34;</span><span class="p">)</span>
+<span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SELECT * FROM Car&#34;</span>)
 </code></pre></div><table>
 <thead>
 <tr>
@@ -228,7 +227,7 @@ type="image/x-icon"/>
 </table>
 <p>Notice that some some properties are <code>NA</code> because they were never specified.</p>
 <p>We can also query specific properties - but this will only return entitites with those properties defined.</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">gql</span><span class="p">(</span><span class="s">&#34;</span><span class="s">SELECT make FROM Car&#34;</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SELECT make FROM Car&#34;</span>)
 </code></pre></div><table>
 <thead>
 <tr>
@@ -251,7 +250,7 @@ type="image/x-icon"/>
 </tbody>
 </table>
 <p>You can also filter on properties with GQL:</p>
-<div class="highlight"><pre class="chroma"><code class="language-R" data-lang="R"><span class="nf">gql</span><span class="p">(</span><span class="s">&#34;</span><span class="s">SELECT * FROM Car WHERE wheels = 3&#34;</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SELECT * FROM Car WHERE wheels = 3&#34;</span>)
 </code></pre></div><table>
 <thead>
 <tr>

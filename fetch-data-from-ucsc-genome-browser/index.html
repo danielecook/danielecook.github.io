@@ -41,7 +41,6 @@ If you have a small dataset that you would like to annotate, you can write SQL s
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -91,60 +90,60 @@ type="image/x-icon"/>
   <div class="lh-copy post-content"><h2 id="original-post-2013-11-03">Original Post (2013-11-03)</h2>
 <p><a href="/accessing-the-ucsc-genome-browser-mysql-database/">Previously</a>, I’ve shown that you can use a mysql database browser (e.g. <a href="http://www.sequelpro.com/">Sequel Pro</a>) to access and browse the UCSC Genome Browser MySQL database.</p>
 <p>If you have a small dataset that you would like to annotate, you can write <a href="http://www8.silversand.net/techdoc/teachsql/ch01.htm">SQL</a> statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Note: Requires mysqldb; install using:</span>
-<span class="c1"># pip install MySQL-python</span>
-<span class="kn">from</span> <span class="nn">MySQLdb.constants</span> <span class="kn">import</span> <span class="n">FIELD_TYPE</span>
-<span class="kn">import</span> <span class="nn">_mysql</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Note: Requires mysqldb; install using:</span>
+<span style="color:#75715e"># pip install MySQL-python</span>
+<span style="color:#f92672">from</span> MySQLdb.constants <span style="color:#f92672">import</span> FIELD_TYPE
+<span style="color:#f92672">import</span> _mysql
 
-<span class="n">db</span> <span class="o">=</span> <span class="bp">None</span>
+db <span style="color:#f92672">=</span> None
 
-<span class="k">def</span> <span class="nf">fetch_gene_coordinates</span><span class="p">(</span><span class="n">gene_name</span><span class="p">,</span> <span class="n">build</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">global</span> <span class="n">db</span> <span class="c1"># db is global to prevent reconnecting.</span>
-    <span class="k">if</span> <span class="n">db</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">print</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">connect</span><span class="s1">&#39;</span>
-        <span class="n">conv</span><span class="o">=</span> <span class="p">{</span> <span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">LONG</span><span class="p">:</span> <span class="nb">int</span> <span class="p">}</span>
-        <span class="n">db</span> <span class="o">=</span> <span class="n">_mysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">genome-mysql.cse.ucsc.edu</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">genome</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">build</span><span class="p">,</span><span class="n">conv</span><span class="o">=</span><span class="n">conv</span><span class="p">)</span>
-    <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">SELECT * FROM kgXref INNER JOIN knownGene ON kgXref.kgID=knownGene.name WHERE kgXref.geneSymbol = </span><span class="s2">&#39;</span><span class="si">%s</span><span class="s2">&#39;</span><span class="s2">&#34;&#34;&#34;</span> <span class="o">%</span> <span class="n">gene_name</span><span class="p">)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_gene_coordinates</span>(gene_name, build):
+    <span style="color:#66d9ef">global</span> db <span style="color:#75715e"># db is global to prevent reconnecting.</span>
+    <span style="color:#66d9ef">if</span> db <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">connect</span><span style="color:#e6db74">&#39;</span>
+        conv<span style="color:#f92672">=</span> { FIELD_TYPE<span style="color:#f92672">.</span>LONG: int }
+        db <span style="color:#f92672">=</span> _mysql<span style="color:#f92672">.</span>connect(host<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">genome-mysql.cse.ucsc.edu</span><span style="color:#e6db74">&#39;</span>, user<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#39;</span>, passwd<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>, db<span style="color:#f92672">=</span>build,conv<span style="color:#f92672">=</span>conv)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">SELECT * FROM kgXref INNER JOIN knownGene ON kgXref.kgID=knownGene.name WHERE kgXref.geneSymbol = </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;&#34;&#34;</span> <span style="color:#f92672">%</span> gene_name)
 
-    <span class="n">r</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">use_result</span><span class="p">(</span><span class="p">)</span><span class="o">.</span><span class="n">fetch_row</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxrows</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">r</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">txStart</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">txEnd</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">chrom</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">strand</span><span class="s1">&#39;</span><span class="p">]</span>
+    r <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>use_result()<span style="color:#f92672">.</span>fetch_row(how<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxrows<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">print</span> r
+    <span style="color:#66d9ef">if</span> len(r)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">pass</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">txStart</span><span style="color:#e6db74">&#39;</span>], r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">txEnd</span><span style="color:#e6db74">&#39;</span>], r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chrom</span><span style="color:#e6db74">&#39;</span>],r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strand</span><span style="color:#e6db74">&#39;</span>]
 
 
-<span class="k">print</span> <span class="n">fetch_gene_coordinates</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">klf1</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">mm9</span><span class="s1">&#39;</span><span class="p">)</span>
+<span style="color:#66d9ef">print</span> fetch_gene_coordinates(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">klf1</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mm9</span><span style="color:#e6db74">&#39;</span>)
 </code></pre></div><hr>
 <p><strong>Note:</strong> The UCSC browser mysql resource will throttle you if you make too many queries. If you need to annotate large datasets, all of the data is freely available for download <a href="http://hgdownload-test.cse.ucsc.edu/goldenPath/">here</a>.</p>
 <h2 id="update-cruzdb-2019-06-18">Update: cruzdb (2019-06-18)</h2>
 <p>Since writing this post, <a href="https://github.com/brentp/cruzdb/">cruzdb</a> has been published. <code>cruzdb</code> is a python module by <a href="https://github.com/brentp">brentp</a> that greatly simplifies and facilitates queries of the UCSC genome browser.</p>
 <p><a href="https://doi.org/10.1093/bioinformatics/btt534">Bioinformatics publication</a></p>
 <h3 id="installation">Installation</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install cruzdb
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install cruzdb
 </code></pre></div><p><strong>Examples</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">cruzdb</span> <span class="kn">import</span> <span class="n">Genome</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> cruzdb <span style="color:#f92672">import</span> Genome
 
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">Genome</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">hg18</span><span class="s2">&#34;</span><span class="p">)</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> g <span style="color:#f92672">=</span> Genome(db<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hg18</span><span style="color:#e6db74">&#34;</span>)
 
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">refGene</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name2</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">MUC5B</span><span class="s2">&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="p">)</span>
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span>
-<span class="n">refGene</span><span class="p">(</span><span class="n">chr11</span><span class="p">:</span><span class="n">MUC5B</span><span class="p">:</span><span class="mi">1200870</span><span class="o">-</span><span class="mi">1239982</span><span class="p">)</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>refGene<span style="color:#f92672">.</span>filter_by(name2<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MUC5B</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b
+refGene(chr11:MUC5B:<span style="color:#ae81ff">1200870</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1239982</span>)
 
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span><span class="o">.</span><span class="n">strand</span>
-<span class="sa"></span><span class="s1">&#39;</span><span class="s1">+</span><span class="s1">&#39;</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>strand
+<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>
 
-<span class="c1"># the first 4 introns</span>
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span><span class="o">.</span><span class="n">introns</span><span class="p">[</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="p">[</span><span class="p">(</span><span class="il">1200999L</span><span class="p">,</span> <span class="il">1203486L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1203543L</span><span class="p">,</span> <span class="il">1204010L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1204082L</span><span class="p">,</span> <span class="il">1204420L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1204682L</span><span class="p">,</span> <span class="il">1204836L</span><span class="p">)</span><span class="p">]</span>
+<span style="color:#75715e"># the first 4 introns</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>introns[:<span style="color:#ae81ff">4</span>]
+[(<span style="color:#ae81ff">1200999L</span>, <span style="color:#ae81ff">1203486L</span>), (<span style="color:#ae81ff">1203543L</span>, <span style="color:#ae81ff">1204010L</span>), (<span style="color:#ae81ff">1204082L</span>, <span style="color:#ae81ff">1204420L</span>), (<span style="color:#ae81ff">1204682L</span>, <span style="color:#ae81ff">1204836L</span>)]
 
-<span class="c1"># the first 4 exons.</span>
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span><span class="o">.</span><span class="n">exons</span><span class="p">[</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="p">[</span><span class="p">(</span><span class="il">1200870L</span><span class="p">,</span> <span class="il">1200999L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1203486L</span><span class="p">,</span> <span class="il">1203543L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1204010L</span><span class="p">,</span> <span class="il">1204082L</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="il">1204420L</span><span class="p">,</span> <span class="il">1204682L</span><span class="p">)</span><span class="p">]</span>
+<span style="color:#75715e"># the first 4 exons.</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>exons[:<span style="color:#ae81ff">4</span>]
+[(<span style="color:#ae81ff">1200870L</span>, <span style="color:#ae81ff">1200999L</span>), (<span style="color:#ae81ff">1203486L</span>, <span style="color:#ae81ff">1203543L</span>), (<span style="color:#ae81ff">1204010L</span>, <span style="color:#ae81ff">1204082L</span>), (<span style="color:#ae81ff">1204420L</span>, <span style="color:#ae81ff">1204682L</span>)]
 
-<span class="c1"># note that some of these are not coding because they are &lt; cdsStart</span>
-<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">muc5b</span><span class="o">.</span><span class="n">cdsStart</span>
-<span class="il">1200929L</span>
+<span style="color:#75715e"># note that some of these are not coding because they are &lt; cdsStart</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>cdsStart
+<span style="color:#ae81ff">1200929L</span>
 </code></pre></div></div>
   
         <div id='comments'></div>

@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Oct 2019 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nim</title>
+      <link>https://www.danielecook.com/tags/nim/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/nim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>seq-collection</title>
+      <link>https://www.danielecook.com/tags/seq-collection/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/seq-collection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vcf</title>
+      <link>https://www.danielecook.com/tags/vcf/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/vcf/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>google-sheets</title>
@@ -72,24 +99,6 @@
       <pubDate>Fri, 27 Sep 2019 01:30:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/tutorial/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nim</title>
-      <link>https://www.danielecook.com/tags/nim/</link>
-      <pubDate>Sun, 22 Sep 2019 01:15:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/nim/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vcf</title>
-      <link>https://www.danielecook.com/tags/vcf/</link>
-      <pubDate>Sun, 22 Sep 2019 01:15:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/vcf/</guid>
       <description></description>
     </item>
     

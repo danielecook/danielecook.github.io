@@ -42,7 +42,6 @@ EF491733 135 EF491734 155 EF491735 140 EF491736 146 EF491737 150 EF491738 152 EF
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -90,9 +89,9 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p><strong>This one liner:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fa <span class="p">|</span> awk <span class="err">&#39;</span><span class="nv">$0</span> ~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span>print c<span class="p">;</span> <span class="nv">c</span><span class="o">=</span>0<span class="p">;</span><span class="nb">printf</span> substr<span class="o">(</span><span class="nv">$0</span>,2,100<span class="o">)</span> <span class="s2">&#34;\t&#34;</span><span class="p">;</span> <span class="o">}</span> <span class="nv">$0</span> !~ <span class="s2">&#34;&gt;&#34;</span> <span class="o">{</span><span class="nv">c</span><span class="o">+=</span>length<span class="o">(</span><span class="nv">$0</span><span class="o">)</span><span class="p">;</span><span class="o">}</span> END <span class="o">{</span> print c<span class="p">;</span> <span class="o">}</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat file.fa | awk <span style="color:#960050;background-color:#1e0010">&#39;</span>$0 ~ <span style="color:#e6db74">&#34;&gt;&#34;</span> <span style="color:#f92672">{</span>print c; c<span style="color:#f92672">=</span>0;printf substr<span style="color:#f92672">(</span>$0,2,100<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;\t&#34;</span>; <span style="color:#f92672">}</span> $0 !~ <span style="color:#e6db74">&#34;&gt;&#34;</span> <span style="color:#f92672">{</span>c<span style="color:#f92672">+=</span>length<span style="color:#f92672">(</span>$0<span style="color:#f92672">)</span>;<span style="color:#f92672">}</span> END <span style="color:#f92672">{</span> print c; <span style="color:#f92672">}</span>
 </code></pre></div><p><strong>Takes a fasta file as input:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;EF491733
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;EF491733
 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg
 caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag
 gaccaccaggtctacggggatcgccaggatggcct
@@ -124,7 +123,7 @@ actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc
 tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg
 gcgatgaatcagaagatgaa
 </code></pre></div><p><strong>Outputs sequence name and length:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">EF491733    135
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">EF491733    135
 EF491734    155
 EF491735    140
 EF491736    146

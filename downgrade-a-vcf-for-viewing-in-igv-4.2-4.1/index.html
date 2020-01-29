@@ -40,7 +40,6 @@ Original Post (2014-12-15) If you are using the new version of bcftools, and you
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -92,23 +91,23 @@ type="image/x-icon"/>
 <h2 id="original-post-2014-12-15">Original Post (2014-12-15)</h2>
 <p>If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I’ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</p>
 <p>All you have to do is revert the version number in the first line and replace a few characters IGV does not like. Below is a bash function that will do this – saving any inputted VCF as <code>{vcf_filename}.dg.vcf.gz</code>. The script also indexes the file making it ready for use.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># If you are trying to view VCF 4.2 files in IGV - you may run into issues. This function might help you.</span>
-<span class="c1"># This script will:</span>
-<span class="c1"># 1. Rename the file as version 4.1</span>
-<span class="c1"># 2. Replace parentheses in the INFO lines (IGV doesn&#39;t like these!)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># If you are trying to view VCF 4.2 files in IGV - you may run into issues. This function might help you.</span>
+<span style="color:#75715e"># This script will:</span>
+<span style="color:#75715e"># 1. Rename the file as version 4.1</span>
+<span style="color:#75715e"># 2. Replace parentheses in the INFO lines (IGV doesn&#39;t like these!)</span>
 
-<span class="k">function</span> vcf_downgrade<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-  <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="p">/.bcf/</span><span class="si">}</span>
-  <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">outfile</span><span class="p">/.gz/</span><span class="si">}</span>
-  <span class="nv">outfile</span><span class="o">=</span><span class="si">${</span><span class="nv">outfile</span><span class="p">/.vcf/</span><span class="si">}</span>
-  bcftools view --max-alleles <span class="m">2</span> -O v <span class="nv">$1</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>  sed <span class="s2">&#34;s/##fileformat=VCFv4.2/##fileformat=VCFv4.1/&#34;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>  sed <span class="s2">&#34;s/(//&#34;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>  sed <span class="s2">&#34;s/)//&#34;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>  sed <span class="s2">&#34;s/,Version=\&#34;3\&#34;&gt;/&gt;/&#34;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>  bcftools view -O z &gt; <span class="si">${</span><span class="nv">outfile</span><span class="si">}</span>.dg.vcf.gz
-  tabix <span class="si">${</span><span class="nv">outfile</span><span class="si">}</span>.dg.vcf.gz
-<span class="o">}</span>
+<span style="color:#66d9ef">function</span> vcf_downgrade<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1/.bcf/<span style="color:#e6db74">}</span>
+  outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>outfile/.gz/<span style="color:#e6db74">}</span>
+  outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>outfile/.vcf/<span style="color:#e6db74">}</span>
+  bcftools view --max-alleles <span style="color:#ae81ff">2</span> -O v $1 | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  sed <span style="color:#e6db74">&#34;s/##fileformat=VCFv4.2/##fileformat=VCFv4.1/&#34;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  sed <span style="color:#e6db74">&#34;s/(//&#34;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  sed <span style="color:#e6db74">&#34;s/)//&#34;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  sed <span style="color:#e6db74">&#34;s/,Version=\&#34;3\&#34;&gt;/&gt;/&#34;</span> | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  bcftools view -O z &gt; <span style="color:#e6db74">${</span>outfile<span style="color:#e6db74">}</span>.dg.vcf.gz
+  tabix <span style="color:#e6db74">${</span>outfile<span style="color:#e6db74">}</span>.dg.vcf.gz
+<span style="color:#f92672">}</span>
 
 </code></pre></div></div>
   

@@ -41,7 +41,6 @@ carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.9
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -92,22 +91,22 @@ type="image/x-icon"/>
 <h4 id="downloadhttpsgithubcomdanielecookmarkdown-table-alfredrawworkflowmarkdown-tablesalfredworkflow"><a href="https://github.com/danielecook/markdown-table-alfred/raw/workflow/markdown-tables.alfredworkflow">Download</a></h4>
 <h2 id="usage">Usage</h2>
 <p>Copy a csv or tsv. The script will attempt to intelligently guess the format. For example, if you copy the table below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">carat   cut color   clarity depth   table   price   x   y   z
-0.23    Ideal   E   SI2 61.5    <span class="m">55</span>  <span class="m">326</span> 3.95    3.98    2.43
-0.21    Premium E   SI1 59.8    <span class="m">61</span>  <span class="m">326</span> 3.89    3.84    2.31
-0.23    Good    E   VS1 56.9    <span class="m">65</span>  <span class="m">327</span> 4.05    4.07    2.31
-0.29    Premium I   VS2 62.4    <span class="m">58</span>  <span class="m">334</span> 4.2 4.23    2.63
-0.31    Good    J   SI2 63.3    <span class="m">58</span>  <span class="m">335</span> 4.34    4.35    2.75
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">carat   cut color   clarity depth   table   price   x   y   z
+0.23    Ideal   E   SI2 61.5    <span style="color:#ae81ff">55</span>  <span style="color:#ae81ff">326</span> 3.95    3.98    2.43
+0.21    Premium E   SI1 59.8    <span style="color:#ae81ff">61</span>  <span style="color:#ae81ff">326</span> 3.89    3.84    2.31
+0.23    Good    E   VS1 56.9    <span style="color:#ae81ff">65</span>  <span style="color:#ae81ff">327</span> 4.05    4.07    2.31
+0.29    Premium I   VS2 62.4    <span style="color:#ae81ff">58</span>  <span style="color:#ae81ff">334</span> 4.2 4.23    2.63
+0.31    Good    J   SI2 63.3    <span style="color:#ae81ff">58</span>  <span style="color:#ae81ff">335</span> 4.34    4.35    2.75
 </code></pre></div><p>Then type <code>tbl</code> in alfred and you will see the following:</p>
 <p><img src="https://github.com/danielecook/markdown-table-alfred/raw/master/tbl.png" alt="tbl screen"></p>
 <p>You can create a table with or without a header. It will be copied to your clipboard as this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="p">|</span>   carat <span class="p">|</span> cut     <span class="p">|</span> color   <span class="p">|</span> clarity   <span class="p">|</span> depth   <span class="p">|</span>   table <span class="p">|</span>   price <span class="p">|</span>      x <span class="p">|</span>    y <span class="p">|</span>    z <span class="p">|</span>
-<span class="p">|</span>--------:<span class="p">|</span>:--------<span class="p">|</span>:--------<span class="p">|</span>:----------<span class="p">|</span>:--------<span class="p">|</span>--------:<span class="p">|</span>--------:<span class="p">|</span>-------:<span class="p">|</span>-----:<span class="p">|</span>-----:<span class="p">|</span>
-<span class="p">|</span>    0.23 <span class="p">|</span> Ideal   <span class="p">|</span> E       <span class="p">|</span> SI2       <span class="p">|</span> 61.5    <span class="p">|</span>    <span class="m">55</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   3.95 <span class="p">|</span> 3.98 <span class="p">|</span> 2.43 <span class="p">|</span>
-<span class="p">|</span>    0.21 <span class="p">|</span> Premium <span class="p">|</span> E       <span class="p">|</span> SI1       <span class="p">|</span> 59.8    <span class="p">|</span>    <span class="m">61</span>   <span class="p">|</span>     <span class="m">326</span> <span class="p">|</span>   3.89 <span class="p">|</span> 3.84 <span class="p">|</span> 2.31 <span class="p">|</span>
-<span class="p">|</span>    0.23 <span class="p">|</span> Good    <span class="p">|</span> E       <span class="p">|</span> VS1       <span class="p">|</span> 56.9    <span class="p">|</span>    <span class="m">65</span>   <span class="p">|</span>     <span class="m">327</span> <span class="p">|</span>   4.05 <span class="p">|</span> 4.07 <span class="p">|</span> 2.31 <span class="p">|</span>
-<span class="p">|</span>    0.29 <span class="p">|</span> Premium <span class="p">|</span> I       <span class="p">|</span> VS2       <span class="p">|</span> 62.4    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">334</span> <span class="p">|</span>   4.2  <span class="p">|</span> 4.23 <span class="p">|</span> 2.63 <span class="p">|</span>
-<span class="p">|</span>    0.31 <span class="p">|</span> Good    <span class="p">|</span> J       <span class="p">|</span> SI2       <span class="p">|</span> 63.3    <span class="p">|</span>    <span class="m">58</span>   <span class="p">|</span>     <span class="m">335</span> <span class="p">|</span>   4.34 <span class="p">|</span> 4.35 <span class="p">|</span> 2.75 <span class="p">|</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">|   carat | cut     | color   | clarity   | depth   |   table |   price |      x |    y |    z |
+|--------:|:--------|:--------|:----------|:--------|--------:|--------:|-------:|-----:|-----:|
+|    0.23 | Ideal   | E       | SI2       | 61.5    |    <span style="color:#ae81ff">55</span>   |     <span style="color:#ae81ff">326</span> |   3.95 | 3.98 | 2.43 |
+|    0.21 | Premium | E       | SI1       | 59.8    |    <span style="color:#ae81ff">61</span>   |     <span style="color:#ae81ff">326</span> |   3.89 | 3.84 | 2.31 |
+|    0.23 | Good    | E       | VS1       | 56.9    |    <span style="color:#ae81ff">65</span>   |     <span style="color:#ae81ff">327</span> |   4.05 | 4.07 | 2.31 |
+|    0.29 | Premium | I       | VS2       | 62.4    |    <span style="color:#ae81ff">58</span>   |     <span style="color:#ae81ff">334</span> |   4.2  | 4.23 | 2.63 |
+|    0.31 | Good    | J       | SI2       | 63.3    |    <span style="color:#ae81ff">58</span>   |     <span style="color:#ae81ff">335</span> |   4.34 | 4.35 | 2.75 |
 </code></pre></div><p>And it will render like this:</p>
 <table>
 <thead>

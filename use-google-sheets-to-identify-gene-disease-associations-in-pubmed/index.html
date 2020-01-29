@@ -41,7 +41,6 @@ For example, suppose you are studying Cleft lip and Palate and are left with a s
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -89,14 +88,14 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>Google Docs allows you to import XML. By using NCBIs <a href="http://www.ncbi.nlm.nih.gov/books/NBK25499/">esearch service</a>, you can query pubmed for a list of genes. Stick the following code in <strong>A2</strong>, and a keyword in <strong>B2</strong>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">=importXML(&#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;term=&#34; &amp; B2 ,&#34;(//Count)[1]&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">=importXML(&#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;term=&#34; &amp; B2 ,&#34;(//Count)[1]&#34;)
 </code></pre></div><p>What is more valuable, however, is if given a gene list – you can query pubmed for each gene combined with a second keyword like a disease.</p>
 <p>For example, suppose you are studying Cleft lip and Palate and are left with a set of genes identified from a gene expression analysis. Now you want to see if any of those genes have published findings on them related to cleft lip and palate.</p>
 <p>You can use the <code>&amp;</code> operator to concatenate two keywords (<code>gene &amp; &quot; &quot; &amp; disease</code>). In <strong>B2</strong> below you would put the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">= C2 &amp; &#34; &#34; &amp; D2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">= C2 &amp; &#34; &#34; &amp; D2
 </code></pre></div><p>The result would look something like this:</p>
-<p><a href="/Screen-Shot-2014-03-03-at-8.38.03-AM.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted -->Pubmed result counts are in Column A<!-- raw HTML omitted --></p>
+<p><a href="/Screen-Shot-2014-03-03-at-8.38.03-AM.png"><img src="/Screen-Shot-2014-03-03-at-8.38.03-AM.png" alt="Pubmed result counts are in Column A1." /></a></p>
+<p><small>Pubmed result counts are in Column A</small></p>
 </div>
   
         <div id='comments'></div>

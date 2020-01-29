@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 22 Sep 2019 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/vcf/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Calculate Insert Size Metrics Faster</title>
+      <link>https://www.danielecook.com/calculate-insert-size-metrics-faster/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/calculate-insert-size-metrics-faster/</guid>
+      <description>Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.
+To speed things up, I created a new command: insert-size as part of seq-collection. The command runs much faster, owing in part to parallelization of insert-size calculations.
+insert-size does not operate in exactly the same way as picard CollectInsertSizeMetrics, but the results are very close.</description>
+    </item>
     
     <item>
       <title>Converting VCF To JSON</title>

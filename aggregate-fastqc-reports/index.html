@@ -12,7 +12,7 @@
 <meta property="og:description" content="Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
 # Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
- MultiQC: Summarize analysis results for multiple tools and samples in a single report Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller Bioinformatics (2016) doi: 10." />
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/aggregate-fastqc-reports/" />
 
@@ -42,7 +42,6 @@ Publication
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -91,16 +90,16 @@ type="image/x-icon"/>
   
   <div class="lh-copy post-content"><h2 id="update-multiqc-2019-06-21">Update: MultiQC (2019-06-21)</h2>
 <p>After I originally published this script for aggregating FASTQC reports, <a href="https://multiqc.info">MultiQC</a> was published by <a href="https://github.com/ewels">Phil Ewels</a>. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Run this command where your *_fastqc.zip files are</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run this command where your *_fastqc.zip files are</span>
 multiqc .
 </code></pre></div><p>This will output a repor that looks like this:</p>
 <p><img src="/multiqc.png" alt="multiqc screenshot"></p>
 <p><strong>Publication</strong></p>
 <blockquote>
-<p><strong>MultiQC: Summarize analysis results for multiple tools and samples in a single report</strong> <!-- raw HTML omitted -->
-<em>Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller</em> <!-- raw HTML omitted -->
-Bioinformatics (2016) <!-- raw HTML omitted -->
-doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a> <!-- raw HTML omitted -->
+<p><strong>MultiQC: Summarize analysis results for multiple tools and samples in a single report</strong> <br/>
+<em>Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller</em> <br/>
+Bioinformatics (2016) <br/>
+doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a> <br/>
 PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 </blockquote>
 <h2 id="original-post-2014-12-28">Original Post (2014-12-28)</h2>
@@ -307,46 +306,46 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 </tbody>
 </table>
 <h2 id="the-code">The Code</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Run this script in a directory containing zip files from fastqc. It aggregates images of each type in individual folders</span>
-<span class="c1"># So looking across data is quick.</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run this script in a directory containing zip files from fastqc. It aggregates images of each type in individual folders</span>
+<span style="color:#75715e"># So looking across data is quick.</span>
 
-<span class="nv">zips</span><span class="o">=</span><span class="sb">`</span>ls *.zip<span class="sb">`</span>
+zips<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ls *.zip<span style="color:#e6db74">`</span>
 
-<span class="k">for</span> i in <span class="nv">$zips</span><span class="p">;</span> <span class="k">do</span>
-    unzip -o <span class="nv">$i</span> <span class="p">&amp;</span>&gt;/dev/null<span class="p">;</span>
-<span class="k">done</span>
+<span style="color:#66d9ef">for</span> i in $zips; <span style="color:#66d9ef">do</span>
+    unzip -o $i &amp;&gt;/dev/null;
+<span style="color:#66d9ef">done</span>
 
-<span class="nv">fastq_folders</span><span class="o">=</span><span class="si">${</span><span class="nv">zips</span><span class="p">/.zip/</span><span class="si">}</span>
+fastq_folders<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>zips/.zip/<span style="color:#e6db74">}</span>
 
-rm -rf fq_aggregated <span class="c1"># Remove aggregate folder if present</span>
+rm -rf fq_aggregated <span style="color:#75715e"># Remove aggregate folder if present</span>
 mkdir fq_aggregated
 
-<span class="c1"># Rename Files within each using folder name.</span>
-<span class="k">for</span> folder in <span class="nv">$fastq_folders</span><span class="p">;</span> <span class="k">do</span>
-    <span class="nv">folder</span><span class="o">=</span><span class="si">${</span><span class="nv">folder</span><span class="p">%.*</span><span class="si">}</span>
-    <span class="nv">img_files</span><span class="o">=</span><span class="sb">`</span>ls <span class="si">${</span><span class="nv">folder</span><span class="si">}</span>/Images/*png<span class="sb">`</span><span class="p">;</span>
-    <span class="k">for</span> img in <span class="nv">$img_files</span><span class="p">;</span> <span class="k">do</span>
-        <span class="nv">img_name</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&#34;</span><span class="nv">$img</span><span class="s2">&#34;</span><span class="k">)</span><span class="p">;</span>
-        <span class="nv">img_name</span><span class="o">=</span><span class="si">${</span><span class="nv">img_name</span><span class="p">%.*</span><span class="si">}</span>
-        <span class="nv">new_name</span><span class="o">=</span><span class="si">${</span><span class="nv">folder</span><span class="si">}</span><span class="p">;</span>
-        mkdir -p fq_aggregated/<span class="si">${</span><span class="nv">img_name</span><span class="si">}</span><span class="p">;</span>
-        mv <span class="nv">$img</span> fq_aggregated/<span class="si">${</span><span class="nv">img_name</span><span class="si">}</span>/<span class="si">${</span><span class="nv">folder</span><span class="p">/_fastqc/</span><span class="si">}</span>.png<span class="p">;</span>
-    <span class="k">done</span><span class="p">;</span>
-<span class="k">done</span><span class="p">;</span>
+<span style="color:#75715e"># Rename Files within each using folder name.</span>
+<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
+    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
+    img_files<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ls <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/Images/*png<span style="color:#e6db74">`</span>;
+    <span style="color:#66d9ef">for</span> img in $img_files; <span style="color:#66d9ef">do</span>
+        img_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>basename <span style="color:#e6db74">&#34;</span>$img<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>;
+        img_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>img_name%.*<span style="color:#e6db74">}</span>
+        new_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>;
+        mkdir -p fq_aggregated/<span style="color:#e6db74">${</span>img_name<span style="color:#e6db74">}</span>;
+        mv $img fq_aggregated/<span style="color:#e6db74">${</span>img_name<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>folder/_fastqc/<span style="color:#e6db74">}</span>.png;
+    <span style="color:#66d9ef">done</span>;
+<span style="color:#66d9ef">done</span>;
 
 
-<span class="c1"># Concatenate Summaries</span>
-<span class="k">for</span> folder in <span class="nv">$fastq_folders</span><span class="p">;</span> <span class="k">do</span>
-    <span class="nv">folder</span><span class="o">=</span><span class="si">${</span><span class="nv">folder</span><span class="p">%.*</span><span class="si">}</span>
-    cat <span class="si">${</span><span class="nv">folder</span><span class="si">}</span>/summary.txt &gt;&gt; fq_aggregated/summary.txt
-<span class="k">done</span><span class="p">;</span>
+<span style="color:#75715e"># Concatenate Summaries</span>
+<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
+    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
+    cat <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/summary.txt &gt;&gt; fq_aggregated/summary.txt
+<span style="color:#66d9ef">done</span>;
 
-<span class="c1"># Concatenate Statistics</span>
-<span class="k">for</span> folder in <span class="nv">$fastq_folders</span><span class="p">;</span> <span class="k">do</span>
-    <span class="nv">folder</span><span class="o">=</span><span class="si">${</span><span class="nv">folder</span><span class="p">%.*</span><span class="si">}</span>
-    head -n <span class="m">10</span> <span class="si">${</span><span class="nv">folder</span><span class="si">}</span>/fastqc_data.txt <span class="p">|</span> tail -n <span class="m">7</span> <span class="p">|</span> awk -v <span class="nv">f</span><span class="o">=</span><span class="si">${</span><span class="nv">folder</span><span class="p">/_fastqc/</span><span class="si">}</span> <span class="s1">&#39;{ print $0 &#34;\t&#34; f }&#39;</span> &gt;&gt; fq_aggregated/statistics.txt
-    rm -rf <span class="si">${</span><span class="nv">folder</span><span class="si">}</span>
-<span class="k">done</span>
+<span style="color:#75715e"># Concatenate Statistics</span>
+<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
+    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
+    head -n <span style="color:#ae81ff">10</span> <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/fastqc_data.txt | tail -n <span style="color:#ae81ff">7</span> | awk -v f<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder/_fastqc/<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;{ print $0 &#34;\t&#34; f }&#39;</span> &gt;&gt; fq_aggregated/statistics.txt
+    rm -rf <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">done</span>
 </code></pre></div></div>
   
         <div id='comments'></div>

@@ -11,7 +11,7 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Oct 2019 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
@@ -20,7 +20,7 @@
     <item>
       <title>Posts</title>
       <link>https://www.danielecook.com/posts/</link>
-      <pubDate>Fri, 25 Oct 2019 01:15:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/posts/</guid>
       <description></description>
@@ -36,12 +36,12 @@
     </item>
     
     <item>
-      <title></title>
+      <title>About Me</title>
       <link>https://www.danielecook.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/about/</guid>
-      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/me.jpg&#34; class=&#34;fr ml4-ns mb4-ns w-100 w-50-m  w-33-ns photo&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;hello-world-my-name-is-daniel-e-cook&#34;&gt;Hello World! My name is Daniel E. Cook&lt;/h2&gt;
 &lt;p&gt;I am currently a Senior Bioinformatician in the &lt;a href=&#34;https://www.crick.ac.uk/research/labs/charles-swanton&#34;&gt;Swanton Lab&lt;/a&gt; at the &lt;a href=&#34;http://www.crick.ac.uk&#34;&gt;Crick Institute&lt;/a&gt; in London.  This is my personal website, where I post things I have developed or useful tips/tricks I have picked up.&lt;/p&gt;
 &lt;p&gt;For more information about me, please take a look at the following links:&lt;/p&gt;

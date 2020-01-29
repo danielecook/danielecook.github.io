@@ -41,7 +41,6 @@ cat spreadsheet.tsv | excel " />
 }</style>
 <link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
 <link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
-<link href='https://www.danielecook.com/css/syntax.min.css' integrity="" rel="stylesheet" media="screen">
 
 
 <link rel="icon" 
@@ -89,14 +88,14 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>Years ago I wrote a function for <a href="/an-r-function-for-opening-a-dataframe-in-excel-mac-only/">opening excel from R</a>. While I would never use Excel for data analysis, it turns out it's pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> excel<span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nv">tmp</span><span class="o">=</span><span class="sb">`</span>mktemp<span class="sb">`</span>
-    <span class="nv">out</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span>
-    cat <span class="si">${</span><span class="nv">out</span><span class="si">}</span> &gt; <span class="nv">$tmp</span>
-    open -a <span class="s2">&#34;Microsoft Excel&#34;</span> <span class="nv">$tmp</span>
-<span class="o">}</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> excel<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    tmp<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>mktemp<span style="color:#e6db74">`</span>
+    out<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
+    cat <span style="color:#e6db74">${</span>out<span style="color:#e6db74">}</span> &gt; $tmp
+    open -a <span style="color:#e6db74">&#34;Microsoft Excel&#34;</span> $tmp
+<span style="color:#f92672">}</span>
 </code></pre></div><p>Usage:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat spreadsheet.tsv <span class="p">|</span> excel
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat spreadsheet.tsv | excel
 </code></pre></div></div>
   
         <div id='comments'></div>
