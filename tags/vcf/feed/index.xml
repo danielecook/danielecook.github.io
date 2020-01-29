@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/vcf/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Parallelize by iterating over chromosomal ranges</title>
+      <link>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</link>
+      <pubDate>Wed, 29 Jan 2020 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
+      <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
+For example:
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
+This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
+    </item>
     
     <item>
       <title>Calculate Insert Size Metrics Faster</title>

@@ -4,21 +4,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>Calculate Insert Size Metrics Faster - Daniel E. Cook</title>
-  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='title' />
-  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='og:title' />
+  <title>Parallelize by iterating over chromosomal ranges - Daniel E. Cook</title>
+  <meta content='Parallelize by iterating over chromosomal ranges - Daniel E. Cook' property='title' />
+  <meta content='Parallelize by iterating over chromosomal ranges - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.
-To speed things up, I created a new command: insert-size as part of seq-collection. The command runs much faster, owing in part to parallelization of insert-size calculations.
-insert-size does not operate in exactly the same way as picard CollectInsertSizeMetrics, but the results are very close." />
+<meta property="og:description" content="I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
+For example:
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &gt; I:0-999999 &gt; I:1000000-1999999 &gt; I:2000000-2999999 &gt; I:3000000-3999999 &gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
+This list of genomic ranges can be used to process a BAM or VCF in parallel:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.danielecook.com/calculate-insert-size-metrics-faster/" />
+<meta property="og:url" content="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/" />
 
 
-<meta property="article:published_time" content="2020-01-29T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2020-01-29T01:15:53&#43;00:00"/>
 
-<meta property="article:modified_time" content="2020-01-29T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-01-29T01:15:53&#43;00:00"/>
 
 
 
@@ -49,7 +50,7 @@ insert-size does not operate in exactly the same way as picard CollectInsertSize
 
 type="image/x-icon"/>
 
-<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/calculate-insert-size-metrics-faster/feed/index.xml" title="Daniel E. Cook" />
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/feed/index.xml" title="Daniel E. Cook" />
 </head>
 <body class="global-font">
   <div id="nav" class="content-width center">
@@ -77,58 +78,44 @@ type="image/x-icon"/>
 
   
 <main class="center mv4 content-width ph3">
-  <div class="f2 fw6 heading-color heading-font post-title">Calculate Insert Size Metrics Faster</div>
+  <div class="f2 fw6 heading-color heading-font post-title">Parallelize by iterating over chromosomal ranges</div>
   
   <p class="silver f6 mt1 mb4 post-meta">
     <time>2020-01-29</time> 
      
     
-    &nbsp;&nbsp;<a href='/tags/vcf' class="link silver tag">VCF</a> &nbsp;&nbsp;<a href='/tags/nim' class="link silver tag">nim</a> &nbsp;&nbsp;<a href='/tags/seq-collection' class="link silver tag">seq-collection</a> &nbsp;&nbsp; 
+    &nbsp;&nbsp;<a href='/tags/bam' class="link silver tag">BAM</a> &nbsp;&nbsp;<a href='/tags/vcf' class="link silver tag">VCF</a> &nbsp;&nbsp;<a href='/tags/nim' class="link silver tag">nim</a> &nbsp;&nbsp;<a href='/tags/seq-collection' class="link silver tag">seq-collection</a> &nbsp;&nbsp; 
     
   </p>
   
-  <div class="lh-copy post-content"><p>Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.</p>
-<p>To speed things up, I created a new command: <code>insert-size</code> as part of <a href="https://www.github.com/danielecook/seq-collection">seq-collection</a>. The command runs much faster, owing in part to parallelization of insert-size calculations.</p>
-<p><img src="/insert-size-benchmark.png" alt=""></p>
-<p><code>insert-size</code> does not operate in exactly the same way as picard <code>CollectInsertSizeMetrics</code>, but the results are very close.</p>
-<p><img src="/insert_size_compare.png" alt=""></p>
-<p><code>insert-size</code> has some nice advantages over picard. The output is a lot more interpretable and parsable than standard picard output.</p>
-<p>For example, if you run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sc insert-size --basename --header tests/data/test.bam
-</code></pre></div><p>The outputted table will be:</p>
-<table>
-<thead>
-<tr>
-<th align="right">median</th>
-<th align="right">mean</th>
-<th align="right">std_dev</th>
-<th align="right">min</th>
-<th align="right">percentile_99.5</th>
-<th align="right">max_all</th>
-<th align="right">n_reads</th>
-<th align="right">n_accept</th>
-<th align="right">n_use</th>
-<th align="left">sample</th>
-<th align="left">basename</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right">179</td>
-<td align="right">176.5</td>
-<td align="right">63.954</td>
-<td align="right">38</td>
-<td align="right">358</td>
-<td align="right">359</td>
-<td align="right">237</td>
-<td align="right">101</td>
-<td align="right">100</td>
-<td align="left">AB1</td>
-<td align="left">test.bam</td>
-</tr>
-</tbody>
-</table>
-<p>You can also output the distribution of insert-sizes by count by specifying the <code>--dist=&lt;filename&gt;</code> argument.</p>
+  <div class="lh-copy post-content"><p>I have added a new utility to <code>seq-collection</code> called <code>iter</code> which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as <code>xargs</code> or <a href="https://www.gnu.org/software/parallel/">gnu-parallel</a> to parallelize commands.</p>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sc iter test.bam 100,000 <span style="color:#75715e"># Iterate on bins of 100k base pairs</span>
+
+<span style="color:#75715e"># Outputs</span>
+&gt; I:0-999999
+&gt; I:1000000-1999999
+&gt; I:2000000-2999999
+&gt; I:3000000-3999999
+&gt; I:4000000-4999999
+</code></pre></div><p><small><strong>Note:</strong> BAMs use a 0-based coordinate system; VCFs are 1-based</small></p>
+<p>This list of genomic ranges can be used to process a BAM or VCF in parallel:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#66d9ef">function</span> process_chunk <span style="color:#f92672">{</span>
+  <span style="color:#75715e"># Code to process chunk</span>
+  vcf<span style="color:#f92672">=</span>$1
+  region<span style="color:#f92672">=</span>$2
+  <span style="color:#75715e"># e.g. bcftools call -m --region</span> 
+  echo bcftools call --region $region $vcf <span style="color:#75715e"># ...</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># Export the function to make it available to GNU parallel</span>
+export -f process_chunk
+
+parallel --verbose process_chunk ::: test.bam ::: <span style="color:#66d9ef">$(</span>sc iter test.bam<span style="color:#66d9ef">)</span>
+
+</code></pre></div><p>You can also set the <code>[width]</code> option to 0 to generate a list of chromosomes.</p>
+<p>See <a href="/using-gnu-parallel-for-bioinformatics/">Using GNU-Parallel for Bioinformatics</a> for a comprehensive guide on using Parallel for bioinformatics.</p>
 <p><a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) is a set of tools written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
 </div>
   
@@ -151,9 +138,9 @@ type="image/x-icon"/>
 <a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
 <br>
   <p class="mb0 mt2 next_prev">
-  ← <a href="https://www.danielecook.com/from-pandas-to-google-sheets/">prev post</a>
+  ← <a href="https://www.danielecook.com/calculate-insert-size-metrics-faster/">prev post</a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/">next post</a> →
+  
   </p>
 </div>
 
