@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 29 Jan 2020 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jan 2020 00:26:29 +0100</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tips</title>
+      <link>https://www.danielecook.com/tags/tips/</link>
+      <pubDate>Thu, 30 Jan 2020 00:26:29 +0100</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/tips/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>bam</title>
@@ -243,15 +252,6 @@
       <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/cycling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tips</title>
-      <link>https://www.danielecook.com/tags/tips/</link>
-      <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/tips/</guid>
       <description></description>
     </item>
     

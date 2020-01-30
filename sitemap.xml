@@ -3,12 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.danielecook.com/tags/bam/</loc>
-    <lastmod>2020-01-29T01:15:53+00:00</lastmod>
+    <loc>https://www.danielecook.com/</loc>
+    <lastmod>2020-01-30T00:26:29+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/</loc>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2020-01-30T00:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
+    <lastmod>2020-01-30T00:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/tips/</loc>
+    <lastmod>2020-01-30T00:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/you-can-walk-to-in-n-out-from-lax/</loc>
+    <lastmod>2020-01-30T00:26:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/bam/</loc>
     <lastmod>2020-01-29T01:15:53+00:00</lastmod>
   </url>
   
@@ -23,17 +43,7 @@
   </url>
   
   <url>
-    <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2020-01-29T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/tags/seq-collection/</loc>
-    <lastmod>2020-01-29T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
     <lastmod>2020-01-29T01:15:53+00:00</lastmod>
   </url>
   
@@ -390,11 +400,6 @@
   <url>
     <loc>https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/</loc>
     <lastmod>2014-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/tips/</loc>
-    <lastmod>2013-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
