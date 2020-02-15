@@ -4,21 +4,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>Calculate Insert Size Metrics Faster - Daniel E. Cook</title>
-  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='title' />
-  <meta content='Calculate Insert Size Metrics Faster - Daniel E. Cook' property='og:title' />
+  <title>Mini-Projects - Daniel E. Cook</title>
+  <meta content='Mini-Projects - Daniel E. Cook' property='title' />
+  <meta content='Mini-Projects - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.
-To speed things up, I created a new command: insert-size as part of seq-collection. The command runs much faster, owing in part to parallelization of insert-size calculations.
-insert-size does not operate in exactly the same way as picard CollectInsertSizeMetrics, but the results are very close." />
+<meta property="og:description" content="I have also developed a few utilities / tools you may find useful." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.danielecook.com/calculate-insert-size-metrics-faster/" />
+<meta property="og:url" content="https://www.danielecook.com/projects/mini-projects/" />
 
 
-<meta property="article:published_time" content="2020-01-29T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="1987-06-10T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2020-01-29T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="1987-06-10T00:00:00&#43;00:00"/>
 
 
 
@@ -49,7 +47,7 @@ insert-size does not operate in exactly the same way as picard CollectInsertSize
 
 type="image/x-icon"/>
 
-<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/calculate-insert-size-metrics-faster/feed/index.xml" title="Daniel E. Cook" />
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/projects/mini-projects/feed/index.xml" title="Daniel E. Cook" />
 </head>
 <body class="global-font">
   <div id="nav" class="content-width center">
@@ -77,59 +75,15 @@ type="image/x-icon"/>
 
   
 <main class="center mv4 content-width ph3">
-  <div class="f2 fw6 heading-color heading-font post-title">Calculate Insert Size Metrics Faster</div>
+  <div class="f2 fw6 heading-color heading-font post-title">Mini-Projects</div>
   
   <p class="silver f6 mt1 mb4 post-meta">
-    <time>2020-01-29</time> 
-     
+    <time>1987-06-10</time> 
     
-    &nbsp;&nbsp;<a href='/tags/vcf' class="link silver tag">VCF</a> &nbsp;&nbsp;<a href='/tags/nim' class="link silver tag">nim</a> &nbsp;&nbsp;<a href='/tags/seq-collection' class="link silver tag">seq-collection</a> &nbsp;&nbsp; 
     
   </p>
   
-  <div class="lh-copy post-content"><p>Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.</p>
-<p>To speed things up, I created a new command: <code>insert-size</code> as part of <a href="https://www.github.com/danielecook/seq-collection">seq-collection</a>. The command runs much faster, owing in part to parallelization of insert-size calculations.</p>
-<p><img src="/insert-size-benchmark.png" alt=""></p>
-<p><code>insert-size</code> does not operate in exactly the same way as picard <code>CollectInsertSizeMetrics</code>, but the results are very close.</p>
-<p><img src="/insert_size_compare.png" alt=""></p>
-<p><code>insert-size</code> has some nice advantages over picard. The output is a lot more interpretable and parsable than standard picard output.</p>
-<p>For example, if you run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sc insert-size --basename --header tests/data/test.bam
-</code></pre></div><p>The outputted table will be:</p>
-<table>
-<thead>
-<tr>
-<th align="right">median</th>
-<th align="right">mean</th>
-<th align="right">std_dev</th>
-<th align="right">min</th>
-<th align="right">percentile_99.5</th>
-<th align="right">max_all</th>
-<th align="right">n_reads</th>
-<th align="right">n_accept</th>
-<th align="right">n_use</th>
-<th align="left">sample</th>
-<th align="left">basename</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right">179</td>
-<td align="right">176.5</td>
-<td align="right">63.954</td>
-<td align="right">38</td>
-<td align="right">358</td>
-<td align="right">359</td>
-<td align="right">237</td>
-<td align="right">101</td>
-<td align="right">100</td>
-<td align="left">AB1</td>
-<td align="left">test.bam</td>
-</tr>
-</tbody>
-</table>
-<p>You can also output the distribution of insert-sizes by count by specifying the <code>--dist=&lt;filename&gt;</code> argument.</p>
-<p><a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) is a set of tools written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
+  <div class="lh-copy post-content"><p>I have also developed a few utilities / tools you may find useful.</p>
 </div>
   
         <div id='comments'></div>
@@ -151,9 +105,9 @@ type="image/x-icon"/>
 <a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
 <br>
   <p class="mb0 mt2 next_prev">
-  ← <a href="https://www.danielecook.com/from-pandas-to-google-sheets/">prev post</a>
+  
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/">next post</a> →
+  <a href="https://www.danielecook.com/projects/open-source/">next post</a> →
   </p>
 </div>
 
