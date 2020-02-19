@@ -109,7 +109,7 @@ type="image/x-icon"/>
         sheet<span style="color:#f92672">.</span>clear()
     (row, col) <span style="color:#f92672">=</span> pandas_df<span style="color:#f92672">.</span>shape
     cells <span style="color:#f92672">=</span> sheet<span style="color:#f92672">.</span>range(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">A1:{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(gspread<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>rowcol_to_a1(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, col)))
-    <span style="color:#66d9ef">for</span> cell, val <span style="color:#f92672">in</span> zip(cells, iter_pd(df)):
+    <span style="color:#66d9ef">for</span> cell, val <span style="color:#f92672">in</span> zip(cells, iter_pd(pandas_df)):
         cell<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> val
     sheet<span style="color:#f92672">.</span>update_cells(cells)
 

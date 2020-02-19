@@ -148,7 +148,7 @@ parallel --verbose process_chunk ::: test.bam ::: &lt;span style=&#34;color:#66d
         sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;clear()
     (row, col) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pandas_df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
     cells &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;range(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;A1:{}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(gspread&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;utils&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rowcol_to_a1(row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, col)))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cell, val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(cells, iter_pd(df)):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cell, val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(cells, iter_pd(pandas_df)):
         cell&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;value &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
     sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update_cells(cells)
 
