@@ -130,13 +130,14 @@ parallel --verbose process_chunk ::: test.bam ::: &lt;span style=&#34;color:#66d
 &lt;p&gt;Then you can set the content of any google sheets worksheet to the data from a pandas dataframe by using the &lt;code&gt;pandas_to_sheets&lt;/code&gt; function.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; gspread
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pd
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; oauth2client.service_account &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ServiceAccountCredentials
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;iter_pd&lt;/span&gt;(df):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; list(df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; val
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; list(row):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numpy():
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; row:
             &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isna(val):
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:

@@ -20,7 +20,7 @@
       <guid>https://www.danielecook.com/from-pandas-to-google-sheets/</guid>
       <description>I wrote the following snippet to post datasets (e.g. TSVs or CSVs) to google sheets. In order to get this to work you will need to authorize google sheets access.
 Then you can set the content of any google sheets worksheet to the data from a pandas dataframe by using the pandas_to_sheets function.
-#!/usr/bin/env python import gspread from oauth2client.service_account import ServiceAccountCredentials def iter_pd(df): for val in list(df.columns): yield val for row in df.</description>
+#!/usr/bin/env python import gspread from pandas import pd from oauth2client.service_account import ServiceAccountCredentials def iter_pd(df): for val in df.</description>
     </item>
     
     <item>
