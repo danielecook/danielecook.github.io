@@ -9,9 +9,9 @@
   <meta content='A bash alias for Microsoft Excel (Mac only) - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&#39;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
-function excel() { tmp=`mktemp` out=${1} cat ${out} &gt; $tmp open -a &#34;Microsoft Excel&#34; $tmp } Usage:
-cat spreadsheet.tsv | excel " />
+<meta property="og:description" content="Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+function excel() { tmp=`mktemp` out=${1} cat ${out} &gt; $tmp open -a &quot;Microsoft Excel&quot; $tmp }  Usage:
+cat spreadsheet.tsv | excel  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/" />
 
@@ -27,7 +27,7 @@ cat spreadsheet.tsv | excel " />
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,16 +87,21 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p>Years ago I wrote a function for <a href="/an-r-function-for-opening-a-dataframe-in-excel-mac-only/">opening excel from R</a>. While I would never use Excel for data analysis, it turns out it's pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> excel<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    tmp<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>mktemp<span style="color:#e6db74">`</span>
-    out<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
-    cat <span style="color:#e6db74">${</span>out<span style="color:#e6db74">}</span> &gt; $tmp
-    open -a <span style="color:#e6db74">&#34;Microsoft Excel&#34;</span> $tmp
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Usage:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat spreadsheet.tsv | excel
-</code></pre></div></div>
+  <div class="lh-copy post-content"><p>Years ago I wrote a function for <a href="/an-r-function-for-opening-a-dataframe-in-excel-mac-only/">opening excel from R</a>. While I would never use Excel for data analysis, it turns out it&rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.</p>
+
+<pre><code class="language-bash">function excel() {
+    tmp=`mktemp`
+    out=${1}
+    cat ${out} &gt; $tmp
+    open -a &quot;Microsoft Excel&quot; $tmp
+}
+</code></pre>
+
+<p>Usage:</p>
+
+<pre><code class="language-bash">cat spreadsheet.tsv | excel
+</code></pre>
+</div>
   
         <div id='comments'></div>
   

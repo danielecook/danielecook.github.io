@@ -9,7 +9,7 @@
   <meta content='How to plot all of your Runkeeper Data - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+<meta property="og:description" content="Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I&#8217;ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
 The script does a few unique things." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/" />
@@ -26,7 +26,7 @@ The script does a few unique things." />
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,146 +86,163 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><div class="fl w-100 pa2">
+  <div class="lh-copy post-content">
+
+<div class="fl w-100 pa2">
 <div class="fl w-50 ma2 thumbnail">
     <img src="/Screen-Shot-2014-05-27-at-10.50.04-PM.png" />
       <small>Runs in Iowa City</small>
 </div>
+
 <div class="fl w-20 ma2 thumbnail">
     <img src="/2-all.png" />
     <small>Running and Biking in Chicago</small>
 </div>
 </div>
-<p>If you use <a href="http://www.runkeeper.com">runkeeper</a> and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using <a href="http://www.r-project.org/"><strong>R</strong></a>. I’ve written a script for doing so (Special thanks to <a href="http://www.flowingdata.com.com">flowing data</a> which has a tutorial that helped with a few key parts of this).</p>
+
+<p>If you use <a href="http://www.runkeeper.com">runkeeper</a> and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using <a href="http://www.r-project.org/"><strong>R</strong></a>. I&#8217;ve written a script for doing so (Special thanks to <a href="http://www.flowingdata.com.com">flowing data</a> which has a tutorial that helped with a few key parts of this).</p>
+
 <p>The script does a few unique things.</p>
+
 <ul>
 <li>Runkeeper exports data in <a href="http://www.topografix.com/gpx.asp">gpx format</a>. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file. The script will retain all paths and plot them separately.</li>
 <li>This script will merge in the type of activities so you can plot different types of activities by color.</li>
-<li>Finally, cluster analysis is used to segregate different locations when plotting. If you are like me and have moved around a bit – this is necessary as plotting distant locations on the same map (e.g. Chicago and Boston) is not feasible and results in distant locations being plotted as single points.</li>
+<li>Finally, cluster analysis is used to segregate different locations when plotting. If you are like me and have moved around a bit &#8211; this is necessary as plotting distant locations on the same map (e.g. Chicago and Boston) is not feasible and results in distant locations being plotted as single points.<br /></li>
 </ul>
+
 <h4 id="directions">Directions</h4>
+
 <ol>
 <li>Export your runkeeper data. The option is available for subscribers only under the settings menu.</li>
 </ol>
+
 <p><a href="/Screen-Shot-2014-05-27-at-8.09.00-PM.png"><img src="/Screen-Shot-2014-05-27-at-8.09.00-PM-300x198.png" alt="Exporting Runkeeper Data" width="300" height="198" class="img-thumbnail size-medium wp-image-520" /></a></p>
+
 <p class='caption'>
   <small>Exporting can be done from within the settings menu</small>
 </p>
+
 <ol>
 <li>Place the script below within a folder containing your runkeeper data. Set the <code>num_locations</code> variable to the number of places you have lived/run. This will be used to pull out the number of distinct running locations automatically.</p></li>
-<li>Install the necessary R packages. You can run the following code within R to do so.</li>
+<li>Install the necessary R packages. You can run the following code within R to do so.
+<br /></li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">fpc&#34;</span>)
-<span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">plyr&#34;</span>)
-<span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">dplyr&#34;</span>)
-<span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mapproj&#34;</span>)
-</code></pre></div><ol start="3">
+
+<pre><code class="language-R">install.packages(&quot;fpc&quot;)
+install.packages(&quot;plyr&quot;)
+install.packages(&quot;dplyr&quot;)
+install.packages(&quot;mapproj&quot;)
+</code></pre>
+
+<ol>
 <li>Run the script below from within R Studio or on unix based machines using <code>RScript plot_runkeeper.R</code>. If you are using Rstudio, be sure to set the working directory using <code>setwd()</code></li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># Special thanks for insights from flowingdata.com regarding this.</span>
 
-<span style="color:#a6e22e">library</span>(plotKML)
-<span style="color:#a6e22e">library</span>(plyr)
-<span style="color:#a6e22e">library</span>(dplyr)
-<span style="color:#a6e22e">library</span>(fpc)
+<pre><code class="language-R"># Special thanks for insights from flowingdata.com regarding this.
 
-num_locations <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+library(plotKML)
+library(plyr)
+library(dplyr)
+library(fpc)
 
-<span style="color:#75715e"># Usage: Place this script in the directory containing your runkeeper data. You can run from terminal using &#39;Rscript map_runkeeper.R&#39;, or</span>
-<span style="color:#75715e"># set your working directory to the location and run within RStudio (use setwd(&#34;~/location/of/runkeeper/data&#34;)).</span>
-<span style="color:#75715e"># See below on how to set the number of clusters.</span>
+num_locations &lt;- 5
 
-<span style="color:#75715e"># GPX files downloaded from Runkeeper</span>
-files <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dir</span>(pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\\.gpx&#34;</span>)
+# Usage: Place this script in the directory containing your runkeeper data. You can run from terminal using 'Rscript map_runkeeper.R', or
+# set your working directory to the location and run within RStudio (use setwd(&quot;~/location/of/runkeeper/data&quot;)).
+# See below on how to set the number of clusters.
 
-<span style="color:#75715e"># Generate vectors for data frame</span>
-index <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-latitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-longitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-file <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+# GPX files downloaded from Runkeeper
+files &lt;- dir(pattern = &quot;\\.gpx&quot;)
 
-c <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># Set up Counter</span>
+# Generate vectors for data frame
+index &lt;- c()
+latitude &lt;- c()
+longitude &lt;- c()
+file &lt;- c()
 
-<span style="color:#75715e"># </span>
-<span style="color:#a6e22e">for </span>(f in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(files)) {
-  curr_route <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">readGPX</span>(files[f])
-<span style="color:#75715e"># Treat interrupted GPS paths as seperate routes (useful if you occasionally stop running..walk for a bit, and start again like I do.)</span>
-<span style="color:#a6e22e">for </span>(i in curr_route<span style="color:#f92672">$</span>tracks[[1]]) {
-  c <span style="color:#f92672">&lt;-</span> c <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-  location <span style="color:#f92672">&lt;-</span> i
-  file <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(file,<span style="color:#a6e22e">rep</span>(files[f], <span style="color:#a6e22e">dim</span>(location)[1])) 
-  index <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(index, <span style="color:#a6e22e">rep</span>(c, <span style="color:#a6e22e">dim</span>(location)[1]))
-  latitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(latitude, location<span style="color:#f92672">$</span>lat)
-  longitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(longitude, location<span style="color:#f92672">$</span>lon)
+c &lt;- 1 # Set up Counter
+
+# 
+for (f in 1:length(files)) {
+  curr_route &lt;- readGPX(files[f])
+# Treat interrupted GPS paths as seperate routes (useful if you occasionally stop running..walk for a bit, and start again like I do.)
+for (i in curr_route$tracks[[1]]) {
+  c &lt;- c + 1
+  location &lt;- i
+  file &lt;- c(file,rep(files[f], dim(location)[1])) 
+  index &lt;- c(index, rep(c, dim(location)[1]))
+  latitude &lt;- c(latitude, location$lat)
+  longitude &lt;- c(longitude, location$lon)
 }
 }
-routes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">cbind</span>(index, latitude, longitude,file))
+routes &lt;- data.frame(cbind(index, latitude, longitude,file))
 
-<span style="color:#75715e"># Because the routes dataframe takes a while to generate for some folks - save it!</span>
-<span style="color:#a6e22e">save</span>(routes, file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">routes.Rdata&#34;</span>)
-<span style="color:#75715e"># Use to load as needed.</span>
-<span style="color:#a6e22e">load</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">routes.Rdata&#34;</span>)
+# Because the routes dataframe takes a while to generate for some folks - save it!
+save(routes, file=&quot;routes.Rdata&quot;)
+# Use to load as needed.
+load(&quot;routes.Rdata&quot;)
 
-<span style="color:#75715e"># Fix data types</span>
-routes<span style="color:#f92672">$</span>file <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.character</span>(routes<span style="color:#f92672">$</span>file)
-routes<span style="color:#f92672">$</span>latitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">levels</span>(routes<span style="color:#f92672">$</span>latitude)[routes<span style="color:#f92672">$</span>latitude])
-routes<span style="color:#f92672">$</span>longitude <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">levels</span>(routes<span style="color:#f92672">$</span>longitude)[routes<span style="color:#f92672">$</span>longitude])
-routes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">transform</span>(routes, index <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.numeric</span>(index))
+# Fix data types
+routes$file &lt;- as.character(routes$file)
+routes$latitude &lt;- as.numeric(levels(routes$latitude)[routes$latitude])
+routes$longitude &lt;- as.numeric(levels(routes$longitude)[routes$longitude])
+routes &lt;- transform(routes, index = as.numeric(index))
 
-<span style="color:#75715e"># Load Meta Data</span>
-meta_data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">cardioActivities.csv&#34;</span>, stringsAsFactors<span style="color:#f92672">=</span><span style="color:#66d9ef">FALSE</span>)
-meta_data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rename</span>(meta_data, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">GPX.File&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">file&#34;</span>))
+# Load Meta Data
+meta_data &lt;- read.csv(&quot;cardioActivities.csv&quot;, stringsAsFactors=FALSE)
+meta_data &lt;- rename(meta_data, c(&quot;GPX.File&quot; = &quot;file&quot;))
 
-<span style="color:#75715e"># Bind routes</span>
-routes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">left_join</span>(routes, meta_data, by<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">file&#34;</span>) <span style="color:#f92672">%.%</span>
-  <span style="color:#a6e22e">arrange</span>(index)
+# Bind routes
+routes &lt;- left_join(routes, meta_data, by=&quot;file&quot;) %.%
+  arrange(index)
 
 
-<span style="color:#75715e"># Use this function specify activity color if you have multiple activities.</span>
-activity_color <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(activity) {
-  <span style="color:#a6e22e">if </span>(activity<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Cycling&#34;</span>) {
-    color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#00000060&#34;</span>
-  } else <span style="color:#a6e22e">if </span>(activity<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hiking&#34;</span>) {
-    color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#00000060&#34;</span>
+# Use this function specify activity color if you have multiple activities.
+activity_color &lt;- function(activity) {
+  if (activity==&quot;Cycling&quot;) {
+    color = &quot;#00000060&quot;
+  } else if (activity==&quot;Hiking&quot;) {
+    color = &quot;#00000060&quot;
   } else {
-    color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#0080ff60&#34;</span>
+    color = &quot;#0080ff60&quot;
   }
   color
 }
 
-<span style="color:#75715e"># Identify clusters of points, which will correspond to locations you have run. For example,</span>
-<span style="color:#75715e"># I have run in Boston, Iowa City, Chicago, and a few other cities. You will want to set the minimum krange</span>
-<span style="color:#75715e"># to the number of cities you have run in (5 in my case).</span>
-clusters <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pamk</span>(routes[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">latitude&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">longitude&#34;</span>)], krange<span style="color:#f92672">=</span>num_locations<span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, diss<span style="color:#f92672">=</span>T, usepam<span style="color:#f92672">=</span>F)<span style="color:#f92672">$</span>pamobject<span style="color:#f92672">$</span>medoids
+# Identify clusters of points, which will correspond to locations you have run. For example,
+# I have run in Boston, Iowa City, Chicago, and a few other cities. You will want to set the minimum krange
+# to the number of cities you have run in (5 in my case).
+clusters &lt;- pamk(routes[,c(&quot;latitude&quot;, &quot;longitude&quot;)], krange=num_locations:20, diss=T, usepam=F)$pamobject$medoids
 
-<span style="color:#75715e"># Plot Everything</span>
-<span style="color:#a6e22e">for </span>(r in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">row</span>(clusters))) {
-  <span style="color:#a6e22e">print</span>(r)
-  lat_range <span style="color:#f92672">&lt;-</span> clusters[r,][1] <span style="color:#f92672">+</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">20</span>, sd<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-  lon_range <span style="color:#f92672">&lt;-</span>clusters[r,][2] <span style="color:#f92672">+</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">20</span>, sd<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-  setroutes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">filter</span>(routes, (latitude <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">min</span>(lat_range) <span style="color:#f92672">&amp;</span> latitude <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">max</span>(lat_range)),
-                      longitude <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">min</span>(lon_range) <span style="color:#f92672">&amp;</span>  longitude <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">max</span>(lon_range))
+# Plot Everything
+for (r in 1:max(row(clusters))) {
+  print(r)
+  lat_range &lt;- clusters[r,][1] + rnorm(20, sd=0.1)
+  lon_range &lt;-clusters[r,][2] + rnorm(20, sd=0.1)
+  setroutes &lt;- filter(routes, (latitude &gt; min(lat_range) &amp; latitude &lt; max(lat_range)),
+                      longitude &gt; min(lon_range) &amp;  longitude &lt; max(lon_range))
   
-  routeIds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">unique</span>(setroutes<span style="color:#f92672">$</span>index)
+  routeIds &lt;- unique(setroutes$index)
   
-  <span style="color:#75715e"># Albers projection</span>
-  locProj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mapproject</span>(setroutes<span style="color:#f92672">$</span>longitude, setroutes<span style="color:#f92672">$</span>latitude, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rectangular&#34;</span>, par<span style="color:#f92672">=</span><span style="color:#ae81ff">38</span>)
-  setroutes<span style="color:#f92672">$</span>latproj <span style="color:#f92672">&lt;-</span> locProj<span style="color:#f92672">$</span>x
-  setroutes<span style="color:#f92672">$</span>lonproj <span style="color:#f92672">&lt;-</span> locProj<span style="color:#f92672">$</span>y
+  # Albers projection
+  locProj &lt;- mapproject(setroutes$longitude, setroutes$latitude, &quot;rectangular&quot;, par=38)
+  setroutes$latproj &lt;- locProj$x
+  setroutes$lonproj &lt;- locProj$y
   
   
-  <span style="color:#75715e"># Map the projected points</span>
-  <span style="color:#a6e22e">pdf</span>(<span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s-all.pdf&#34;</span>, r))
+  # Map the projected points
+  pdf(sprintf(&quot;%s-all.pdf&quot;, r))
   
-  <span style="color:#a6e22e">plot</span>(setroutes<span style="color:#f92672">$</span>latproj, setroutes<span style="color:#f92672">$</span>lonproj, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">n&#34;</span>, asp<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, axes<span style="color:#f92672">=</span><span style="color:#66d9ef">FALSE</span>, xlab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, ylab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>)
-  <span style="color:#a6e22e">for </span>(i in routeIds) {
-    currRoute <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(setroutes, index<span style="color:#f92672">==</span>i)
-    <span style="color:#a6e22e">lines</span>(currRoute<span style="color:#f92672">$</span>latproj, currRoute<span style="color:#f92672">$</span>lonproj, col<span style="color:#f92672">=</span><span style="color:#a6e22e">activity_color</span>(currRoute<span style="color:#f92672">$</span>Type), lwd<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>)
+  plot(setroutes$latproj, setroutes$lonproj, type=&quot;n&quot;, asp=1, axes=FALSE, xlab=&quot;&quot;, ylab=&quot;&quot;)
+  for (i in routeIds) {
+    currRoute &lt;- subset(setroutes, index==i)
+    lines(currRoute$latproj, currRoute$lonproj, col=activity_color(currRoute$Type), lwd=0.4)
   }
-  <span style="color:#a6e22e">dev.off</span>()
+  dev.off()
 }
 
-</code></pre></div></div>
+</code></pre>
+</div>
   
         <div id='comments'></div>
   

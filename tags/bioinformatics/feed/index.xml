@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bioinformatics on Daniel E. Cook</title>
@@ -21,7 +21,7 @@
       <description>GNU Parallel is an indispensible tool for speeding up bioinformatics. It allows you to easily parallelize commands. Below, I detail some of the basics regarding how it is used and how it can be applied to bioinformatics.
 Many HPC clusters will have GNU-Parallel pre-installed or available as a module. You can also install it using homebrew or other package managers.
 Basic Usage Lets start with a basic example:
-seq 1 5 | parallel -j 4 echo Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into parallel.</description>
+seq 1 5 | parallel -j 4 echo  Here we are (1) Printing a sequence of numbers from 1 to 5, and (2) piping this data into parallel.</description>
     </item>
     
   </channel>

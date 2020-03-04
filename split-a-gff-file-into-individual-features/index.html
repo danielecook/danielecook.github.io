@@ -26,7 +26,7 @@ I was working with wormbase annotation files, which combine all the different ty
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,25 +87,31 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>The <a href="http://www.ensembl.org/info/website/upload/gff.html">General Feature Format</a> is a widely used format for annotating genome sequences. If indexed with tabix, gff files can be viewed in IGV or elsewhere. While features are organized in a nested manner (e.g. genes &gt; exons &gt; variant), you can pull out the individual types and index them, or combine only a few for viewing in your genome browser.</p>
+
 <p>I was working with <a href="ftp://ftp.wormbase.org/pub/wormbase/releases/WS245/species/c_elegans/PRJNA13758/">wormbase</a> annotation files, which combine all the different types of features together (genes, ncRNA, mRNA, binding site, operon, G Quartets, piRNAs, etc). This results in a very dense track in IGV which makes it difficult to disentangle what role individual features (or features of interest) might have.</p>
+
 <p>As a result, I wrote this very short script for splitting the individual feature types apart, sorting them, and indexing them with tabix. This way they can be selectively viewed in IGV or elsewhere.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 
-current_feature <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>
+<pre><code class="language-python">import sys
 
-<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>stdin:
-    feature <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">2</span>]
-    <span style="color:#66d9ef">if</span> feature <span style="color:#f92672">!=</span> current_feature:
-        f <span style="color:#f92672">=</span> file(feature <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.gff</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a+</span><span style="color:#e6db74">&#34;</span>)
-    f<span style="color:#f92672">.</span>write(line)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gunzip -kfc &lt;GFF&gt; | grep -v ^<span style="color:#e6db74">&#34;#&#34;</span> | sort -k3,3 | python process_gff.py
+current_feature = &quot;&quot;
 
-<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls *.gff<span style="color:#e6db74">`</span>; <span style="color:#66d9ef">do</span>
-    <span style="color:#f92672">(</span>grep ^<span style="color:#e6db74">&#34;#&#34;</span> $i.gff; grep -v ^<span style="color:#e6db74">&#34;#&#34;</span> $i.gff | sort -k1,1 -k4,4n<span style="color:#f92672">)</span> | bgzip &gt; $i.sorted.gff.gz;
+for line in sys.stdin:
+    feature = line.split(&quot;\t&quot;)[2]
+    if feature != current_feature:
+        f = file(feature + &quot;.gff&quot;, &quot;a+&quot;)
+    f.write(line)
+</code></pre>
+
+<pre><code class="language-bash">gunzip -kfc &lt;GFF&gt; | grep -v ^&quot;#&quot; | sort -k3,3 | python process_gff.py
+
+for i in `ls *.gff`; do
+    (grep ^&quot;#&quot; $i.gff; grep -v ^&quot;#&quot; $i.gff | sort -k1,1 -k4,4n) | bgzip &gt; $i.sorted.gff.gz;
     tabix $i.sorted.gff.gz
     rm $i.gff
-<span style="color:#66d9ef">done</span>
-</code></pre></div></div>
+done
+</code></pre>
+</div>
   
         <div id='comments'></div>
   

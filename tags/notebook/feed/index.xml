@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>notebook on Daniel E. Cook</title>
@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</guid>
       <description>If you are relying on built-in functions to read and write large datasets you are losing out on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.
-Sample Data First, I&#39;ll generate a sample dataset with ten million rows we can use for testing.
+Sample Data First, I&amp;rsquo;ll generate a sample dataset with ten million rows we can use for testing.
 Generating a test dataset library(tidyverse) library(microbenchmark) n &amp;lt;- 1e6 times &amp;lt;- 10 # Number of times to run each benchmark data &amp;lt;- data.</description>
     </item>
     

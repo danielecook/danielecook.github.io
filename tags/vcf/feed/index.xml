@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vcf on Daniel E. Cook</title>
@@ -20,7 +20,7 @@
       <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
       <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999  Note: BAMs use a 0-based coordinate system; VCFs are 1-based
 This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
     </item>
     
@@ -52,7 +52,7 @@ The first utility I added was a tool to convert a VCF to JSON. This tool is usef
       
       <guid>https://www.danielecook.com/parallelize-bcftools-functions/</guid>
       <description>bcftools is a great for working with variant call files. In general, it is fast. However, I have found that the process of merging VCF files (using bcftools merge) and performing concordance checking (using bcftools gtcheck) can be a little bit slow. That is why I wrote two functions that take advantage of GNU Parallel to parallelize them.
-# ~/.bashrc: executed by bash(1) for non-login shells. # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) # for examples function bam_chromosomes() { # Fetch chromosomes from a bam file samtools view -H $1 | \  grep -Po &amp;#39;SN:(.</description>
+# ~/.bashrc: executed by bash(1) for non-login shells. # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) # for examples function bam_chromosomes() { # Fetch chromosomes from a bam file samtools view -H $1 | \ grep -Po &#39;SN:(.</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@ The first utility I added was a tool to convert a VCF to JSON. This tool is usef
       
       <guid>https://www.danielecook.com/downgrade-a-vcf-for-viewing-in-igv-4.2-4.1/</guid>
       <description>Update: You probably no longer need this (2019-06-24) If you are using up to date software then you probably do not need to worry about downgrading a VCF file.
-Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I’ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</description>
+Original Post (2014-12-15) If you are using the new version of bcftools, and you frequently use IGV to view variants you may have run into issues loading the file in IGV. IGV currently does not support VCF version 4.2. However, I&amp;#8217;ve been able to tweak the headers of newer VCF files to allow these variants to be viewable in IGV again.</description>
     </item>
     
   </channel>

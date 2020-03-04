@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Daniel E. Cook</title>
@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</guid>
       <description>If you are relying on built-in functions to read and write large datasets you are losing out on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.
-Sample Data First, I&#39;ll generate a sample dataset with ten million rows we can use for testing.
+Sample Data First, I&amp;rsquo;ll generate a sample dataset with ten million rows we can use for testing.
 Generating a test dataset library(tidyverse) library(microbenchmark) n &amp;lt;- 1e6 times &amp;lt;- 10 # Number of times to run each benchmark data &amp;lt;- data.</description>
     </item>
     
@@ -38,7 +38,7 @@ Generating a test dataset library(tidyverse) library(microbenchmark) n &amp;lt;-
       <pubDate>Thu, 15 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/rdatastore/</guid>
-      <description>I&#39;ve developed a new package for R known as rdatastore that is avaliable at cloudyr/rdatastore. rdatastore provides an interface for Google Cloud&#39;s datastore service. Google Cloud Datastore is a NoSQL database, which makes provides a mechanism for storing and retrieving heterogeneous data. Although Google Datastore is not useful for storing large datasets, it has a number of useful applications within R. For example:
+      <description>I&amp;rsquo;ve developed a new package for R known as rdatastore that is avaliable at cloudyr/rdatastore. rdatastore provides an interface for Google Cloud&amp;rsquo;s datastore service. Google Cloud Datastore is a NoSQL database, which makes provides a mechanism for storing and retrieving heterogeneous data. Although Google Datastore is not useful for storing large datasets, it has a number of useful applications within R. For example:
  Saving and loading credentials for use with other services.</description>
     </item>
     
@@ -50,7 +50,7 @@ Generating a test dataset library(tidyverse) library(microbenchmark) n &amp;lt;-
       <guid>https://www.danielecook.com/memoise-caching-in-the-cloud/</guid>
       <description>Update: 2019-06-22 Based on my suggestions, out-of-memory caching was implemented in the &amp;ldquo;official&amp;rdquo; memoise package here. The memoise package now caches based on files and AWS.
 Original Post Memoisation is a technique for caching the results of functions based on inputs. For example, the following function calculates the fibonnaci sequence in R.
-fib &amp;lt;- function(n) { if (n &amp;lt; 2) return(1) fib(n - 2) + fib(n - 1) } This is an innefficient way of calculating values of the fibonnacci sequence.</description>
+fib &amp;lt;- function(n) { if (n &amp;lt; 2) return(1) fib(n - 2) + fib(n - 1) }  This is an innefficient way of calculating values of the fibonnacci sequence.</description>
     </item>
     
     <item>
@@ -59,7 +59,7 @@ fib &amp;lt;- function(n) { if (n &amp;lt; 2) return(1) fib(n - 2) + fib(n - 1) 
       <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</guid>
-      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I&amp;#8217;ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
 The script does a few unique things.</description>
     </item>
     

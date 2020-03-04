@@ -10,7 +10,7 @@
 
 
 <meta property="og:description" content="Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
-# Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
+# Run this command where your *_fastqc.zip files are multiqc .  This will output a repor that looks like this:
 Publication
  MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10." />
 <meta property="og:type" content="article" />
@@ -28,7 +28,7 @@ Publication
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,13 +88,22 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><h2 id="update-multiqc-2019-06-21">Update: MultiQC (2019-06-21)</h2>
+  <div class="lh-copy post-content">
+
+<h2 id="update-multiqc-2019-06-21">Update: MultiQC (2019-06-21)</h2>
+
 <p>After I originally published this script for aggregating FASTQC reports, <a href="https://multiqc.info">MultiQC</a> was published by <a href="https://github.com/ewels">Phil Ewels</a>. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run this command where your *_fastqc.zip files are</span>
+
+<pre><code class="language-bash"># Run this command where your *_fastqc.zip files are
 multiqc .
-</code></pre></div><p>This will output a repor that looks like this:</p>
-<p><img src="/multiqc.png" alt="multiqc screenshot"></p>
+</code></pre>
+
+<p>This will output a repor that looks like this:</p>
+
+<p><img src="/multiqc.png" alt="multiqc screenshot" /></p>
+
 <p><strong>Publication</strong></p>
+
 <blockquote>
 <p><strong>MultiQC: Summarize analysis results for multiple tools and samples in a single report</strong> <br/>
 <em>Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller</em> <br/>
@@ -102,10 +111,15 @@ Bioinformatics (2016) <br/>
 doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a> <br/>
 PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 </blockquote>
+
 <h2 id="original-post-2014-12-28">Original Post (2014-12-28)</h2>
-<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I’m talking about the set of plots that look like this:</p>
-<p><img src="/Uchicago-L001-CB4857_CGC-4642f-1.png" alt="fastqc"></p>
+
+<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is a phenomenal sequence quality assessment tool for evaluating both fastq and bam files. If you are working with a large number of sequence files (fastq), you may wish to compare results across all of them by comparing the plots that fastqc produces. I&#8217;m talking about the set of plots that look like this:</p>
+
+<p><img src="/Uchicago-L001-CB4857_CGC-4642f-1.png" alt="fastqc" /></p>
+
 <p>FastQC can be invoked from the command line by typing <code>fastqc &lt;fastq/bam&gt;</code>, and it will produce an html report and associated zip file containing data, plots, and some ancillary files. The zip file contains an <strong>Images</strong> folder where the plots that become incorporated into the html report are stored. They are:</p>
+
 <ul>
 <li>Adapter Content</li>
 <li>Duplication Levels</li>
@@ -118,8 +132,11 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 <li>Per Tile Quality</li>
 <li>Sequence Length Distribution</li>
 </ul>
+
 <p>The zipped folder also contains a file called <strong>fastqc_data.txt</strong> and <strong>summary.txt</strong>. <strong>fastqc_data.txt</strong> contains the raw data and statistics while <strong>summary.txt</strong> summarizes which tests have been passed.</p>
-<p>To easily compare data across reports I wrote this short shell script (below) which will ‘aggregate’ images, statistics, and summaries by:</p>
+
+<p>To easily compare data across reports I wrote this short shell script (below) which will &#8216;aggregate&#8217; images, statistics, and summaries by:</p>
+
 <ol>
 <li>Unzipping all the avaible fastqc zip files.</li>
 <li>Creating a <strong>fq_aggregated</strong> folder, and individual folders within for each plot type.</li>
@@ -127,10 +144,15 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 <li>Concatenating <strong>summary.txt</strong> files as <strong>fq_aggregated</strong>/<strong>summary.txt</strong>.</li>
 <li>Concatenating the basic statistics from each report into <strong>fq_aggregated</strong>/<strong>statistics.txt</strong>.</li>
 </ol>
+
 <p>Images will be reorganized as shown below:</p>
-<p><img src="/aggregate_fastqc.png" alt="aggregate fastqc"></p>
-<h2 id="summarytxt"><code>summary.txt</code></h2>
+
+<p><img src="/aggregate_fastqc.png" alt="aggregate fastqc" /></p>
+
+<h2 id="summary-txt"><code>summary.txt</code></h2>
+
 <p><strong>fq_aggregated</strong>/<strong>summary.txt</strong> will produce a tab delimited file that looks like this:</p>
+
 <table>
 <thead>
 <tr>
@@ -139,77 +161,92 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 <th></th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>PASS</td>
 <td>Basic Statistics</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  quality</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per tile  sequence  quality</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  quality scores</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per base  sequence  content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  GC  content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  N content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td></td>
 <td>…</td>
 <td></td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Basic Statistics</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  quality</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per tile  sequence  quality</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  quality scores</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  content</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per sequence  GC  content</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per base  N content</td>
@@ -217,8 +254,11 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 </tr>
 </tbody>
 </table>
-<h2 id="statisticstxt"><code>statistics.txt</code></h2>
+
+<h2 id="statistics-txt"><code>statistics.txt</code></h2>
+
 <p><strong>fq_aggregated</strong>/<strong>statistics.txt</strong> will look like this:</p>
+
 <table>
 <thead>
 <tr>
@@ -227,77 +267,92 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 <th></th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>PASS</td>
 <td>Basic Statistics</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  quality</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per tile  sequence  quality</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  quality scores</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per base  sequence  content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  GC  content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  N content</td>
 <td>SeqA.fq</td>
 </tr>
+
 <tr>
 <td>d</td>
 <td>…</td>
 <td></td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Basic Statistics</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  quality</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per tile  sequence  quality</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per sequence  quality scores</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>PASS</td>
 <td>Per base  sequence  content</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per sequence  GC  content</td>
 <td>SeqB.fq</td>
 </tr>
+
 <tr>
 <td>FAIL</td>
 <td>Per base  N content</td>
@@ -305,48 +360,51 @@ PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/27312411">27312411</a></p>
 </tr>
 </tbody>
 </table>
+
 <h2 id="the-code">The Code</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run this script in a directory containing zip files from fastqc. It aggregates images of each type in individual folders</span>
-<span style="color:#75715e"># So looking across data is quick.</span>
 
-zips<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ls *.zip<span style="color:#e6db74">`</span>
+<pre><code class="language-bash"># Run this script in a directory containing zip files from fastqc. It aggregates images of each type in individual folders
+# So looking across data is quick.
 
-<span style="color:#66d9ef">for</span> i in $zips; <span style="color:#66d9ef">do</span>
+zips=`ls *.zip`
+
+for i in $zips; do
     unzip -o $i &amp;&gt;/dev/null;
-<span style="color:#66d9ef">done</span>
+done
 
-fastq_folders<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>zips/.zip/<span style="color:#e6db74">}</span>
+fastq_folders=${zips/.zip/}
 
-rm -rf fq_aggregated <span style="color:#75715e"># Remove aggregate folder if present</span>
+rm -rf fq_aggregated # Remove aggregate folder if present
 mkdir fq_aggregated
 
-<span style="color:#75715e"># Rename Files within each using folder name.</span>
-<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
-    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
-    img_files<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ls <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/Images/*png<span style="color:#e6db74">`</span>;
-    <span style="color:#66d9ef">for</span> img in $img_files; <span style="color:#66d9ef">do</span>
-        img_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>basename <span style="color:#e6db74">&#34;</span>$img<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>;
-        img_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>img_name%.*<span style="color:#e6db74">}</span>
-        new_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>;
-        mkdir -p fq_aggregated/<span style="color:#e6db74">${</span>img_name<span style="color:#e6db74">}</span>;
-        mv $img fq_aggregated/<span style="color:#e6db74">${</span>img_name<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>folder/_fastqc/<span style="color:#e6db74">}</span>.png;
-    <span style="color:#66d9ef">done</span>;
-<span style="color:#66d9ef">done</span>;
+# Rename Files within each using folder name.
+for folder in $fastq_folders; do
+    folder=${folder%.*}
+    img_files=`ls ${folder}/Images/*png`;
+    for img in $img_files; do
+        img_name=$(basename &quot;$img&quot;);
+        img_name=${img_name%.*}
+        new_name=${folder};
+        mkdir -p fq_aggregated/${img_name};
+        mv $img fq_aggregated/${img_name}/${folder/_fastqc/}.png;
+    done;
+done;
 
 
-<span style="color:#75715e"># Concatenate Summaries</span>
-<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
-    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
-    cat <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/summary.txt &gt;&gt; fq_aggregated/summary.txt
-<span style="color:#66d9ef">done</span>;
+# Concatenate Summaries
+for folder in $fastq_folders; do
+    folder=${folder%.*}
+    cat ${folder}/summary.txt &gt;&gt; fq_aggregated/summary.txt
+done;
 
-<span style="color:#75715e"># Concatenate Statistics</span>
-<span style="color:#66d9ef">for</span> folder in $fastq_folders; <span style="color:#66d9ef">do</span>
-    folder<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder%.*<span style="color:#e6db74">}</span>
-    head -n <span style="color:#ae81ff">10</span> <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>/fastqc_data.txt | tail -n <span style="color:#ae81ff">7</span> | awk -v f<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>folder/_fastqc/<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;{ print $0 &#34;\t&#34; f }&#39;</span> &gt;&gt; fq_aggregated/statistics.txt
-    rm -rf <span style="color:#e6db74">${</span>folder<span style="color:#e6db74">}</span>
-<span style="color:#66d9ef">done</span>
-</code></pre></div></div>
+# Concatenate Statistics
+for folder in $fastq_folders; do
+    folder=${folder%.*}
+    head -n 10 ${folder}/fastqc_data.txt | tail -n 7 | awk -v f=${folder/_fastqc/} '{ print $0 &quot;\t&quot; f }' &gt;&gt; fq_aggregated/statistics.txt
+    rm -rf ${folder}
+done
+</code></pre>
+</div>
   
         <div id='comments'></div>
   

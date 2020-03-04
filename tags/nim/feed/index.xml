@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nim on Daniel E. Cook</title>
@@ -20,7 +20,7 @@
       <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
       <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999  Note: BAMs use a 0-based coordinate system; VCFs are 1-based
 This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
     </item>
     

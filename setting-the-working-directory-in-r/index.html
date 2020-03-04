@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -85,43 +85,65 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p>It is convenient to be able to set the working directory of a script to its parent directory. This allows you to point to the relative path of files associated with it. For example, if your working directory is set to the location of <code>init.sh</code>, then you will be able to read in <code>data/file.dat</code> without specifying its full path. If these files are in a git repo - you can also be assured they will travel together.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">├── init.sh
+  <div class="lh-copy post-content">
+
+<p>It is convenient to be able to set the working directory of a script to its parent directory. This allows you to point to the relative path of files associated with it. For example, if your working directory is set to the location of <code>init.sh</code>, then you will be able to read in <code>data/file.dat</code> without specifying its full path. If these files are in a git repo - you can also be assured they will travel together.</p>
+
+<pre><code>├── init.sh
 └── data
     └── file.dat
-</code></pre></div><p>In <strong>bash</strong> you can set the directory to the location of the script being executed using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>0%/*<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre>
 
-<span style="color:#75715e"># Or more obviously</span>
-cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-</code></pre></div><p>In <strong>python</strong> you can set the directory to the location of the script being executed using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-<span style="color:#f92672">from</span> os.path <span style="color:#f92672">import</span> dirname, abspath
+<p>In <strong>bash</strong> you can set the directory to the location of the script being executed using:</p>
 
-os<span style="color:#f92672">.</span>chdir(dirname(abspath(__file__)))
-</code></pre></div><p>In <strong>R</strong>, unfortunately, no straightforward method exists. This <a href="https://stackoverflow.com/questions/3452086/getting-path-of-an-r-script">stackoverflow question</a> has some useful answers though. Two are listed below, and I've added a third option for setting the work directory relative to a git repo.</p>
+<pre><code class="language-bash">cd &quot;${0%/*}&quot;
+
+# Or more obviously
+cd &quot;$(dirname &quot;${BASH_SOURCE[0]}&quot;)&quot;
+</code></pre>
+
+<p>In <strong>python</strong> you can set the directory to the location of the script being executed using:</p>
+
+<pre><code class="language-python">import os
+from os.path import dirname, abspath
+
+os.chdir(dirname(abspath(__file__)))
+</code></pre>
+
+<p>In <strong>R</strong>, unfortunately, no straightforward method exists. This <a href="https://stackoverflow.com/questions/3452086/getting-path-of-an-r-script">stackoverflow question</a> has some useful answers though. Two are listed below, and I&rsquo;ve added a third option for setting the work directory relative to a git repo.</p>
+
 <h3 id="setwd-to-script-location-when-calling-rscript">setwd to script location when calling <code>Rscript</code></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">getScriptPath <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(){
-    cmd.args <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">commandArgs</span>()
-    m <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">regexpr</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">(?&lt;=^--file=).+&#34;</span>, cmd.args, perl<span style="color:#f92672">=</span><span style="color:#66d9ef">TRUE</span>)
-    script.dir <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dirname</span>(<span style="color:#a6e22e">regmatches</span>(cmd.args, m))
-    <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">length</span>(script.dir) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">can&#39;t determine script dir: please call the script with Rscript&#34;</span>)
-    <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">length</span>(script.dir) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">can&#39;t determine script dir: more than one &#39;--file&#39; argument detected&#34;</span>)
-    <span style="color:#a6e22e">return</span>(script.dir)
+
+<pre><code class="language-r">getScriptPath &lt;- function(){
+    cmd.args &lt;- commandArgs()
+    m &lt;- regexpr(&quot;(?&lt;=^--file=).+&quot;, cmd.args, perl=TRUE)
+    script.dir &lt;- dirname(regmatches(cmd.args, m))
+    if(length(script.dir) == 0) stop(&quot;can't determine script dir: please call the script with Rscript&quot;)
+    if(length(script.dir) &gt; 1) stop(&quot;can't determine script dir: more than one '--file' argument detected&quot;)
+    return(script.dir)
 }
 
-<span style="color:#75715e"># Setting the script path would then be:</span>
-<span style="color:#a6e22e">setwd</span>(<span style="color:#a6e22e">getScriptPath</span>())
-</code></pre></div><h3 id="setwd-to-script-location-in-rstudio">setwd to script location in Rstudio</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># This will not throw an error if you are not using rstudio.</span>
-<span style="color:#a6e22e">try</span>(<span style="color:#a6e22e">setwd</span>(<span style="color:#a6e22e">dirname</span>(rstudioapi<span style="color:#f92672">::</span><span style="color:#a6e22e">getActiveDocumentContext</span>()<span style="color:#f92672">$</span>path)))
-</code></pre></div><h3 id="setting-the-script-path-relative-to-the-git-repo">Setting the script path relative to the git repo</h3>
+# Setting the script path would then be:
+setwd(getScriptPath())
+</code></pre>
+
+<h3 id="setwd-to-script-location-in-rstudio">setwd to script location in Rstudio</h3>
+
+<pre><code class="language-r"># This will not throw an error if you are not using rstudio.
+try(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
+</code></pre>
+
+<h3 id="setting-the-script-path-relative-to-the-git-repo">Setting the script path relative to the git repo</h3>
+
 <p>Most of my code resides in git repositories - so an alternative to setting the working directory to the location of a script is to set it to the location of a git repository. Here is how I do that in R:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># First set the working directory to the location of a script (useful for working in Rstudio)</span>
-<span style="color:#a6e22e">try</span>(<span style="color:#a6e22e">setwd</span>(<span style="color:#a6e22e">dirname</span>(rstudioapi<span style="color:#f92672">::</span><span style="color:#a6e22e">getActiveDocumentContext</span>()<span style="color:#f92672">$</span>path)))
-<span style="color:#75715e"># Next, set the directory relative to the git repo</span>
-<span style="color:#a6e22e">setwd</span>(<span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">git rev-parse --show-toplevel&#34;</span>, intern<span style="color:#f92672">=</span>T))
-</code></pre></div><p>The big advantage of this approach is that you can call the script from anywhere while you are located in its git repo, and it will always execute from the base or top-level of that repo.</p>
+
+<pre><code class="language-r"># First set the working directory to the location of a script (useful for working in Rstudio)
+try(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
+# Next, set the directory relative to the git repo
+setwd(system(&quot;git rev-parse --show-toplevel&quot;, intern=T))
+</code></pre>
+
+<p>The big advantage of this approach is that you can call the script from anywhere while you are located in its git repo, and it will always execute from the base or top-level of that repo.</p>
 </div>
   
         <div id='comments'></div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Daniel E. Cook</title>
@@ -58,7 +58,7 @@
     </item>
     
     <item>
-      <title>Google-Sheets</title>
+      <title>google-sheets</title>
       <link>https://www.danielecook.com/tags/google-sheets/</link>
       <pubDate>Fri, 25 Oct 2019 01:15:53 +0000</pubDate>
       
@@ -76,20 +76,20 @@
     </item>
     
     <item>
-      <title>notebook</title>
-      <link>https://www.danielecook.com/tags/notebook/</link>
-      <pubDate>Sun, 20 Oct 2019 01:30:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/notebook/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>R</title>
       <link>https://www.danielecook.com/tags/r/</link>
       <pubDate>Sun, 20 Oct 2019 01:30:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notebook</title>
+      <link>https://www.danielecook.com/tags/notebook/</link>
+      <pubDate>Sun, 20 Oct 2019 01:30:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/notebook/</guid>
       <description></description>
     </item>
     

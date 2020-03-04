@@ -11,11 +11,13 @@
 
 <meta property="og:description" content="The UCSC Genome browser has a publicly available MySQL database. There are a lot of different ways you can use it, including:
 
+
 Annotating a small dataset
 Understanding how data is formatted, and can be used.
 Browsing Data
 
-If you are on a mac – Sequel Pro is a fantastic tool for browsing." />
+
+If you are on a mac &#8211; Sequel Pro is a fantastic tool for browsing." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/" />
 
@@ -31,7 +33,7 @@ If you are on a mac – Sequel Pro is a fantastic tool for browsing." />
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.55.6" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -92,19 +94,29 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>The UCSC Genome browser has a <a href="http://genome.ucsc.edu/goldenPath/help/mysql.html">publicly available MySQL database</a>. There are a lot of different ways you can use it, including:</p>
+
 <ul>
 <li>Annotating a small dataset</li>
 <li>Understanding how data is formatted, and can be used.</li>
 <li>Browsing Data</li>
 </ul>
-<p>If you are on a mac – <a href="http://www.sequelpro.com/">Sequel Pro</a> is a fantastic tool for browsing.</p>
+
+<p>If you are on a mac &#8211; <a href="http://www.sequelpro.com/">Sequel Pro</a> is a fantastic tool for browsing.</p>
+
 <h1 id="connecting">Connecting</h1>
+
 <p>To browse the UCSC genome browser database, download <a href="http://www.sequelpro.com/">Sequal Pro</a> and enter in the following connection information into the login screen:</p>
+
 <p><img src="/Screen-Shot-2013-10-25-at-3.56.23-PM.png" alt="UCSC MySQL" /></p>
+
 <p>You should be presented with a screen that looks like this:</p>
+
 <p><a href="/Screen-Shot-2013-10-25-at-4.05.16-PM1.png"><img src="/Screen-Shot-2013-10-25-at-4.05.16-PM1.png" alt="Browsing UCSC Genome MySQL database" /></a></p>
-<p>Databases are represented as <strong>Connection/Resource &gt; Database &gt; Tables &gt; Rows</strong>. Sequal pro lets you connect to the UCSC Browser MySQL server. Each <strong>database</strong> represents a different genome. Remember that genomes change and improve over time – so there are multiple <strong>builds</strong> of each genome (e.g. hg18 and hg19) represented by separate databases.</p>
-<p>Within each database are tables. These are the same tables referred to on the UCSC website – and you can find out more about what the data represents on the browser website by clicking ‘describe table schema’ for the table of interest as shown below.</p>
+
+<p>Databases are represented as <strong>Connection/Resource &gt; Database &gt; Tables &gt; Rows</strong>. Sequal pro lets you connect to the UCSC Browser MySQL server. Each <strong>database</strong> represents a different genome. Remember that genomes change and improve over time &#8211; so there are multiple <strong>builds</strong> of each genome (e.g. hg18 and hg19) represented by separate databases.</p>
+
+<p>Within each database are tables. These are the same tables referred to on the UCSC website &#8211; and you can find out more about what the data represents on the browser website by clicking &#8216;describe table schema&#8217; for the table of interest as shown below.</p>
+
 <p><a href="/Screen-Shot-2013-10-25-at-3.51.29-PM.png"><img src="/Screen-Shot-2013-10-25-at-3.51.29-PM-1024x232.png"  /></a></p></div>
   
         <div id='comments'></div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on Daniel E. Cook</title>
@@ -50,7 +50,7 @@ This script will extracting basic information from a set of FASTQs and output it
       <pubDate>Mon, 20 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/</guid>
-      <description>If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) – you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.
+      <description>If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) &amp;#8211; you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.
 If you use python, it is easy to download and store data in an SQlite database.</description>
     </item>
     
@@ -60,7 +60,7 @@ If you use python, it is easy to download and store data in an SQlite database.<
       <pubDate>Sun, 03 Nov 2013 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/fetch-data-from-ucsc-genome-browser/</guid>
-      <description>Original Post (2013-11-03) Previously, I’ve shown that you can use a mysql database browser (e.g. Sequel Pro) to access and browse the UCSC Genome Browser MySQL database.
+      <description>Original Post (2013-11-03) Previously, I&amp;#8217;ve shown that you can use a mysql database browser (e.g. Sequel Pro) to access and browse the UCSC Genome Browser MySQL database.
 If you have a small dataset that you would like to annotate, you can write SQL statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.
 # Note: Requires mysqldb; install using: # pip install MySQL-python from MySQLdb.</description>
     </item>
