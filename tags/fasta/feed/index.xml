@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FASTA on Daniel E. Cook</title>
@@ -18,8 +18,8 @@
       <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</guid>
-      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;rsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
-If you&amp;rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
+      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&#39;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
     </item>
     
     <item>
@@ -29,8 +29,8 @@ If you&amp;rsquo;ve been provided with or have generated a masked fasta file for
       
       <guid>https://www.danielecook.com/generate-fasta-sequence-lengths/</guid>
       <description>This one liner:
-cat file.fa | awk &#39;$0 ~ &amp;quot;&amp;gt;&amp;quot; {if (NR &amp;gt; 1) {print c;} c=0;printf substr($0,2,100) &amp;quot;\t&amp;quot;; } $0 !~ &amp;quot;&amp;gt;&amp;quot; {c+=length($0);} END { print c; }&#39;  Takes a fasta file as input:
-&amp;gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &amp;gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &amp;gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &amp;gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &amp;gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &amp;gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &amp;gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa  Outputs sequence name and length:</description>
+cat file.fa | awk &amp;#39;$0 ~ &amp;#34;&amp;gt;&amp;#34; {if (NR &amp;gt; 1) {print c;} c=0;printf substr($0,2,100) &amp;#34;\t&amp;#34;; } $0 !~ &amp;#34;&amp;gt;&amp;#34; {c+=length($0);} END { print c; }&amp;#39; Takes a fasta file as input:
+&amp;gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &amp;gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &amp;gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &amp;gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &amp;gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &amp;gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &amp;gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa Outputs sequence name and length:</description>
     </item>
     
   </channel>

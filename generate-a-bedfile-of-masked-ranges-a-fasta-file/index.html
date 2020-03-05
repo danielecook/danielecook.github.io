@@ -9,8 +9,8 @@
   <meta content='Generate a bedfile of masked ranges a fasta file - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&rsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
-If you&rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges." />
+<meta property="og:description" content="If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&#39;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/" />
 
@@ -26,7 +26,7 @@ If you&rsquo;ve been provided with or have generated a masked fasta file for a g
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,13 +86,9 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p>If you are calling variants as part of a <acronym name="Next Generation Sequencing">NGS</acronym> experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as <a href="http://www.repeatmasker.org/">repeatmasker</a> are used to identify low complexity regions, replacing repetitive sequences with <strong>N</strong>&rsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.</p>
-
-<p>If you&rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</p>
-
-<pre><code class="language-&gt;">&gt;CHROMOSOME_I 1 15072423
+  <div class="lh-copy post-content"><p>If you are calling variants as part of a <acronym name="Next Generation Sequencing">NGS</acronym> experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as <a href="http://www.repeatmasker.org/">repeatmasker</a> are used to identify low complexity regions, replacing repetitive sequences with <strong>N</strong>&lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.</p>
+<p>If you've been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;CHROMOSOME_I 1 15072423
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
@@ -117,9 +113,7 @@ NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNGTTTGTTNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 TATTAAAAACTGTTCNNNNNNNNNNNNNNNNNNNN
-</code></pre>
-
-<pre><code class="language-text">chrI    0   4831
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">chrI    0   4831
 chrI    4869    5146
 chrI    5181    5305
 chrI    5340    5677
@@ -143,84 +137,76 @@ chrI    30682   39364
 chrI    39419   42234
 chrI    42307   56428
 chrI    56455   57860
-</code></pre>
-
-<p><em>Each range corresponds with a low complexity region within the fasta file.</em> The resulting bed file can be used to filter variants out of a VCF file using a tool such as bcftools</p>
-
+</code></pre></div><p><em>Each range corresponds with a low complexity region within the fasta file.</em> The resulting bed file can be used to filter variants out of a VCF file using a tool such as bcftools</p>
 <h2 id="usage">Usage</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python generate_masked_ranges.py &lt;fasta_file&gt; &gt; output_ranges.txt
+</code></pre></div><h2 id="script">Script</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!bin/python</span>
 
-<pre><code class="language-bash">python generate_masked_ranges.py &lt;fasta_file&gt; &gt; output_ranges.txt
-</code></pre>
+<span style="color:#f92672">import</span> gzip
+<span style="color:#f92672">import</span> io
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> os
 
-<h2 id="script">Script</h2>
+<span style="color:#75715e"># This file will generate a bedfile of the masked regions a fasta file.</span>
 
-<pre><code class="language-python">#!bin/python
+<span style="color:#75715e"># STDIN or arguments</span>
+<span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
 
-import gzip
-import io
-import sys
-import os
-
-# This file will generate a bedfile of the masked regions a fasta file.
-
-# STDIN or arguments
-if len(sys.argv) &gt; 1:
-
-    # Check file type
-    if sys.argv[1].endswith(&quot;.fa.gz&quot;):
-        input_fasta = io.TextIOWrapper(io.BufferedReader(gzip.open(sys.argv[1])))
-    elif sys.argv[1].endswith(&quot;.fa&quot;) or sys.argv[1].endswith(&quot;.txt&quot;):
-        input_fasta = file(sys.argv[1],'r')
-    else:
-        raise Exception(&quot;Unsupported File Type&quot;)
-else:
-    print &quot;&quot;&quot;
-    \tUsage:\n\t\tgenerate_masked_ranges.py &lt;fasta file | .fa or .fa.gz&gt; &lt;chrome find&gt; &lt;chrome replace&gt;
-    
-    \t\t'Chrome find' and 'chrome replace' are used to find and replace the name of a chromsome. For example,
-    \t\treplacing CHROMSOME_I with chr1 can be accomplished by using the command as follows:
-    \t\t\tpython generate_masked_ranges.py my_fasta.fa CHROMSOME_ chr
-    \t\tOutput is to stdout
-    &quot;&quot;&quot;
-    raise SystemExit
+    <span style="color:#75715e"># Check file type</span>
+    <span style="color:#66d9ef">if</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.fa.gz</span><span style="color:#e6db74">&#34;</span>):
+        input_fasta <span style="color:#f92672">=</span> io<span style="color:#f92672">.</span>TextIOWrapper(io<span style="color:#f92672">.</span>BufferedReader(gzip<span style="color:#f92672">.</span>open(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>])))
+    <span style="color:#66d9ef">elif</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.fa</span><span style="color:#e6db74">&#34;</span>) <span style="color:#f92672">or</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.txt</span><span style="color:#e6db74">&#34;</span>):
+        input_fasta <span style="color:#f92672">=</span> file(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Unsupported File Type</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Usage:</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">generate_masked_ranges.py &lt;fasta file | .fa or .fa.gz&gt; &lt;chrome find&gt; &lt;chrome replace&gt;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Chrome find</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> and </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chrome replace</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> are used to find and replace the name of a chromsome. For example,</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">replacing CHROMSOME_I with chr1 can be accomplished by using the command as follows:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">python generate_masked_ranges.py my_fasta.fa CHROMSOME_ chr</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Output is to stdout</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">SystemExit</span>
 
 
-n, state = 0, 0 # line, character, state (0=Out of gap; 1=In Gap)
-chrom, start, end = None, None, None
+n, state <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> <span style="color:#75715e"># line, character, state (0=Out of gap; 1=In Gap)</span>
+chrom, start, end <span style="color:#f92672">=</span> None, None, None
 
-with input_fasta as f:
-    for line in f:
-        line = line.replace(&quot;\n&quot;,&quot;&quot;)
-        if line.startswith(&quot;&gt;&quot;):
-            # Print end range
-            if state == 1:
-                print '\t'.join([chrom ,str(start), str(n)])
-                start, end, state  = 0, 0, 0
-            n = 0 # Reset character
-            chrom = line.split(&quot; &quot;)[0].replace(&quot;&gt;&quot;,&quot;&quot;)
-            # If user specifies, replace chromosome as well
-            if len(sys.argv) &gt; 2:
-                chrom = chrom.replace(sys.argv[2],sys.argv[3])
-        else:
-            for char in line:
-                if state == 0 and char == &quot;N&quot;:
-                    state = 1
-                    start = n
-                elif state == 1 and char != &quot;N&quot;:
-                    state = 0
-                    end = n
-                    print '\t'.join([chrom ,str(start), str(end)])
-                else:
-                    pass
+<span style="color:#66d9ef">with</span> input_fasta <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f:
+        line <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&gt;</span><span style="color:#e6db74">&#34;</span>):
+            <span style="color:#75715e"># Print end range</span>
+            <span style="color:#66d9ef">if</span> state <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+                <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([chrom ,str(start), str(n)])
+                start, end, state  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>
+            n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Reset character</span>
+            chrom <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&gt;</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>)
+            <span style="color:#75715e"># If user specifies, replace chromosome as well</span>
+            <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>:
+                chrom <span style="color:#f92672">=</span> chrom<span style="color:#f92672">.</span>replace(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>],sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">3</span>])
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> line:
+                <span style="color:#66d9ef">if</span> state <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> char <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#34;</span>:
+                    state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+                    start <span style="color:#f92672">=</span> n
+                <span style="color:#66d9ef">elif</span> state <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> char <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#34;</span>:
+                    state <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+                    end <span style="color:#f92672">=</span> n
+                    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([chrom ,str(start), str(end)])
+                <span style="color:#66d9ef">else</span>:
+                    <span style="color:#66d9ef">pass</span>
 
-                n += 1 # First base is 0 in bed format.
+                n <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># First base is 0 in bed format.</span>
 
-# Print mask close if on the last chromosome.
-if state == 1:
-            print '\t'.join([chrom ,str(start), str(n)])
-            start, end, state  = 0, 0, 0
-</code></pre>
-</div>
+<span style="color:#75715e"># Print mask close if on the last chromosome.</span>
+<span style="color:#66d9ef">if</span> state <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+            <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([chrom ,str(start), str(n)])
+            start, end, state  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>
+</code></pre></div></div>
   
         <div id='comments'></div>
   

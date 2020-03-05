@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>excel on Daniel E. Cook</title>
@@ -18,9 +18,9 @@
       <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</guid>
-      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&amp;rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
-function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;quot;Microsoft Excel&amp;quot; $tmp }  Usage:
-cat spreadsheet.tsv | excel  </description>
+      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&#39;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;#34;Microsoft Excel&amp;#34; $tmp } Usage:
+cat spreadsheet.tsv | excel </description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ cat spreadsheet.tsv | excel  </description>
       <pubDate>Sat, 09 Nov 2013 22:45:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/export-excel-worksheets-as-individual-csvs/</guid>
-      <description>Original Post (2013-11-09) If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don&amp;#8217;t want to do so in Microsoft Excel &amp;#8211; here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.
+      <description>Original Post (2013-11-09) If you need to work with data spread across a bunch of worksheets within an excel workbook, but you don’t want to do so in Microsoft Excel – here is a python script for extracting each individual workbook as a csv and exporting them all to a folder.
 import xlrd # pip install xlrd import csv import os def export_workbook(filename): # Open workbook for initial extraction workbook = xlrd.</description>
     </item>
     
@@ -48,7 +48,7 @@ import xlrd # pip install xlrd import csv import os def export_workbook(filename
       <pubDate>Wed, 06 Mar 2013 22:45:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/excel-template-for-mapping-four-96-well-plates-to-one-384-well-plate/</guid>
-      <description> Download 96_to_384_platemapper.xlsx
+      <description>Download 96_to_384_platemapper.xlsx
 Copy in Identifiers A 384 well template is produced And a summary table too. </description>
     </item>
     

@@ -9,7 +9,7 @@
   <meta content='Calculate Depth and Breadth of Coverage From a bam File - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Original Post What is the difference between depth and coverage in sequencing experiments? Actually &#8211; they refer to the same thing, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is breadth of coverage. This paper more precisely defines what breadth of coverage and depth of coverage mean." />
+<meta property="og:description" content="Original Post What is the difference between depth and coverage in sequencing experiments? Actually – they refer to the same thing, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is breadth of coverage. This paper more precisely defines what breadth of coverage and depth of coverage mean." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/calculate-depth-and-breadth-of-coverage-from-a-bam-file/" />
 
@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -85,102 +85,91 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h3 id="original-post">Original Post</h3>
-
-<p>What is the difference between depth and coverage in sequencing experiments? Actually &#8211; <a href="https://www.biostars.org/p/6571/#6574">they refer to the same thing</a>, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is <strong>breadth of coverage</strong>. <a href="http://doi.org/10.1093/bib/bbu029">This paper</a> more precisely defines what <strong>breadth of coverage</strong> and <strong>depth of coverage</strong> mean.</p>
-
+  <div class="lh-copy post-content"><h3 id="original-post">Original Post</h3>
+<p>What is the difference between depth and coverage in sequencing experiments? Actually – <a href="https://www.biostars.org/p/6571/#6574">they refer to the same thing</a>, the average number of reads aligned to an individual base. Previously, I had thought coverage referred to the percentage of the genome with aligned reads to it; however the more appropriate term for this is <strong>breadth of coverage</strong>. <a href="http://doi.org/10.1093/bib/bbu029">This paper</a> more precisely defines what <strong>breadth of coverage</strong> and <strong>depth of coverage</strong> mean.</p>
 <p><img src="/doc.png" alt="Depth vs. Breadth of Coverage" width="940" height="198" class="aligncenter size-large wp-image-805" /></p>
-
 <p>If you need to calculate <em>depth of coverage</em> and <em>breadth of coverage</em> you can do so using the python script below. To use the script, feed the function <code>coverage</code> a bam file, and the function will return a dictionary of the depth of coverage, breadth of coverage, sum of depths (at every position), and number of bases mapped, for every contig/chromosome individually, and the entire genome as a whole.</p>
-
 <p>Additionally, if you specify the optional second parameter specifying the mitochondrial chromosome, the script will calculate the parameters listed above for the nuclear genome and calculate the ratio of mitochondrial depth of coverage to nuclear depth of coverage. This can act as a proxy for mitochondrial count/content within a cell.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#</span>
+<span style="color:#75715e"># This script calculates the depth of coverage and breadth of coverage for a given bam. </span>
+<span style="color:#75715e"># Outputs a dictionary containing the contig/chromosome names and the depth and breadth of coverage for each</span>
+<span style="color:#75715e"># and for the entire genome.</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># If you optionally specify the name of the mitochondrial chromosome (e.g. mtDNA, chrM, chrMT)</span>
+<span style="color:#75715e"># The script will also generate breadth and depth of coverage for the nuclear genome AND the ratio</span>
+<span style="color:#75715e"># of mtDNA:nuclearDNA; which can act as a proxy in some cases for mitochondrial count within an individual.</span>
+<span style="color:#75715e"># </span>
+<span style="color:#75715e"># Author: Daniel E. Cook</span>
+<span style="color:#75715e"># Website: Danielecook.com</span>
+<span style="color:#75715e">#</span>
 
-<pre><code class="language-python">#
-# This script calculates the depth of coverage and breadth of coverage for a given bam. 
-# Outputs a dictionary containing the contig/chromosome names and the depth and breadth of coverage for each
-# and for the entire genome.
-#
-# If you optionally specify the name of the mitochondrial chromosome (e.g. mtDNA, chrM, chrMT)
-# The script will also generate breadth and depth of coverage for the nuclear genome AND the ratio
-# of mtDNA:nuclearDNA; which can act as a proxy in some cases for mitochondrial count within an individual.
-# 
-# Author: Daniel E. Cook
-# Website: Danielecook.com
-#
 
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> subprocess <span style="color:#f92672">import</span> Popen, PIPE
 
-import os
-import re
-from subprocess import Popen, PIPE
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_contigs</span>(bam):
+    header, err <span style="color:#f92672">=</span> Popen([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">samtools</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">view</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-H</span><span style="color:#e6db74">&#34;</span>,bam], stdout<span style="color:#f92672">=</span>PIPE, stderr<span style="color:#f92672">=</span>PIPE)<span style="color:#f92672">.</span>communicate()
+    <span style="color:#66d9ef">if</span> err <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(err)
+    <span style="color:#75715e"># Extract contigs from header and convert contigs to integers</span>
+    contigs <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">@SQ</span><span style="color:#e6db74">\</span><span style="color:#e6db74">WSN:(?P&lt;chrom&gt;[A-Za-z0-9_]*)</span><span style="color:#e6db74">\</span><span style="color:#e6db74">WLN:(?P&lt;length&gt;[0-9]+)</span><span style="color:#e6db74">&#34;</span>, header):
+        contigs[x[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> int(x[<span style="color:#ae81ff">1</span>])
+    <span style="color:#66d9ef">return</span> contigs
 
-def get_contigs(bam):
-    header, err = Popen([&quot;samtools&quot;,&quot;view&quot;,&quot;-H&quot;,bam], stdout=PIPE, stderr=PIPE).communicate()
-    if err != &quot;&quot;:
-        raise Exception(err)
-    # Extract contigs from header and convert contigs to integers
-    contigs = {}
-    for x in re.findall(&quot;@SQ\WSN:(?P&lt;chrom&gt;[A-Za-z0-9_]*)\WLN:(?P&lt;length&gt;[0-9]+)&quot;, header):
-        contigs[x[0]] = int(x[1])
-    return contigs
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">coverage</span>(bam, mtchr <span style="color:#f92672">=</span> None):
+    <span style="color:#75715e"># Check to see if file exists</span>
+    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(bam) <span style="color:#f92672">==</span> False:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bam file does not exist</span><span style="color:#e6db74">&#34;</span>)
+    contigs <span style="color:#f92672">=</span> get_contigs(bam)
 
-def coverage(bam, mtchr = None):
-    # Check to see if file exists
-    if os.path.isfile(bam) == False:
-        raise Exception(&quot;Bam file does not exist&quot;)
-    contigs = get_contigs(bam)
+    <span style="color:#75715e"># Guess mitochondrial chromosome</span>
+    mtchr <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> contigs <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>lower()<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">if</span> len(mtchr) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+        mtchr <span style="color:#f92672">=</span> None
+    <span style="color:#66d9ef">else</span>:
+        mtchr <span style="color:#f92672">=</span> mtchr[<span style="color:#ae81ff">0</span>]
 
-    # Guess mitochondrial chromosome
-    mtchr = [x for x in contigs if x.lower().find(&quot;m&quot;) == 0]
-    if len(mtchr) != 1:
-        mtchr = None
-    else:
-        mtchr = mtchr[0]
+    coverage_dict <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> contigs<span style="color:#f92672">.</span>keys():
+        command <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">samtools depth -r </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> | awk </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{sum+=$3;cnt++}END{print cnt </span><span style="color:#ae81ff">\&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> sum}</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (c, bam)
+        coverage_dict[c] <span style="color:#f92672">=</span> {}
+        coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>], coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> map(int,Popen(command, stdout<span style="color:#f92672">=</span>PIPE, shell <span style="color:#f92672">=</span> True)<span style="color:#f92672">.</span>communicate()[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>))
+        coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Breadth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">/</span> float(contigs[c])
+        coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Depth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">/</span> float(contigs[c])
+        coverage_dict[c][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> int(contigs[c])
 
-    coverage_dict = {}
-    for c in contigs.keys():
-        command = &quot;samtools depth -r %s %s | awk '{sum+=$3;cnt++}END{print cnt \&quot;\t\&quot; sum}'&quot; % (c, bam)
-        coverage_dict[c] = {}
-        coverage_dict[c][&quot;Bases Mapped&quot;], coverage_dict[c][&quot;Sum of Depths&quot;] = map(int,Popen(command, stdout=PIPE, shell = True).communicate()[0].strip().split(&quot;\t&quot;))
-        coverage_dict[c][&quot;Breadth of Coverage&quot;] = coverage_dict[c][&quot;Bases Mapped&quot;] / float(contigs[c])
-        coverage_dict[c][&quot;Depth of Coverage&quot;] = coverage_dict[c][&quot;Sum of Depths&quot;] / float(contigs[c])
-        coverage_dict[c][&quot;Length&quot;] = int(contigs[c])
+    <span style="color:#75715e"># Calculate Genome Wide Breadth of Coverage and Depth of Coverage</span>
+    genome_length <span style="color:#f92672">=</span> float(sum(contigs<span style="color:#f92672">.</span>values()))
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> {}
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> int(genome_length)
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>])
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>])
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Breadth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>]) <span style="color:#f92672">/</span> float(genome_length)
+    coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Depth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>]) <span style="color:#f92672">/</span> float(genome_length)
 
-    # Calculate Genome Wide Breadth of Coverage and Depth of Coverage
-    genome_length = float(sum(contigs.values()))
-    coverage_dict[&quot;genome&quot;] = {}
-    coverage_dict[&quot;genome&quot;][&quot;Length&quot;] = int(genome_length)
-    coverage_dict[&quot;genome&quot;][&quot;Bases Mapped&quot;] = sum([x[&quot;Bases Mapped&quot;] for k, x in coverage_dict.iteritems() if k != &quot;genome&quot;])
-    coverage_dict[&quot;genome&quot;][&quot;Sum of Depths&quot;] = sum([x[&quot;Sum of Depths&quot;] for k, x in coverage_dict.iteritems() if k != &quot;genome&quot;])
-    coverage_dict[&quot;genome&quot;][&quot;Breadth of Coverage&quot;] = sum([x[&quot;Bases Mapped&quot;] for k, x in coverage_dict.iteritems() if k != &quot;genome&quot;]) / float(genome_length)
-    coverage_dict[&quot;genome&quot;][&quot;Depth of Coverage&quot;] = sum([x[&quot;Sum of Depths&quot;] for k, x in coverage_dict.iteritems() if k != &quot;genome&quot;]) / float(genome_length)
+    <span style="color:#66d9ef">if</span> mtchr <span style="color:#f92672">!=</span> None:
+        <span style="color:#75715e"># Calculate nuclear breadth of coverage and depth of coverage</span>
+        ignore_contigs <span style="color:#f92672">=</span> [mtchr, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>]
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> {}
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k,x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> ignore_contigs ])
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> ignore_contigs])
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> ignore_contigs])
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Breadth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Bases Mapped</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> ignore_contigs]) <span style="color:#f92672">/</span> float(coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>])
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Depth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> sum([x[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sum of Depths</span><span style="color:#e6db74">&#34;</span>] <span style="color:#66d9ef">for</span> k, x <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>iteritems() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> ignore_contigs]) <span style="color:#f92672">/</span> float(coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Length</span><span style="color:#e6db74">&#34;</span>])
 
-    if mtchr != None:
-        # Calculate nuclear breadth of coverage and depth of coverage
-        ignore_contigs = [mtchr, &quot;genome&quot;, &quot;nuclear&quot;]
-        coverage_dict[&quot;nuclear&quot;] = {}
-        coverage_dict[&quot;nuclear&quot;][&quot;Length&quot;] = sum([x[&quot;Length&quot;] for k,x in coverage_dict.iteritems() if k not in ignore_contigs ])
-        coverage_dict[&quot;nuclear&quot;][&quot;Bases Mapped&quot;] = sum([x[&quot;Bases Mapped&quot;] for k, x in coverage_dict.iteritems() if k not in ignore_contigs])
-        coverage_dict[&quot;nuclear&quot;][&quot;Sum of Depths&quot;] = sum([x[&quot;Sum of Depths&quot;] for k, x in coverage_dict.iteritems() if k not in ignore_contigs])
-        coverage_dict[&quot;nuclear&quot;][&quot;Breadth of Coverage&quot;] = sum([x[&quot;Bases Mapped&quot;] for k, x in coverage_dict.iteritems() if k not in ignore_contigs]) / float(coverage_dict[&quot;nuclear&quot;][&quot;Length&quot;])
-        coverage_dict[&quot;nuclear&quot;][&quot;Depth of Coverage&quot;] = sum([x[&quot;Sum of Depths&quot;] for k, x in coverage_dict.iteritems() if k not in ignore_contigs]) / float(coverage_dict[&quot;nuclear&quot;][&quot;Length&quot;])
+        <span style="color:#75715e"># Calculate the ratio of mtDNA depth to nuclear depth</span>
+        coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mt_ratio</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> coverage_dict[mtchr][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Depth of Coverage</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">/</span> float(coverage_dict[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nuclear</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Depth of Coverage</span><span style="color:#e6db74">&#34;</span>])
 
-        # Calculate the ratio of mtDNA depth to nuclear depth
-        coverage_dict[&quot;genome&quot;][&quot;mt_ratio&quot;] = coverage_dict[mtchr][&quot;Depth of Coverage&quot;] / float(coverage_dict[&quot;nuclear&quot;][&quot;Depth of Coverage&quot;])
-
-    # Flatten Dictionary 
-    coverage = []
-    for k,v in coverage_dict.items():
-        for x in v.items():
-            coverage += [(k,x[0], x[1])]
-    return coverage
-</code></pre>
-
-<p><a href="http://samtools.github.io/bcftools/">Requires BCFTools</a></p>
-
+    <span style="color:#75715e"># Flatten Dictionary </span>
+    coverage <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> coverage_dict<span style="color:#f92672">.</span>items():
+        <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> v<span style="color:#f92672">.</span>items():
+            coverage <span style="color:#f92672">+</span><span style="color:#f92672">=</span> [(k,x[<span style="color:#ae81ff">0</span>], x[<span style="color:#ae81ff">1</span>])]
+    <span style="color:#66d9ef">return</span> coverage
+</code></pre></div><p><a href="http://samtools.github.io/bcftools/">Requires BCFTools</a></p>
 <h3 id="update-mosdepth-2019-06-21">Update: mosdepth (2019-06-21)</h3>
-
 <p>If you are looking to calculate coverage, I highly recommend <a href="http://www.github.com/brentp/mosdepth">mosdepth</a>.</p>
 </div>
   

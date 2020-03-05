@@ -9,7 +9,7 @@
   <meta content='Fetch Data from UCSC Genome Browser - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="Original Post (2013-11-03) Previously, I&#8217;ve shown that you can use a mysql database browser (e.g. Sequel Pro) to access and browse the UCSC Genome Browser MySQL database.
+<meta property="og:description" content="Original Post (2013-11-03) Previously, I’ve shown that you can use a mysql database browser (e.g. Sequel Pro) to access and browse the UCSC Genome Browser MySQL database.
 If you have a small dataset that you would like to annotate, you can write SQL statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.
 # Note: Requires mysqldb; install using: # pip install MySQL-python from MySQLdb." />
 <meta property="og:type" content="article" />
@@ -27,7 +27,7 @@ If you have a small dataset that you would like to annotate, you can write SQL s
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,81 +87,64 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h2 id="original-post-2013-11-03">Original Post (2013-11-03)</h2>
-
-<p><a href="/accessing-the-ucsc-genome-browser-mysql-database/">Previously</a>, I&#8217;ve shown that you can use a mysql database browser (e.g. <a href="http://www.sequelpro.com/">Sequel Pro</a>) to access and browse the UCSC Genome Browser MySQL database.</p>
-
+  <div class="lh-copy post-content"><h2 id="original-post-2013-11-03">Original Post (2013-11-03)</h2>
+<p><a href="/accessing-the-ucsc-genome-browser-mysql-database/">Previously</a>, I’ve shown that you can use a mysql database browser (e.g. <a href="http://www.sequelpro.com/">Sequel Pro</a>) to access and browse the UCSC Genome Browser MySQL database.</p>
 <p>If you have a small dataset that you would like to annotate, you can write <a href="http://www8.silversand.net/techdoc/teachsql/ch01.htm">SQL</a> statements to fetch data. Below I show how you can use python to fetch genome coordinates by specifying gene and genome build.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Note: Requires mysqldb; install using:</span>
+<span style="color:#75715e"># pip install MySQL-python</span>
+<span style="color:#f92672">from</span> MySQLdb.constants <span style="color:#f92672">import</span> FIELD_TYPE
+<span style="color:#f92672">import</span> _mysql
 
-<pre><code class="language-python"># Note: Requires mysqldb; install using:
-# pip install MySQL-python
-from MySQLdb.constants import FIELD_TYPE
-import _mysql
+db <span style="color:#f92672">=</span> None
 
-db = None
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_gene_coordinates</span>(gene_name, build):
+    <span style="color:#66d9ef">global</span> db <span style="color:#75715e"># db is global to prevent reconnecting.</span>
+    <span style="color:#66d9ef">if</span> db <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">connect</span><span style="color:#e6db74">&#39;</span>
+        conv<span style="color:#f92672">=</span> { FIELD_TYPE<span style="color:#f92672">.</span>LONG: int }
+        db <span style="color:#f92672">=</span> _mysql<span style="color:#f92672">.</span>connect(host<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">genome-mysql.cse.ucsc.edu</span><span style="color:#e6db74">&#39;</span>, user<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">genome</span><span style="color:#e6db74">&#39;</span>, passwd<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>, db<span style="color:#f92672">=</span>build,conv<span style="color:#f92672">=</span>conv)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">SELECT * FROM kgXref INNER JOIN knownGene ON kgXref.kgID=knownGene.name WHERE kgXref.geneSymbol = </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;&#34;&#34;</span> <span style="color:#f92672">%</span> gene_name)
 
-def fetch_gene_coordinates(gene_name, build):
-    global db # db is global to prevent reconnecting.
-    if db is None:
-        print 'connect'
-        conv= { FIELD_TYPE.LONG: int }
-        db = _mysql.connect(host='genome-mysql.cse.ucsc.edu', user='genome', passwd='', db=build,conv=conv)
-    db.query(&quot;&quot;&quot;SELECT * FROM kgXref INNER JOIN knownGene ON kgXref.kgID=knownGene.name WHERE kgXref.geneSymbol = '%s'&quot;&quot;&quot; % gene_name)
-
-    r = db.use_result().fetch_row(how=1, maxrows=0)
-    print r
-    if len(r)&gt;1:
-        pass
-    else:
-        return r[0]['txStart'], r[0]['txEnd'], r[0]['chrom'],r[0]['strand']
+    r <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>use_result()<span style="color:#f92672">.</span>fetch_row(how<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxrows<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">print</span> r
+    <span style="color:#66d9ef">if</span> len(r)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">pass</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">txStart</span><span style="color:#e6db74">&#39;</span>], r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">txEnd</span><span style="color:#e6db74">&#39;</span>], r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chrom</span><span style="color:#e6db74">&#39;</span>],r[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strand</span><span style="color:#e6db74">&#39;</span>]
 
 
-print fetch_gene_coordinates('klf1', 'mm9')
-</code></pre>
-
-<hr />
-
+<span style="color:#66d9ef">print</span> fetch_gene_coordinates(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">klf1</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mm9</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><hr>
 <p><strong>Note:</strong> The UCSC browser mysql resource will throttle you if you make too many queries. If you need to annotate large datasets, all of the data is freely available for download <a href="http://hgdownload-test.cse.ucsc.edu/goldenPath/">here</a>.</p>
-
 <h2 id="update-cruzdb-2019-06-18">Update: cruzdb (2019-06-18)</h2>
-
 <p>Since writing this post, <a href="https://github.com/brentp/cruzdb/">cruzdb</a> has been published. <code>cruzdb</code> is a python module by <a href="https://github.com/brentp">brentp</a> that greatly simplifies and facilitates queries of the UCSC genome browser.</p>
-
 <p><a href="https://doi.org/10.1093/bioinformatics/btt534">Bioinformatics publication</a></p>
-
 <h3 id="installation">Installation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install cruzdb
+</code></pre></div><p><strong>Examples</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> cruzdb <span style="color:#f92672">import</span> Genome
 
-<pre><code class="language-bash">pip install cruzdb
-</code></pre>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> g <span style="color:#f92672">=</span> Genome(db<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hg18</span><span style="color:#e6db74">&#34;</span>)
 
-<p><strong>Examples</strong></p>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>refGene<span style="color:#f92672">.</span>filter_by(name2<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MUC5B</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b
+refGene(chr11:MUC5B:<span style="color:#ae81ff">1200870</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1239982</span>)
 
-<pre><code class="language-python">&gt;&gt;&gt; from cruzdb import Genome
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>strand
+<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>
 
-&gt;&gt;&gt; g = Genome(db=&quot;hg18&quot;)
+<span style="color:#75715e"># the first 4 introns</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>introns[:<span style="color:#ae81ff">4</span>]
+[(<span style="color:#ae81ff">1200999L</span>, <span style="color:#ae81ff">1203486L</span>), (<span style="color:#ae81ff">1203543L</span>, <span style="color:#ae81ff">1204010L</span>), (<span style="color:#ae81ff">1204082L</span>, <span style="color:#ae81ff">1204420L</span>), (<span style="color:#ae81ff">1204682L</span>, <span style="color:#ae81ff">1204836L</span>)]
 
-&gt;&gt;&gt; muc5b = g.refGene.filter_by(name2=&quot;MUC5B&quot;).first()
-&gt;&gt;&gt; muc5b
-refGene(chr11:MUC5B:1200870-1239982)
+<span style="color:#75715e"># the first 4 exons.</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>exons[:<span style="color:#ae81ff">4</span>]
+[(<span style="color:#ae81ff">1200870L</span>, <span style="color:#ae81ff">1200999L</span>), (<span style="color:#ae81ff">1203486L</span>, <span style="color:#ae81ff">1203543L</span>), (<span style="color:#ae81ff">1204010L</span>, <span style="color:#ae81ff">1204082L</span>), (<span style="color:#ae81ff">1204420L</span>, <span style="color:#ae81ff">1204682L</span>)]
 
-&gt;&gt;&gt; muc5b.strand
-'+'
-
-# the first 4 introns
-&gt;&gt;&gt; muc5b.introns[:4]
-[(1200999L, 1203486L), (1203543L, 1204010L), (1204082L, 1204420L), (1204682L, 1204836L)]
-
-# the first 4 exons.
-&gt;&gt;&gt; muc5b.exons[:4]
-[(1200870L, 1200999L), (1203486L, 1203543L), (1204010L, 1204082L), (1204420L, 1204682L)]
-
-# note that some of these are not coding because they are &lt; cdsStart
-&gt;&gt;&gt; muc5b.cdsStart
-1200929L
-</code></pre>
-</div>
+<span style="color:#75715e"># note that some of these are not coding because they are &lt; cdsStart</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> muc5b<span style="color:#f92672">.</span>cdsStart
+<span style="color:#ae81ff">1200929L</span>
+</code></pre></div></div>
   
         <div id='comments'></div>
   

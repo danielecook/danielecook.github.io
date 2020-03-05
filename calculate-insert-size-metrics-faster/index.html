@@ -27,7 +27,7 @@ insert-size does not operate in exactly the same way as picard CollectInsertSize
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,24 +88,14 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>Picard tools is a great set of utilities by the Broad Institute for performing sequence analysis. however, some of the utilities run on the slower side.</p>
-
 <p>To speed things up, I created a new command: <code>insert-size</code> as part of <a href="https://www.github.com/danielecook/seq-collection">seq-collection</a>. The command runs much faster, owing in part to parallelization of insert-size calculations.</p>
-
-<p><img src="/insert-size-benchmark.png" alt="" /></p>
-
+<p><img src="/insert-size-benchmark.png" alt=""></p>
 <p><code>insert-size</code> does not operate in exactly the same way as picard <code>CollectInsertSizeMetrics</code>, but the results are very close.</p>
-
-<p><img src="/insert_size_compare.png" alt="" /></p>
-
+<p><img src="/insert_size_compare.png" alt=""></p>
 <p><code>insert-size</code> has some nice advantages over picard. The output is a lot more interpretable and parsable than standard picard output.</p>
-
 <p>For example, if you run:</p>
-
-<pre><code class="language-bash">sc insert-size --basename --header tests/data/test.bam
-</code></pre>
-
-<p>The outputted table will be:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sc insert-size --basename --header tests/data/test.bam
+</code></pre></div><p>The outputted table will be:</p>
 <table>
 <thead>
 <tr>
@@ -122,7 +112,6 @@ type="image/x-icon"/>
 <th align="left">basename</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">179</td>
@@ -139,9 +128,7 @@ type="image/x-icon"/>
 </tr>
 </tbody>
 </table>
-
 <p>You can also output the distribution of insert-sizes by count by specifying the <code>--dist=&lt;filename&gt;</code> argument.</p>
-
 <p><a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) is a set of tools written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
 </div>
   

@@ -9,7 +9,7 @@
   <meta content='Downloading and storing bioinformatic databases locally - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) &#8211; you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.
+<meta property="og:description" content="If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) – you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.
 If you use python, it is easy to download and store data in an SQlite database." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/downloading-and-storing-bioinformatic-databases-locally/" />
@@ -26,7 +26,7 @@ If you use python, it is easy to download and store data in an SQlite database."
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,88 +86,82 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p>If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) &#8211; you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.</p>
-
+  <div class="lh-copy post-content"><p>If you need to annotate biological data there are plenty of resources online (UCSC Genome Browser, BioMart), and plenty of programmatic tools to interact with these databases as well. But if you are going to be annotating a large dataset (like ChIP-Seq or RNA-Seq data) – you will probably not want to rely on web based services because a) It is inefficient b) You may get throttled or banned.</p>
 <p>If you use <strong>python</strong>, it is easy to download and store data in an SQlite database. This allows you to query the database using SQL and quickly and efficiently annotate large datasets.</p>
-
 <p>Below you will see that is what I have done here for HapMap allele frequency data (<a href="http://hapmap.ncbi.nlm.nih.gov/downloads/genotypes/2010-08_phaseII+III/forward/">2010-08_phaseII+III</a>), and it allows me to retrieve allele frequency data from 26,278,275 rows across 11 populations instantly. The database itself is 3.22 Gb. A zipped version (~1Gb) is available <a href="https://drive.google.com/file/d/0B_6qjHtu65BDdmFBeXdGeEc2STQ/edit?usp=sharing">Here</a>.</p>
-
 <p><a href="/Screen-Shot-2014-01-20-at-12.07.25-AM.png"><img src="/Screen-Shot-2014-01-20-at-12.07.25-AM.png" /></a></p>
-
 <p>You will need sqlalchemy for this script to work. Install using <code>pip install sqlalchemy</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/local/bin/Python</span>
+<span style="color:#f92672">import</span> sqlite3
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> glob
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Table, Column, Index, Integer, String, Float, MetaData, ForeignKey
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
+<span style="color:#f92672">import</span> datetime
 
-<pre><code class="language-python">#! /usr/local/bin/Python
-import sqlite3
-import os
-import glob
-import time
-import sqlalchemy
-from sqlalchemy import Table, Column, Index, Integer, String, Float, MetaData, ForeignKey
-from sqlalchemy import create_engine
-import datetime
-
-os.chdir(os.path.dirname(__file__))
+os<span style="color:#f92672">.</span>chdir(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(__file__))
 
 
-os.system('wget -nd -r  -A &quot;allele*.gz&quot; -e robots=off &quot;http://hapmap.ncbi.nlm.nih.gov/downloads/frequencies/2010-08_phaseII+III/&quot;')
-os.system('gunzip *.gz # Unzip all the files')
+os<span style="color:#f92672">.</span>system(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wget -nd -r  -A </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele*.gz</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> -e robots=off </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">http://hapmap.ncbi.nlm.nih.gov/downloads/frequencies/2010-08_phaseII+III/</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>)
+os<span style="color:#f92672">.</span>system(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gunzip *.gz # Unzip all the files</span><span style="color:#e6db74">&#39;</span>)
 
-if os.path.isfile('hapmap.db'):
-    os.remove('hapmap.db')
+<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hapmap.db</span><span style="color:#e6db74">&#39;</span>):
+    os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hapmap.db</span><span style="color:#e6db74">&#39;</span>)
 
-engine = create_engine('sqlite:///hapmap.db')
-conn = engine.connect()
+engine <span style="color:#f92672">=</span> create_engine(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">sqlite:///hapmap.db</span><span style="color:#e6db74">&#39;</span>)
+conn <span style="color:#f92672">=</span> engine<span style="color:#f92672">.</span>connect()
 
-metadata = MetaData()
+metadata <span style="color:#f92672">=</span> MetaData()
 
-freq = Table('freq', metadata,
-    Column('id', Integer, primary_key=True),
-    Column('population', String(3)),
-    Column('rs', Integer),
-    Column('chrom', String(5)),
-    Column('pos', Integer),
-    Column('refallele',String(3)),
-    Column('refallele_freq',Float),
-    Column('refallele_count',Integer),
-    #
-    Column('otherallele',String(3)),
-    Column('otherallele_freq',Float),
-    Column('otherallele_count',Integer),
-    #
-    Column('totalcount',Integer),
-    sqlite_autoincrement=True,
+freq <span style="color:#f92672">=</span> Table(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">freq</span><span style="color:#e6db74">&#39;</span>, metadata,
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">id</span><span style="color:#e6db74">&#39;</span>, Integer, primary_key<span style="color:#f92672">=</span>True),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">population</span><span style="color:#e6db74">&#39;</span>, String(<span style="color:#ae81ff">3</span>)),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rs</span><span style="color:#e6db74">&#39;</span>, Integer),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chrom</span><span style="color:#e6db74">&#39;</span>, String(<span style="color:#ae81ff">5</span>)),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pos</span><span style="color:#e6db74">&#39;</span>, Integer),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">refallele</span><span style="color:#e6db74">&#39;</span>,String(<span style="color:#ae81ff">3</span>)),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">refallele_freq</span><span style="color:#e6db74">&#39;</span>,Float),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">refallele_count</span><span style="color:#e6db74">&#39;</span>,Integer),
+    <span style="color:#75715e">#</span>
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">otherallele</span><span style="color:#e6db74">&#39;</span>,String(<span style="color:#ae81ff">3</span>)),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">otherallele_freq</span><span style="color:#e6db74">&#39;</span>,Float),
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">otherallele_count</span><span style="color:#e6db74">&#39;</span>,Integer),
+    <span style="color:#75715e">#</span>
+    Column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">totalcount</span><span style="color:#e6db74">&#39;</span>,Integer),
+    sqlite_autoincrement<span style="color:#f92672">=</span>True,
 )
 
 
 
-metadata.create_all(engine)
+metadata<span style="color:#f92672">.</span>create_all(engine)
 
-for allele_file in glob.glob(&quot;allele*&quot;):
-    f = file(allele_file,'r')
-    print f
-    print datetime.datetime.now()
-    pop = allele_file[allele_file.find('_',allele_file.find('chr')+1)+1:allele_file.find('_',allele_file.find('chr')+1)+4]
-    h = f.readline().replace('#','').replace('\n','')
-    inserts = []
-    c = 0
-    for line in f.readlines():
-        k = dict(zip(h.split(' '), line.split(' ')))
-        k['population'] = pop
-        c += 1
-        inserts.append(k)
-        if c == 1000:
-            conn.execute(freq.insert(),inserts)
-            inserts = []
-            c = 0
-    conn.execute(freq.insert(),inserts)
+<span style="color:#66d9ef">for</span> allele_file <span style="color:#f92672">in</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele*</span><span style="color:#e6db74">&#34;</span>):
+    f <span style="color:#f92672">=</span> file(allele_file,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">print</span> f
+    <span style="color:#66d9ef">print</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+    pop <span style="color:#f92672">=</span> allele_file[allele_file<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span>,allele_file<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chr</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:allele_file<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span>,allele_file<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chr</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>]
+    h <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>readline()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">#</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)
+    inserts <span style="color:#f92672">=</span> []
+    c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>readlines():
+        k <span style="color:#f92672">=</span> dict(zip(h<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span>), line<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span>)))
+        k[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">population</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> pop
+        c <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+        inserts<span style="color:#f92672">.</span>append(k)
+        <span style="color:#66d9ef">if</span> c <span style="color:#f92672">==</span> <span style="color:#ae81ff">1000</span>:
+            conn<span style="color:#f92672">.</span>execute(freq<span style="color:#f92672">.</span>insert(),inserts)
+            inserts <span style="color:#f92672">=</span> []
+            c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    conn<span style="color:#f92672">.</span>execute(freq<span style="color:#f92672">.</span>insert(),inserts)
 
-# Add indices
-Index('population', freq.c.population).create(engine)
-Index('rs', freq.c.rs).create(engine)
-Index('chrom', freq.c.chrom).create(engine)
-Index('pos', freq.c.pos).create(engine)
-</code></pre>
-</div>
+<span style="color:#75715e"># Add indices</span>
+Index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">population</span><span style="color:#e6db74">&#39;</span>, freq<span style="color:#f92672">.</span>c<span style="color:#f92672">.</span>population)<span style="color:#f92672">.</span>create(engine)
+Index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rs</span><span style="color:#e6db74">&#39;</span>, freq<span style="color:#f92672">.</span>c<span style="color:#f92672">.</span>rs)<span style="color:#f92672">.</span>create(engine)
+Index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">chrom</span><span style="color:#e6db74">&#39;</span>, freq<span style="color:#f92672">.</span>c<span style="color:#f92672">.</span>chrom)<span style="color:#f92672">.</span>create(engine)
+Index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pos</span><span style="color:#e6db74">&#39;</span>, freq<span style="color:#f92672">.</span>c<span style="color:#f92672">.</span>pos)<span style="color:#f92672">.</span>create(engine)
+</code></pre></div></div>
   
         <div id='comments'></div>
   

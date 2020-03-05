@@ -10,7 +10,7 @@
 
 
 <meta property="og:description" content="If you are relying on built-in functions to read and write large datasets you are losing out on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.
-Sample Data First, I&rsquo;ll generate a sample dataset with ten million rows we can use for testing.
+Sample Data First, I&#39;ll generate a sample dataset with ten million rows we can use for testing.
 Generating a test dataset library(tidyverse) library(microbenchmark) n &lt;- 1e6 times &lt;- 10 # Number of times to run each benchmark data &lt;- data." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/speeding-up-reading-and-writing-in-r/" />
@@ -27,7 +27,7 @@ Generating a test dataset library(tidyverse) library(microbenchmark) n &lt;- 1e6
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -87,30 +87,21 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<p>If you are relying on built-in functions to read and write large datasets you are losing out  on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.</p>
-
+  <div class="lh-copy post-content"><p>If you are relying on built-in functions to read and write large datasets you are losing out  on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.</p>
 <h1 id="sample-data">Sample Data</h1>
-
-<p>First, I&rsquo;ll generate a sample dataset with ten million rows we can use for testing.</p>
-
+<p>First, I'll generate a sample dataset with ten million rows we can use for testing.</p>
 <h2 id="generating-a-test-dataset">Generating a test dataset</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(tidyverse)
+<span style="color:#a6e22e">library</span>(microbenchmark)
+n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1e6</span>
+times <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e"># Number of times to run each benchmark</span>
+data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(a <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(n),
+                   b <span style="color:#f92672">=</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1000</span>, n, T),
+                   c <span style="color:#f92672">=</span> <span style="color:#a6e22e">sample</span>(month.name, n, T),
+                   d <span style="color:#f92672">=</span> <span style="color:#a6e22e">sample</span>(<span style="color:#66d9ef">LETTERS</span>, n, T))
 
-<pre><code class="language-R">library(tidyverse)
-library(microbenchmark)
-n &lt;- 1e6
-times &lt;- 10 # Number of times to run each benchmark
-data &lt;- data.frame(a = runif(n),
-                   b = sample(1:1000, n, T),
-                   c = sample(month.name, n, T),
-                   d = sample(LETTERS, n, T))
-
-write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
-</code></pre>
-
-<p>Here are the first few rows of that dataset:</p>
-
+<span style="color:#a6e22e">write.table</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>, quote <span style="color:#f92672">=</span> F, row.names <span style="color:#f92672">=</span> F)
+</code></pre></div><p>Here are the first few rows of that dataset:</p>
 <table>
 <thead>
 <tr>
@@ -121,7 +112,6 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <th align="left">d</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1</td>
@@ -130,7 +120,6 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <td align="left">August</td>
 <td align="left">R</td>
 </tr>
-
 <tr>
 <td align="left">2</td>
 <td align="right">0.8303095</td>
@@ -138,7 +127,6 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <td align="left">March</td>
 <td align="left">D</td>
 </tr>
-
 <tr>
 <td align="left">3</td>
 <td align="right">0.1144189</td>
@@ -146,7 +134,6 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <td align="left">July</td>
 <td align="left">P</td>
 </tr>
-
 <tr>
 <td align="left">4</td>
 <td align="right">0.2828960</td>
@@ -154,7 +141,6 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <td align="left">April</td>
 <td align="left">S</td>
 </tr>
-
 <tr>
 <td align="left">5</td>
 <td align="right">0.2861664</td>
@@ -164,15 +150,10 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 </tr>
 </tbody>
 </table>
-
 <h1 id="reading-tsvs">Reading TSVs</h1>
-
 <p>Base R has some pretty slow functions for reading files that also are poorly designed (row numbers and quotes by default, issues reading column names with special characters, etc.). Lets see how they compare with more up to date packages.</p>
-
-<h2 id="vroom-vs-readr-vs-base-r-vs-data-table">vroom vs readr vs base R vs data.table</h2>
-
+<h2 id="vroom-vs-readr-vs-base-r-vs-datatable">vroom vs readr vs base R vs data.table</h2>
 <p>Below I use microbenchmark to compare the following methods for reading this 1M row dataset:</p>
-
 <ul>
 <li><code>base::read.table</code></li>
 <li><code>base::read.delim</code></li>
@@ -181,97 +162,71 @@ write.table(data, &quot;data.tsv&quot;, quote = F, row.names = F)
 <li><code>data.table::fread</code></li>
 <li><code>tbl_df(data.table::fread)</code> - This converts the data.table to a <code>tibble::tbl_df</code> object which is the type of data structure <code>readr</code> and <code>vroom</code> return and is what is used in the <a href="https://www.tidyverse.org/">tidyverse</a>.</li>
 </ul>
-
 <p>These functions will output data in either a data.frame, tibble, or data.table.</p>
-
-<pre><code class="language-R">bm &lt;- microbenchmark(
-  `base::read.table` = read.table(&quot;data.tsv&quot;),
-  `base::read.delim` = read.delim(&quot;data.tsv&quot;),
-  `readr::read_tsv` = readr::read_tsv(&quot;data.tsv&quot;),
-  `vroom ~ 1 thread` = vroom::vroom(&quot;data.tsv&quot;, num_threads = 1),
-  `vroom ~ 8 threads` = vroom::vroom(&quot;data.tsv&quot;),
-  `tbl_df(data.table::fread) ~ 1 thread` = tbl_df(data.table::fread(&quot;data.tsv&quot;, nThread = 1)),
-  `tbl_df(data.table::fread) ~ 8 threads` = tbl_df(data.table::fread(&quot;data.tsv&quot;)),
-  `data.table::fread ~ 1 thread` = data.table::fread(&quot;data.tsv&quot;, nThread = 1),
-  `data.table::fread ~ 8 threads` = data.table::fread(&quot;data.tsv&quot;),
-  times = times
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">bm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">microbenchmark</span>(
+  `base::read.table` <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>),
+  `base::read.delim` <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.delim</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>),
+  `readr::read_tsv` <span style="color:#f92672">=</span> readr<span style="color:#f92672">::</span><span style="color:#a6e22e">read_tsv</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>),
+  `vroom ~ 1 thread` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>, num_threads <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>),
+  `vroom ~ 8 threads` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>),
+  <span style="color:#a6e22e">`tbl_df</span>(data.table<span style="color:#f92672">::</span>fread) <span style="color:#f92672">~</span> <span style="color:#ae81ff">1</span> thread` = tbl_df(data.table::fread(&#34;data.tsv&#34;, nThread = 1)),
+  `<span style="color:#a6e22e">tbl_df</span>(data.table<span style="color:#f92672">::</span>fread) <span style="color:#f92672">~</span> <span style="color:#ae81ff">8</span> threads` = tbl_df(data.table::fread(&#34;data.tsv&#34;)),
+  `data.table<span style="color:#f92672">::</span>fread <span style="color:#f92672">~</span> <span style="color:#ae81ff">1</span> thread` = data.table::fread(&#34;data.tsv&#34;, nThread = 1),
+  `data.table<span style="color:#f92672">::</span>fread <span style="color:#f92672">~</span> <span style="color:#ae81ff">8</span> threads` <span style="color:#f92672">=</span> data.table<span style="color:#f92672">::</span><span style="color:#a6e22e">fread</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">data.tsv&#34;</span>),
+  times <span style="color:#f92672">=</span> times
 )
-autoplot(bm) + 
-  labs(caption = glue::glue(&quot;{scales::comma(n)} rows; {times} times&quot;))
-</code></pre>
-
-<p><img src="/benchmarks-1.png" alt="" /><!-- --></p>
-
+<span style="color:#a6e22e">autoplot</span>(bm) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(caption <span style="color:#f92672">=</span> glue<span style="color:#f92672">::</span><span style="color:#a6e22e">glue</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{scales::comma(n)} rows; {times} times&#34;</span>))
+</code></pre></div><p><img src="/benchmarks-1.png" alt=""><!-- --></p>
 <p>Looks like the base R functions lose - by a lot. <code>data.table::fread</code> and <code>vroom::vroom</code> come out on top at ~ 100 milleseconds whereas the base functions take ~10 seconds or 100x longer!</p>
-
 <p>Stop wasting your time with <code>read.table</code>, <code>read.csv</code>, and <code>read.delim</code> and move to something quicker like <code>data.table::fread</code>, or <code>vroom::vroom</code> both of which perform much faster. Both can also take advantage of multiple cores but outperform base R even when they only use a single thread!</p>
-
 <h1 id="writing-tsvs">Writing TSVs</h1>
-
-<h2 id="vroom-vs-readr-vs-data-table-vs-base-r">vroom vs readr vs data.table vs base R</h2>
-
+<h2 id="vroom-vs-readr-vs-datatable-vs-base-r">vroom vs readr vs data.table vs base R</h2>
 <p>Next I compared methods for writing TSV files. Base R has the functions <code>write.csv</code> and <code>write.table</code> for writing delimited text files. Unfortunately, these too have poor defaults (quoting strings, adding rownames).  I have turned these off for the comparison.</p>
-
-<pre><code class="language-R">bm &lt;- microbenchmark(
-    `base::write.table` = write.table(data, file = &quot;out.tsv&quot;, quote=F, sep = &quot;\t&quot;),
-    `readr::write_tsv` = readr::write_tsv(data, &quot;out.tsv&quot;),
-    `readr::write_tsv + gz` = readr::write_tsv(data, &quot;out.tsv.gz&quot;),
-    `data.table::fwrite ~ 1 thread` = data.table::fwrite(data, &quot;out.tsv&quot;, nThread = 1),
-    `data.table::fwrite ~ 8 threads` = data.table::fwrite(data, &quot;out.tsv&quot;, nThread = 8),
-    `vroom::vroom_write ~ 1 thread` = vroom::vroom_write(data, &quot;out.tsv&quot;, num_threads = 1),
-    `vroom::vroom_write ~ 8 threads` = vroom::vroom_write(data, &quot;out.tsv&quot;),
-    `vroom::vroom_write ~ 1 thread + gz` = vroom::vroom_write(data, &quot;out.tsv.gz&quot;, num_threads = 1),
-    `vroom::vroom_write ~ 8 threads + gz` = vroom::vroom_write(data, &quot;out.tsv.gz&quot;),
-    times = times
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">bm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">microbenchmark</span>(
+    `base::write.table` <span style="color:#f92672">=</span> <span style="color:#a6e22e">write.table</span>(data, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>, quote<span style="color:#f92672">=</span>F, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\t&#34;</span>),
+    `readr::write_tsv` <span style="color:#f92672">=</span> readr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_tsv</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>),
+    `readr::write_tsv + gz` <span style="color:#f92672">=</span> readr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_tsv</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv.gz&#34;</span>),
+    `data.table::fwrite ~ 1 thread` <span style="color:#f92672">=</span> data.table<span style="color:#f92672">::</span><span style="color:#a6e22e">fwrite</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>, nThread <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>),
+    `data.table::fwrite ~ 8 threads` <span style="color:#f92672">=</span> data.table<span style="color:#f92672">::</span><span style="color:#a6e22e">fwrite</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>, nThread <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>),
+    `vroom::vroom_write ~ 1 thread` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom_write</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>, num_threads <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>),
+    `vroom::vroom_write ~ 8 threads` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom_write</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv&#34;</span>),
+    `vroom::vroom_write ~ 1 thread + gz` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom_write</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv.gz&#34;</span>, num_threads <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>),
+    `vroom::vroom_write ~ 8 threads + gz` <span style="color:#f92672">=</span> vroom<span style="color:#f92672">::</span><span style="color:#a6e22e">vroom_write</span>(data, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.tsv.gz&#34;</span>),
+    times <span style="color:#f92672">=</span> times
 )
-autoplot(bm) 
-</code></pre>
-
-<p><img src="/writing_tsv-1.png" alt="" /><!-- --></p>
-
+<span style="color:#a6e22e">autoplot</span>(bm) 
+</code></pre></div><p><img src="/writing_tsv-1.png" alt=""><!-- --></p>
 <p><code>data.table::fwrite</code> performs the fastest in multi-threaded mode with <code>vroom::vroom</code> not far behind. These are ~100x faster than base R. Apparently, applying gzip compression slows things down considerably but can save a lot of space.</p>
-
 <h3 id="serializing-data">Serializing Data</h3>
-
 <p>Serialized data formats retain column types and avoid data loss that may occur when writing and reading TSVs. Here I compare:</p>
-
 <ul>
 <li><code>feather::write_feather</code></li>
 <li><code>fst::write_fst</code></li>
 <li><code>base::save</code></li>
 <li><code>base::saveRDS</code></li>
 </ul>
-
 <p>Note that these serialization formats each provide other benefits that should be considered. For example, feather files are a good interchange format between R and python using the python Pandas module.</p>
-
-<pre><code class="language-r">bm &lt;- microbenchmark(
-   `base::save`=save(data, file = &quot;out.Rda&quot;),
-   `saveRDS` = saveRDS(data, file = &quot;out.rds&quot;),
-   `fst::write_fst` = fst::write_fst(data, path = &quot;out.fst&quot;),
-   `feather::write_feather` = feather::write_feather(data, path = &quot;out.feather&quot;),
-   times = times
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">bm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">microbenchmark</span>(
+   `base::save`<span style="color:#f92672">=</span><span style="color:#a6e22e">save</span>(data, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.Rda&#34;</span>),
+   `saveRDS` <span style="color:#f92672">=</span> <span style="color:#a6e22e">saveRDS</span>(data, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.rds&#34;</span>),
+   `fst::write_fst` <span style="color:#f92672">=</span> fst<span style="color:#f92672">::</span><span style="color:#a6e22e">write_fst</span>(data, path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.fst&#34;</span>),
+   `feather::write_feather` <span style="color:#f92672">=</span> feather<span style="color:#f92672">::</span><span style="color:#a6e22e">write_feather</span>(data, path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.feather&#34;</span>),
+   times <span style="color:#f92672">=</span> times
 )
-autoplot(bm) 
-</code></pre>
-
-<p><img src="/serialize-1.png" alt="" /><!-- --></p>
-
+<span style="color:#a6e22e">autoplot</span>(bm) 
+</code></pre></div><p><img src="/serialize-1.png" alt=""><!-- --></p>
 <p><code>fst</code> and <code>feather</code> perform about the same and again, about ~100x better than base R.</p>
-
 <h3 id="reading-serialized-data">Reading Serialized Data</h3>
-
-<pre><code class="language-r">bm &lt;- microbenchmark(
-   `base::load`=load(file = &quot;out.Rda&quot;),
-   `readRDS` = readRDS(file = &quot;out.rds&quot;),
-   `fst::read_fst` = fst::read_fst(path = &quot;out.fst&quot;),
-   `feather::read_feather` = feather::read_feather(path = &quot;out.feather&quot;),
-   times = times
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">bm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">microbenchmark</span>(
+   `base::load`<span style="color:#f92672">=</span><span style="color:#a6e22e">load</span>(file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.Rda&#34;</span>),
+   `readRDS` <span style="color:#f92672">=</span> <span style="color:#a6e22e">readRDS</span>(file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.rds&#34;</span>),
+   `fst::read_fst` <span style="color:#f92672">=</span> fst<span style="color:#f92672">::</span><span style="color:#a6e22e">read_fst</span>(path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.fst&#34;</span>),
+   `feather::read_feather` <span style="color:#f92672">=</span> feather<span style="color:#f92672">::</span><span style="color:#a6e22e">read_feather</span>(path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">out.feather&#34;</span>),
+   times <span style="color:#f92672">=</span> times
 )
-autoplot(bm) 
-</code></pre>
-
-<p><img src="/serialize_bm-1.png" alt="" /><!-- --></p>
-
+<span style="color:#a6e22e">autoplot</span>(bm) 
+</code></pre></div><p><img src="/serialize_bm-1.png" alt=""><!-- --></p>
 <p><code>fst</code> reads the quickest but <code>feather</code> is not too far behind. These functions are about ~10x better than base R in this comparison.</p>
 </div>
   

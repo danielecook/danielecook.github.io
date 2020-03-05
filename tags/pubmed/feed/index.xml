@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pubmed on Daniel E. Cook</title>
@@ -29,7 +29,7 @@ In the example below, I show the results from organisms x diseases/disease-assoc
       
       <guid>https://www.danielecook.com/use-google-sheets-to-identify-gene-disease-associations-in-pubmed/</guid>
       <description>Google Docs allows you to import XML. By using NCBIs esearch service, you can query pubmed for a list of genes. Stick the following code in A2, and a keyword in B2:
-=importXML(&amp;quot;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;amp;term=&amp;quot; &amp;amp; B2 ,&amp;quot;(//Count)[1]&amp;quot;)  What is more valuable, however, is if given a gene list &amp;#8211; you can query pubmed for each gene combined with a second keyword like a disease.
+=importXML(&amp;#34;http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;amp;term=&amp;#34; &amp;amp; B2 ,&amp;#34;(//Count)[1]&amp;#34;) What is more valuable, however, is if given a gene list – you can query pubmed for each gene combined with a second keyword like a disease.
 For example, suppose you are studying Cleft lip and Palate and are left with a set of genes identified from a gene expression analysis.</description>
     </item>
     

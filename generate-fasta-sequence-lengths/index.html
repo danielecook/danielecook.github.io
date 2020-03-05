@@ -10,8 +10,8 @@
 
 
 <meta property="og:description" content="This one liner:
-cat file.fa | awk &#39;$0 ~ &quot;&gt;&quot; {if (NR &gt; 1) {print c;} c=0;printf substr($0,2,100) &quot;\t&quot;; } $0 !~ &quot;&gt;&quot; {c&#43;=length($0);} END { print c; }&#39;  Takes a fasta file as input:
-&gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa  Outputs sequence name and length:" />
+cat file.fa | awk &#39;$0 ~ &#34;&gt;&#34; {if (NR &gt; 1) {print c;} c=0;printf substr($0,2,100) &#34;\t&#34;; } $0 !~ &#34;&gt;&#34; {c&#43;=length($0);} END { print c; }&#39; Takes a fasta file as input:
+&gt;EF491733 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag gaccaccaggtctacggggatcgccaggatggcct &gt;EF491734 tcacagggaatgaaggcactgttcgacttgatcgctttgagaccaagacc cgtggcaattctcggagggcaatgcactgaagtgaacgagccaatagcga tggcgctcaagtattggcaaatcgtgcaattatcctatgcggagacacat gccaa &gt;EF491735 gtcttgcatgacccaaaaggctcctgctcttctgtttcttcttccaatac atccttctaaccagttggaagggttgacgtatcaagacttcctgcatcaa aacttcttgaatttgccttcatttgtcgcaattgtgcagc &gt;EF491736 taaatggaaggaatcacttggcgctgaagaatttgctctccgcacagctt aatcagactggaactccaatggttaatccaatgatggctttacaacaaca agcggccgcagtaaacctgattcccaacacaccaatttacccaccc &gt;EF491737 actctcgcaatcgtctctccccaaatgatgttaacatcactagaaatgac aaccgaacatatagcccagtcactcctcgtatcacaacaagtgagcggac agtaacaccggaacagcggtcgccgggtcgaaaagcgttcgaaaccattc &gt;EF491738 tccctcgttcattcacaacaaaggaaaagcaaactatgggccattcattg ttgaaattatgaactatcatcagtattctgcaatgacaagtcatatggtc aaagtaatgaaacggccccaccaggttccgccaatgaaggtcgaccctga gg &gt;EF491739 tccttccaactgttgccaactttccaactacaagacacactgaaccagaa actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg gcgatgaatcagaagatgaa Outputs sequence name and length:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/generate-fasta-sequence-lengths/" />
 
@@ -27,7 +27,7 @@ cat file.fa | awk &#39;$0 ~ &quot;&gt;&quot; {if (NR &gt; 1) {print c;} c=0;prin
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,13 +88,9 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p><strong>This one liner:</strong></p>
-
-<pre><code class="language-bash">cat file.fa | awk '$0 ~ &quot;&gt;&quot; {if (NR &gt; 1) {print c;} c=0;printf substr($0,2,100) &quot;\t&quot;; } $0 !~ &quot;&gt;&quot; {c+=length($0);} END { print c; }'
-</code></pre>
-
-<p><strong>Takes a fasta file as input:</strong></p>
-
-<pre><code class="language-FASTA">&gt;EF491733
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat file.fa | awk <span style="color:#e6db74">&#39;$0 ~ &#34;&gt;&#34; {if (NR &gt; 1) {print c;} c=0;printf substr($0,2,100) &#34;\t&#34;; } $0 !~ &#34;&gt;&#34; {c+=length($0);} END { print c; }&#39;</span>
+</code></pre></div><p><strong>Takes a fasta file as input:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;EF491733
 tcagattcaaacaccgacgacgatgacgtggcaaagtctcgacgtgtgcg
 caattcgtgtatgtgtccagcaggacctcccggagaacgcggaccagtag
 gaccaccaggtctacggggatcgccaggatggcct
@@ -125,20 +121,15 @@ tccttccaactgttgccaactttccaactacaagacacactgaaccagaa
 actacgcggagacctctgtcgccttcaaaaatgacaccttctcttccttc
 tcctaccaccaccactttgcctgttttctttttgtcacaaatcactgacg
 gcgatgaatcagaagatgaa
-</code></pre>
-
-<p><strong>Outputs sequence name and length:</strong></p>
-
-<pre><code class="language-tsv">EF491733    135
+</code></pre></div><p><strong>Outputs sequence name and length:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">EF491733    135
 EF491734    155
 EF491735    140
 EF491736    146
 EF491737    150
 EF491738    152
 EF491739    170
-</code></pre>
-
-<p>I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</p>
+</code></pre></div><p>I made this today when I needed a way to generate sequence lengths required for some ChIP-Seq analysis.</p>
 </div>
   
         <div id='comments'></div>

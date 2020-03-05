@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>fastq on Daniel E. Cook</title>
@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/aggregate-fastqc-reports/</guid>
       <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
-# Run this command where your *_fastqc.zip files are multiqc .  This will output a repor that looks like this:
+# Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
  MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
     </item>
@@ -30,7 +30,7 @@ Publication
       <pubDate>Sat, 25 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/from-sra-project-to-fastq/</guid>
-      <description>Original Post (2014-10-25) The Sequence Read Archive (SRA) contains sequence data from scientific studies stored in a special &amp;#8216;sra&amp;#8217; format. Data is stored in a hierarchical format:
+      <description>Original Post (2014-10-25) The Sequence Read Archive (SRA) contains sequence data from scientific studies stored in a special ‘sra’ format. Data is stored in a hierarchical format:
 Project ▸ Study ▸ Sample ▸ Experiment ▸ Run
 Recently, I had to use the SRA to download all of the sequence data for a given project. This required querying the SRA database for all the runs in a sequencing project and converting them to FASTQs.</description>
     </item>

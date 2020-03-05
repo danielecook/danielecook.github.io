@@ -26,7 +26,7 @@ Original Post BigQuery is a phenomenal tool for analyzing large datasets. It ena
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,88 +86,71 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h2 id="update-bigquery-adds-schema-auto-detection-2019-06-22">Update: BigQuery adds schema auto-detection (2019-06-22)</h2>
-
+  <div class="lh-copy post-content"><h2 id="update-bigquery-adds-schema-auto-detection-2019-06-22">Update: BigQuery adds schema auto-detection (2019-06-22)</h2>
 <p>BigQuery now offers a <a href="https://cloud.google.com/bigquery/docs/schema-detect">schema auto-detection features</a> making the work I had done below no longer necessary.</p>
-
 <h2 id="original-post">Original Post</h2>
-
 <p><a href="https://cloud.google.com/bigquery/">BigQuery</a> is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using <a href="https://github.com/r-dbi/bigrquery">BigRQuery</a>, which can be used to interact with bigquery using some of the functions in dplyr.</p>
-
 <p>It is easy to upload datasets to bigquery, although it requires you to specify a schema. If you have a lot of columns in a dataset this can be a pain to do manually - so I wrote a script to automate the process. The script automatically determines the variable types within the first 500 rows of a tab-delimited dataset. To get started, download the python script below and save it as schema.py.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mimetypes
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> OrderedDict
 
-<pre><code class="language-python">import mimetypes
-import sys
-from collections import OrderedDict
+filename <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]
 
-filename = sys.argv[1]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">file_type</span>(filename):
+    type <span style="color:#f92672">=</span> mimetypes<span style="color:#f92672">.</span>guess_type(filename)
+    <span style="color:#66d9ef">return</span> type
 
-def file_type(filename):
-    type = mimetypes.guess_type(filename)
-    return type
+filetype <span style="color:#f92672">=</span> file_type(filename)[<span style="color:#ae81ff">1</span>]
+<span style="color:#66d9ef">if</span> filetype <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">gzip</span><span style="color:#e6db74">&#34;</span>:
+    <span style="color:#f92672">import</span> gzip
+    readfile <span style="color:#f92672">=</span> gzip<span style="color:#f92672">.</span>GzipFile(filename, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">else</span>:
+    readfile <span style="color:#f92672">=</span> open(filename,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
 
-filetype = file_type(filename)[1]
-if filetype == &quot;gzip&quot;:
-    import gzip
-    readfile = gzip.GzipFile(filename, 'r')
-else:
-    readfile = open(filename,'r')
+<span style="color:#66d9ef">with</span> readfile <span style="color:#66d9ef">as</span> f:
+    header <span style="color:#f92672">=</span> next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>)
+    lines <span style="color:#f92672">=</span> [dict(zip(header,next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>))) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">50000</span>)]
 
-with readfile as f:
-    header = next(f).strip().split(&quot;\t&quot;)
-    lines = [dict(zip(header,next(f).strip().split(&quot;\t&quot;))) for x in xrange(50000)]
+schema <span style="color:#f92672">=</span> OrderedDict(zip(header, [bool]<span style="color:#f92672">*</span>len(header)))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">boolify</span>(s):
+    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TRUE</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">T</span><span style="color:#e6db74">&#34;</span>:
+        <span style="color:#66d9ef">return</span> True
+    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">False</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">FALSE</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">F</span><span style="color:#e6db74">&#34;</span>:
+        <span style="color:#66d9ef">return</span> False
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">huh?</span><span style="color:#e6db74">&#34;</span>)
 
-schema = OrderedDict(zip(header, [bool]*len(header)))
-def boolify(s):
-    if s == 'True' or s == &quot;TRUE&quot; or s == &quot;T&quot;:
-        return True
-    if s == 'False' or s == &quot;FALSE&quot; or s == &quot;F&quot;:
-        return False
-    raise ValueError(&quot;huh?&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">autoconvert</span>(s):
+    <span style="color:#66d9ef">for</span> fn <span style="color:#f92672">in</span> (boolify, int, float):
+        <span style="color:#66d9ef">try</span>:
+            <span style="color:#66d9ef">return</span> fn(s)
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+            <span style="color:#66d9ef">pass</span>
+    <span style="color:#66d9ef">return</span> s
 
-def autoconvert(s):
-    for fn in (boolify, int, float):
-        try:
-            return fn(s)
-        except ValueError:
-            pass
-    return s
+type_precedence <span style="color:#f92672">=</span> {str:<span style="color:#ae81ff">0</span>, float:<span style="color:#ae81ff">1</span>, int:<span style="color:#ae81ff">2</span>,bool:<span style="color:#ae81ff">3</span>}
+type_map <span style="color:#f92672">=</span> {str:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">STRING</span><span style="color:#e6db74">&#34;</span>, float:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">FLOAT</span><span style="color:#e6db74">&#34;</span>, int:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">INTEGER</span><span style="color:#e6db74">&#34;</span>, bool:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">BOOLEAN</span><span style="color:#e6db74">&#34;</span>}
 
-type_precedence = {str:0, float:1, int:2,bool:3}
-type_map = {str:&quot;STRING&quot;, float:&quot;FLOAT&quot;, int:&quot;INTEGER&quot;, bool:&quot;BOOLEAN&quot;}
+<span style="color:#75715e"># Sense header</span>
+<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
+    <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> line<span style="color:#f92672">.</span>items():
+        <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">&#34;</span>:
+            <span style="color:#66d9ef">pass</span>
+        <span style="color:#66d9ef">else</span>:
+            sense_type <span style="color:#f92672">=</span> type(autoconvert(v))
+            <span style="color:#66d9ef">if</span> schema[k] <span style="color:#f92672">==</span> sense_type <span style="color:#f92672">or</span> schema[k] <span style="color:#f92672">==</span> str:
+                <span style="color:#66d9ef">pass</span>
+            <span style="color:#66d9ef">elif</span> type_precedence[schema[k]] <span style="color:#f92672">&gt;</span> type_precedence[sense_type]:
+                schema[k] <span style="color:#f92672">=</span> sense_type
 
-# Sense header
-for line in lines:
-    for k,v in line.items():
-        if v == &quot;&quot; or v == &quot;.&quot;:
-            pass
-        else:
-            sense_type = type(autoconvert(v))
-            if schema[k] == sense_type or schema[k] == str:
-                pass
-            elif type_precedence[schema[k]] &gt; type_precedence[sense_type]:
-                schema[k] = sense_type
-
-print ','.join([ k.replace(&quot;/&quot;,&quot;_&quot;) + &quot;:&quot; + type_map[v] for k,v in schema.items()])
-</code></pre>
-
-<h3 id="usage">Usage</h3>
-
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([ k<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> type_map[v] <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> schema<span style="color:#f92672">.</span>items()])
+</code></pre></div><h3 id="usage">Usage</h3>
 <p>Save the gist as a script and run it as follows:</p>
-
-<pre><code>python schema.py &lt;file&gt;
-</code></pre>
-
-<p>The script supports plain text and gzipped files (which bigquery can load).</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">python schema.py &lt;file&gt;
+</code></pre></div><p>The script supports plain text and gzipped files (which bigquery can load).</p>
 <h3 id="output-example">Output Example</h3>
-
-<pre><code>CHROM:STRING,POS:INTEGER,REF_Original:STRING,ALT_Change:STRING,avg_cover:FLOAT,spikein_snvfrac:FLOAT,maxfrac:FLOAT,in_spikein:BOOLEAN,in_varset:BOOLEAN
-</code></pre>
-
-<p>Note that support for <a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">RECORD and TIMESTAMP</a> fieldtypes is not supported.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CHROM:STRING,POS:INTEGER,REF_Original:STRING,ALT_Change:STRING,avg_cover:FLOAT,spikein_snvfrac:FLOAT,maxfrac:FLOAT,in_spikein:BOOLEAN,in_varset:BOOLEAN
+</code></pre></div><p>Note that support for <a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">RECORD and TIMESTAMP</a> fieldtypes is not supported.</p>
 </div>
   
         <div id='comments'></div>

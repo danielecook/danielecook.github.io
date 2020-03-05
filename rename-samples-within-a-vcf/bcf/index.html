@@ -26,7 +26,7 @@ Original Post (2014-12-05) These two simple bash functions make it easy to renam
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,35 +86,28 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content">
-
-<h1 id="update-use-bcftools-2019-06-21">Update: Use bcftools (2019-06-21)</h1>
-
+  <div class="lh-copy post-content"><h1 id="update-use-bcftools-2019-06-21">Update: Use bcftools (2019-06-21)</h1>
 <p>Since this post was originally written, <a href="https://github.com/samtools/bcftools">bcftools</a> has added a command for renaming samples called <code>reheader</code> which allows sample names to be easily modified.</p>
-
 <h1 id="original-post-2014-12-05">Original Post (2014-12-05)</h1>
-
 <p>These two simple bash functions make it easy to rename samples within a bcf file by using the filename given (if it is a single sample file) or adding a prefix to all samples. This is useful if you want to merge bcf files where the sample names are identical in both (for comparison purposes).</p>
-
-<pre><code class="language-bash">function rename_to_filename {
-    # Renames samples with the filename.
-    tmp=`mktemp -t temp`
-    echo ${1/.[vb]cf/} &gt; $tmp
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> rename_to_filename <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Renames samples with the filename.</span>
+    tmp<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>mktemp -t temp<span style="color:#e6db74">`</span>
+    echo <span style="color:#e6db74">${</span>1/.[vb]cf/<span style="color:#e6db74">}</span> &gt; $tmp
     bcftools reheader -s $tmp $1 &gt; m.$1
     mv m.$1 $1
     bcftools index $1
-}
+<span style="color:#f92672">}</span>
 
-function add_sample_prefix {
-    # Adds a prefix to the samples within a bcf file.
-    tmp=`mktemp -t temp`
-    bcftools query -l $1 | awk -v g=$2 '{ print g $0 }'  &gt; $tmp
+<span style="color:#66d9ef">function</span> add_sample_prefix <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Adds a prefix to the samples within a bcf file.</span>
+    tmp<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>mktemp -t temp<span style="color:#e6db74">`</span>
+    bcftools query -l $1 | awk -v g<span style="color:#f92672">=</span>$2 <span style="color:#e6db74">&#39;{ print g $0 }&#39;</span>  &gt; $tmp
     bcftools reheader -s $tmp $1 &gt; m.$1
     mv m.$1 $1
     bcftools index $1
-}
-</code></pre>
-</div>
+<span style="color:#f92672">}</span>
+</code></pre></div></div>
   
         <div id='comments'></div>
   

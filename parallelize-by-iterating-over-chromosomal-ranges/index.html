@@ -11,7 +11,7 @@
 
 <meta property="og:description" content="I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &gt; I:0-999999 &gt; I:1000000-1999999 &gt; I:2000000-2999999 &gt; I:3000000-3999999 &gt; I:4000000-4999999  Note: BAMs use a 0-based coordinate system; VCFs are 1-based
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &gt; I:0-999999 &gt; I:1000000-1999999 &gt; I:2000000-2999999 &gt; I:3000000-3999999 &gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
 This list of genomic ranges can be used to process a BAM or VCF in parallel:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/" />
@@ -28,7 +28,7 @@ This list of genomic ranges can be used to process a BAM or VCF in parallel:" />
 
 
 
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.62.2" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -89,43 +89,33 @@ type="image/x-icon"/>
   </p>
   
   <div class="lh-copy post-content"><p>I have added a new utility to <code>seq-collection</code> called <code>iter</code> which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as <code>xargs</code> or <a href="https://www.gnu.org/software/parallel/">gnu-parallel</a> to parallelize commands.</p>
-
 <p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sc iter test.bam 100,000 <span style="color:#75715e"># Iterate on bins of 100k base pairs</span>
 
-<pre><code class="language-bash">sc iter test.bam 100,000 # Iterate on bins of 100k base pairs
-
-# Outputs
+<span style="color:#75715e"># Outputs</span>
 &gt; I:0-999999
 &gt; I:1000000-1999999
 &gt; I:2000000-2999999
 &gt; I:3000000-3999999
 &gt; I:4000000-4999999
-</code></pre>
-
-<p><small><strong>Note:</strong> BAMs use a 0-based coordinate system; VCFs are 1-based</small></p>
-
+</code></pre></div><p><small><strong>Note:</strong> BAMs use a 0-based coordinate system; VCFs are 1-based</small></p>
 <p>This list of genomic ranges can be used to process a BAM or VCF in parallel:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#66d9ef">function</span> process_chunk <span style="color:#f92672">{</span>
+  <span style="color:#75715e"># Code to process chunk</span>
+  vcf<span style="color:#f92672">=</span>$1
+  region<span style="color:#f92672">=</span>$2
+  <span style="color:#75715e"># e.g. bcftools call -m --region</span> 
+  echo bcftools call --region $region $vcf <span style="color:#75715e"># ...</span>
+<span style="color:#f92672">}</span>
 
-<pre><code class="language-bash">
-function process_chunk {
-  # Code to process chunk
-  vcf=$1
-  region=$2
-  # e.g. bcftools call -m --region 
-  echo bcftools call --region $region $vcf # ...
-}
-
-# Export the function to make it available to GNU parallel
+<span style="color:#75715e"># Export the function to make it available to GNU parallel</span>
 export -f process_chunk
 
-parallel --verbose process_chunk ::: test.bam ::: $(sc iter test.bam)
+parallel --verbose process_chunk ::: test.bam ::: <span style="color:#66d9ef">$(</span>sc iter test.bam<span style="color:#66d9ef">)</span>
 
-</code></pre>
-
-<p>You can also set the <code>[width]</code> option to 0 to generate a list of chromosomes.</p>
-
+</code></pre></div><p>You can also set the <code>[width]</code> option to 0 to generate a list of chromosomes.</p>
 <p>See <a href="/using-gnu-parallel-for-bioinformatics/">Using GNU-Parallel for Bioinformatics</a> for a comprehensive guide on using Parallel for bioinformatics.</p>
-
 <p><a href="https://github.com/danielecook/seq-collection">seq-collection</a> (<strong>sc</strong>) is a set of tools written in <a href="https://nim-lang.org/">nim</a> and using the fantastic <a href="https://github.com/brentp/hts-nim">hts-nim</a> package.</p>
 </div>
   
