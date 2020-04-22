@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 30 Jan 2020 00:26:29 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nim</title>
+      <link>https://www.danielecook.com/tags/nim/</link>
+      <pubDate>Wed, 22 Apr 2020 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/nim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>tips</title>
@@ -22,20 +31,11 @@
     </item>
     
     <item>
-      <title>BAM</title>
+      <title>bam</title>
       <link>https://www.danielecook.com/tags/bam/</link>
       <pubDate>Wed, 29 Jan 2020 01:15:53 +0000</pubDate>
       
       <guid>https://www.danielecook.com/tags/bam/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nim</title>
-      <link>https://www.danielecook.com/tags/nim/</link>
-      <pubDate>Wed, 29 Jan 2020 01:15:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/tags/nim/</guid>
       <description></description>
     </item>
     
@@ -49,7 +49,7 @@
     </item>
     
     <item>
-      <title>VCF</title>
+      <title>vcf</title>
       <link>https://www.danielecook.com/tags/vcf/</link>
       <pubDate>Wed, 29 Jan 2020 01:15:53 +0000</pubDate>
       
@@ -148,7 +148,7 @@
     </item>
     
     <item>
-      <title>Chicago</title>
+      <title>chicago</title>
       <link>https://www.danielecook.com/tags/chicago/</link>
       <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
       
@@ -247,7 +247,7 @@
     </item>
     
     <item>
-      <title>CYCLING</title>
+      <title>cycling</title>
       <link>https://www.danielecook.com/tags/cycling/</link>
       <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
       

@@ -4,17 +4,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
-  <title>tutorial - Daniel E. Cook</title>
-  <meta content='tutorial - Daniel E. Cook' property='title' />
-  <meta content='tutorial - Daniel E. Cook' property='og:title' />
+  <title>A tool for writing TILs (Today I Learned) - Daniel E. Cook</title>
+  <meta content='A tool for writing TILs (Today I Learned) - Daniel E. Cook' property='title' />
+  <meta content='A tool for writing TILs (Today I Learned) - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.danielecook.com/tags/tutorial/" />
+<meta property="og:description" content="There is a great repo on GitHub of TILs. The author (jbranchaud) states:
+ A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&#39;t really warrant a full blog post.
+ I think this is a pretty cool idea, but putting together the repo with the index can take time and interrupt your workflow. I wanted to make it very quick and easy to add TILs, so I wrote TIL-Tool." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/" />
 
 
-<meta property="og:updated_time" content="2019-09-27T01:30:53&#43;00:00"/>
+<meta property="article:published_time" content="2020-04-22T01:15:53&#43;00:00"/>
+
+<meta property="article:modified_time" content="2020-04-22T01:15:53&#43;00:00"/>
+
 
 
 
@@ -44,7 +49,7 @@
 
 type="image/x-icon"/>
 
-<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/tags/tutorial/feed/index.xml" title="Daniel E. Cook" />
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/feed/index.xml" title="Daniel E. Cook" />
 </head>
 <body class="global-font">
   <div id="nav" class="content-width center">
@@ -71,157 +76,58 @@ type="image/x-icon"/>
 </div>
 
   
-
 <main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">A tool for writing TILs (Today I Learned)</div>
   
-  <h1 class="f2 fw6 silver" id="tag">TUTORIAL</h1>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2020-04-22</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/nim' class="link silver tag">nim</a> &nbsp;&nbsp; 
+    
+  </p>
   
-  <ul class="list pa0">
-    
-        <li class="mb2">
-      <div class='fl w-10 pa2 tl nowrap' style='line-height: 25px;'>
-        <time>2019-09-27</time> 
-      </div>
-      <div class='fl w-90 pa2 pl5 pl4'>
-          <a class="f4 heading-color heading-font fw6 no-underline" href="https://www.danielecook.com/using-gnu-parallel-for-bioinformatics/">Using GNU-Parallel for bioinformatics</a>
-          <p class="f5 mt1 silver">
-            
-            <a href='/tags/bioinformatics' class="link silver tag">bioinformatics</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/tags/tutorial' class="link silver tag">tutorial</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/tags/bash' class="link silver tag">bash</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-          </p>
-      </div>
-  </li>
-    
-  </ul>
+  <div class="lh-copy post-content"><p>There is a great repo on GitHub of <a href="https://github.com/jbranchaud/til/blob/master/README.md">TILs</a>. The author (jbranchaud) states:</p>
+<blockquote>
+<p>A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don't really warrant a full blog post.</p>
+</blockquote>
+<p>I think this is a pretty cool idea, but putting together the repo with the index can take time and interrupt your workflow. I wanted to make it very quick and easy to add TILs, so I wrote <a href="https://www.github.com/danielecook/til-tool">TIL-Tool</a>. <strong>TIL-tool</strong> is a command line application invoked using <code>til</code> that makes it very easy to write TILs and generate an index.</p>
+<p>To create a new TIL, run <code>til open topic/title</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">til open Python/list_comprehensions
+</code></pre></div><p>This will open up a new text document which you can edit. Once you are done you can save the document and <code>til</code>. If you have configured a git remote (e.g. on GitHub), then you can then run <code>til push</code> which will build an index and push changes.</p>
+<p>All TILs are stored in <code>~/.til</code></p>
+<ul>
+<li><strong><a href="https://github.com/danielecook/til-tool">TIL-Tool on GitHub</a></strong></li>
+<li><strong><a href="http://www.github.com/danielecook/til">TIL Example Repo</a></strong></li>
+</ul>
+</div>
+  
+        <div id='comments'></div>
+  
 </main>
 
+   
 
 
 
-<div class="dn tr fixed right-2 " id="tag-cloud">
-    <strong>tags</strong> <br>
-    
-    
-    <a class="silver tag" href="/tags/gist">gist</a> (19) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/alfred">alfred</a> (9) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/r">r</a> (6) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/python">python</a> (5) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/vcf">vcf</a> (5) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bash">bash</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/excel">excel</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/nim">nim</a> (4) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bam">bam</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/cycling">cycling</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fastq">fastq</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/google-sheets">google-sheets</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/seq-collection">seq-collection</a> (3) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/chicago">chicago</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/database">database</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/fasta">fasta</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/pubmed">pubmed</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/tips">tips</a> (2) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bcftools">bcftools</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bigquery">bigquery</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/bioinformatics">bioinformatics</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/genetics">genetics</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/gff">gff</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/guitar">guitar</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/nextflow">nextflow</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/notebook">notebook</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver tag" href="/tags/sql">sql</a> (1) <br/></li>
-    
-  
-    
-    <a class="silver selected tag" href="/tags/tutorial">tutorial</a> (1) <br/></li>
-    
-  
-  <br />
-  
-</div>
 
-<div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
 <a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
-
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/you-can-walk-to-in-n-out-from-lax/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
 </div>
+
+
 
   <div class='cb'></div>
 <footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">

@@ -11,11 +11,33 @@
     
     
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 30 Jan 2020 00:26:29 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 01:15:53 +0000</lastBuildDate>
     
     
         <atom:link href="https://www.danielecook.com/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A tool for writing TILs (Today I Learned)</title>
+      <link>https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/</link>
+      <pubDate>Wed, 22 Apr 2020 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/</guid>
+      <description>&lt;p&gt;There is a great repo on GitHub of &lt;a href=&#34;https://github.com/jbranchaud/til/blob/master/README.md&#34;&gt;TILs&lt;/a&gt;. The author (jbranchaud) states:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&#39;t really warrant a full blog post.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I think this is a pretty cool idea, but putting together the repo with the index can take time and interrupt your workflow. I wanted to make it very quick and easy to add TILs, so I wrote &lt;a href=&#34;https://www.github.com/danielecook/til-tool&#34;&gt;TIL-Tool&lt;/a&gt;. &lt;strong&gt;TIL-tool&lt;/strong&gt; is a command line application invoked using &lt;code&gt;til&lt;/code&gt; that makes it very easy to write TILs and generate an index.&lt;/p&gt;
+&lt;p&gt;To create a new TIL, run &lt;code&gt;til open topic/title&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;til open Python/list_comprehensions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up a new text document which you can edit. Once you are done you can save the document and &lt;code&gt;til&lt;/code&gt;. If you have configured a git remote (e.g. on GitHub), then you can then run &lt;code&gt;til push&lt;/code&gt; which will build an index and push changes.&lt;/p&gt;
+&lt;p&gt;All TILs are stored in &lt;code&gt;~/.til&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/danielecook/til-tool&#34;&gt;TIL-Tool on GitHub&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;http://www.github.com/danielecook/til&#34;&gt;TIL Example Repo&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>You can walk to In-N-Out from LAX</title>
