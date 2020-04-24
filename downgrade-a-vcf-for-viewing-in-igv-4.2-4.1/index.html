@@ -26,7 +26,7 @@ Original Post (2014-12-15) If you are using the new version of bcftools, and you
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -96,7 +96,7 @@ type="image/x-icon"/>
 <span style="color:#75715e"># 1. Rename the file as version 4.1</span>
 <span style="color:#75715e"># 2. Replace parentheses in the INFO lines (IGV doesn&#39;t like these!)</span>
 
-<span style="color:#66d9ef">function</span> vcf_downgrade<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> vcf_downgrade<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
   outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1/.bcf/<span style="color:#e6db74">}</span>
   outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>outfile/.gz/<span style="color:#e6db74">}</span>
   outfile<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>outfile/.vcf/<span style="color:#e6db74">}</span>

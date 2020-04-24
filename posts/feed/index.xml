@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/</guid>
       <description>There is a great repo on GitHub of TILs. The author (jbranchaud) states:
- A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&#39;t really warrant a full blog post.
+ A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&amp;rsquo;t really warrant a full blog post.
  I think this is a pretty cool idea, but putting together the repo with the index can take time and interrupt your workflow. I wanted to make it very quick and easy to add TILs, so I wrote TIL-Tool.</description>
     </item>
     
@@ -29,7 +29,7 @@
       <pubDate>Thu, 30 Jan 2020 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/you-can-walk-to-in-n-out-from-lax/</guid>
-      <description>Don&#39;t believe everything you read on the internet. There is an In-N-Out just outside of LAX on Sepulveda Blvd which I had thought was walkable. I was discouraged after reading this thread which suggests the walk to In-N-Out from LAX is not possible during a layover. Turns out, on a decent layover (~2.5 hours), it is totally possible!
+      <description>Don&amp;rsquo;t believe everything you read on the internet. There is an In-N-Out just outside of LAX on Sepulveda Blvd which I had thought was walkable. I was discouraged after reading this thread which suggests the walk to In-N-Out from LAX is not possible during a layover. Turns out, on a decent layover (~2.5 hours), it is totally possible!
 We gave it a go because I am a big fan of In-N-Out.</description>
     </item>
     
@@ -41,8 +41,7 @@ We gave it a go because I am a big fan of In-N-Out.</description>
       <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
       <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
-This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note:BAMs use a 0-based coordinate system; VCFs are 1-basedThis list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
     </item>
     
     <item>
@@ -74,7 +73,7 @@ Then you can set the content of any google sheets worksheet to the data from a p
       
       <guid>https://www.danielecook.com/speeding-up-reading-and-writing-in-r/</guid>
       <description>If you are relying on built-in functions to read and write large datasets you are losing out on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.
-Sample Data First, I&#39;ll generate a sample dataset with ten million rows we can use for testing.
+Sample Data First, I&amp;rsquo;ll generate a sample dataset with ten million rows we can use for testing.
 Generating a test dataset library(tidyverse) library(microbenchmark) n &amp;lt;- 1e6 times &amp;lt;- 10 # Number of times to run each benchmark data &amp;lt;- data.</description>
     </item>
     
@@ -115,7 +114,7 @@ The first utility I added was a tool to convert a VCF to JSON. This tool is usef
       <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</guid>
-      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&#39;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&amp;rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
 function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;#34;Microsoft Excel&amp;#34; $tmp } Usage:
 cat spreadsheet.tsv | excel </description>
     </item>
@@ -159,8 +158,7 @@ The repo has the following features added:</description>
       
       <guid>https://www.danielecook.com/introducing-a-chicago-bioinformatics-slack-channel/</guid>
       <description>Today I am introducing a new slack team for bioinformatians in Chicago.
-Signup for the Chicago Bioinformatics Slack Channel!
-Currently anyone with an email at the following domains can signup:
+Signup for the Chicago Bioinformatics Slack Channel!Currently anyone with an email at the following domains can signup:
  @northwestern.edu @uchicago.edu @uic.edu @depaul.edu @luc.edu @iit.edu  Members can invite anyone. I am happy to add any Chicago-area domains. Please let me know which ones I am missing!
 The slack team features channels for bioinformatics-help, general, introductions, meetups, and random currently.</description>
     </item>
@@ -171,7 +169,7 @@ The slack team features channels for bioinformatics-help, general, introductions
       <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/alfred-image-utilities/</guid>
-      <description>A workflow for making quick changes to image files. Alfred-image-utilities grabs any selected images in the frontmost finder window and can apply changes to them. Most of the time a copy of the image is made and its extension is changed to &amp;lt;filename&amp;gt;.orig.&amp;lt;ext&amp;gt;. You can replace the original file by holding command when executing most commands.
+      <description>A workflow for making quick changes to image files. Alfred-image-utilities grabs any selected images in the frontmost finder window and can apply changes to them. Most of the time a copy of the image is made and its extension is changed to &amp;lt;filename&amp;gt;.orig.&amp;lt;ext&amp;gt;. You can replace the original file by holding commandwhen executing most commands.
 Download Main Menu
 Convert to png or jpg
 You can convert from a large number of formats to these jpg or png.</description>
@@ -183,7 +181,7 @@ You can convert from a large number of formats to these jpg or png.</description
       <pubDate>Thu, 15 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/rdatastore/</guid>
-      <description>I&#39;ve developed a new package for R known as rdatastore that is avaliable at cloudyr/rdatastore. rdatastore provides an interface for Google Cloud&#39;s datastore service. Google Cloud Datastore is a NoSQL database, which makes provides a mechanism for storing and retrieving heterogeneous data. Although Google Datastore is not useful for storing large datasets, it has a number of useful applications within R. For example:
+      <description>I&amp;rsquo;ve developed a new package for R known as rdatastore that is avaliable at cloudyr/rdatastore. rdatastore provides an interface for Google Cloud&amp;rsquo;s datastore service. Google Cloud Datastore is a NoSQL database, which makes provides a mechanism for storing and retrieving heterogeneous data. Although Google Datastore is not useful for storing large datasets, it has a number of useful applications within R. For example:
  Saving and loading credentials for use with other services.</description>
     </item>
     
@@ -193,7 +191,7 @@ You can convert from a large number of formats to these jpg or png.</description
       <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/a-big-list-of-favorites/</guid>
-      <description>Here it is! My favorite things in life across all domains. This is a work in progress, but hopefully you&#39;ll find one (or a few) things you like and add it to your life. It&#39;s a bit sparse currently, but it will fill in over time.
+      <description>Here it is! My favorite things in life across all domains. This is a work in progress, but hopefully you&amp;rsquo;ll find one (or a few) things you like and add it to your life. It&amp;rsquo;s a bit sparse currently, but it will fill in over time.
 Note: There are no referral links here and I am not being paid to advertise anything here. Any companies/products listed have earned it.
 Programming/Software  Terminal  Homebrew - A phenomenal package manage.</description>
     </item>
@@ -204,8 +202,7 @@ Programming/Software  Terminal  Homebrew - A phenomenal package manage.</descrip
       <pubDate>Wed, 17 Aug 2016 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/guitar-printouts/</guid>
-      <description>I put these guitar-related printouts (A chord diagram sheet and a fretboard diagram sheet) together years ago:
-  </description>
+      <description>I put these guitar-related printouts (A chord diagram sheet and a fretboard diagram sheet) together years ago:</description>
     </item>
     
     <item>
@@ -215,8 +212,8 @@ Programming/Software  Terminal  Homebrew - A phenomenal package manage.</descrip
       
       <guid>https://www.danielecook.com/quiver-alfred/</guid>
       <description>Search Quiver from Alfred! Quiver-alfred quickly constructs a database of your notes for fast and easy querying.
-Download Usage Type qset to set your quiver library location. Quiver-Alfred constructs a database of your notes to make querying as fast as possible. The database should refresh once every hour and should only take a few seconds to create.
-Type q to use!
+Download Usage Type qsetto set your quiver library location. Quiver-Alfred constructs a database of your notes to make querying as fast as possible. The database should refresh once every hour and should only take a few seconds to create.
+Type qto use!
 You can search tags by hitting q #.
 Browse Notes within notebook:</description>
     </item>
@@ -269,10 +266,9 @@ carat cut color clarity depth table price x y z 0.23 Ideal E SI2 61.5 55 326 3.9
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</guid>
-      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&#39;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&amp;rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
 =pubmed(23149456) Will return an html-formatted citation:
-The heritability of metabolic profiles in newborn twins.
-Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8</description>
+Setup To implement the function, you&amp;rsquo;ll need to copy and paste the function below into the script editor and save it as a new project.</description>
     </item>
     
     <item>
@@ -314,7 +310,7 @@ Information and links are provided for individual genes</description>
       <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/an-alfred-workflow-for-working-with-sequence-data/</guid>
-      <description>I&#39;ve put together a simple alfred workflow with a few utilities for working with sequence data.
+      <description>I&amp;rsquo;ve put together a simple alfred workflow with a few utilities for working with sequence data.
 Download the latest release of Seq-Utilities
 Usage Generate a random dna sequence 200 base pairs long.
 Generate the complement, reverse complement, RNA, and protein of a DNA sequence
@@ -341,7 +337,7 @@ I was working with wormbase annotation files, which combine all the different ty
       <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
 # Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
- MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller Bioinformatics (2016) doi: 10.</description>
     </item>
     
     <item>
@@ -390,8 +386,8 @@ Recently, I had to use the SRA to download all of the sequence data for a given 
       <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</guid>
-      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
-If you&#39;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
+      <description>If you are calling variants as part of a NGSexperiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&amp;rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
     </item>
     
     <item>
@@ -427,12 +423,10 @@ In the example below, I show the results from organisms x diseases/disease-assoc
 &lt;li&gt;&lt;strong&gt;Shorten the days&lt;/strong&gt; – Having never gone more than 40 miles in a single day, I decided to go 108 on the first day. Yeah. I probably should have gone more like 60-70 each day. By the time I got to my destination each day I was too tired to do anything. Part of the experience is seeing new places.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Get a proper touring bike&lt;/strong&gt; – I didn’t use a touring bike because I don’t have one (yet). I used a &lt;a href=&#34;http://www.trekbikes.com/us/en/bikes/town/fitness/fx/7_2_fx_wsd_2014/#&#34;&gt;Trek 7.2&lt;/a&gt;. My wrists hurt a lot for parts of the trip. Next time I’ll get a proper touring bike with the appropriate handle bars.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;https://www.danielecook.com/Screen-Shot-2014-07-12-at-7.27.56-PM1.png&#34; alt=&#34;Trip around Lake Michigan&#34;  class=&#34;thumbnail&#34; style=&#34;margin:auto;&#34; /&gt;&lt;small style=&#34;color:#4792f3&#34;&gt;Day 1&lt;/span&gt; · &lt;span style=&#34;color:Red&#34;&gt;Day 2&lt;/span&gt; · &lt;span style=&#34;color:#fba43c&#34;&gt;Ferry&lt;/span&gt; · &lt;span style=&#34;color:Green&#34;&gt;Day 3&lt;/span&gt;&lt;/small&gt;
-&lt;/div&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;pictures&#34;&gt;Pictures&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0826.jpg&#34; alt=&#34;Michigan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.danielecook.com/IMG_0849.jpg&#34; alt=&#34;Outside Muskeegan&#34;  class=&#34;caption&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -441,8 +435,9 @@ In the example below, I show the results from organisms x diseases/disease-assoc
       <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</guid>
-      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
-The script does a few unique things.</description>
+      <description>If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+The script does a few unique things.
+ Runkeeper exports data in gpx format. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file.</description>
     </item>
     
     <item>
@@ -451,8 +446,8 @@ The script does a few unique things.</description>
       <pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/where-i-run-and-bike-in-chicago/</guid>
-      <description>Original Post (2014-05-25) Using runkeeper and with the help of a tutorial at flowing data, I was able to plot all of the running and biking I’ve been doing in Chicago since moving here two years ago. The blue is running and the black is biking.
- Update: Strava (2019-06-21) I have since migrated my data to Strava - which I like a lot better than runkeeper. You can migrate your data using the Tapariik service.</description>
+      <description>Original Post (2014-05-25) Using runkeeper and with the help of a tutorial at flowing data, I was able to plot all of the running and biking I’ve been doing in Chicago since moving here two years ago. The blueis running and the black is biking.
+Update: Strava (2019-06-21) I have since migrated my data to Strava - which I like a lot better than runkeeper. You can migrate your data using the Tapariik service.</description>
     </item>
     
     <item>
@@ -492,8 +487,7 @@ For example, suppose you are studying Cleft lip and Palate and are left with a s
       
       <guid>https://www.danielecook.com/alfred-workflow-for-creating-a-data-analysis-project/</guid>
       <description>This idea I got from my brother. The idea is to keep any data analysis/bioinformatic projects I work on organized by sticking to a standard template. I wrote an Alfred Workflow for generating the template. There are a couple key features:
-Directory Structure
- Markdown (md) extension – is used for the readme because its simple and so that the directory is ready for github if desired. Data Folder – This directory is used for storing raw data and scripts that are used to clean and prepare data for analysis.</description>
+Directory Structure Markdown (md) extension – is used for the readme because its simple and so that the directory is ready for github if desired. Data Folder – This directory is used for storing raw data and scripts that are used to clean and prepare data for analysis.</description>
     </item>
     
     <item>
@@ -512,7 +506,7 @@ If you use python, it is easy to download and store data in an SQlite database.<
       <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/use-google-to-find-lecture-notes/</guid>
-      <description>This may seem obvious - but I&#39;ve discovered a wonderful trick if you ever need to review a science topic quickly or are trying to learn something new, try searching google like this:
+      <description>This may seem obvious - but I&amp;rsquo;ve discovered a wonderful trick if you ever need to review a science topic quickly or are trying to learn something new, try searching google like this:
 (topic) + Lecture filetype:pdf You’ll find that tons of professors post their lecture notes online. Also try using filetype:ppt or leave filetype off (as some professors host websites with lecture notes).</description>
     </item>
     
@@ -591,6 +585,17 @@ Copy in Identifiers A 384 well template is produced And a summary table too. </d
       <description>Original Post (2013-01-09) Here is my first stab at models for django of the Chado database schema
 Gist → Chado models
 Update: machado (2019-06-20) I originally put together a set of models for Chado in January of 2013. I later moved on from this work when I started graduate school - but a group incorporated a little bit of this work in the development of their framework for storing, searching and visualizing biological data called machado.</description>
+    </item>
+    
+    <item>
+      <title>ccmatch: A stata program for matching cases and controls</title>
+      <link>https://www.danielecook.com/ccmatch-a-stata-program-for-matching-cases-and-controls/</link>
+      <pubDate>Wed, 19 Dec 2012 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/ccmatch-a-stata-program-for-matching-cases-and-controls/</guid>
+      <description>ccmatch is used to randomly match cases and controls based on specified criteria. For instance, if you wanted to randomly match cases and controls based on age, you can use ccmatch to pair up people with the same age. You can use multiple variables to match cases and controls.
+Installation ssc install ccmatch Syntax ccmatch variable_list, cc( ) [id( )] specifying an id is optional
+ variable_list The variable list are categorical or discrete variables you want to match on (example: age, sex, weight class, etc.</description>
     </item>
     
   </channel>

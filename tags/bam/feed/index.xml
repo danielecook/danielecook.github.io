@@ -20,8 +20,7 @@
       <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
       <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
-This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note:BAMs use a 0-based coordinate system; VCFs are 1-basedThis list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
     </item>
     
     <item>
@@ -33,7 +32,7 @@ This list of genomic ranges can be used to process a BAM or VCF in parallel:</de
       <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
 # Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
- MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller Bioinformatics (2016) doi: 10.</description>
     </item>
     
     <item>

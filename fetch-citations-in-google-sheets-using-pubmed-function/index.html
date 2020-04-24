@@ -9,10 +9,9 @@
   <meta content='Fetch Citations in Google Sheets using pubmed() function - Daniel E. Cook' property='og:title' />
 
 
-<meta property="og:description" content="If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&#39;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+<meta property="og:description" content="If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
 =pubmed(23149456) Will return an html-formatted citation:
-The heritability of metabolic profiles in newborn twins.
-Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8" />
+Setup To implement the function, you&rsquo;ll need to copy and paste the function below into the script editor and save it as a new project." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/" />
 
@@ -28,7 +27,7 @@ Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman 
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -88,12 +87,12 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I've created a <code>pubmed()</code> function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:</p>
+  <div class="lh-copy post-content"><p>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&rsquo;ve created a <code>pubmed()</code> function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">=</span>pubmed<span style="color:#f92672">(</span>23149456<span style="color:#f92672">)</span>
 </code></pre></div><p>Will return an html-formatted citation:</p>
-<p><strong>The heritability of metabolic profiles in newborn twins.</strong><br />Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, <br />(2013 Mar) <em>Heredity</em> 110 (3) 253-8</p>
+<!-- raw HTML omitted -->
 <h3 id="setup">Setup</h3>
-<p>To implement the function, you'll need to copy and paste the function below into the script editor and save it as a new project. Then it will become available within your google sheet. The script editor is available through the <code>Tools &gt; Script Editor</code></p>
+<p>To implement the function, you&rsquo;ll need to copy and paste the function below into the script editor and save it as a new project. Then it will become available within your google sheet. The script editor is available through the <code>Tools &gt; Script Editor</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * Returns formatted pubmed citation.
 </span><span style="color:#75715e"> *

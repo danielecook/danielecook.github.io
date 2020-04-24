@@ -19,7 +19,7 @@
       
       <guid>https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/</guid>
       <description>There is a great repo on GitHub of TILs. The author (jbranchaud) states:
- A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&#39;t really warrant a full blog post.
+ A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies. These are things that don&amp;rsquo;t really warrant a full blog post.
  I think this is a pretty cool idea, but putting together the repo with the index can take time and interrupt your workflow. I wanted to make it very quick and easy to add TILs, so I wrote TIL-Tool.</description>
     </item>
     
@@ -31,8 +31,7 @@
       <guid>https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/</guid>
       <description>I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
-This list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &amp;gt; I:0-999999 &amp;gt; I:1000000-1999999 &amp;gt; I:2000000-2999999 &amp;gt; I:3000000-3999999 &amp;gt; I:4000000-4999999 Note:BAMs use a 0-based coordinate system; VCFs are 1-basedThis list of genomic ranges can be used to process a BAM or VCF in parallel:</description>
     </item>
     
     <item>

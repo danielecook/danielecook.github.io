@@ -26,7 +26,7 @@ import xlrd # pip install xlrd import csv import os def export_workbook(filename
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -102,13 +102,13 @@ type="image/x-icon"/>
   <span style="color:#66d9ef">for</span> sheet <span style="color:#f92672">in</span> workbook<span style="color:#f92672">.</span>sheet_names():
     worksheet <span style="color:#f92672">=</span> workbook<span style="color:#f92672">.</span>sheet_by_name(sheet)
     <span style="color:#75715e"># Create a file for each sheet</span>
-    <span style="color:#66d9ef">with</span> open(filename <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(sheet)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wb</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">with</span> open(filename <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> str(sheet)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>,<span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
       c <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f)
       <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> range(worksheet<span style="color:#f92672">.</span>nrows):
         c<span style="color:#f92672">.</span>writerow(worksheet<span style="color:#f92672">.</span>row_values(r))
-      <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Exported workbook </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%12.2d</span><span style="color:#e6db74"> row</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (sheet,worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">+</span><span style="color:#ae81ff">85</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">s</span><span style="color:#e6db74">&#34;</span>[worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>:])
+      <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Exported workbook &#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; </span><span style="color:#e6db74">%12.2d</span><span style="color:#e6db74"> row</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (sheet,worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">+</span><span style="color:#ae81ff">85</span>,<span style="color:#e6db74">&#34;s&#34;</span>[worksheet<span style="color:#f92672">.</span>nrows<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>:])
 
-export_workbook(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">test.xlsx</span><span style="color:#e6db74">&#39;</span>)
+export_workbook(<span style="color:#e6db74">&#39;test.xlsx&#39;</span>)
 </code></pre></div><h2 id="update-xlsx2csv-2019-06-18">Update: xlsx2csv (2019-06-18)</h2>
 <p>The original post here detailed a python script for extracting worksheets from excel files as plain text files. However, I later stumbled upon an easy to use command-line based option called <a href="https://github.com/dilshod/xlsx2csv">xlsx2csv</a>. <code>xlsx2csv</code> is a python module with a command line interface that can export worksheets in an Excel file as plain text csv or tsv files.</p>
 <h3 id="install-xlsx2csv">Install xlsx2csv</h3>
@@ -120,11 +120,11 @@ export_workbook(<span style="color:#e6db74"></span><span style="color:#e6db74">&
 </code></pre></div><h3 id="options">Options</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">usage: xlsx2csv <span style="color:#f92672">[</span>-h<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-v<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-a<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-c OUTPUTENCODING<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-d DELIMITER<span style="color:#f92672">]</span>
                 <span style="color:#f92672">[</span>--hyperlinks<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-e<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>-E EXCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>EXCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]</span><span style="color:#f92672">]</span>
+                <span style="color:#f92672">[</span>-E EXCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>EXCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]]</span>
                 <span style="color:#f92672">[</span>-f DATEFORMAT<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t TIMEFORMAT<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--floatformat FLOATFORMAT<span style="color:#f92672">]</span>
                 <span style="color:#f92672">[</span>--sci-float<span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>-I INCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>INCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]</span><span style="color:#f92672">]</span>
-                <span style="color:#f92672">[</span>--ignore-formats IGNORE_FORMATS <span style="color:#f92672">[</span>IGNORE_FORMATS ...<span style="color:#f92672">]</span><span style="color:#f92672">]</span>
+                <span style="color:#f92672">[</span>-I INCLUDE_SHEET_PATTERN <span style="color:#f92672">[</span>INCLUDE_SHEET_PATTERN ...<span style="color:#f92672">]]</span>
+                <span style="color:#f92672">[</span>--ignore-formats IGNORE_FORMATS <span style="color:#f92672">[</span>IGNORE_FORMATS ...<span style="color:#f92672">]]</span>
                 <span style="color:#f92672">[</span>-l LINETERMINATOR<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-m<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-n SHEETNAME<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-i<span style="color:#f92672">]</span>
                 <span style="color:#f92672">[</span>--skipemptycolumns<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p SHEETDELIMITER<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-q QUOTING<span style="color:#f92672">]</span>
                 <span style="color:#f92672">[</span>-s SHEETID<span style="color:#f92672">]</span>

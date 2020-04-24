@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -89,13 +89,13 @@ type="image/x-icon"/>
 <p>This may be worth sticking in your <code>.RProfile</code> so it is always available.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">excel <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(df) {
   f <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste0</span>(<span style="color:#a6e22e">tempdir</span>(),
-              <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/&#39;</span>,
+              <span style="color:#e6db74">&#39;/&#39;</span>,
               <span style="color:#a6e22e">make.names</span>(<span style="color:#a6e22e">deparse</span>(<span style="color:#a6e22e">substitute</span>(df))),
-              <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.&#39;</span>,
-              <span style="color:#a6e22e">paste0</span>(<span style="color:#a6e22e">sample</span>(<span style="color:#66d9ef">letters</span>)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>],collapse<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-              <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv&#39;</span>)
+              <span style="color:#e6db74">&#39;.&#39;</span>,
+              <span style="color:#a6e22e">paste0</span>(<span style="color:#a6e22e">sample</span>(<span style="color:#66d9ef">letters</span>)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>],collapse<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>),
+              <span style="color:#e6db74">&#39;.csv&#39;</span>)
   <span style="color:#a6e22e">write.csv</span>(df,f)
-  <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">open -a &#39;Microsoft Excel&#39; %s&#34;</span>,f))
+  <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;open -a &#39;Microsoft Excel&#39; %s&#34;</span>,f))
 }
 </code></pre></div><p>To use, just type:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">excel</span>(dataframe)

@@ -18,7 +18,7 @@
       <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</guid>
-      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&#39;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&amp;rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
 function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;#34;Microsoft Excel&amp;#34; $tmp } Usage:
 cat spreadsheet.tsv | excel </description>
     </item>

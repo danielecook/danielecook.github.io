@@ -26,7 +26,7 @@ Original Post BigQuery is a phenomenal tool for analyzing large datasets. It ena
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -102,23 +102,23 @@ filename <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</
     <span style="color:#66d9ef">return</span> type
 
 filetype <span style="color:#f92672">=</span> file_type(filename)[<span style="color:#ae81ff">1</span>]
-<span style="color:#66d9ef">if</span> filetype <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">gzip</span><span style="color:#e6db74">&#34;</span>:
+<span style="color:#66d9ef">if</span> filetype <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;gzip&#34;</span>:
     <span style="color:#f92672">import</span> gzip
-    readfile <span style="color:#f92672">=</span> gzip<span style="color:#f92672">.</span>GzipFile(filename, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+    readfile <span style="color:#f92672">=</span> gzip<span style="color:#f92672">.</span>GzipFile(filename, <span style="color:#e6db74">&#39;r&#39;</span>)
 <span style="color:#66d9ef">else</span>:
-    readfile <span style="color:#f92672">=</span> open(filename,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+    readfile <span style="color:#f92672">=</span> open(filename,<span style="color:#e6db74">&#39;r&#39;</span>)
 
 <span style="color:#66d9ef">with</span> readfile <span style="color:#66d9ef">as</span> f:
-    header <span style="color:#f92672">=</span> next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>)
-    lines <span style="color:#f92672">=</span> [dict(zip(header,next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>))) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">50000</span>)]
+    header <span style="color:#f92672">=</span> next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>)
+    lines <span style="color:#f92672">=</span> [dict(zip(header,next(f)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>))) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">50000</span>)]
 
 schema <span style="color:#f92672">=</span> OrderedDict(zip(header, [bool]<span style="color:#f92672">*</span>len(header)))
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">boolify</span>(s):
-    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TRUE</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">T</span><span style="color:#e6db74">&#34;</span>:
+    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;True&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;TRUE&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;T&#34;</span>:
         <span style="color:#66d9ef">return</span> True
-    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">False</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">FALSE</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">F</span><span style="color:#e6db74">&#34;</span>:
+    <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;False&#39;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;FALSE&#34;</span> <span style="color:#f92672">or</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;F&#34;</span>:
         <span style="color:#66d9ef">return</span> False
-    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">huh?</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;huh?&#34;</span>)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">autoconvert</span>(s):
     <span style="color:#66d9ef">for</span> fn <span style="color:#f92672">in</span> (boolify, int, float):
@@ -129,12 +129,12 @@ schema <span style="color:#f92672">=</span> OrderedDict(zip(header, [bool]<span 
     <span style="color:#66d9ef">return</span> s
 
 type_precedence <span style="color:#f92672">=</span> {str:<span style="color:#ae81ff">0</span>, float:<span style="color:#ae81ff">1</span>, int:<span style="color:#ae81ff">2</span>,bool:<span style="color:#ae81ff">3</span>}
-type_map <span style="color:#f92672">=</span> {str:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">STRING</span><span style="color:#e6db74">&#34;</span>, float:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">FLOAT</span><span style="color:#e6db74">&#34;</span>, int:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">INTEGER</span><span style="color:#e6db74">&#34;</span>, bool:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">BOOLEAN</span><span style="color:#e6db74">&#34;</span>}
+type_map <span style="color:#f92672">=</span> {str:<span style="color:#e6db74">&#34;STRING&#34;</span>, float:<span style="color:#e6db74">&#34;FLOAT&#34;</span>, int:<span style="color:#e6db74">&#34;INTEGER&#34;</span>, bool:<span style="color:#e6db74">&#34;BOOLEAN&#34;</span>}
 
 <span style="color:#75715e"># Sense header</span>
 <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
     <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> line<span style="color:#f92672">.</span>items():
-        <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">&#34;</span>:
+        <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">or</span> v <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.&#34;</span>:
             <span style="color:#66d9ef">pass</span>
         <span style="color:#66d9ef">else</span>:
             sense_type <span style="color:#f92672">=</span> type(autoconvert(v))
@@ -143,7 +143,7 @@ type_map <span style="color:#f92672">=</span> {str:<span style="color:#e6db74"><
             <span style="color:#66d9ef">elif</span> type_precedence[schema[k]] <span style="color:#f92672">&gt;</span> type_precedence[sense_type]:
                 schema[k] <span style="color:#f92672">=</span> sense_type
 
-<span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([ k<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> type_map[v] <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> schema<span style="color:#f92672">.</span>items()])
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;,&#39;</span><span style="color:#f92672">.</span>join([ k<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;/&#34;</span>,<span style="color:#e6db74">&#34;_&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:&#34;</span> <span style="color:#f92672">+</span> type_map[v] <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> schema<span style="color:#f92672">.</span>items()])
 </code></pre></div><h3 id="usage">Usage</h3>
 <p>Save the gist as a script and run it as follows:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">python schema.py &lt;file&gt;

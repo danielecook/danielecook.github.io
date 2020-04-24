@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -91,14 +91,14 @@ type="image/x-icon"/>
 <span style="color:#75715e"># see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)</span>
 <span style="color:#75715e"># for examples</span>
 
-<span style="color:#66d9ef">function</span> bam_chromosomes<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> bam_chromosomes<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e"># Fetch chromosomes from a bam file</span>
     samtools view -H $1 | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    grep -Po <span style="color:#e6db74">&#39;SN:(.*)\t&#39;</span> | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    cut -c 4-1000
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> vcf_chromosomes<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> vcf_chromosomes<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e"># Fetch contigs from a vcf file.</span>
     bcftools view -h $1 | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    grep <span style="color:#e6db74">&#39;contig&#39;</span> | <span style="color:#ae81ff">\
@@ -109,7 +109,7 @@ type="image/x-icon"/>
 
 
 PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
-<span style="color:#66d9ef">function</span> parallel_bcftools_merge<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> parallel_bcftools_merge<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     file_set<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | egrep -o <span style="color:#e6db74">&#39;(\-l|\-\-file-list)(=|[ ]+)[^ ]+&#39;</span> | tr <span style="color:#e6db74">&#39;=&#39;</span> <span style="color:#e6db74">&#39; &#39;</span> | cut -f <span style="color:#ae81ff">2</span> -d <span style="color:#e6db74">&#39; &#39;</span><span style="color:#e6db74">`</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file_set<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
         <span style="color:#66d9ef">then</span>
@@ -126,14 +126,14 @@ PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6<
 </span><span style="color:#ae81ff"></span>    --env args -j <span style="color:#e6db74">${</span>PARALLEL_CORES<span style="color:#e6db74">}</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    <span style="color:#e6db74">&#39;bcftools merge -r {1} -O u &#39;</span> $@ <span style="color:#e6db74">&#39; &gt; &#39;</span> <span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;.{1}.bcf&#39;</span> ::: <span style="color:#e6db74">${</span>contigs<span style="color:#e6db74">}</span> 
     
-    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.bcf&#34; }&#39;</span><span style="color:#e6db74">`</span>
+    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.bcf&#34; }&#39;</span><span style="color:#e6db74">`</span>
     bcftools concat -O v <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span> | grep -v <span style="color:#e6db74">&#39;parallel_merge&#39;</span> | sed <span style="color:#e6db74">&#39;s/##bcftools_mergeCommand=merge -r I -O u /##bcftools_mergeCommand=merge /g&#39;</span> | bcftools view -O u
     rm <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span>
 <span style="color:#f92672">}</span>
 
 
 PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
-<span style="color:#66d9ef">function</span> parallel_bcftools_gtcheck<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> parallel_bcftools_gtcheck<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     find_vcf<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $@ | tr <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | egrep -o <span style="color:#e6db74">&#39;[^ ]+.vcf.gz&#39;</span> | awk <span style="color:#e6db74">&#39;NR == 1 { print }&#39;</span> - <span style="color:#e6db74">`</span>
     contigs<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>vcf_chromosomes <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
     current_dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">${</span>find_vcf<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span>
@@ -144,7 +144,7 @@ PARALLEL_CORES<span style="color:#f92672">=</span><span style="color:#ae81ff">6<
 </span><span style="color:#e6db74">    bcftools gtcheck &#39;</span> <span style="color:#e6db74">${</span>gtcheck_options<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39; - | \
 </span><span style="color:#e6db74">    awk -v chrom={} &#34;/^CN/ { print \$0 \&#34;\t\&#34; chrom } \$0 !~ /.*CN.*/ { print } \$0 ~ /^# \[1\]CN/ { print \$0 \&#34;\tchrom\&#34;}&#34; - &gt; &#39;</span> <span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;.{}.tsv&#39;</span> ::: <span style="color:#e6db74">${</span>contigs<span style="color:#e6db74">}</span>
 
-    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.tsv&#34; }&#39;</span><span style="color:#e6db74">`</span>
+    order<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $contigs | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span> | awk -v <span style="color:#e6db74">&#34;prefix=</span><span style="color:#e6db74">${</span>output_prefix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;{ print prefix &#34;.&#34; $0 &#34;.tsv&#34; }&#39;</span><span style="color:#e6db74">`</span>
     cat <span style="color:#e6db74">${</span>order<span style="color:#e6db74">}</span> | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    grep <span style="color:#e6db74">&#39;CN&#39;</span> | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;NR == 1 &amp;&amp; /Discordance/ { print } NR &gt; 1 &amp;&amp; $0 !~ /Discordance/ { print }&#39;</span> | <span style="color:#ae81ff">\

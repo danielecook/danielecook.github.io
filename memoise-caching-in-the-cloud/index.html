@@ -27,7 +27,7 @@ fib &lt;- function(n) { if (n &lt; 2) return(1) fib(n - 2) &#43; fib(n - 1) } Th
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -110,7 +110,7 @@ mem_fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mem
 <span style="color:#a6e22e">mem_fib</span>(<span style="color:#ae81ff">30</span>) <span style="color:#75715e"># Initial run caches the value</span>
 </code></pre></div><p>In the above example, the <code>memoise()</code> function generates a memoised function, which will automatically cache results. If the function is run again with the same parameters, it will return the cached result rather than recompute the result. Implementing memoisation can significantly speed up analysis when functions that take time to run are repeatedly called.</p>
 <p>What if you are running similar analyses within a cluster environment? The ability to cache results in a centralized datastore could increase the speed of analysis across all machines. Alternatively, perhaps you work on different computers at work and at home. Forgetting to save/load intermediate files may require long-running functions to be run again. Further, managing and retaining intermediate files can be cumbersome and annoying. Again, caching the results of the memoised function in a central location (e.g., cloud-based storage) can speed up analytical pipelines across machines.</p>
-<p>Recently I've put some work into developing new types of out-of-memory caches for the <strong>memoise</strong> package  <a href="https://github.com/danielecook/memoise">available here</a>. This forked version can be used to cache items locally or remotely in a variety of environments. Supported environments include:</p>
+<p>Recently I&rsquo;ve put some work into developing new types of out-of-memory caches for the <strong>memoise</strong> package  <a href="https://github.com/danielecook/memoise">available here</a>. This forked version can be used to cache items locally or remotely in a variety of environments. Supported environments include:</p>
 <ul>
 <li>R environment (cache_local)</li>
 <li>Google Datastore (cache_datastore)</li>
@@ -119,7 +119,7 @@ mem_fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mem
 </ul>
 <p>There are a few caveats to consider when using this version of <strong>memoise</strong>. If you use the external cache options, it will take additional time to retrieve cached items. This is preferable in cluster environments where syncing files across instances/nodes can be difficult. However, when working at home/work, using locally synced files is preferred.</p>
 <h3 id="installation">Installation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">devtools<span style="color:#f92672">::</span><span style="color:#a6e22e">install_github</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">danielecook/memoise&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">devtools<span style="color:#f92672">::</span><span style="color:#a6e22e">install_github</span>(<span style="color:#e6db74">&#34;danielecook/memoise&#34;</span>)
 </code></pre></div><h3 id="usage">Usage</h3>
 <h4 id="google-datastore">Google Datastore</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(memoise)
@@ -131,7 +131,7 @@ fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">functio
 }
 
 <span style="color:#75715e"># Define a cache</span>
-ds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cache_datastore</span>(project <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">your-project-name&#34;</span>, cache_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rcache2&#34;</span>)
+ds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cache_datastore</span>(project <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;your-project-name&#34;</span>, cache_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rcache2&#34;</span>)
 
 <span style="color:#75715e"># Memoize fib</span>
 mem_fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">memoise</span>(fib, cache <span style="color:#f92672">=</span> ds)
@@ -147,12 +147,12 @@ fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">functio
 }
 
 <span style="color:#75715e"># Set up credentials</span>
-<span style="color:#a6e22e">Sys.setenv</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AWS_ACCESS_KEY_ID&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;access key&gt;&#34;</span>,
-           <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AWS_SECRET_ACCESS_KEY&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;access secret&gt;&#34;</span>)
+<span style="color:#a6e22e">Sys.setenv</span>(<span style="color:#e6db74">&#34;AWS_ACCESS_KEY_ID&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;access key&gt;&#34;</span>,
+           <span style="color:#e6db74">&#34;AWS_SECRET_ACCESS_KEY&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;access secret&gt;&#34;</span>)
 
 <span style="color:#75715e"># Define a cache</span>
 <span style="color:#75715e"># Your bucket name must be unique among all s3 users - so use something like &#39;rcache-&lt;initials&gt;&#39;</span>
-aws_s3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cache_s3</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;unique bucket name&gt;&#34;</span>)
+aws_s3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cache_s3</span>(<span style="color:#e6db74">&#34;&lt;unique bucket name&gt;&#34;</span>)
 
 <span style="color:#75715e"># Memoize fib</span>
 mem_fib <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">memoise</span>(fib, cache <span style="color:#f92672">=</span> aws_s3)

@@ -18,7 +18,7 @@
       <pubDate>Fri, 28 Jun 2019 00:26:29 +0100</pubDate>
       
       <guid>https://www.danielecook.com/a-bash-alias-for-microsoft-excel-mac-only/</guid>
-      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&#39;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
+      <description>Years ago I wrote a function for opening excel from R. While I would never use Excel for data analysis, it turns out it&amp;rsquo;s pretty good for sorting and browsing data. Thats why I wrote a simple bash alias for opening up text documents from the terminal.
 function excel() { tmp=`mktemp` out=${1} cat ${out} &amp;gt; $tmp open -a &amp;#34;Microsoft Excel&amp;#34; $tmp } Usage:
 cat spreadsheet.tsv | excel </description>
     </item>
@@ -63,7 +63,7 @@ I was working with wormbase annotation files, which combine all the different ty
       <description>Update: MultiQC (2019-06-21) After I originally published this script for aggregating FASTQC reports, MultiQC was published by Phil Ewels. MultiQC aggregates quality-control and other associated data from sequencing tools into an interactive report. Instead of the script below, you can simply run:
 # Run this command where your *_fastqc.zip files are multiqc . This will output a repor that looks like this:
 Publication
- MultiQC: Summarize analysis results for multiple tools and samples in a single report  Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller  Bioinformatics (2016)  doi: 10.</description>
+ MultiQC: Summarize analysis results for multiple tools and samples in a single report Philip Ewels, Måns Magnusson, Sverker Lundin and Max Käller Bioinformatics (2016) doi: 10.</description>
     </item>
     
     <item>
@@ -112,8 +112,8 @@ Recently, I had to use the SRA to download all of the sequence data for a given 
       <pubDate>Mon, 15 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/generate-a-bedfile-of-masked-ranges-a-fasta-file/</guid>
-      <description>If you are calling variants as part of a NGS experiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
-If you&#39;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
+      <description>If you are calling variants as part of a NGSexperiment, you likely are considering filters such as depth, quality, and filtering low complexity regions from the variant dataset. Programs such as repeatmasker are used to identify low complexity regions, replacing repetitive sequences with N&amp;lsquo;s. Repetitive regions have a tendency to be aligned with inappropriate reads and results in false positives.
+If you&amp;rsquo;ve been provided with or have generated a masked fasta file for a given genome, you can use the following script convert a masked fasta (left) into a bed file (right) with the masked ranges.</description>
     </item>
     
     <item>
@@ -143,8 +143,9 @@ In the example below, I show the results from organisms x diseases/disease-assoc
       <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/how-to-plot-all-of-your-runkeeper-data/</guid>
-      <description>Runs in Iowa City  Running and Biking in Chicago   If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
-The script does a few unique things.</description>
+      <description>If you use runkeeper and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using R. I’ve written a script for doing so (Special thanks to flowing data which has a tutorial that helped with a few key parts of this).
+The script does a few unique things.
+ Runkeeper exports data in gpx format. If you ever pause an activity within runkeeper or you lose GPS reception briefly, the GPS path will get split into multiple paths within the same file.</description>
     </item>
     
     <item>

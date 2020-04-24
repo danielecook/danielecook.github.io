@@ -26,7 +26,7 @@ This script will extracting basic information from a set of FASTQs and output it
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -111,75 +111,75 @@ type="image/x-icon"/>
   <span style="color:#66d9ef">return</span> max(g(sorted(L)), key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span>(x, v):(len(list(v)),<span style="color:#f92672">-</span>L<span style="color:#f92672">.</span>index(x)))[<span style="color:#ae81ff">0</span>]
 
 <span style="color:#75715e"># Set this variable to ensure no quality score lines get examined.</span>
-fq_at_start <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">HWI</span><span style="color:#e6db74">&#34;</span>
+fq_at_start <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HWI&#34;</span>
 
-r <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>check_output(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">for r in `ls *fastq.gz`; </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">do</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">echo </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$r</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">gunzip -cq $r | head -n 1000 | grep </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">^@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> - | grep -v </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">^@@</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> |  egrep </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(:.+){4}</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> -</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">echo </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">|</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">done;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span> <span style="color:#f92672">%</span> fq_at_start, shell<span style="color:#f92672">=</span>True)
+r <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>check_output(<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">for r in `ls *fastq.gz`; 
+</span><span style="color:#e6db74">do
+</span><span style="color:#e6db74">echo &#34;$r&#34; 
+</span><span style="color:#e6db74">gunzip -cq $r | head -n 1000 | grep &#39;^@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; - | grep -v &#39;^@@&#39; |  egrep &#39;(:.+){4}&#39; -
+</span><span style="color:#e6db74">echo &#34;|&#34; 
+</span><span style="color:#e6db74">done;
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span> <span style="color:#f92672">%</span> fq_at_start, shell<span style="color:#f92672">=</span>True)
 
 
-f <span style="color:#f92672">=</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">fastq_summary.txt</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#34;</span>)
+f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;fastq_summary.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>)
  
 
-orig_line <span style="color:#f92672">=</span>  OrderedDict([(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">file</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">instrument</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_id</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_lane</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x_coord</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y_coord</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">index</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pair</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">run_id</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">filtered</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>),
-      (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">control_bits</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>)])
+orig_line <span style="color:#f92672">=</span>  OrderedDict([(<span style="color:#e6db74">&#34;file&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;instrument&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;flowcell_id&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;x_coord&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;y_coord&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;index&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;pair&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;run_id&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;filtered&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>),
+      (<span style="color:#e6db74">&#34;control_bits&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)])
 l_keys <span style="color:#f92672">=</span> orig_line<span style="color:#f92672">.</span>keys()
 
-f<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(l_keys) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(l_keys) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
  
-<span style="color:#66d9ef">for</span> fq_group <span style="color:#f92672">in</span> [filter(len,x<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">|</span><span style="color:#e6db74">&#34;</span>)][:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+<span style="color:#66d9ef">for</span> fq_group <span style="color:#f92672">in</span> [filter(len,x<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;|&#34;</span>)][:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
   index_set <span style="color:#f92672">=</span> []
   <span style="color:#66d9ef">for</span> heading <span style="color:#f92672">in</span> fq_group[<span style="color:#ae81ff">1</span>:]:
-    l <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>split(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">\</span><span style="color:#e6db74">:|#| )</span><span style="color:#e6db74">&#39;</span>,heading)
+    l <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>split(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\:|#| )&#39;</span>,heading)
     line <span style="color:#f92672">=</span> orig_line
-    line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">file</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> fq_group[<span style="color:#ae81ff">0</span>]
-                <span style="color:#66d9ef">if</span> l[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">@SRR</span><span style="color:#e6db74">&#34;</span>):
-                    line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">run_id</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-                    line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">instrument</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-                    line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_lane</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-                    index_set<span style="color:#f92672">.</span>append(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>)
+    line[<span style="color:#e6db74">&#34;file&#34;</span>] <span style="color:#f92672">=</span> fq_group[<span style="color:#ae81ff">0</span>]
+                <span style="color:#66d9ef">if</span> l[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#34;@SRR&#34;</span>):
+                    line[<span style="color:#e6db74">&#34;run_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
+                    line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
+                    line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
+                    index_set<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;&#34;</span>)
     <span style="color:#66d9ef">elif</span> len(l) <span style="color:#f92672">==</span> <span style="color:#ae81ff">11</span>:
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">instrument</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_lane</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_tile</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x_coord</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y_coord</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
+      line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
+      line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
+      line[<span style="color:#e6db74">&#34;flowcell_tile&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
+      line[<span style="color:#e6db74">&#34;x_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
+      line[<span style="color:#e6db74">&#34;y_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
       <span style="color:#66d9ef">try</span>:
-        line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pair</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">1</span>]
-        index_set<span style="color:#f92672">.</span>append(l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">0</span>])
+        line[<span style="color:#e6db74">&#34;pair&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">1</span>]
+        index_set<span style="color:#f92672">.</span>append(l[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">0</span>])
       <span style="color:#66d9ef">except</span>:
         <span style="color:#66d9ef">break</span>
     <span style="color:#66d9ef">elif</span> len(l) <span style="color:#f92672">==</span> <span style="color:#ae81ff">21</span>:
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">instrument</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">run_id</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_id</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_lane</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">flowcell_tile</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x_coord</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y_coord</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">12</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pair</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">14</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">filtered</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">control_bits</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
-      line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">index</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">20</span>]
+      line[<span style="color:#e6db74">&#34;instrument&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">0</span>]
+      line[<span style="color:#e6db74">&#34;run_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">2</span>]
+      line[<span style="color:#e6db74">&#34;flowcell_id&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">4</span>]
+      line[<span style="color:#e6db74">&#34;flowcell_lane&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">6</span>]
+      line[<span style="color:#e6db74">&#34;flowcell_tile&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">8</span>]
+      line[<span style="color:#e6db74">&#34;x_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">10</span>]
+      line[<span style="color:#e6db74">&#34;y_coord&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">12</span>]
+      line[<span style="color:#e6db74">&#34;pair&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">14</span>]
+      line[<span style="color:#e6db74">&#34;filtered&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
+      line[<span style="color:#e6db74">&#34;control_bits&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">16</span>]
+      line[<span style="color:#e6db74">&#34;index&#34;</span>] <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">20</span>]
       index_set<span style="color:#f92672">.</span>append(l[<span style="color:#ae81ff">20</span>])
     <span style="color:#66d9ef">else</span>:
-      <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">error</span><span style="color:#e6db74">&#34;</span>, l
-  line[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">index</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> most_common(index_set)
-  f<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([line[x] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> l_keys]<span style="color:#f92672">+</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>]))
+      <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;error&#34;</span>, l
+  line[<span style="color:#e6db74">&#34;index&#34;</span>] <span style="color:#f92672">=</span> most_common(index_set)
+  f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([line[x] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> l_keys]<span style="color:#f92672">+</span> [<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>]))
 </code></pre></div></div>
   
         <div id='comments'></div>

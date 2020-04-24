@@ -11,8 +11,7 @@
 
 <meta property="og:description" content="I have added a new utility to seq-collection called iter which generates chromosomal ranges. Lists of genomic ranges can be easily plugged into utilities such as xargs or gnu-parallel to parallelize commands.
 For example:
-sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &gt; I:0-999999 &gt; I:1000000-1999999 &gt; I:2000000-2999999 &gt; I:3000000-3999999 &gt; I:4000000-4999999 Note: BAMs use a 0-based coordinate system; VCFs are 1-based
-This list of genomic ranges can be used to process a BAM or VCF in parallel:" />
+sc iter test.bam 100,000 # Iterate on bins of 100k base pairs # Outputs &gt; I:0-999999 &gt; I:1000000-1999999 &gt; I:2000000-2999999 &gt; I:3000000-3999999 &gt; I:4000000-4999999 Note:BAMs use a 0-based coordinate system; VCFs are 1-basedThis list of genomic ranges can be used to process a BAM or VCF in parallel:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.danielecook.com/parallelize-by-iterating-over-chromosomal-ranges/" />
 
@@ -28,7 +27,7 @@ This list of genomic ranges can be used to process a BAM or VCF in parallel:" />
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -98,7 +97,7 @@ type="image/x-icon"/>
 &gt; I:2000000-2999999
 &gt; I:3000000-3999999
 &gt; I:4000000-4999999
-</code></pre></div><p><small><strong>Note:</strong> BAMs use a 0-based coordinate system; VCFs are 1-based</small></p>
+</code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted -->Note:<!-- raw HTML omitted --> BAMs use a 0-based coordinate system; VCFs are 1-based<!-- raw HTML omitted --></p>
 <p>This list of genomic ranges can be used to process a BAM or VCF in parallel:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 <span style="color:#66d9ef">function</span> process_chunk <span style="color:#f92672">{</span>

@@ -29,10 +29,9 @@ Then you can set the content of any google sheets worksheet to the data from a p
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
       <guid>https://www.danielecook.com/fetch-citations-in-google-sheets-using-pubmed-function/</guid>
-      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&#39;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
+      <description>If you need to fetch pubmed citations in aggregate it can be convenient to do so using pubmed identifiers. I&amp;rsquo;ve created a pubmed() function that can be added to a google sheet and used to fetch formatted html citations from pubmed. For example, entering the following into a cell:
 =pubmed(23149456) Will return an html-formatted citation:
-The heritability of metabolic profiles in newborn twins.
-Alul FY, Cook DE, Shchelochkov OA, Fleener LG, Berberich SL, Murray JC, Ryckman KK, (2013 Mar) Heredity 110 (3) 253-8</description>
+Setup To implement the function, you&amp;rsquo;ll need to copy and paste the function below into the script editor and save it as a new project.</description>
     </item>
     
     <item>

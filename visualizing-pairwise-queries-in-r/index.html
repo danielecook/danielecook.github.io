@@ -26,7 +26,7 @@ In the example below, I show the results from organisms x diseases/disease-assoc
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -86,7 +86,7 @@ type="image/x-icon"/>
     
   </p>
   
-  <div class="lh-copy post-content"><p><img src="/pairwise_search.png" alt="diseasexorg" class='center-img' /></p>
+  <div class="lh-copy post-content"><p><!-- raw HTML omitted --></p>
 <p>You can look for interesting associations between sets of search terms on PubMed by comparing how often two terms co-occur. The code below returns the number of publications where both terms are mentioned, acting as a rough estimate for how associated they are (at least, in the scholarly world).</p>
 <p>In the example below, I show the results from organisms x diseases/disease-associated terms which is an imperfect look at how various terms estimate of how much each disease is studied in a given organism. Of course, this should all be taken with a (big) grain of salt because these organisms and diseases have many synonyms or related terms (e.g. <em>M. Musculus</em> is often referred to as Mouse in the literature). Additionally, the result count is based off of whether or not the terms were found together within the title and abstract of the literature only – and not the body of the text in many cases.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># install.packages(&#34;RISmed&#34;, &#34;ggplot2&#34;)</span>
@@ -94,32 +94,32 @@ type="image/x-icon"/>
 <span style="color:#a6e22e">library</span>(ggplot2)
 
 <span style="color:#75715e"># Given two lists of terms, lets see how &#39;hot&#39; they are together</span>
-set1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ebola&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">autoimmune&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Diabetes&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Glioblastoma&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Asthma&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Schizophrenia&#34;</span>)
-set2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">C. elegans&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">D. Melanogaster&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">M. Musculus&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">S. Cerevisiae&#34;</span>)
+set1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;ebola&#34;</span>,<span style="color:#e6db74">&#34;autoimmune&#34;</span>,<span style="color:#e6db74">&#34;Diabetes&#34;</span>,<span style="color:#e6db74">&#34;Glioblastoma&#34;</span>,<span style="color:#e6db74">&#34;Asthma&#34;</span>,<span style="color:#e6db74">&#34;Schizophrenia&#34;</span>)
+set2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;C. elegans&#34;</span>,<span style="color:#e6db74">&#34;D. Melanogaster&#34;</span>, <span style="color:#e6db74">&#34;M. Musculus&#34;</span>,<span style="color:#e6db74">&#34;S. Cerevisiae&#34;</span>)
 
 <span style="color:#75715e"># Generate all possible pairs</span>
 pairs <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">expand.grid</span>(set1, set2, stringsAsFactors<span style="color:#f92672">=</span>F)
 
 <span style="color:#75715e"># Search pubmed for each pair, and return the number of search results.</span>
 results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">nrow</span>(pairs),  <span style="color:#a6e22e">function</span>(x) {
-  query <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s %s&#34;</span>, pairs[x,]<span style="color:#f92672">$</span>Var1, pairs[x,]<span style="color:#f92672">$</span>Var2)
+  query <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, pairs[x,]<span style="color:#f92672">$</span>Var1, pairs[x,]<span style="color:#f92672">$</span>Var2)
   <span style="color:#a6e22e">print</span>(query)
-  result <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">EUtilsSummary</span>(query, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">esearch&#39;</span>, db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pubmed&#39;</span>)
+  result <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">EUtilsSummary</span>(query, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;esearch&#39;</span>, db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pubmed&#39;</span>)
   <span style="color:#a6e22e">c</span>(q1<span style="color:#f92672">=</span>pairs[x,]<span style="color:#f92672">$</span>Var1, q2<span style="color:#f92672">=</span>pairs[x,]<span style="color:#f92672">$</span>Var2, count<span style="color:#f92672">=</span><span style="color:#a6e22e">QueryCount</span>(result))
 })
 
 <span style="color:#75715e"># Do some data formatting on the results.</span>
-results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">do.call</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rbind&#34;</span>, results), stringsAsFactors<span style="color:#f92672">=</span>F)
+results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">do.call</span>(<span style="color:#e6db74">&#34;rbind&#34;</span>, results), stringsAsFactors<span style="color:#f92672">=</span>F)
 <span style="color:#75715e"># Turn the number of search results into numeric form.</span>
 results<span style="color:#f92672">$</span>count <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(results<span style="color:#f92672">$</span>count)
 
 <span style="color:#75715e"># Plot the results using geom_tile</span>
 <span style="color:#a6e22e">ggplot</span>(results) <span style="color:#f92672">+</span>
   <span style="color:#a6e22e">geom_tile</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>q1, y<span style="color:#f92672">=</span>q2, fill<span style="color:#f92672">=</span>count)) <span style="color:#f92672">+</span>
-  <span style="color:#a6e22e">geom_text</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>q1, y<span style="color:#f92672">=</span>q2, label<span style="color:#f92672">=</span>count), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">white&#34;</span>) <span style="color:#f92672">+</span> 
-  <span style="color:#a6e22e">labs</span>(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Disease Publications by Organism&#34;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y&#34;</span>)
+  <span style="color:#a6e22e">geom_text</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>q1, y<span style="color:#f92672">=</span>q2, label<span style="color:#f92672">=</span>count), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Disease Publications by Organism&#34;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;y&#34;</span>)
 
-<span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">~/Desktop/pairwise_search.png&#34;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>)
+<span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;~/Desktop/pairwise_search.png&#34;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>)
 
 </code></pre></div></div>
   

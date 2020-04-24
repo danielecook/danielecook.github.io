@@ -27,7 +27,7 @@ Then you can set the content of any google sheets worksheet to the data from a p
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -100,7 +100,7 @@ type="image/x-icon"/>
     <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>to_numpy():
         <span style="color:#66d9ef">for</span> val <span style="color:#f92672">in</span> row:
             <span style="color:#66d9ef">if</span> pd<span style="color:#f92672">.</span>isna(val):
-                <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>
+                <span style="color:#66d9ef">yield</span> <span style="color:#e6db74">&#34;&#34;</span>
             <span style="color:#66d9ef">else</span>:
                 <span style="color:#66d9ef">yield</span> val
 
@@ -109,23 +109,23 @@ type="image/x-icon"/>
     <span style="color:#66d9ef">if</span> clear:
         sheet<span style="color:#f92672">.</span>clear()
     (row, col) <span style="color:#f92672">=</span> pandas_df<span style="color:#f92672">.</span>shape
-    cells <span style="color:#f92672">=</span> sheet<span style="color:#f92672">.</span>range(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">A1:{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(gspread<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>rowcol_to_a1(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, col)))
+    cells <span style="color:#f92672">=</span> sheet<span style="color:#f92672">.</span>range(<span style="color:#e6db74">&#34;A1:{}&#34;</span><span style="color:#f92672">.</span>format(gspread<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>rowcol_to_a1(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, col)))
     <span style="color:#66d9ef">for</span> cell, val <span style="color:#f92672">in</span> zip(cells, iter_pd(pandas_df)):
         cell<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> val
     sheet<span style="color:#f92672">.</span>update_cells(cells)
 
-scope <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://spreadsheets.google.com/feeds</span><span style="color:#e6db74">&#39;</span>,
-         <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://www.googleapis.com/auth/drive</span><span style="color:#e6db74">&#39;</span>]
+scope <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;https://spreadsheets.google.com/feeds&#39;</span>,
+         <span style="color:#e6db74">&#39;https://www.googleapis.com/auth/drive&#39;</span>]
 
-credentials <span style="color:#f92672">=</span> ServiceAccountCredentials<span style="color:#f92672">.</span>from_json_keyfile_name(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">service.json</span><span style="color:#e6db74">&#39;</span>, scope)
+credentials <span style="color:#f92672">=</span> ServiceAccountCredentials<span style="color:#f92672">.</span>from_json_keyfile_name(<span style="color:#e6db74">&#39;service.json&#39;</span>, scope)
 
 gc <span style="color:#f92672">=</span> gspread<span style="color:#f92672">.</span>authorize(credentials)
 
-workbook <span style="color:#f92672">=</span> gc<span style="color:#f92672">.</span>open_by_key(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;workbook id&gt;</span><span style="color:#e6db74">&#34;</span>)
-sheet <span style="color:#f92672">=</span> workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">worksheet_name</span><span style="color:#e6db74">&#34;</span>)
+workbook <span style="color:#f92672">=</span> gc<span style="color:#f92672">.</span>open_by_key(<span style="color:#e6db74">&#34;&lt;workbook id&gt;&#34;</span>)
+sheet <span style="color:#f92672">=</span> workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74">&#34;worksheet_name&#34;</span>)
 
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">input_data.tsv</span><span style="color:#e6db74">&#34;</span>)
-pandas_to_sheets(df, workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">worksheet</span><span style="color:#e6db74">&#34;</span>))
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;input_data.tsv&#34;</span>)
+pandas_to_sheets(df, workbook<span style="color:#f92672">.</span>worksheet(<span style="color:#e6db74">&#34;worksheet&#34;</span>))
 </code></pre></div></div>
   
         <div id='comments'></div>

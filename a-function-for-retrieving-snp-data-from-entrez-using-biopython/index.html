@@ -26,7 +26,7 @@ Unfortunately – one notable database biopython has trouble working with is the
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -92,20 +92,20 @@ type="image/x-icon"/>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint <span style="color:#66d9ef">as</span> pp
 <span style="color:#f92672">from</span> Bio <span style="color:#f92672">import</span> Entrez
 
-Entrez<span style="color:#f92672">.</span>email <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">YOUR@EMAIL.HERE</span><span style="color:#e6db74">&#34;</span>
+Entrez<span style="color:#f92672">.</span>email <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;YOUR@EMAIL.HERE&#34;</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pull_line</span>(var_set, line):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    This function parses data from lines in one of three ways:</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    1.) Pulls variables out of a particular line when defined as </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">variablename=[value]</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> - uses a string to find the variable.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    2.) Pulls variables based on a set position within a line [splits the line by </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">|</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">]</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    3.) Defines variables that can be identified based on a limited possible set of values - [categorical variable, specified using an array]</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    This function parses data from lines in one of three ways:
+</span><span style="color:#e6db74">    1.) Pulls variables out of a particular line when defined as &#34;variablename=[value]&#34; - uses a string to find the variable.
+</span><span style="color:#e6db74">    2.) Pulls variables based on a set position within a line [splits the line by &#39;|&#39;]
+</span><span style="color:#e6db74">    3.) Defines variables that can be identified based on a limited possible set of values - [categorical variable, specified using an array]
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
     line_set <span style="color:#f92672">=</span> {}
     <span style="color:#66d9ef">for</span> k,v <span style="color:#f92672">in</span> var_set<span style="color:#f92672">.</span>items():
         <span style="color:#66d9ef">if</span> type(v) <span style="color:#f92672">==</span> str:
             <span style="color:#66d9ef">try</span>:
-                line_set[k] <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> line <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>startswith(v)][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(v,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)
+                line_set[k] <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> line <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>startswith(v)][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(v,<span style="color:#e6db74">&#39;&#39;</span>)
             <span style="color:#66d9ef">except</span>:
                 <span style="color:#66d9ef">pass</span>
         <span style="color:#66d9ef">elif</span> type(v) <span style="color:#f92672">==</span> int:
@@ -121,15 +121,15 @@ Entrez<span style="color:#f92672">.</span>email <span style="color:#f92672">=</s
     <span style="color:#66d9ef">return</span> line_set
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pull_vars</span>(var_set,line_start,line,multi<span style="color:#f92672">=</span>False):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Delegates and compiles data from entrez flat files dependent on whether</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    the type of data trying to be pulled is contained in unique vs. non-unique lines.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    For example - the first line of the flat file is always something like this:</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    rs12009 | Homo Sapiens | 9606 | etc.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    This line is unique (refers to RefSnp identifier)- and only occurs once in each flat file. On the other hand, lines</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    beginning with </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ss[number]</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> refer to </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">submitted snp</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> numbers and can appear multiple times.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    lineset <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> | </span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> line <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>startswith(line_start)]
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Delegates and compiles data from entrez flat files dependent on whether
+</span><span style="color:#e6db74">    the type of data trying to be pulled is contained in unique vs. non-unique lines.
+</span><span style="color:#e6db74">    For example - the first line of the flat file is always something like this:
+</span><span style="color:#e6db74">    rs12009 | Homo Sapiens | 9606 | etc.
+</span><span style="color:#e6db74">    This line is unique (refers to RefSnp identifier)- and only occurs once in each flat file. On the other hand, lines
+</span><span style="color:#e6db74">    beginning with &#34;ss[number]&#34; refer to &#39;submitted snp&#39; numbers and can appear multiple times.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    lineset <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; | &#39;</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> line <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>startswith(line_start)]
     <span style="color:#66d9ef">if</span> len(lineset) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
         <span style="color:#66d9ef">return</span> 
     <span style="color:#75715e"># If the same line exists multiple times - place results into an array</span>
@@ -146,110 +146,110 @@ Entrez<span style="color:#f92672">.</span>email <span style="color:#f92672">=</s
         <span style="color:#66d9ef">return</span> pull_line(var_set,line)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_snp</span>(q):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Takes as input an array of snp identifiers and returns </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    a parsed dictionary of their data from Entrez.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    response <span style="color:#f92672">=</span> Entrez<span style="color:#f92672">.</span>efetch(db<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SNP</span><span style="color:#e6db74">&#39;</span>, id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(q), rettype<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flt</span><span style="color:#e6db74">&#39;</span>, retmode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flt</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>read()
+    <span style="color:#e6db74">&#34;&#34;&#34; 
+</span><span style="color:#e6db74">    Takes as input an array of snp identifiers and returns 
+</span><span style="color:#e6db74">    a parsed dictionary of their data from Entrez.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    response <span style="color:#f92672">=</span> Entrez<span style="color:#f92672">.</span>efetch(db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SNP&#39;</span>, id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span><span style="color:#f92672">.</span>join(q), rettype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;flt&#39;</span>, retmode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;flt&#39;</span>)<span style="color:#f92672">.</span>read()
     r <span style="color:#f92672">=</span> {} <span style="color:#75715e"># Return dictionary variable</span>
     <span style="color:#75715e"># Parse flat file response</span>
-    <span style="color:#66d9ef">for</span> snp_info <span style="color:#f92672">in</span> filter(None,response<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)):
+    <span style="color:#66d9ef">for</span> snp_info <span style="color:#f92672">in</span> filter(None,response<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)):
         <span style="color:#66d9ef">print</span> snp_info
         <span style="color:#75715e"># Parse the First Line. Details of rs flat files available here:</span>
         <span style="color:#75715e"># ftp://ftp.ncbi.nlm.nih.gov/snp/specs/00readme.txt</span>
-        snp <span style="color:#f92672">=</span> snp_info<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+        snp <span style="color:#f92672">=</span> snp_info<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
         <span style="color:#75715e"># Parse the &#39;rs&#39; line:</span>
-        rsId <span style="color:#f92672">=</span> snp[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> | </span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">0</span>]
+        rsId <span style="color:#f92672">=</span> snp[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34; | &#34;</span>)[<span style="color:#ae81ff">0</span>]
         r[rsId] <span style="color:#f92672">=</span> {}
 
         <span style="color:#75715e"># rs vars</span>
-        rs_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">organism</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">1</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">taxId</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">2</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">snpClass</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">3</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genotype</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">genotype=</span><span style="color:#e6db74">&#34;</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rsLinkout</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">submitterlink=</span><span style="color:#e6db74">&#34;</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">date</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">updated </span><span style="color:#e6db74">&#34;</span>}
+        rs_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;organism&#34;</span>:<span style="color:#ae81ff">1</span>,
+                   <span style="color:#e6db74">&#34;taxId&#34;</span>:<span style="color:#ae81ff">2</span>,
+                   <span style="color:#e6db74">&#34;snpClass&#34;</span>:<span style="color:#ae81ff">3</span>,
+                   <span style="color:#e6db74">&#34;genotype&#34;</span>:<span style="color:#e6db74">&#34;genotype=&#34;</span>,
+                   <span style="color:#e6db74">&#34;rsLinkout&#34;</span>:<span style="color:#e6db74">&#34;submitterlink=&#34;</span>,
+                   <span style="color:#e6db74">&#34;date&#34;</span>:<span style="color:#e6db74">&#34;updated &#34;</span>}
 
         <span style="color:#75715e"># rs vars</span>
-        ss_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ssId</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">0</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">handle</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">1</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">locSnpId</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">2</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient=</span><span style="color:#e6db74">&#34;</span>,
-                   <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">exemplar</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ss_pick=</span><span style="color:#e6db74">&#34;</span>,
+        ss_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;ssId&#34;</span>:<span style="color:#ae81ff">0</span>,
+                   <span style="color:#e6db74">&#34;handle&#34;</span>:<span style="color:#ae81ff">1</span>,
+                   <span style="color:#e6db74">&#34;locSnpId&#34;</span>:<span style="color:#ae81ff">2</span>,
+                   <span style="color:#e6db74">&#34;orient&#34;</span>:<span style="color:#e6db74">&#34;orient=&#34;</span>,
+                   <span style="color:#e6db74">&#34;exemplar&#34;</span>:<span style="color:#e6db74">&#34;ss_pick=&#34;</span>,
                    }
 
         <span style="color:#75715e"># SNP line variables:</span>
-        SNP_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">observed</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">alleles=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">het=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">stdError</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">se(het)=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">validated</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">validated=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">validProbMin</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">min_prob=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">validProbMax</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">max_prob=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">validation</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">suspect=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AlleleOrigin</span><span style="color:#e6db74">&#34;</span>:[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">unknown</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">germline</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">somatic</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">inherited</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">paternal</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">maternal</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">de-novo</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bipaternal</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">unipaternal</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">not-tested</span><span style="color:#e6db74">&#39;</span>,
-                                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tested-inconclusive</span><span style="color:#e6db74">&#39;</span>],
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">snpType</span><span style="color:#e6db74">&#34;</span>:[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">notwithdrawn</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">artifact</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gene-duplication</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">duplicate-submission</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">notspecified</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ambiguous-location;</span><span style="color:#e6db74">&#39;</span>,
-                               <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">low-map-quality</span><span style="color:#e6db74">&#39;</span>]}
+        SNP_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;observed&#34;</span>:<span style="color:#e6db74">&#34;alleles=&#34;</span>,
+                    <span style="color:#e6db74">&#34;value&#34;</span>:<span style="color:#e6db74">&#34;het=&#34;</span>,
+                    <span style="color:#e6db74">&#34;stdError&#34;</span>:<span style="color:#e6db74">&#34;se(het)=&#34;</span>,
+                    <span style="color:#e6db74">&#34;validated&#34;</span>:<span style="color:#e6db74">&#34;validated=&#34;</span>,
+                    <span style="color:#e6db74">&#34;validProbMin&#34;</span>:<span style="color:#e6db74">&#34;min_prob=&#34;</span>,
+                    <span style="color:#e6db74">&#34;validProbMax&#34;</span>:<span style="color:#e6db74">&#34;max_prob=&#34;</span>,
+                    <span style="color:#e6db74">&#34;validation&#34;</span>:<span style="color:#e6db74">&#34;suspect=&#34;</span>,
+                    <span style="color:#e6db74">&#34;AlleleOrigin&#34;</span>:[<span style="color:#e6db74">&#39;unknown&#39;</span>,
+                                    <span style="color:#e6db74">&#39;germline&#39;</span>,
+                                    <span style="color:#e6db74">&#39;somatic&#39;</span>,
+                                    <span style="color:#e6db74">&#39;inherited&#39;</span>,
+                                    <span style="color:#e6db74">&#39;paternal&#39;</span>,
+                                    <span style="color:#e6db74">&#39;maternal&#39;</span>,
+                                    <span style="color:#e6db74">&#39;de-novo&#39;</span>,
+                                    <span style="color:#e6db74">&#39;bipaternal&#39;</span>,
+                                    <span style="color:#e6db74">&#39;unipaternal&#39;</span>,
+                                    <span style="color:#e6db74">&#39;not-tested&#39;</span>,
+                                    <span style="color:#e6db74">&#39;tested-inconclusive&#39;</span>],
+                    <span style="color:#e6db74">&#34;snpType&#34;</span>:[<span style="color:#e6db74">&#39;notwithdrawn&#39;</span>,
+                               <span style="color:#e6db74">&#39;artifact&#39;</span>,
+                               <span style="color:#e6db74">&#39;gene-duplication&#39;</span>,
+                               <span style="color:#e6db74">&#39;duplicate-submission&#39;</span>,
+                               <span style="color:#e6db74">&#39;notspecified&#39;</span>,
+                               <span style="color:#e6db74">&#39;ambiguous-location;&#39;</span>,
+                               <span style="color:#e6db74">&#39;low-map-quality&#39;</span>]}
         
         <span style="color:#75715e"># CLINSIG line variables:</span>
-        CLINSIG_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ClinicalSignificance</span><span style="color:#e6db74">&#34;</span>:[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">probable-pathogenic</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pathogenic</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">other</span><span style="color:#e6db74">&#39;</span>]}
+        CLINSIG_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;ClinicalSignificance&#34;</span>:[<span style="color:#e6db74">&#39;probable-pathogenic&#39;</span>,<span style="color:#e6db74">&#39;pathogenic&#39;</span>,<span style="color:#e6db74">&#39;other&#39;</span>]}
 
         <span style="color:#75715e"># GMAF line variables</span>
-        GMAF_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele=</span><span style="color:#e6db74">&#34;</span>,
-                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">sampleSize</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">count=</span><span style="color:#e6db74">&#34;</span>,
-                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">freq</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MAF=</span><span style="color:#e6db74">&#34;</span>}
+        GMAF_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;allele&#34;</span>:<span style="color:#e6db74">&#34;allele=&#34;</span>,
+                     <span style="color:#e6db74">&#34;sampleSize&#34;</span>:<span style="color:#e6db74">&#34;count=&#34;</span>,
+                     <span style="color:#e6db74">&#34;freq&#34;</span>:<span style="color:#e6db74">&#34;MAF=&#34;</span>}
 
         <span style="color:#75715e"># CTG line variables</span>
-        CTG_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">groupLabel</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">assembly=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">chromosome</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">chr=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">physmapInt</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">chr-pos=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">asnFrom</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ctg-start=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">asnTo</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ctg-end=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">loctype</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">loctype=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient=</span><span style="color:#e6db74">&#34;</span>}
+        CTG_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;groupLabel&#34;</span>:<span style="color:#e6db74">&#34;assembly=&#34;</span>,
+                    <span style="color:#e6db74">&#34;chromosome&#34;</span>:<span style="color:#e6db74">&#34;chr=&#34;</span>,
+                    <span style="color:#e6db74">&#34;physmapInt&#34;</span>:<span style="color:#e6db74">&#34;chr-pos=&#34;</span>,
+                    <span style="color:#e6db74">&#34;asnFrom&#34;</span>:<span style="color:#e6db74">&#34;ctg-start=&#34;</span>,
+                    <span style="color:#e6db74">&#34;asnTo&#34;</span>:<span style="color:#e6db74">&#34;ctg-end=&#34;</span>,
+                    <span style="color:#e6db74">&#34;loctype&#34;</span>:<span style="color:#e6db74">&#34;loctype=&#34;</span>,
+                    <span style="color:#e6db74">&#34;orient&#34;</span>:<span style="color:#e6db74">&#34;orient=&#34;</span>}
 
         <span style="color:#75715e"># LOC line variables</span>
-        LOC_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">symbol</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">1</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">geneId</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">locus_id=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">fxnClass</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">fxn-class=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">allele=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">readingFrame</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">frame=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">residue</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">residue=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">aaPosition</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">aa_position=</span><span style="color:#e6db74">&#34;</span>}
+        LOC_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;symbol&#34;</span>:<span style="color:#ae81ff">1</span>,
+                    <span style="color:#e6db74">&#34;geneId&#34;</span>:<span style="color:#e6db74">&#34;locus_id=&#34;</span>,
+                    <span style="color:#e6db74">&#34;fxnClass&#34;</span>:<span style="color:#e6db74">&#34;fxn-class=&#34;</span>,
+                    <span style="color:#e6db74">&#34;allele&#34;</span>:<span style="color:#e6db74">&#34;allele=&#34;</span>,
+                    <span style="color:#e6db74">&#34;readingFrame&#34;</span>:<span style="color:#e6db74">&#34;frame=&#34;</span>,
+                    <span style="color:#e6db74">&#34;residue&#34;</span>:<span style="color:#e6db74">&#34;residue=&#34;</span>,
+                    <span style="color:#e6db74">&#34;aaPosition&#34;</span>:<span style="color:#e6db74">&#34;aa_position=&#34;</span>}
 
         <span style="color:#75715e"># LOC line variables</span>
-        SEQ_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">gi</span><span style="color:#e6db74">&#34;</span>:<span style="color:#ae81ff">1</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">source</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">source-db=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">asnFrom</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">seq-pos=</span><span style="color:#e6db74">&#34;</span>,
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">orient=</span><span style="color:#e6db74">&#34;</span>}
+        SEQ_vars <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;gi&#34;</span>:<span style="color:#ae81ff">1</span>,
+                    <span style="color:#e6db74">&#34;source&#34;</span>:<span style="color:#e6db74">&#34;source-db=&#34;</span>,
+                    <span style="color:#e6db74">&#34;asnFrom&#34;</span>:<span style="color:#e6db74">&#34;seq-pos=&#34;</span>,
+                    <span style="color:#e6db74">&#34;orient&#34;</span>:<span style="color:#e6db74">&#34;orient=&#34;</span>}
 
         <span style="color:#75715e"># Pull out variable information:</span>
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rs</span><span style="color:#e6db74">&#39;</span>]       <span style="color:#f92672">=</span> pull_vars(rs_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rs</span><span style="color:#e6db74">&#34;</span>,snp)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ss</span><span style="color:#e6db74">&#39;</span>]       <span style="color:#f92672">=</span> pull_vars(ss_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ss</span><span style="color:#e6db74">&#34;</span>,snp,True)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SNP</span><span style="color:#e6db74">&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(SNP_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SNP</span><span style="color:#e6db74">&#34;</span>,snp)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CLINSIG</span><span style="color:#e6db74">&#39;</span>]  <span style="color:#f92672">=</span> pull_vars(CLINSIG_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CLINSIG</span><span style="color:#e6db74">&#34;</span>,snp)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">GMAF</span><span style="color:#e6db74">&#39;</span>]     <span style="color:#f92672">=</span> pull_vars(GMAF_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">GMAF</span><span style="color:#e6db74">&#34;</span>,snp)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CTG</span><span style="color:#e6db74">&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(CTG_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CTG</span><span style="color:#e6db74">&#34;</span>,snp,True)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LOC</span><span style="color:#e6db74">&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(LOC_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">LOC</span><span style="color:#e6db74">&#34;</span>,snp,True)
-        r[rsId][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SEQ</span><span style="color:#e6db74">&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(SEQ_vars,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SEQ</span><span style="color:#e6db74">&#34;</span>,snp,True)
+        r[rsId][<span style="color:#e6db74">&#39;rs&#39;</span>]       <span style="color:#f92672">=</span> pull_vars(rs_vars,<span style="color:#e6db74">&#34;rs&#34;</span>,snp)
+        r[rsId][<span style="color:#e6db74">&#39;ss&#39;</span>]       <span style="color:#f92672">=</span> pull_vars(ss_vars,<span style="color:#e6db74">&#34;ss&#34;</span>,snp,True)
+        r[rsId][<span style="color:#e6db74">&#39;SNP&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(SNP_vars,<span style="color:#e6db74">&#34;SNP&#34;</span>,snp)
+        r[rsId][<span style="color:#e6db74">&#39;CLINSIG&#39;</span>]  <span style="color:#f92672">=</span> pull_vars(CLINSIG_vars,<span style="color:#e6db74">&#34;CLINSIG&#34;</span>,snp)
+        r[rsId][<span style="color:#e6db74">&#39;GMAF&#39;</span>]     <span style="color:#f92672">=</span> pull_vars(GMAF_vars,<span style="color:#e6db74">&#34;GMAF&#34;</span>,snp)
+        r[rsId][<span style="color:#e6db74">&#39;CTG&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(CTG_vars,<span style="color:#e6db74">&#34;CTG&#34;</span>,snp,True)
+        r[rsId][<span style="color:#e6db74">&#39;LOC&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(LOC_vars,<span style="color:#e6db74">&#34;LOC&#34;</span>,snp,True)
+        r[rsId][<span style="color:#e6db74">&#39;SEQ&#39;</span>]      <span style="color:#f92672">=</span> pull_vars(SEQ_vars,<span style="color:#e6db74">&#34;SEQ&#34;</span>,snp,True)
     <span style="color:#66d9ef">return</span> r
         
 
-snp <span style="color:#f92672">=</span> get_snp([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">12009</span><span style="color:#e6db74">&#34;</span>])
+snp <span style="color:#f92672">=</span> get_snp([<span style="color:#e6db74">&#34;12009&#34;</span>])
 <span style="color:#66d9ef">print</span> pp(snp)
 </code></pre></div></div>
   

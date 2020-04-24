@@ -28,7 +28,7 @@ seq 1 5 | parallel -j 4 echo Here we are (1) Printing a sequence of numbers from
 
 
 
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.69.1" />
 
 <style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
 :root {
@@ -125,7 +125,7 @@ parallel -j +1 <span style="color:#75715e"># Parallelize across the number of co
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">parallel -j <span style="color:#ae81ff">4</span> -k echo :::: my_args.txt
 </code></pre></div><h2 id="use-">Use `</h2>
 <p>By default, <code>parallel</code> assumes the arguments are placed at the end of the input command, but you can explicitly define where arguments are substituted using <code>{}</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span style="color:#ae81ff">4</span> -k echo <span style="color:#ae81ff">\&#34;</span><span style="color:#f92672">{</span><span style="color:#f92672">}</span> <span style="color:#e6db74">&#34;&lt;-- a number&#34;</span><span style="color:#ae81ff">\&#34;</span> ::: <span style="color:#e6db74">`</span>seq <span style="color:#ae81ff">1</span> 5<span style="color:#e6db74">`</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">parallel --dry-run -j <span style="color:#ae81ff">4</span> -k echo <span style="color:#ae81ff">\&#34;</span><span style="color:#f92672">{}</span> <span style="color:#e6db74">&#34;&lt;-- a number&#34;</span><span style="color:#ae81ff">\&#34;</span> ::: <span style="color:#e6db74">`</span>seq <span style="color:#ae81ff">1</span> 5<span style="color:#e6db74">`</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;1 &lt;-- a number&#34;
 echo &#34;2 &lt;-- a number&#34;
 echo &#34;3 &lt;-- a number&#34;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stata on Daniel E. Cook</title>
+    <link>https://www.danielecook.com/tags/stata/</link>
+    <description>Recent content in stata on Daniel E. Cook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 19 Dec 2012 22:45:53 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.danielecook.com/tags/stata/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ccmatch: A stata program for matching cases and controls</title>
+      <link>https://www.danielecook.com/ccmatch-a-stata-program-for-matching-cases-and-controls/</link>
+      <pubDate>Wed, 19 Dec 2012 22:45:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/ccmatch-a-stata-program-for-matching-cases-and-controls/</guid>
+      <description>ccmatch is used to randomly match cases and controls based on specified criteria. For instance, if you wanted to randomly match cases and controls based on age, you can use ccmatch to pair up people with the same age. You can use multiple variables to match cases and controls.
+Installation ssc install ccmatch Syntax ccmatch variable_list, cc( ) [id( )] specifying an id is optional
+ variable_list The variable list are categorical or discrete variables you want to match on (example: age, sex, weight class, etc.</description>
+    </item>
+    
+  </channel>
+</rss>
