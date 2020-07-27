@@ -3,37 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.danielecook.com/</loc>
-    <lastmod>2020-07-08T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/managing-software-environments-on-hpc-systems/</loc>
-    <lastmod>2020-07-08T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/posts/</loc>
-    <lastmod>2020-07-08T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/presentation/</loc>
-    <lastmod>2020-07-08T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.danielecook.com/tags/</loc>
-    <lastmod>2020-07-08T01:15:53+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/</loc>
     <lastmod>2020-04-22T01:15:53+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://www.danielecook.com/</loc>
+    <lastmod>2020-04-22T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danielecook.com/tags/nim/</loc>
+    <lastmod>2020-04-22T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/posts/</loc>
+    <lastmod>2020-04-22T01:15:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danielecook.com/tags/</loc>
     <lastmod>2020-04-22T01:15:53+00:00</lastmod>
   </url>
   

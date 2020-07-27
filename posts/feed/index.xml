@@ -7,20 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/posts/feed/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Managing software environments on HPC systems</title>
-      <link>https://www.danielecook.com/managing-software-environments-on-hpc-systems/</link>
-      <pubDate>Wed, 08 Jul 2020 01:15:53 +0000</pubDate>
-      
-      <guid>https://www.danielecook.com/managing-software-environments-on-hpc-systems/</guid>
-      <description>The ability to control software environments is essential for reproducible and robust data analysis. A number of tools exist for managing software environments that can be run on High-performance computing (HPC) systems. Below I detail a few of them.
-Replication and Portability The Replication crisis is an ongoing problem in which the results of many studies cannot be reproduced. Surprisingly, many studies that rely on computational methods also are not reproducible even though code, data, and software can be packaged and distributed for others to evaluate 1.</description>
-    </item>
     
     <item>
       <title>A tool for writing TILs (Today I Learned)</title>
