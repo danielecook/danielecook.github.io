@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>The `module` command</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <hr>
+<p>title: &quot;Working with software environments on HPC systems&quot;
+author: Daniel Cook
+date: 2020-07-08T01:15:53Z
+tags:</p>
+<ul>
+<li>presentation</li>
+</ul>
+<hr>
+<p>The ability to control software environments is essential for reproducible and robust data analysis. A number of tools exist for managing software environments that can be run on  High-performance computing (HPC) systems. They are detailed here.</p>
+<h1 id="the-module-command">The <code>module</code> command</h1>
+<p><a href="https://linux.die.net/man/1/module">module</a> is a program often found on HPC systems that allows you to load software. You load programs by typing something like:</p>
+<pre><code class="language-bash"><div>module load bcftools/1.10.1
+</div></code></pre>
+<p>You can also load the latest version of a module by leaving off the version, but this is bad practice, because results can change when software is updated and your work is no longer reproducible.</p>
+<pre><code class="language-bash"><div>module load bcftools
+</div></code></pre>
+<p>Additional commands you should be aware of:</p>
+<pre><code class="language-bash"><div>module avail <span class="hljs-comment"># Lists all available software</span>
+module list  <span class="hljs-comment"># Shows loaded modules</span>
+</div></code></pre>
+<p>The module command is often run in analysis scripts. For example, on a SLURM cluster you might have a script that looks like this:</p>
+<pre><code class="language-bash"><div><span class="hljs-meta">#!/usr/bin/bash</span>
+<span class="hljs-comment"># Author: Daniel E. Cook</span>
+<span class="hljs-comment">#SBATCH --job-name bcftools_analysis</span>
+<span class="hljs-comment">#SBATCH --part=cpu</span>
+<span class="hljs-comment">#SBATCH --time=2:00:00</span>
+<span class="hljs-comment">#SBATCH --cpus-per-task=1</span>
+<span class="hljs-comment">#SBATCH --mem=4G</span>
+<span class="hljs-comment">#SBATCH -o %j.out</span>
+<span class="hljs-comment">#SBATCH -e %j.err</span>
+module load bcftools/1.10.1
+module load bedtools/2.29.1
+bcftools call ...
+bedtools ...
+</div></code></pre>
+<h3 id="modulefiles">modulefiles</h3>
+<p>Modules are defined using <code>modulefiles</code>, which basically alter your shell environment to make make software accessible.</p>
+<p>The contents of a module can be shown by typing <code>module show &lt;module name&gt;</code>.</p>
+<pre><code class="language-bash"><div>&gt;&gt;&gt; module show bedtools/2.29.1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   /software/Modules/3.2.9/modulefiles/bedtools/2.29.1:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+whatis(<span class="hljs-string">"Sets up bedtools/2.29.1 "</span>)
+setenv(<span class="hljs-string">"BEDTOOLS_DIR"</span>,<span class="hljs-string">"/software/bedtools/2.29.1/bin"</span>)
+setenv(<span class="hljs-string">"BEDTOOLS_HOME"</span>,<span class="hljs-string">"/software/bedtools/2.29.1"</span>)
+prepend_path(<span class="hljs-string">"PATH"</span>,<span class="hljs-string">"/software/bedtools/2.29.1/bin"</span>)
+<span class="hljs-built_in">help</span>([[This module adds bedtools/2.29.1 to various paths
+]])
+</div></code></pre>
+<p>If you are lucky, your HPC administrators will manage installation of software and you will not have to write any <code>modulefiles</code> yourself. However, there are scenerios where you might choose to do so. For example, if you work in a lab and want to share a program program with other lab members, you can write a module for the group. The software and <code>modulefile</code> would be stored in your shared disk space, and everyone would have to add the directory of the <code>modulefile</code> to an environmental variable called <code>MODULEPATH</code> in order to load it.</p>
+<h3 id="should-i-use-module">Should I use <code>module</code>?</h3>
+<p>It depends. <code>module</code> is convenient for loading the software. However, modules are generally not portable - meaning you cannot use the same software locally or even on another HPC cluster. Even when two clusters have the same software and versions you still might not be able to load the software correctly with the same script because modules are often named arbitrarily and are case sensitive.</p>
+<p>For example, I have worked on two HPCs with <code>bedtools</code> installed but I have to load it differently on each one:</p>
+<pre><code><code><div>module load bedtools/2.29.1 # HPC 1
+module load BEDtools/2.29.1 # HPC 2
+</div></code></code></pre>
+<p>It's a good idea to just use lowercase for module names to avoid confusion.</p>
+<p><strong>Other issues I have encountered with module</strong></p>
+<ul>
+<li>Your HPC admin might remove or update modules. This can break all of your scripts.</li>
+<li>Loading multiple modules can unload and/or load different versions of dependencies</li>
+</ul>
+<p>My recommendation: do not use <code>module</code> if you intend to publish analysis scripts, or need your analysis to be reproducible outside of your current HPC environment. Your work is not reproducible if your scripts cannot be run by someone else on their own cluster.</p>
+<h3 id="conda">conda</h3>
+<h3 id="docker">docker</h3>
+<h3 id="singularity">singularity</h3>
+
+    </body>
+    </html>

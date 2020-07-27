@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 22 Apr 2020 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/tags/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>presentation</title>
+      <link>https://www.danielecook.com/tags/presentation/</link>
+      <pubDate>Wed, 08 Jul 2020 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/tags/presentation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>nim</title>

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 22 Apr 2020 01:15:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 01:15:53 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danielecook.com/posts/feed/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Managing software environments on HPC systems</title>
+      <link>https://www.danielecook.com/managing-software-environments-on-hpc-systems/</link>
+      <pubDate>Wed, 08 Jul 2020 01:15:53 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/managing-software-environments-on-hpc-systems/</guid>
+      <description>The ability to control software environments is essential for reproducible and robust data analysis. A number of tools exist for managing software environments that can be run on High-performance computing (HPC) systems. Below I detail a few of them.
+Replication and Portability The Replication crisis is an ongoing problem in which the results of many studies cannot be reproduced. Surprisingly, many studies that rely on computational methods also are not reproducible even though code, data, and software can be packaged and distributed for others to evaluate 1.</description>
+    </item>
     
     <item>
       <title>A tool for writing TILs (Today I Learned)</title>
@@ -596,6 +606,15 @@ Update: machado (2019-06-20) I originally put together a set of models for Chado
       <description>ccmatch is used to randomly match cases and controls based on specified criteria. For instance, if you wanted to randomly match cases and controls based on age, you can use ccmatch to pair up people with the same age. You can use multiple variables to match cases and controls.
 Installation ssc install ccmatch Syntax ccmatch variable_list, cc( ) [id( )] specifying an id is optional
  variable_list The variable list are categorical or discrete variables you want to match on (example: age, sex, weight class, etc.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.danielecook.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielecook.com/</guid>
+      <description>browser()</description>
     </item>
     
   </channel>

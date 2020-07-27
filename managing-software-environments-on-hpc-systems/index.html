@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Managing software environments on HPC systems - Daniel E. Cook</title>
+  <meta content='Managing software environments on HPC systems - Daniel E. Cook' property='title' />
+  <meta content='Managing software environments on HPC systems - Daniel E. Cook' property='og:title' />
+
+
+<meta property="og:description" content="The ability to control software environments is essential for reproducible and robust data analysis. A number of tools exist for managing software environments that can be run on High-performance computing (HPC) systems. Below I detail a few of them.
+Replication and Portability The Replication crisis is an ongoing problem in which the results of many studies cannot be reproduced. Surprisingly, many studies that rely on computational methods also are not reproducible even though code, data, and software can be packaged and distributed for others to evaluate 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.danielecook.com/managing-software-environments-on-hpc-systems/" />
+
+
+<meta property="article:published_time" content="2020-07-08T01:15:53&#43;00:00"/>
+
+<meta property="article:modified_time" content="2020-07-08T01:15:53&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.1" />
+
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #309fff; 
+  --secondary-color: #ff622e;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+  --max-width: 850px;
+}</style>
+<link href='https://www.danielecook.com/css/tachyons.min.min.css' integrity="" rel="stylesheet" media="screen">
+<link href='https://www.danielecook.com/css/styles.min.css' integrity="" rel="stylesheet" media="screen">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link rel="alternate" type="application/rss+xml" href="https://www.danielecook.com/managing-software-environments-on-hpc-systems/feed/index.xml" title="Daniel E. Cook" />
+</head>
+<body class="global-font">
+  <div id="nav" class="content-width center">
+<nav class="flex-ns justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home"></a>
+  </div>
+  
+  <div class=" flex-ns mt2 mt0-ns pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/about/' title="about">about</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/' title="blog">blog</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/photos/' title="photos">photos</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/projects/' title="projects">projects</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/contact/' title="contact">contact</a>
+    
+  </div>
+  
+</nav>
+</div>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f2 fw6 heading-color heading-font post-title">Managing software environments on HPC systems</div>
+  
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>2020-07-08</time> 
+     
+    
+    &nbsp;&nbsp;<a href='/tags/presentation' class="link silver tag">presentation</a> &nbsp;&nbsp; 
+    
+  </p>
+  
+  <div class="lh-copy post-content"><p>The ability to control software environments is essential for reproducible and robust data analysis. A number of tools exist for managing software environments that can be run on  High-performance computing (HPC) systems. Below I detail a few of them.</p>
+<h1 id="replication-and-portability">Replication and Portability</h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Replication_crisis">Replication crisis</a> is an ongoing problem in which the results of many studies cannot be reproduced. Surprisingly, many studies that rely on computational methods also are not reproducible even though code, data, and software can be packaged and distributed for others to evaluate <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>A good ideal to shoot for is to make computational experiments <strong>portable</strong>. Being able to move code, data, and software to a new system with limited friction means you have a good, reproducible experiment. Recently developed tools make this relatively easy on HPC systems.</p>
+<h1 id="linuxbrew">Linuxbrew</h1>
+<p>Homebrew is a package manager for MacOS, and <a href="https://docs.brew.sh/Homebrew-on-Linux">Linuxbrew</a> is a fork developed for Linux. You can use Linuxbrew to install software in HPC environments, but a lot of the software you install will not be usable by others. The reason for this is that Linuxbrew is designed to manage software for individual users. It stores shared libraries, binaries, and other dependencies in the home directory (<code>~/.linuxbrew</code>).</p>
+<p>I mention Linuxbrew here though because it is still really useful in HPC environments to be able to install software for testing purposes. In fact you can use it to install utilities like <a href="https://github.com/wting/autojump">autojump</a>, <a href="https://direnv.net/">direnv</a>, git, <a href="https://github.com/pyenv/pyenv">pyenv</a>, and others that can be very beneficial in HPC environments.</p>
+<h1 id="executable-binaries">Executable binaries</h1>
+<p>When you run a command-line interface (CLI)  program in an HPC environment, you are often running an <a href="https://en.wikipedia.org/wiki/Executable">executable binary</a>. You can see the location of that binary by typing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">which bedtools <span style="color:#75715e"># /software/bedtools/2.29.1/bin/bedtools</span>
+</code></pre></div><p>Binaries are platform-specific, meaning you need to compile them or get a version compiled for your platform in order for them to work. Fortunately, the vast majority of HPC systems run linux. However, executable binaries can also use dynamic linking which can complicate their portability.</p>
+<h2 id="dynamically-linked-binaries">Dynamically linked binaries</h2>
+<p>Binaries often rely on shared libraries. Shared libraries are used by multiple programs and are said to be &lsquo;dynamically linked&rsquo; because they are loaded at runtime.</p>
+<p>On linux, shared libraries end with a <code>.so</code> extension <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, and they are often stored in the <code>/lib</code> or <code>/lib/lib64</code>. These are generally off limits to users in HPC environments, so this can complicate the portability of your work because shared libraries differ from system to system.</p>
+<p>One workaround is to bundle a binary with the required shared libraries, and append the directory of shared libraries to the <code>LD_LIBRARY_PATH</code> environmental varialbe. <code>LD_LIBRARY_PATH</code> is used to specify additional locations for shared libraries.</p>
+<p>The bottom line is that dynamically linked binaries can complicate portability of your work - making it more difficult to distribute.</p>
+<h2 id="statically-linked-binaries">Statically linked binaries</h2>
+<p>Some executable binaries are statically linked. This means that all the dependencies are bundled into the binary itself when it is compiled.</p>
+<p>A good example of this is <a href="https://www.github.com/brentp/somalier">somalier</a>. <strong>somalier</strong> includes all the dependent libraries. All you have to do is download it and it will run on your Linux-based HPC environment!</p>
+<h2 id="java-jar-files">Java .jar files</h2>
+<p>Java programs can be compiled to <code>.jar</code> (java archive) files. These offer an advantage over traditional binaries in that they do not need to be compiled for a specific machine. Instead, they run using the Java Virtual Machine:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">java -jar gatk.jar &lt;options&gt;
+</code></pre></div><p>The downside of Jars is that they may be dependent on the version of Java you are running.</p>
+<h2 id="the-path-variable">The <code>$PATH</code> variable</h2>
+<p>On Unix systems, the <code>$PATH</code> variable is used to specify the location of binaries. For example, if you have downloaded <code>somalier</code> to your home folder and want it to be globally accessible, you can do so by appending the directory to your PATH variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/my_software/somalier <span style="color:#75715e"># location of somalier</span>
+export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span>:~/mysoftware/somalier
+</code></pre></div><h2 id="summary-of-binaries">Summary of binaries</h2>
+<p>Binaries and <code>.jar</code> files can be used to distribute a software environment on their own. A good way of doing this might be to write a script that retrieves and compiles the required software, but if many tools are being used this approach can quickly become difficult to manage.</p>
+<h1 id="the-module-command">The <code>module</code> command</h1>
+<p><a href="https://linux.die.net/man/1/module">module</a> is a program often found on HPC systems that allows you to load software. You load programs by typing something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">module load bcftools/1.10.1
+</code></pre></div><p>You can also load the latest version of a module by leaving off the version, but this is bad practice, because results can change when software is updated and your work is no longer reproducible.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">module load bcftools
+</code></pre></div><p>Additional commands you should be aware of:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">module avail <span style="color:#75715e"># Lists all available software</span>
+module list  <span style="color:#75715e"># Shows loaded modules</span>
+</code></pre></div><p>The module command is often run in analysis scripts. For example, on a SLURM cluster you might have a script that looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Author: Daniel E. Cook</span>
+<span style="color:#75715e">#SBATCH --job-name bcftools_analysis</span>
+<span style="color:#75715e">#SBATCH --part=cpu</span>
+<span style="color:#75715e">#SBATCH --time=2:00:00</span>
+<span style="color:#75715e">#SBATCH --cpus-per-task=1</span>
+<span style="color:#75715e">#SBATCH --mem=4G</span>
+<span style="color:#75715e">#SBATCH -o %j.out</span>
+<span style="color:#75715e">#SBATCH -e %j.err</span>
+module load bcftools/1.10.1
+module load bedtools/2.29.1
+bcftools call ...
+bedtools ...
+</code></pre></div><h2 id="modulefiles">modulefiles</h2>
+<p>Modules are defined using <code>modulefiles</code>, which basically alters your shell environment to make make software accessible.</p>
+<p>The contents of a module can be shown by typing <code>module show &lt;module name&gt;</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; module show bedtools/2.29.1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   /software/Modules/3.2.9/modulefiles/bedtools/2.29.1:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+whatis<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sets up bedtools/2.29.1 &#34;</span><span style="color:#f92672">)</span>
+setenv<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;BEDTOOLS_DIR&#34;</span>,<span style="color:#e6db74">&#34;/software/bedtools/2.29.1/bin&#34;</span><span style="color:#f92672">)</span>
+setenv<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;BEDTOOLS_HOME&#34;</span>,<span style="color:#e6db74">&#34;/software/bedtools/2.29.1&#34;</span><span style="color:#f92672">)</span>
+prepend_path<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PATH&#34;</span>,<span style="color:#e6db74">&#34;/software/bedtools/2.29.1/bin&#34;</span><span style="color:#f92672">)</span>
+help<span style="color:#f92672">([[</span>This module adds bedtools/2.29.1 to various paths
+<span style="color:#f92672">]])</span>
+</code></pre></div><p>If you are lucky, your HPC administrators will manage installation of software and you will not have to write any <code>modulefiles</code> yourself. However, there are scenerios where you might choose to do so. For example, if you work in a lab and want to share a program program with other lab members, you can write a module for the group. The software and <code>modulefile</code> would be stored in your shared disk space, and everyone would have to add the directory of the <code>modulefile</code> to an environmental variable called <code>MODULEPATH</code> in order to load it.</p>
+<h2 id="should-i-distribute-software-environments-using-module">Should I distribute software environments using <code>module</code>?</h2>
+<p>Modules are generally not portable - meaning you cannot use the same software locally or even on another HPC cluster. Even when two clusters have the same software and versions you still might not be able to load the software correctly with the same script because modules are often named arbitrarily and are case sensitive.</p>
+<p>For example, I have worked on two HPCs with <code>bedtools</code> installed but I have to load it differently on each one:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">module load bedtools/2.29.1 # HPC 1
+module load BEDtools/2.29.1 # HPC 2
+</code></pre></div><p>It&rsquo;s a good idea to just use lowercase for module names to avoid confusion.</p>
+<p><strong>Other issues with modules</strong></p>
+<ul>
+<li>Your HPC admin might remove or update modules. This can break all of your scripts.</li>
+<li>Loading multiple modules can unload and/or load different versions of dependencies</li>
+</ul>
+<p>My recommendation: do not use <code>module</code> if you intend to publish analysis scripts, or need your analysis to be reproducible outside of your current HPC environment. Your work is not reproducible if your scripts cannot be run by someone else on their own cluster.</p>
+<h1 id="conda">conda</h1>
+<blockquote>
+<p>&ldquo;Conda is an open source package management system and environment management system for installing multiple versions of software packages and their dependencies and switching easily between them. It works on Linux, OS X and Windows, and was created for Python programs but can package and distribute any software.&rdquo; Source: <a href="https://docs.conda.io/en/latest/">Anaconda website</a></p>
+</blockquote>
+<p>Conda is distributed in a couple of different ways:</p>
+<ul>
+<li>Miniconda = conda + Python</li>
+<li>Anaconda = conda + Python + ~160+ data-science packages</li>
+</ul>
+<h2 id="conda-channels">conda channels</h2>
+<p>Packages are stored and retrieved from &ldquo;channels.&rdquo; Examples of channels include <a href="https://bioconda.github.io/">bioconda</a>, and <a href="https://conda-forge.org">conda-forge</a>.</p>
+<p>When installing software, conda will look for software in a predetermined set of channels, using the first match. A good set of default channels to use is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+</code></pre></div><p><a href="https://bioconda.github.io/">bioconda</a> is a channel specializing in bioinformatics software, and <a href="https://conda-forge.org">conda-forge</a> is a community managed channel of software.</p>
+<p>These channels contain thousdands of software packages. You can search for packages on their sites.</p>
+<h2 id="organizing-software-environments">Organizing software environments</h2>
+<p>A key problem that conda helps solve for computational analyses is that it allows you to isolate software environments and design them to cater to a specific analysis.  If you have ever tried to maintain a single software environment for multiple projects you will quickly run into &ldquo;dependency hell.&rdquo;</p>
+<p>Conda environments are similar to docker/singularity containers which we will explore later on.</p>
+<h2 id="conda-environments">conda environments</h2>
+<p>Lets create a conda environment.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda create -n variant_calling bcftools<span style="color:#f92672">=</span>1.10.1 bedtools<span style="color:#f92672">=</span>2.29.2
+</code></pre></div><p>Also note that you can explicitely define the desired channel by prefixing a package with the channel name and two colons (e.g. <code>bioconda::bcftools=1.10.1</code>)</p>
+<p>Now, to &ldquo;turn on&rdquo; a conda environment you can activate it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda activate variant_calling
+</code></pre></div><p><code>bcftools</code> and <code>bedtools</code> should now be available.</p>
+<h2 id="distributing-conda-environments">Distributing conda environments</h2>
+<p>You can &ldquo;export&rdquo; a conda environment using this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda env export -n variant_calling &gt; variant_calling.yml
+</code></pre></div><p>The exported environment looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">channels:
+  - ggd-genomics
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bcftools=1.10.1=h27336cd_0
+  - bedtools=2.29.2=h37cfd92_0
+  - bzip2=1.0.8=h0b31af3_2
+  ...
+</code></pre></div><p>Store this <code>.yml</code> file with your code so others can easily recreate the software environment you used!</p>
+<h2 id="conda-and-r-environments">conda and R environments</h2>
+<p>Many bioinformaticians and data scientists rely on a combination of R, Python, and Bash. Did you know that conda can be used to manage R environemnts?!</p>
+<p>Most R packages are prefixed with <code>r-</code>. For example, you can install the <a href="https://www.tidyverse.org/">R tidyverse</a> package using a command like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda create -n Renv r-tidyverse<span style="color:#f92672">=</span>1.2.1
+</code></pre></div><p>Now you can build R libraries specific to your project!</p>
+<h2 id="should-i-distribute-software-environments-using-conda">Should I distribute software environments using conda?</h2>
+<p>Yes! Conda is a great solution, but like most solutions it has some drawbacks. Conda can ta
+ke a very long time to resolve environments. And in some cases it will fail due to dependency issues.</p>
+<p>Additionally, conda creates software environments specific to a platform - and if no distribution for your platform exists you may be out of luck. This can be the case when a linux-version of a package exists but not one for MacOS or windows. This can make it difficult to debug or run analyses locally before running it an HPC environment.</p>
+<h1 id="docker">Docker</h1>
+<p>Next up lets talk about Docker. Docker is a software package that uses OS-level virtualization to run &ldquo;containers.&rdquo; Containers are packaged software-environments.</p>
+<p>In general, I have had less issues with Docker than Conda, but Docker tends to be more complicated.</p>
+<h2 id="docker-environments">Docker environments</h2>
+<p>Docker environments are specified using <code>.Dockerfiles</code>.</p>
+<h1 id="singularity">singularity</h1>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://www.arxiv-vanity.com/papers/1707.04393">Sustainable computational science:
+the ReScience initiative</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>On windows they end in <code>.dll</code>, and on macos they end in <code>.dylib</code>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+  
+        <div id='comments'></div>
+  
+</main>
+
+   
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2 next_prev">
+  ← <a href="https://www.danielecook.com/a-tool-for-writing-tils-today-i-learned/">prev post</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+  </p>
+</div>
+
+
+
+  <div class='cb'></div>
+<footer class="content-width mt3 mb4 f6 center ph3 gray tc tl-l">
+    <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US" class='cc'>CC</a>
+    <br /><br />
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+
+  <script src='https://www.danielecook.com/js/instantclick.js' integrity="" data-no-instant></script>
+    <script data-no-instant>
+
+    function utterances(index) {
+        var discussion = document.getElementById('comments');
+        if (!discussion) {
+            return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'danielecook/danielecook.com');
+        script.setAttribute('issue-term', index);
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+    }
+
+    InstantClick.on('change', function() {
+        utterances(location.pathname + location.search)
+    });
+
+
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-39176354-1', 'auto');
+
+        InstantClick.on('change', function() {
+            ga('send', 'pageview', location.pathname + location.search);
+      });
+       
+
+    InstantClick.init();
+    </script>
+</body>
+</html>
